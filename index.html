@@ -590,8 +590,8 @@
             box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
         }
 
-        /* Admin Login Modal */
-        .admin-login-modal {
+        /* Admin Panel Styles (Hidden for users) */
+        .admin-panel {
             display: none;
             position: fixed;
             top: 0;
@@ -600,62 +600,6 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.9);
             z-index: 3000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .admin-login-content {
-            background: white;
-            border-radius: 20px;
-            padding: 2.5rem;
-            max-width: 400px;
-            width: 90%;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        }
-
-        .admin-login-content h2 {
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-        }
-
-        .admin-login-content input {
-            width: 100%;
-            padding: 12px 15px;
-            margin: 10px 0;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 1rem;
-        }
-
-        .btn-login {
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .btn-login:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px var(--shadow);
-        }
-
-        /* Admin Panel Styles */
-        .admin-panel {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 2000;
             align-items: center;
             justify-content: center;
         }
@@ -731,29 +675,21 @@
             box-shadow: 0 5px 15px var(--shadow);
         }
 
-        .admin-toggle {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            z-index: 100;
-            display: none; /* Sembunyi sampai login */
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            box-shadow: 0 5px 15px var(--shadow);
+        /* SUPPORTER STYLE - SEMUA TAMPIL SAMA PERSIS */
+        .supporter {
+            background: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            cursor: default;
+            user-select: none;
             transition: all 0.3s ease;
+            display: inline-block;
         }
 
-        .admin-toggle:hover {
-            transform: scale(1.1);
-        }
+        /* TIDAK ADA BEDANYA DI TAMPILAN - SEMUA SAMA PERSIS */
+        /* Hanya di JavaScript kita tau mana yang bisa diklik */
 
         .product-list-item {
             padding: 10px;
@@ -923,14 +859,6 @@
             margin-top: 1rem;
         }
 
-        .supporter {
-            background: white;
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-
         .floating-wa {
             position: fixed;
             bottom: 30px;
@@ -1088,19 +1016,6 @@
             .qr-image {
                 width: 150px;
                 height: 150px;
-            }
-            
-            .admin-toggle {
-                bottom: 20px;
-                left: 20px;
-                width: 40px;
-                height: 40px;
-                font-size: 1rem;
-            }
-            
-            .admin-modal {
-                padding: 1.5rem;
-                width: 98%;
             }
         }
 
@@ -1378,14 +1293,8 @@
                     <h3 style="color: var(--primary); margin-bottom: 1.5rem;">Collaborator & Support</h3>
                     <p>Terima kasih kepada semua yang telah mendukung ZarrStoreID:</p>
                     
-                    <div class="supporters">
-                        <div class="supporter">SabaMart</div>
-                        <div class="supporter">AqilDevv</div>
-                        <div class="supporter">Wanz Preset</div>
-                        <div class="supporter">Vion Shizawa</div>
-                        <div class="supporter">Alya Store</div>
-                        <div class="supporter">Mahiro Editz</div>
-                        <div class="supporter">Suzza Preset</div>
+                    <div class="supporters" id="collaboratorsList">
+                        <!-- Daftar supporter akan dibuat otomatis -->
                     </div>
                     
                     <div style="margin-top: 2rem;">
@@ -1453,42 +1362,26 @@
         </div>
     </div>
 
-    <!-- Admin Login Modal (Hanya muncul dengan akses khusus) -->
-    <div class="admin-login-modal" id="adminLoginModal">
-        <div class="admin-login-content">
-            <h2><i class="fas fa-lock"></i> Admin Login</h2>
-            <p>Hanya developer yang bisa mengakses</p>
-            
-            <input type="password" id="adminPassword" placeholder="Masukkan password admin" autocomplete="off">
-            <button class="btn-login" id="btnLogin">Login</button>
-            
-            <div style="margin-top: 1.5rem; font-size: 0.9rem; color: var(--gray);">
-                <p><strong>Password default:</strong> zarrstore2024</p>
-                <p><small>Ganti password di kode JavaScript untuk keamanan</small></p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Admin Panel untuk Tambah Produk -->
+    <!-- Admin Panel untuk Developer (Akses via Alya Store - SECRET) -->
     <div class="admin-panel" id="adminPanel">
         <div class="admin-modal">
             <div class="admin-header">
-                <h2><i class="fas fa-cogs"></i> Admin Panel - ZarrStoreID</h2>
+                <h2><i class="fas fa-user-secret"></i> Developer Panel - ZarrStoreID</h2>
                 <button class="modal-close" id="adminClose">&times;</button>
             </div>
             
-            <div style="margin-bottom: 1.5rem;">
-                <button class="btn-admin" onclick="showAddProductForm()">
-                    <i class="fas fa-plus-circle"></i> Tambah Produk Baru
-                </button>
-                <button class="btn-admin" onclick="openAdminSettings()" style="background: var(--accent); margin-top: 10px;">
-                    <i class="fas fa-cog"></i> Pengaturan Admin
-                </button>
+            <div style="margin-bottom: 1.5rem; background: #f8f9ff; padding: 1rem; border-radius: 10px;">
+                <p style="color: var(--primary); margin-bottom: 0.5rem;">
+                    <i class="fas fa-info-circle"></i> <strong>Developer Mode Aktif</strong>
+                </p>
+                <p style="font-size: 0.9rem; color: var(--gray);">
+                    Hanya developer yang bisa mengakses panel ini via pola klik rahasia pada Alya Store.
+                </p>
             </div>
             
             <!-- Form Tambah Produk -->
-            <div id="addProductForm" style="display: none;">
-                <h3 style="color: var(--primary); margin-bottom: 1rem;">Tambah Produk Baru</h3>
+            <div id="addProductForm" style="display: block;">
+                <h3 style="color: var(--primary); margin-bottom: 1rem;">Tambah/Edit Produk</h3>
                 <form id="adminForm" class="admin-form">
                     <div class="form-group">
                         <label for="adminProductName">Nama Produk *</label>
@@ -1527,35 +1420,26 @@
                         <button type="submit" class="btn-admin" style="flex: 1;">
                             <i class="fas fa-save"></i> Simpan Produk
                         </button>
-                        <button type="button" class="btn-admin" onclick="hideAddProductForm()" style="background: #6c757d; flex: 1;">
-                            <i class="fas fa-times"></i> Batal
+                        <button type="button" class="btn-admin" onclick="resetProductForm()" style="background: #6c757d; flex: 1;">
+                            <i class="fas fa-times"></i> Form Baru
                         </button>
                     </div>
                 </form>
             </div>
             
-            <!-- Pengaturan Admin -->
-            <div id="adminSettings" style="display: none;">
-                <h3 style="color: var(--primary); margin-bottom: 1rem;">Pengaturan Admin</h3>
+            <!-- Pengaturan Toko -->
+            <div style="margin-top: 2rem;">
+                <h3 style="color: var(--primary); margin-bottom: 1rem;">Pengaturan Toko</h3>
                 <form id="settingsForm" class="admin-form">
                     <div class="form-group">
-                        <label for="newPassword">Password Baru</label>
-                        <input type="password" id="newPassword" placeholder="Masukkan password baru">
+                        <label for="storeName">Nama Toko *</label>
+                        <input type="text" id="storeName" value="ZarrStoreID" required>
                     </div>
                     
                     <div class="form-group">
-                        <label for="confirmPassword">Konfirmasi Password</label>
-                        <input type="password" id="confirmPassword" placeholder="Ulangi password baru">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="storeName">Nama Toko</label>
-                        <input type="text" id="storeName" value="ZarrStoreID">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="storePhone">Nomor WhatsApp</label>
-                        <input type="text" id="storePhone" value="6288295039238">
+                        <label for="storePhone">Nomor WhatsApp *</label>
+                        <input type="text" id="storePhone" value="6288295039238" required>
+                        <small style="color: var(--gray);">Format: 628xxxxxxxxxx (tanpa +)</small>
                     </div>
                     
                     <div class="form-group">
@@ -1563,7 +1447,12 @@
                         <input type="url" id="storeQRIS" placeholder="https://files.catbox.moe/qris.jpg">
                     </div>
                     
-                    <button type="button" class="btn-admin" onclick="saveAdminSettings()">
+                    <div class="form-group">
+                        <label for="storeLogo">Link Logo Toko</label>
+                        <input type="url" id="storeLogo" placeholder="https://files.catbox.moe/logo.jpg">
+                    </div>
+                    
+                    <button type="button" class="btn-admin" onclick="saveStoreSettings()">
                         <i class="fas fa-save"></i> Simpan Pengaturan
                     </button>
                 </form>
@@ -1577,7 +1466,7 @@
                 </div>
             </div>
             
-            <!-- Export Data -->
+            <!-- Export/Import Data -->
             <div class="export-section">
                 <h4 style="color: var(--primary); margin-bottom: 1rem;">Backup Data</h4>
                 <button class="btn-export" onclick="exportProducts()">
@@ -1592,19 +1481,30 @@
                 <input type="file" id="importFile" accept=".json" style="display: none;">
             </div>
             
-            <!-- Logout -->
+            <!-- Developer Tools -->
+            <div style="margin-top: 2rem; padding: 1rem; background: #f8f9ff; border-radius: 10px;">
+                <h4 style="color: var(--primary); margin-bottom: 1rem;"><i class="fas fa-tools"></i> Developer Tools</h4>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button class="btn-export" onclick="addSampleProducts()" style="background: #6f42c1;">
+                        <i class="fas fa-magic"></i> Tambah Produk Contoh
+                    </button>
+                    <button class="btn-export" onclick="checkLocalStorage()" style="background: #17a2b8;">
+                        <i class="fas fa-database"></i> Cek LocalStorage
+                    </button>
+                    <button class="btn-export" onclick="clearAllData()" style="background: #dc3545;">
+                        <i class="fas fa-broom"></i> Reset Semua Data
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Logout Button -->
             <div style="margin-top: 2rem; text-align: center;">
-                <button class="btn-login" onclick="logoutAdmin()" style="background: #dc3545;">
-                    <i class="fas fa-sign-out-alt"></i> Logout Admin
+                <button class="btn-admin" onclick="disableDeveloperMode()" style="background: #6c757d;">
+                    <i class="fas fa-power-off"></i> Matikan Developer Mode
                 </button>
             </div>
         </div>
     </div>
-
-    <!-- Tombol Admin (Muncul setelah login) -->
-    <button class="admin-toggle" id="adminToggle" title="Admin Panel">
-        <i class="fas fa-cog"></i>
-    </button>
 
     <!-- Floating WhatsApp -->
     <a href="https://wa.me/6288295039238?text=Halo%20ZarrStoreID,%20saya%20ingin%20bertanya%20tentang%20produk" class="floating-wa" target="_blank">
@@ -1637,12 +1537,12 @@
     </footer>
 
     <script>
-        // ==================== KONFIGURASI ADMIN ====================
-        const ADMIN_CONFIG = {
-            password: "zarr987123", // GANTI PASSWORD INI!
+        // ==================== KONFIGURASI TOKO ====================
+        const STORE_CONFIG = {
             storeName: "ZarrStoreID",
             phoneNumber: "6288295039238", // GANTI NOMOR LU!
-            qrisUrl: "https://files.catbox.moe/xxxxxx.png" // GANTI LINK QRIS LU!
+            qrisUrl: "https://files.catbox.moe/xxxxxx.png", // GANTI LINK QRIS LU!
+            storeLogo: "https://files.catbox.moe/vev7k0.png"
         };
 
         // ==================== DATA PRODUK ====================
@@ -1673,9 +1573,25 @@
             }
         ];
 
+        // ==================== DATA COLLABORATOR ====================
+        const collaborators = [
+            { name: "SabaMart", secret: false },
+            { name: "AqilDevv", secret: false },
+            { name: "Wanz Preset", secret: false },
+            { name: "Vion Shizawa", secret: false },
+            { name: "Alya Store", secret: true }, // INI RAHASIA - TAPI TAMPILAN SAMA PERSIS
+            { name: "Mahiro Editz", secret: false },
+            { name: "Suzza Preset", secret: false }
+        ];
+
         // ==================== VARIABEL GLOBAL ====================
         let currentProduct = products[0];
         let selectedPaymentMethod = null;
+        let isDeveloperMode = false;
+        let currentEditProductId = null;
+        let secretClickCount = 0;
+        let lastSecretClickTime = 0;
+        let secretElement = null;
 
         // ==================== INISIALISASI ====================
         document.addEventListener('DOMContentLoaded', function() {
@@ -1695,9 +1611,8 @@
             setupPayment();
             setupMobileMenu();
             setupOrderModal();
-            setupAdminLogin();
-            setupAdminPanel();
             setupCopyButtons();
+            setupCollaborators();
             
             // Tampilkan data
             renderProducts('all');
@@ -1706,11 +1621,11 @@
             // Setup order summary
             updateOrderSummary(currentProduct);
             
-            // Check admin login
-            checkAdminLogin();
-            
             // Load QRIS image
             loadQRISImage();
+            
+            // Setup admin panel
+            setupAdminPanel();
         }
 
         // ==================== FUNGSI LOCALSTORAGE ====================
@@ -1718,14 +1633,27 @@
             // Load produk
             const savedProducts = localStorage.getItem('zarrstore_products');
             if (savedProducts) {
-                products = JSON.parse(savedProducts);
+                try {
+                    products = JSON.parse(savedProducts);
+                } catch (e) {
+                    console.error("Error parsing products:", e);
+                    products = [];
+                }
             }
             
             // Load config
             const savedConfig = localStorage.getItem('zarrstore_config');
             if (savedConfig) {
-                Object.assign(ADMIN_CONFIG, JSON.parse(savedConfig));
+                try {
+                    Object.assign(STORE_CONFIG, JSON.parse(savedConfig));
+                } catch (e) {
+                    console.error("Error parsing config:", e);
+                }
             }
+            
+            // Load developer mode
+            const savedDevMode = localStorage.getItem('zarrstore_devmode');
+            isDeveloperMode = savedDevMode === 'true';
             
             // Update UI dengan config
             updateUIFromConfig();
@@ -1733,110 +1661,171 @@
 
         function saveToLocalStorage() {
             localStorage.setItem('zarrstore_products', JSON.stringify(products));
-            localStorage.setItem('zarrstore_config', JSON.stringify(ADMIN_CONFIG));
+            localStorage.setItem('zarrstore_config', JSON.stringify(STORE_CONFIG));
+            localStorage.setItem('zarrstore_devmode', isDeveloperMode.toString());
         }
 
         function updateUIFromConfig() {
             // Update nomor pembayaran
             document.querySelectorAll('.payment-number').forEach(el => {
-                const number = ADMIN_CONFIG.phoneNumber.replace('62', '0');
+                const number = STORE_CONFIG.phoneNumber.replace('62', '0');
                 el.textContent = number;
                 el.setAttribute('data-number', number);
             });
             
             // Update nama toko
-            document.getElementById('storeNameFooter').textContent = ADMIN_CONFIG.storeName;
-            document.getElementById('storeNameCopyright').textContent = ADMIN_CONFIG.storeName;
+            document.getElementById('storeNameFooter').textContent = STORE_CONFIG.storeName;
+            document.getElementById('storeNameCopyright').textContent = STORE_CONFIG.storeName;
             
             // Update floating WhatsApp
             const floatingWA = document.querySelector('.floating-wa');
             if (floatingWA) {
-                floatingWA.href = `https://wa.me/${ADMIN_CONFIG.phoneNumber}?text=Halo%20${encodeURIComponent(ADMIN_CONFIG.storeName)}%2C%20saya%20ingin%20bertanya%20tentang%20produk`;
+                floatingWA.href = `https://wa.me/${STORE_CONFIG.phoneNumber}?text=Halo%20${encodeURIComponent(STORE_CONFIG.storeName)}%2C%20saya%20ingin%20bertanya%20tentang%20produk`;
+            }
+            
+            // Update form pengaturan
+            if (document.getElementById('storeName')) {
+                document.getElementById('storeName').value = STORE_CONFIG.storeName;
+                document.getElementById('storePhone').value = STORE_CONFIG.phoneNumber;
+                document.getElementById('storeQRIS').value = STORE_CONFIG.qrisUrl;
+                document.getElementById('storeLogo').value = STORE_CONFIG.storeLogo;
             }
         }
 
-        // ==================== FUNGSI ADMIN ====================
-        function checkAdminLogin() {
-            const isLoggedIn = localStorage.getItem('zarrstore_admin') === 'true';
-            document.getElementById('adminToggle').style.display = isLoggedIn ? 'flex' : 'none';
+        // ==================== FUNGSI COLLABORATOR ====================
+        function setupCollaborators() {
+            const container = document.getElementById('collaboratorsList');
+            if (!container) return;
             
-            if (!isLoggedIn) {
-                setTimeout(() => {
-                    document.getElementById('adminLoginModal').style.display = 'flex';
-                }, 1000);
-            }
-        }
-
-        function loginAdmin() {
-            const password = document.getElementById('adminPassword').value;
+            container.innerHTML = '';
             
-            if (password === ADMIN_CONFIG.password) {
-                localStorage.setItem('zarrstore_admin', 'true');
-                document.getElementById('adminLoginModal').style.display = 'none';
-                document.getElementById('adminToggle').style.display = 'flex';
-                showNotification('Login admin berhasil!', 'success');
+            collaborators.forEach(collab => {
+                const supporter = document.createElement('div');
+                supporter.className = 'supporter';
+                supporter.textContent = collab.name;
+                supporter.title = "Supporter ZarrStoreID";
                 
-                setTimeout(() => {
-                    document.getElementById('adminPanel').style.display = 'flex';
-                    updateProductList();
-                }, 500);
-            } else {
-                showNotification('Password salah!', 'error');
-            }
+                // SEMUA TAMPILAN SAMA PERSIS!
+                // Tidak ada perbedaan warna, animasi, atau style khusus
+                
+                if (collab.secret) {
+                    // Simpan element rahasia
+                    secretElement = supporter;
+                    
+                    // Tambah event listener rahasia (tanpa feedback visual)
+                    supporter.addEventListener('click', handleSecretClick);
+                    supporter.style.cursor = 'pointer'; // Cursor normal, tidak ada perubahan
+                } else {
+                    // Yang lain tidak bisa diklik sama sekali
+                    supporter.style.cursor = 'default';
+                }
+                
+                container.appendChild(supporter);
+            });
         }
 
-        function logoutAdmin() {
-            localStorage.removeItem('zarrstore_admin');
-            document.getElementById('adminToggle').style.display = 'none';
-            document.getElementById('adminPanel').style.display = 'none';
-            showNotification('Logout berhasil', 'success');
+        function handleSecretClick(e) {
+            const currentTime = new Date().getTime();
             
+            // Reset jika lebih dari 2 detik dari klik terakhir
+            if (currentTime - lastSecretClickTime > 2000) {
+                secretClickCount = 0;
+            }
+            
+            secretClickCount++;
+            lastSecretClickTime = currentTime;
+            
+            // Feedback sangat minimal (hanya developer yang tahu)
+            this.style.transform = 'scale(0.98)';
             setTimeout(() => {
-                document.getElementById('adminLoginModal').style.display = 'flex';
-                document.getElementById('adminPassword').value = '';
-            }, 1000);
+                this.style.transform = '';
+            }, 100);
+            
+            // Pola rahasia: 4x klik dalam 2 detik
+            if (secretClickCount >= 4) {
+                activateDeveloperMode();
+                secretClickCount = 0;
+            }
         }
 
-        function openAdminSettings() {
-            document.getElementById('addProductForm').style.display = 'none';
-            document.getElementById('adminSettings').style.display = 'block';
-            
-            // Isi form dengan data config
-            document.getElementById('storeName').value = ADMIN_CONFIG.storeName;
-            document.getElementById('storePhone').value = ADMIN_CONFIG.phoneNumber;
-            document.getElementById('storeQRIS').value = ADMIN_CONFIG.qrisUrl;
-        }
-
-        function saveAdminSettings() {
-            const newPassword = document.getElementById('newPassword').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-            const storeName = document.getElementById('storeName').value;
-            const storePhone = document.getElementById('storePhone').value;
-            const storeQRIS = document.getElementById('storeQRIS').value;
-            
-            if (newPassword && newPassword !== confirmPassword) {
-                showNotification('Password tidak cocok!', 'error');
-                return;
-            }
-            
-            if (newPassword) {
-                ADMIN_CONFIG.password = newPassword;
-            }
-            
-            ADMIN_CONFIG.storeName = storeName;
-            ADMIN_CONFIG.phoneNumber = storePhone;
-            ADMIN_CONFIG.qrisUrl = storeQRIS;
-            
+        function activateDeveloperMode() {
+            isDeveloperMode = true;
             saveToLocalStorage();
+            
+            // Tidak ada perubahan visual di Alya Store!
+            // Tetap terlihat sama seperti supporter lainnya
+            
+            showNotification('Developer mode diaktifkan', 'success');
+            
+            // Buka panel admin setelah 0.5 detik
+            setTimeout(() => {
+                openAdminPanel();
+            }, 500);
+        }
+
+        function setupAdminPanel() {
+            // Setup admin panel close
+            document.getElementById('adminClose').addEventListener('click', function() {
+                document.getElementById('adminPanel').style.display = 'none';
+            });
+            
+            // Close panel saat klik di luar
+            document.getElementById('adminPanel').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.style.display = 'none';
+                }
+            });
+            
+            // Setup form admin
+            document.getElementById('adminForm').addEventListener('submit', addProduct);
+            
+            // Setup import file
+            document.getElementById('importFile').addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (!file) return;
+                
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    try {
+                        const imported = JSON.parse(event.target.result);
+                        if (Array.isArray(imported)) {
+                            products = imported.filter(p => p.id && p.name && p.category && p.price);
+                            saveToLocalStorage();
+                            renderProducts('all');
+                            updateProductList();
+                            showNotification(`${products.length} produk diimport!`, 'success');
+                        }
+                    } catch (error) {
+                        showNotification('File tidak valid!', 'error');
+                    }
+                    e.target.value = '';
+                };
+                reader.readAsText(file);
+            });
+        }
+
+        function openAdminPanel() {
+            if (!isDeveloperMode) return;
+            
+            document.getElementById('adminPanel').style.display = 'flex';
+            updateProductList();
             updateUIFromConfig();
-            loadQRISImage();
             
-            // Clear password fields
-            document.getElementById('newPassword').value = '';
-            document.getElementById('confirmPassword').value = '';
-            
-            showNotification('Pengaturan disimpan!', 'success');
-            document.getElementById('adminSettings').style.display = 'none';
+            // Reset form produk
+            resetProductForm();
+        }
+
+        function disableDeveloperMode() {
+            if (confirm('Matikan Developer Mode?\nAnda akan keluar dari panel admin.')) {
+                isDeveloperMode = false;
+                secretClickCount = 0;
+                saveToLocalStorage();
+                
+                // Tutup panel
+                document.getElementById('adminPanel').style.display = 'none';
+                
+                showNotification('Developer Mode telah dimatikan', 'success');
+            }
         }
 
         // ==================== FUNGSI PRODUK ====================
@@ -1855,7 +1844,7 @@
                     <div style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
                         <i class="fas fa-box-open" style="font-size: 3rem; color: var(--gray); margin-bottom: 1rem;"></i>
                         <h3 style="color: var(--gray);">Belum ada produk</h3>
-                        <p>Login sebagai admin untuk menambah produk</p>
+                        <p>Tambahkan produk melalui panel developer</p>
                     </div>
                 `;
                 return;
@@ -1904,26 +1893,42 @@
                 return;
             }
             
-            const newProduct = {
-                id: products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1,
-                name,
-                category,
-                price,
-                description,
-                image
-            };
+            if (currentEditProductId) {
+                // Edit produk yang ada
+                const productIndex = products.findIndex(p => p.id === currentEditProductId);
+                if (productIndex !== -1) {
+                    products[productIndex] = {
+                        id: currentEditProductId,
+                        name,
+                        category,
+                        price,
+                        description,
+                        image
+                    };
+                    showNotification('Produk berhasil diperbarui!', 'success');
+                }
+                currentEditProductId = null;
+            } else {
+                // Tambah produk baru
+                const newProduct = {
+                    id: products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1,
+                    name,
+                    category,
+                    price,
+                    description,
+                    image
+                };
+                products.push(newProduct);
+                showNotification('Produk berhasil ditambahkan!', 'success');
+            }
             
-            products.push(newProduct);
             saveToLocalStorage();
             
             const activeFilter = document.querySelector('.filter-btn.active');
             renderProducts(activeFilter ? activeFilter.getAttribute('data-filter') : 'all');
             
             updateProductList();
-            document.getElementById('adminForm').reset();
-            hideAddProductForm();
-            
-            showNotification('Produk berhasil ditambahkan!', 'success');
+            resetProductForm();
         }
 
         function updateProductList() {
@@ -1965,17 +1970,23 @@
             const product = products.find(p => p.id === id);
             if (!product) return;
             
+            currentEditProductId = id;
+            
             document.getElementById('adminProductName').value = product.name;
             document.getElementById('adminProductCategory').value = product.category;
             document.getElementById('adminProductPrice').value = product.price;
             document.getElementById('adminProductDescription').value = product.description;
             document.getElementById('adminProductImage').value = product.image;
             
-            products = products.filter(p => p.id !== id);
-            saveToLocalStorage();
+            document.querySelector('button[type="submit"]').innerHTML = '<i class="fas fa-save"></i> Update Produk';
             
-            showAddProductForm();
-            showNotification('Edit produk - isi perubahan lalu klik Simpan', 'info');
+            showNotification('Edit produk - perbarui data lalu klik Update', 'info');
+        }
+
+        function resetProductForm() {
+            currentEditProductId = null;
+            document.getElementById('adminForm').reset();
+            document.querySelector('button[type="submit"]').innerHTML = '<i class="fas fa-save"></i> Simpan Produk';
         }
 
         function deleteProduct(id) {
@@ -2004,7 +2015,7 @@
         function exportProducts() {
             const dataStr = JSON.stringify(products, null, 2);
             const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
-            const fileName = `${ADMIN_CONFIG.storeName}-products-${new Date().toISOString().split('T')[0]}.json`;
+            const fileName = `${STORE_CONFIG.storeName}-products-${new Date().toISOString().split('T')[0]}.json`;
             
             const link = document.createElement('a');
             link.setAttribute('href', dataUri);
@@ -2016,6 +2027,30 @@
 
         function importProducts() {
             document.getElementById('importFile').click();
+        }
+
+        // ==================== FUNGSI PENGATURAN TOKO ====================
+        function saveStoreSettings() {
+            const storeName = document.getElementById('storeName').value.trim();
+            const storePhone = document.getElementById('storePhone').value.trim();
+            const storeQRIS = document.getElementById('storeQRIS').value.trim();
+            const storeLogo = document.getElementById('storeLogo').value.trim();
+            
+            if (!storeName || !storePhone) {
+                showNotification('Nama toko dan nomor WhatsApp wajib diisi!', 'error');
+                return;
+            }
+            
+            STORE_CONFIG.storeName = storeName;
+            STORE_CONFIG.phoneNumber = storePhone;
+            STORE_CONFIG.qrisUrl = storeQRIS;
+            STORE_CONFIG.storeLogo = storeLogo;
+            
+            saveToLocalStorage();
+            updateUIFromConfig();
+            loadQRISImage();
+            
+            showNotification('Pengaturan toko disimpan!', 'success');
         }
 
         // ==================== FUNGSI UI ====================
@@ -2158,65 +2193,14 @@
             }
         }
 
-        function setupAdminLogin() {
-            document.getElementById('btnLogin').addEventListener('click', loginAdmin);
-            document.getElementById('adminPassword').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') loginAdmin();
-            });
-        }
-
-        function setupAdminPanel() {
-            document.getElementById('adminToggle').addEventListener('click', function() {
-                if (localStorage.getItem('zarrstore_admin') === 'true') {
-                    document.getElementById('adminPanel').style.display = 'flex';
-                    updateProductList();
-                }
-            });
-            
-            document.getElementById('adminClose').addEventListener('click', function() {
-                document.getElementById('adminPanel').style.display = 'none';
-            });
-            
-            document.getElementById('adminPanel').addEventListener('click', function(e) {
-                if (e.target === this) {
-                    this.style.display = 'none';
-                }
-            });
-            
-            document.getElementById('adminForm').addEventListener('submit', addProduct);
-            
-            document.getElementById('importFile').addEventListener('change', function(e) {
-                const file = e.target.files[0];
-                if (!file) return;
-                
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    try {
-                        const imported = JSON.parse(event.target.result);
-                        if (Array.isArray(imported)) {
-                            products = imported.filter(p => p.id && p.name && p.category && p.price);
-                            saveToLocalStorage();
-                            renderProducts('all');
-                            updateProductList();
-                            showNotification(`${products.length} produk diimport!`, 'success');
-                        }
-                    } catch (error) {
-                        showNotification('File tidak valid!', 'error');
-                    }
-                    e.target.value = '';
-                };
-                reader.readAsText(file);
-            });
-        }
-
         // ==================== FUNGSI BANTUAN ====================
         function loadQRISImage() {
             const qrisContainer = document.getElementById('qrisContainer');
-            if (!qrisContainer || !ADMIN_CONFIG.qrisUrl) return;
+            if (!qrisContainer || !STORE_CONFIG.qrisUrl) return;
             
-            if (ADMIN_CONFIG.qrisUrl !== "https://files.catbox.moe/xxxxxx.png") {
+            if (STORE_CONFIG.qrisUrl !== "https://files.catbox.moe/xxxxxx.png") {
                 qrisContainer.innerHTML = `
-                    <img src="${ADMIN_CONFIG.qrisUrl}" alt="QRIS ${ADMIN_CONFIG.storeName}" class="qr-image" onerror="handleQRISError()">
+                    <img src="${STORE_CONFIG.qrisUrl}" alt="QRIS ${STORE_CONFIG.storeName}" class="qr-image" onerror="handleQRISError()">
                     <p style="color: var(--success); margin-top: 10px;">
                         <i class="fas fa-check-circle"></i> QRIS aktif, scan untuk bayar
                     </p>
@@ -2292,10 +2276,10 @@
                 <h2 style="color: var(--primary); margin-bottom: 1.5rem;">Pembayaran QRIS</h2>
                 <div style="text-align: center;">
                     <div style="background: white; padding: 1.5rem; border-radius: 15px; display: inline-block;">
-                        <img src="${ADMIN_CONFIG.qrisUrl}" alt="QRIS ${ADMIN_CONFIG.storeName}" style="width: 250px; height: 250px; object-fit: contain; border: 1px solid #eee; border-radius: 10px;" onerror="this.src='https://via.placeholder.com/250/FF6B00/FFFFFF?text=QRIS+Error'">
+                        <img src="${STORE_CONFIG.qrisUrl}" alt="QRIS ${STORE_CONFIG.storeName}" style="width: 250px; height: 250px; object-fit: contain; border: 1px solid #eee; border-radius: 10px;" onerror="this.src='https://via.placeholder.com/250/FF6B00/FFFFFF?text=QRIS+Error'">
                     </div>
                     <div style="margin-top: 2rem;">
-                        <a href="https://wa.me/${ADMIN_CONFIG.phoneNumber}?text=Halo%20${encodeURIComponent(ADMIN_CONFIG.storeName)}%2C%20saya%20sudah%20bayar%20via%20QRIS%20untuk%20${encodeURIComponent(currentProduct.name)}" 
+                        <a href="https://wa.me/${STORE_CONFIG.phoneNumber}?text=Halo%20${encodeURIComponent(STORE_CONFIG.storeName)}%2C%20saya%20sudah%20bayar%20via%20QRIS%20untuk%20${encodeURIComponent(currentProduct.name)}" 
                            class="btn-whatsapp" target="_blank">
                             <i class="fab fa-whatsapp"></i> Kirim Bukti Bayar
                         </a>
@@ -2330,7 +2314,7 @@
                 return;
             }
             
-            const message = `Halo ${ADMIN_CONFIG.storeName}, saya ingin memesan:
+            const message = `Halo ${STORE_CONFIG.storeName}, saya ingin memesan:
 
 📦 *Produk:* ${product.name}
 💰 *Harga:* Rp ${product.price.toLocaleString('id-ID')}
@@ -2342,7 +2326,7 @@ ${notes ? `📝 *Catatan:* ${notes}` : ''}
 
 Saya sudah memesan melalui website. Bagaimana cara melanjutkan pembayaran?`;
             
-            const url = `https://wa.me/${ADMIN_CONFIG.phoneNumber}?text=${encodeURIComponent(message)}`;
+            const url = `https://wa.me/${STORE_CONFIG.phoneNumber}?text=${encodeURIComponent(message)}`;
             
             // Simpan ke riwayat transaksi
             addTransactionHistory(product, name);
@@ -2414,15 +2398,6 @@ Saya sudah memesan melalui website. Bagaimana cara melanjutkan pembayaran?`;
             }
         }
 
-        function showAddProductForm() {
-            document.getElementById('addProductForm').style.display = 'block';
-            document.getElementById('adminSettings').style.display = 'none';
-        }
-
-        function hideAddProductForm() {
-            document.getElementById('addProductForm').style.display = 'none';
-        }
-
         function showNotification(message, type) {
             // Hapus notifikasi sebelumnya
             const oldNotification = document.querySelector('.notification');
@@ -2448,17 +2423,71 @@ Saya sudah memesan melalui website. Bagaimana cara melanjutkan pembayaran?`;
             }, 3000);
         }
 
+        // ==================== FUNGSI DEVELOPER TOOLS ====================
+        function addSampleProducts() {
+            const sampleProducts = [
+                {
+                    id: products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1,
+                    name: "Mobile Legends 172 Diamond",
+                    category: "game",
+                    price: 50000,
+                    description: "Diamond MLBB siap kirim",
+                    image: "https://files.catbox.moe/xxxxxx.png"
+                },
+                {
+                    id: (products.length > 0 ? Math.max(...products.map(p => p.id)) + 2 : 2),
+                    name: "Free Fire 500 Diamond",
+                    category: "game",
+                    price: 100000,
+                    description: "Diamond FF proses cepat",
+                    image: "https://files.catbox.moe/xxxxxx.png"
+                },
+                {
+                    id: (products.length > 0 ? Math.max(...products.map(p => p.id)) + 3 : 3),
+                    name: "Pulsa Axis 25.000",
+                    category: "pulsa",
+                    price: 23000,
+                    description: "Pulsa AXIS harga murah",
+                    image: "https://files.catbox.moe/xxxxxx.png"
+                }
+            ];
+            
+            products.push(...sampleProducts);
+            saveToLocalStorage();
+            
+            const activeFilter = document.querySelector('.filter-btn.active');
+            renderProducts(activeFilter ? activeFilter.getAttribute('data-filter') : 'all');
+            updateProductList();
+            
+            showNotification('3 produk contoh ditambahkan!', 'success');
+        }
+
+        function checkLocalStorage() {
+            const totalProducts = products.length;
+            const totalHistory = JSON.parse(localStorage.getItem('zarrstore_history') || '[]').length;
+            
+            alert(`Status LocalStorage:\n\nProduk: ${totalProducts} item\nRiwayat: ${totalHistory} transaksi\nDeveloper Mode: ${isDeveloperMode ? 'Aktif' : 'Nonaktif'}\n\nTotal data: ${localStorage.length} item`);
+        }
+
+        function clearAllData() {
+            if (confirm('RESET SEMUA DATA?\n\nIni akan menghapus:\n• Semua produk\n• Semua riwayat transaksi\n• Semua pengaturan\n• Developer mode\n\nTindakan ini tidak bisa dibatalkan!')) {
+                localStorage.clear();
+                location.reload();
+            }
+        }
+
         // ==================== EXPORT FUNCTIONS TO WINDOW ====================
-        window.showAddProductForm = showAddProductForm;
-        window.hideAddProductForm = hideAddProductForm;
-        window.openAdminSettings = openAdminSettings;
-        window.saveAdminSettings = saveAdminSettings;
+        window.resetProductForm = resetProductForm;
+        window.saveStoreSettings = saveStoreSettings;
         window.exportProducts = exportProducts;
         window.importProducts = importProducts;
         window.clearAllProducts = clearAllProducts;
-        window.logoutAdmin = logoutAdmin;
         window.editProduct = editProduct;
         window.deleteProduct = deleteProduct;
+        window.addSampleProducts = addSampleProducts;
+        window.checkLocalStorage = checkLocalStorage;
+        window.clearAllData = clearAllData;
+        window.disableDeveloperMode = disableDeveloperMode;
     </script>
 </body>
 </html>
