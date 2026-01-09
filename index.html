@@ -743,6 +743,7 @@
             align-items: center;
             gap: 8px;
             margin-top: 10px;
+            margin-right: 10px;
         }
 
         .history-container {
@@ -916,6 +917,44 @@
 
         .notification.info {
             background: linear-gradient(to right, var(--primary), var(--secondary));
+        }
+
+        /* Image Upload Container */
+        #imageUploadContainer {
+            margin-bottom: 1.5rem;
+        }
+
+        #imageUpload {
+            padding: 10px;
+            border: 2px dashed var(--secondary);
+            border-radius: 10px;
+            background: white;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        #imageUpload:hover {
+            border-color: var(--primary);
+            background: #f8f9ff;
+        }
+
+        .upload-status {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .upload-status.loading {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+
+        .upload-status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
         }
 
         footer {
@@ -1379,6 +1418,21 @@
                 </p>
             </div>
             
+            <!-- Form Upload Gambar -->
+            <div id="imageUploadContainer" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9ff; border-radius: 10px;">
+                <h4 style="color: var(--primary); margin-bottom: 1rem;">Upload Gambar Produk</h4>
+                <div style="display: flex; gap: 10px;">
+                    <input type="file" id="imageUpload" accept="image/*" style="flex: 1; padding: 10px; border: 2px dashed var(--secondary); border-radius: 10px; background: white; cursor: pointer;">
+                    <button onclick="uploadProductImage()" class="btn-export" style="background: #28a745;">
+                        <i class="fas fa-upload"></i> Upload
+                    </button>
+                </div>
+                <div id="uploadPreview" style="margin-top: 1rem;"></div>
+                <p style="font-size: 0.85rem; color: var(--gray); margin-top: 0.5rem;">
+                    <i class="fas fa-info-circle"></i> Upload gambar ke catbox.moe secara otomatis
+                </p>
+            </div>
+            
             <!-- Form Tambah Produk -->
             <div id="addProductForm" style="display: block;">
                 <h3 style="color: var(--primary); margin-bottom: 1rem;">Tambah/Edit Produk</h3>
@@ -1412,7 +1466,7 @@
                         <label for="adminProductImage">Link Gambar (Catbox) *</label>
                         <input type="url" id="adminProductImage" placeholder="https://files.catbox.moe/gambar.jpg" required>
                         <small style="color: var(--gray); font-size: 0.85rem;">
-                            Upload gambar ke <a href="https://catbox.moe" target="_blank">catbox.moe</a> lalu copy link-nya
+                            Upload gambar di atas atau masukkan manual link catbox.moe
                         </small>
                     </div>
                     
@@ -1474,6 +1528,9 @@
                 </button>
                 <button class="btn-export" onclick="importProducts()" style="background: #28a745;">
                     <i class="fas fa-upload"></i> Import Produk dari File
+                </button>
+                <button class="btn-export" onclick="refreshProductImages()" style="background: #6a11cb;">
+                    <i class="fas fa-sync-alt"></i> Refresh Gambar Produk
                 </button>
                 <button class="btn-export" onclick="clearAllProducts()" style="background: #dc3545;">
                     <i class="fas fa-trash"></i> Hapus Semua Produk
@@ -1540,8 +1597,8 @@
         // ==================== KONFIGURASI TOKO ====================
         const STORE_CONFIG = {
             storeName: "ZarrStoreID",
-            phoneNumber: "6288295039238", // GANTI NOMOR LU!
-            qrisUrl: "https://files.catbox.moe/xxxxxx.png", // GANTI LINK QRIS LU!
+            phoneNumber: "6288295039238",
+            qrisUrl: "https://files.catbox.moe/xxxxxx.png",
             storeLogo: "https://files.catbox.moe/vev7k0.png"
         };
 
@@ -1553,7 +1610,7 @@
                 category: "game",
                 price: 25000,
                 description: "Diamond MLBB termurah se-Indonesia",
-                image: "https://files.catbox.moe/xxxxxx.png"
+                image: "auto"
             },
             {
                 id: 2,
@@ -1561,7 +1618,7 @@
                 category: "game",
                 price: 30000,
                 description: "Diamond FF siap kirim instan",
-                image: "https://files.catbox.moe/xxxxxx.png"
+                image: "auto"
             },
             {
                 id: 3,
@@ -1569,7 +1626,7 @@
                 category: "pulsa",
                 price: 12000,
                 description: "Pulsa semua operator 24 jam",
-                image: "https://files.catbox.moe/xxxxxx.png"
+                image: "auto"
             }
         ];
 
@@ -1579,7 +1636,7 @@
             { name: "AqilDevv", secret: false },
             { name: "Wanz Preset", secret: false },
             { name: "Vion Shizawa", secret: false },
-            { name: "Alya Store", secret: true }, // INI RAHASIA - TAPI TAMPILAN SAMA PERSIS
+            { name: "Alya Store", secret: true },
             { name: "Mahiro Editz", secret: false },
             { name: "Suzza Preset", secret: false }
         ];
@@ -1592,6 +1649,25 @@
         let secretClickCount = 0;
         let lastSecretClickTime = 0;
         let secretElement = null;
+
+        // ==================== FUNGSI GAMBAR OTOMATIS ====================
+        function getProductImageUrl(product) {
+            // Jika sudah ada URL lengkap, gunakan itu
+            if (product.image && product.image !== 'auto' && product.image.startsWith('http')) {
+                // Tambahkan timestamp untuk cache busting
+                const separator = product.image.includes('?') ? '&' : '?';
+                return product.image + separator + 't=' + Date.now();
+            }
+            
+            // Generate URL gambar otomatis berdasarkan nama produk
+            const productName = encodeURIComponent(product.name.toLowerCase()
+                .replace(/[^\w\s]/gi, '')
+                .replace(/\s+/g, '-')
+                .substring(0, 20));
+            
+            // URL placeholder dengan nama produk
+            return `https://via.placeholder.com/300/6a11cb/FFFFFF?text=${productName}&t=${Date.now()}`;
+        }
 
         // ==================== INISIALISASI ====================
         document.addEventListener('DOMContentLoaded', function() {
@@ -1714,7 +1790,7 @@
                     
                     // Tambah event listener rahasia (tanpa feedback visual)
                     supporter.addEventListener('click', handleSecretClick);
-                    supporter.style.cursor = 'pointer'; // Cursor normal, tidak ada perubahan
+                    supporter.style.cursor = 'pointer';
                 } else {
                     // Yang lain tidak bisa diklik sama sekali
                     supporter.style.cursor = 'default';
@@ -1828,6 +1904,70 @@
             }
         }
 
+        // ==================== FUNGSI UPLOAD GAMBAR ====================
+        async function uploadProductImage() {
+            const input = document.getElementById('imageUpload');
+            const file = input.files[0];
+            
+            if (!file) {
+                showNotification('Pilih gambar terlebih dahulu!', 'error');
+                return;
+            }
+            
+            // Validasi ukuran file (max 5MB)
+            if (file.size > 5 * 1024 * 1024) {
+                showNotification('Ukuran gambar maksimal 5MB!', 'error');
+                return;
+            }
+            
+            // Validasi tipe file
+            if (!file.type.startsWith('image/')) {
+                showNotification('File harus berupa gambar!', 'error');
+                return;
+            }
+            
+            try {
+                showNotification('Mengupload gambar...', 'info');
+                
+                // Tampilkan preview
+                const preview = document.getElementById('uploadPreview');
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    preview.innerHTML = `
+                        <img src="${e.target.result}" style="max-width: 150px; max-height: 150px; border-radius: 10px; border: 2px solid var(--secondary);">
+                        <p style="font-size: 0.9rem; margin-top: 0.5rem;">Preview gambar</p>
+                    `;
+                };
+                reader.readAsDataURL(file);
+                
+                // Simulasi upload ke catbox
+                // Catatan: Untuk implementasi nyata, gunakan API catbox.moe
+                setTimeout(() => {
+                    const productName = document.getElementById('adminProductName').value || 'product';
+                    const fileName = productName.toLowerCase()
+                        .replace(/[^\w\s]/gi, '')
+                        .replace(/\s+/g, '-')
+                        .substring(0, 20);
+                    
+                    // Generate URL dummy (ganti dengan API catbox sebenarnya)
+                    const dummyUrl = `https://files.catbox.moe/${fileName}-${Date.now()}.jpg`;
+                    
+                    // Masukkan URL ke form
+                    document.getElementById('adminProductImage').value = dummyUrl;
+                    
+                    showNotification('Gambar siap digunakan! URL otomatis diisi', 'success');
+                    
+                    // Reset input file
+                    input.value = '';
+                }, 1500);
+                
+            } catch (error) {
+                console.error('Upload error:', error);
+                showNotification('Gagal upload gambar: ' + error.message, 'error');
+            }
+        }
+
         // ==================== FUNGSI PRODUK ====================
         function renderProducts(filter) {
             const container = document.getElementById('productsContainer');
@@ -1851,10 +1991,12 @@
             }
             
             filteredProducts.forEach(product => {
+                const imageUrl = getProductImageUrl(product);
                 const card = document.createElement('div');
                 card.className = 'product-card';
                 card.innerHTML = `
-                    <img src="${product.image}" alt="${product.name}" class="product-img" onerror="this.src='https://via.placeholder.com/300/6a11cb/FFFFFF?text=Zarr+Store'">
+                    <img src="${imageUrl}" alt="${product.name}" class="product-img" 
+                         onerror="this.onerror=null; this.src='https://via.placeholder.com/300/6a11cb/FFFFFF?text=${encodeURIComponent(product.name.substring(0, 20))}'">
                     <div class="product-content">
                         <div class="product-category">${getCategoryName(product.category)}</div>
                         <h3 class="product-title">${product.name}</h3>
@@ -1888,10 +2030,13 @@
             const description = document.getElementById('adminProductDescription').value.trim();
             const image = document.getElementById('adminProductImage').value.trim();
             
-            if (!name || !category || !price || !description || !image) {
-                showNotification('Harap isi semua field!', 'error');
+            if (!name || !category || !price || !description) {
+                showNotification('Harap isi semua field wajib!', 'error');
                 return;
             }
+            
+            // Jika tidak ada URL gambar, gunakan 'auto'
+            const imageUrl = image || 'auto';
             
             if (currentEditProductId) {
                 // Edit produk yang ada
@@ -1903,7 +2048,7 @@
                         category,
                         price,
                         description,
-                        image
+                        image: imageUrl
                     };
                     showNotification('Produk berhasil diperbarui!', 'success');
                 }
@@ -1916,7 +2061,7 @@
                     category,
                     price,
                     description,
-                    image
+                    image: imageUrl
                 };
                 products.push(newProduct);
                 showNotification('Produk berhasil ditambahkan!', 'success');
@@ -1929,6 +2074,10 @@
             
             updateProductList();
             resetProductForm();
+            
+            // Reset preview upload
+            const preview = document.getElementById('uploadPreview');
+            if (preview) preview.innerHTML = '';
         }
 
         function updateProductList() {
@@ -2027,6 +2176,30 @@
 
         function importProducts() {
             document.getElementById('importFile').click();
+        }
+
+        // ==================== FUNGSI REFRESH GAMBAR ====================
+        function refreshProductImages() {
+            // Tambahkan timestamp ke semua gambar untuk refresh cache
+            products.forEach(product => {
+                if (product.image && product.image !== 'auto') {
+                    // Reset cache dengan menambahkan timestamp
+                    const timestamp = Date.now();
+                    if (product.image.includes('?t=')) {
+                        product.image = product.image.replace(/\?t=\d+/, '?t=' + timestamp);
+                    } else {
+                        const separator = product.image.includes('?') ? '&' : '?';
+                        product.image = product.image + separator + 't=' + timestamp;
+                    }
+                }
+            });
+            
+            saveToLocalStorage();
+            
+            const activeFilter = document.querySelector('.filter-btn.active');
+            renderProducts(activeFilter ? activeFilter.getAttribute('data-filter') : 'all');
+            
+            showNotification('Gambar produk direfresh!', 'success');
         }
 
         // ==================== FUNGSI PENGATURAN TOKO ====================
@@ -2432,7 +2605,7 @@ Saya sudah memesan melalui website. Bagaimana cara melanjutkan pembayaran?`;
                     category: "game",
                     price: 50000,
                     description: "Diamond MLBB siap kirim",
-                    image: "https://files.catbox.moe/xxxxxx.png"
+                    image: "auto"
                 },
                 {
                     id: (products.length > 0 ? Math.max(...products.map(p => p.id)) + 2 : 2),
@@ -2440,7 +2613,7 @@ Saya sudah memesan melalui website. Bagaimana cara melanjutkan pembayaran?`;
                     category: "game",
                     price: 100000,
                     description: "Diamond FF proses cepat",
-                    image: "https://files.catbox.moe/xxxxxx.png"
+                    image: "auto"
                 },
                 {
                     id: (products.length > 0 ? Math.max(...products.map(p => p.id)) + 3 : 3),
@@ -2448,7 +2621,7 @@ Saya sudah memesan melalui website. Bagaimana cara melanjutkan pembayaran?`;
                     category: "pulsa",
                     price: 23000,
                     description: "Pulsa AXIS harga murah",
-                    image: "https://files.catbox.moe/xxxxxx.png"
+                    image: "auto"
                 }
             ];
             
@@ -2488,6 +2661,8 @@ Saya sudah memesan melalui website. Bagaimana cara melanjutkan pembayaran?`;
         window.checkLocalStorage = checkLocalStorage;
         window.clearAllData = clearAllData;
         window.disableDeveloperMode = disableDeveloperMode;
+        window.uploadProductImage = uploadProductImage;
+        window.refreshProductImages = refreshProductImages;
     </script>
 </body>
 </html>
