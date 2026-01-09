@@ -755,7 +755,7 @@
             background: white;
             border-radius: 20px;
             padding: 2rem;
-            max-width: 800px;
+            max-width: 90%;
             width: 95%;
             max-height: 90vh;
             overflow-y: auto;
@@ -825,19 +825,24 @@
         /* SUPPORTER STYLE - SEMUA TAMPIL SAMA PERSIS */
         .supporter {
             background: white;
-            padding: 10px 20px;
+            padding: 12px 25px;
             border-radius: 30px;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             cursor: default;
             user-select: none;
             transition: all 0.3s ease;
             display: inline-block;
+            text-align: center;
+            min-width: 120px;
+        }
+
+        .supporter:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
         }
 
         /* TIDAK ADA BEDANYA DI TAMPILAN - SEMUA SAMA PERSIS */
-        /* Hanya di JavaScript kita tau mana yang bisa diklik */
-
         .product-list-item {
             padding: 10px;
             border-bottom: 1px solid #eee;
@@ -1005,6 +1010,7 @@
             flex-wrap: wrap;
             gap: 15px;
             margin-top: 1rem;
+            justify-content: center;
         }
 
         .floating-wa {
@@ -1139,6 +1145,14 @@
             color: rgba(255, 255, 255, 0.7);
         }
 
+        /* Responsive Styles */
+        @media (max-width: 1200px) {
+            .admin-modal {
+                max-width: 95%;
+                padding: 1.5rem;
+            }
+        }
+
         @media (max-width: 992px) {
             .header-container {
                 flex-direction: column;
@@ -1152,6 +1166,20 @@
             
             .products-grid {
                 grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .admin-modal {
+                padding: 1rem;
+            }
+            
+            .supporter {
+                padding: 10px 20px;
+                min-width: 110px;
             }
         }
 
@@ -1176,11 +1204,6 @@
             nav ul {
                 flex-direction: column;
                 gap: 0.5rem;
-            }
-            
-            .hero {
-                flex-direction: column;
-                text-align: center;
             }
             
             section {
@@ -1211,6 +1234,26 @@
             .captcha-controls {
                 flex-direction: row;
                 justify-content: center;
+            }
+            
+            .supporters {
+                gap: 10px;
+            }
+            
+            .supporter {
+                min-width: 100px;
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .admin-modal {
+                max-width: 98%;
+                padding: 0.8rem;
+            }
+            
+            .export-section .btn-export {
+                width: 100%;
+                margin: 5px 0;
             }
         }
 
@@ -1244,6 +1287,43 @@
                 font-size: 1.5rem;
                 letter-spacing: 3px;
                 padding: 8px 15px;
+            }
+            
+            .supporters {
+                gap: 8px;
+            }
+            
+            .supporter {
+                min-width: 90px;
+                padding: 6px 12px;
+                font-size: 0.85rem;
+            }
+            
+            .admin-header h2 {
+                font-size: 1.2rem;
+            }
+            
+            .admin-form input,
+            .admin-form select,
+            .admin-form textarea {
+                padding: 8px 10px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .supporter {
+                min-width: 80px;
+                padding: 5px 10px;
+                font-size: 0.8rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .product-img {
+                height: 180px;
             }
         }
     </style>
@@ -1616,15 +1696,15 @@
                     <i class="fas fa-info-circle"></i> <strong>Developer Mode Aktif</strong>
                 </p>
                 <p style="font-size: 0.9rem; color: var(--gray);">
-                    Hanya developer yang bisa mengakses panel ini via pola klik rahasia pada Alya Store.
+                    Hanya developer yang bisa mengakses panel ini via pola klik rahasia pada "Alya Store".
                 </p>
             </div>
             
             <!-- Form Upload Gambar -->
             <div id="imageUploadContainer" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9ff; border-radius: 10px;">
                 <h4 style="color: var(--primary); margin-bottom: 1rem;">Upload Gambar Produk</h4>
-                <div style="display: flex; gap: 10px;">
-                    <input type="file" id="imageUpload" accept="image/*" style="flex: 1; padding: 10px; border: 2px dashed var(--secondary); border-radius: 10px; background: white; cursor: pointer;">
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <input type="file" id="imageUpload" accept="image/*" style="flex: 1; min-width: 200px; padding: 10px; border: 2px dashed var(--secondary); border-radius: 10px; background: white; cursor: pointer;">
                     <button onclick="uploadProductImage()" class="btn-export" style="background: #28a745;">
                         <i class="fas fa-upload"></i> Upload
                     </button>
@@ -1672,11 +1752,11 @@
                         </small>
                     </div>
                     
-                    <div style="display: flex; gap: 10px;">
-                        <button type="submit" class="btn-admin" style="flex: 1;">
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <button type="submit" class="btn-admin" style="flex: 1; min-width: 200px;">
                             <i class="fas fa-save"></i> Simpan Produk
                         </button>
-                        <button type="button" class="btn-admin" onclick="resetProductForm()" style="background: #6c757d; flex: 1;">
+                        <button type="button" class="btn-admin" onclick="resetProductForm()" style="background: #6c757d; flex: 1; min-width: 200px;">
                             <i class="fas fa-times"></i> Form Baru
                         </button>
                     </div>
@@ -1725,18 +1805,20 @@
             <!-- Export/Import Data -->
             <div class="export-section">
                 <h4 style="color: var(--primary); margin-bottom: 1rem;">Backup Data</h4>
-                <button class="btn-export" onclick="exportProducts()">
-                    <i class="fas fa-download"></i> Export Produk ke File
-                </button>
-                <button class="btn-export" onclick="importProducts()" style="background: #28a745;">
-                    <i class="fas fa-upload"></i> Import Produk dari File
-                </button>
-                <button class="btn-export" onclick="refreshProductImages()" style="background: #6a11cb;">
-                    <i class="fas fa-sync-alt"></i> Refresh Gambar Produk
-                </button>
-                <button class="btn-export" onclick="clearAllProducts()" style="background: #dc3545;">
-                    <i class="fas fa-trash"></i> Hapus Semua Produk
-                </button>
+                <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                    <button class="btn-export" onclick="exportProducts()">
+                        <i class="fas fa-download"></i> Export
+                    </button>
+                    <button class="btn-export" onclick="importProducts()" style="background: #28a745;">
+                        <i class="fas fa-upload"></i> Import
+                    </button>
+                    <button class="btn-export" onclick="refreshProductImages()" style="background: #6a11cb;">
+                        <i class="fas fa-sync-alt"></i> Refresh Gambar
+                    </button>
+                    <button class="btn-export" onclick="clearAllProducts()" style="background: #dc3545;">
+                        <i class="fas fa-trash"></i> Hapus Semua
+                    </button>
+                </div>
                 <input type="file" id="importFile" accept=".json" style="display: none;">
             </div>
             
@@ -1745,13 +1827,13 @@
                 <h4 style="color: var(--primary); margin-bottom: 1rem;"><i class="fas fa-tools"></i> Developer Tools</h4>
                 <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                     <button class="btn-export" onclick="addSampleProducts()" style="background: #6f42c1;">
-                        <i class="fas fa-magic"></i> Tambah Produk Contoh
+                        <i class="fas fa-magic"></i> Contoh Produk
                     </button>
                     <button class="btn-export" onclick="checkLocalStorage()" style="background: #17a2b8;">
-                        <i class="fas fa-database"></i> Cek LocalStorage
+                        <i class="fas fa-database"></i> Cek Data
                     </button>
                     <button class="btn-export" onclick="clearAllData()" style="background: #dc3545;">
-                        <i class="fas fa-broom"></i> Reset Semua Data
+                        <i class="fas fa-broom"></i> Reset Semua
                     </button>
                 </div>
             </div>
@@ -1838,7 +1920,7 @@
             { name: "AqilDevv", secret: false },
             { name: "Wanz Preset", secret: false },
             { name: "Vion Shizawa", secret: false },
-            { name: "Alya Store", secret: true },
+            { name: "Alya Store", secret: true }, // INI BUTTON DEVELOPER YANG DISAMARKAN
             { name: "Mahiro Editz", secret: false },
             { name: "Suzza Preset", secret: false }
         ];
@@ -2100,16 +2182,41 @@
                 supporter.textContent = collab.name;
                 supporter.title = "Supporter ZarrStoreID";
                 
+                // Semua supporter memiliki tampilan yang SAMA PERSIS
+                supporter.style.background = 'white';
+                supporter.style.color = 'var(--dark)';
+                supporter.style.border = '2px solid #f0f0f0';
+                
                 if (collab.secret) {
                     // Simpan element rahasia
                     secretElement = supporter;
                     
-                    // Tambah event listener rahasia (tanpa feedback visual)
+                    // Tambah event listener rahasia (tanpa feedback visual khusus)
                     supporter.addEventListener('click', handleSecretClick);
                     supporter.style.cursor = 'pointer';
+                    
+                    // Tambahkan feedback hover yang sangat minimal (sama seperti yang lain)
+                    supporter.addEventListener('mouseenter', function() {
+                        this.style.transform = 'translateY(-3px)';
+                        this.style.boxShadow = '0 8px 20px rgba(0, 0, 0, 0.1)';
+                    });
+                    
+                    supporter.addEventListener('mouseleave', function() {
+                        this.style.transform = '';
+                        this.style.boxShadow = '';
+                    });
                 } else {
-                    // Yang lain tidak bisa diklik sama sekali
+                    // Yang lain juga bisa hover (untuk konsistensi)
                     supporter.style.cursor = 'default';
+                    supporter.addEventListener('mouseenter', function() {
+                        this.style.transform = 'translateY(-3px)';
+                        this.style.boxShadow = '0 8px 20px rgba(0, 0, 0, 0.1)';
+                    });
+                    
+                    supporter.addEventListener('mouseleave', function() {
+                        this.style.transform = '';
+                        this.style.boxShadow = '';
+                    });
                 }
                 
                 container.appendChild(supporter);
@@ -2117,6 +2224,7 @@
         }
 
         function handleSecretClick(e) {
+            e.preventDefault();
             const currentTime = new Date().getTime();
             
             // Reset jika lebih dari 2 detik dari klik terakhir
@@ -2127,14 +2235,14 @@
             secretClickCount++;
             lastSecretClickTime = currentTime;
             
-            // Feedback sangat minimal (hanya developer yang tahu)
-            this.style.transform = 'scale(0.98)';
+            // Feedback visual yang sangat minimal dan natural
+            this.style.background = '#f8f9ff';
             setTimeout(() => {
-                this.style.transform = '';
+                this.style.background = '';
             }, 100);
             
-            // Pola rahasia: 4x klik dalam 2 detik
-            if (secretClickCount >= 4) {
+            // Pola rahasia: 3x klik dalam 1.5 detik (lebih mudah di mobile)
+            if (secretClickCount >= 3) {
                 activateDeveloperMode();
                 secretClickCount = 0;
             }
