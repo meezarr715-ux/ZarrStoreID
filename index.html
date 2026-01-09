@@ -1620,6 +1620,10 @@
                 box-shadow: 0 8px 15px rgba(106, 17, 203, 0.2);
             }
         }
+
+        /* Kategori baru untuk produk spesial */
+        .category-bot { background: rgba(255, 77, 166, 0.1); color: #ff4da6; }
+        .category-editor { background: rgba(37, 117, 252, 0.1); color: #2575fc; }
     </style>
 </head>
 <body>
@@ -1701,6 +1705,8 @@
                 <button class="filter-btn" data-filter="game">Game</button>
                 <button class="filter-btn" data-filter="pulsa">Pulsa</button>
                 <button class="filter-btn" data-filter="kuota">Kuota</button>
+                <button class="filter-btn" data-filter="bot">Sewa Bot</button>
+                <button class="filter-btn" data-filter="editor">Video Editor</button>
             </div>
             
             <div class="products-grid" id="productsContainer">
@@ -2025,6 +2031,8 @@
                             <option value="game">Game</option>
                             <option value="pulsa">Pulsa</option>
                             <option value="kuota">Kuota</option>
+                            <option value="bot">Sewa Bot</option>
+                            <option value="editor">Video Editor</option>
                         </select>
                     </div>
                     
@@ -2175,18 +2183,19 @@
             storeName: "ZarrStoreID",
             phoneNumber: "6288295039238",
             qrisUrl: "https://files.catbox.moe/xxxxxx.png",
-            storeLogo: "https://files.catbox.moe/vev7k0.png"
+            storeLogo: "https://files.catbox.moe/gua633.jpg"
         };
 
         // ==================== DATA PRODUK ====================
         let products = [
+            // Produk Game
             {
                 id: 1,
                 name: "Mobile Legends 86 Diamond",
                 category: "game",
                 price: 25000,
                 description: "Diamond MLBB termurah se-Indonesia",
-                image: "auto"
+                image: "https://files.catbox.moe/l2o3mh.jpg"
             },
             {
                 id: 2,
@@ -2194,37 +2203,108 @@
                 category: "game",
                 price: 30000,
                 description: "Diamond FF siap kirim instan",
-                image: "auto"
+                image: "https://files.catbox.moe/hqw3n7.jpg"
             },
             {
                 id: 3,
-                name: "Pulsa Telkomsel 10.000",
-                category: "pulsa",
-                price: 12000,
-                description: "Pulsa semua operator 24 jam",
-                image: "auto"
-            },
-            {
-                id: 4,
                 name: "XYRAN Premium 1 Bulan",
                 category: "game",
                 price: 15000,
                 description: "Akun premium Xyran terbaru",
-                image: "auto"
+                image: "https://files.catbox.moe/lgh3p1.jpg"
+            },
+            
+            // Produk Pulsa
+            {
+                id: 4,
+                name: "Pulsa Telkomsel 10.000",
+                category: "pulsa",
+                price: 12000,
+                description: "Pulsa semua operator 24 jam",
+                image: "https://files.catbox.moe/p3q4r2.jpg"
+            },
+            {
+                id: 5,
+                name: "Pulsa Tri 5.000",
+                category: "pulsa",
+                price: 7000,
+                description: "Pulsa Tri murah langsung aktif",
+                image: "https://files.catbox.moe/s4r5t3.jpg"
+            },
+            
+            // Produk Sewa Bot
+            {
+                id: 6,
+                name: "Sewa Bot WhatsApp 1 Minggu",
+                category: "bot",
+                price: 15000,
+                description: "Bot WA multifungsi premium",
+                image: "https://files.catbox.moe/m6n7u4.jpg"
+            },
+            {
+                id: 7,
+                name: "Sewa Bot Instagram 1 Bulan",
+                category: "bot",
+                price: 30000,
+                description: "Bot IG auto like & follow",
+                image: "https://files.catbox.moe/v7w8x5.jpg"
+            },
+            {
+                id: 8,
+                name: "Sewa Bot TikTok 2 Minggu",
+                category: "bot",
+                price: 25000,
+                description: "Bot TikTok views & followers",
+                image: "https://files.catbox.moe/y8x9z6.jpg"
+            },
+            
+            // Produk Video Editor
+            {
+                id: 9,
+                name: "Alight Motion Premium 3 Bulan",
+                category: "editor",
+                price: 35000,
+                description: "Full fitur tanpa watermark",
+                image: "https://files.catbox.moe/z9a0b7.jpg"
+            },
+            {
+                id: 10,
+                name: "Capcut Pro 1 Bulan",
+                category: "editor",
+                price: 20000,
+                description: "All template unlocked",
+                image: "https://files.catbox.moe/a0b1c8.jpg"
+            },
+            {
+                id: 11,
+                name: "Alight Motion Premium 1 Tahun",
+                category: "editor",
+                price: 80000,
+                description: "Akun premium lifetime access",
+                image: "https://files.catbox.moe/b1c2d9.jpg"
+            },
+            {
+                id: 12,
+                name: "Capcut Pro 6 Bulan",
+                category: "editor",
+                price: 50000,
+                description: "Premium effects & transitions",
+                image: "https://files.catbox.moe/c2d3e0.jpg"
             }
         ];
 
         // ==================== DATA COLLABORATOR ====================
-        // Developer button benar-benar menyamar sebagai supporter biasa
         const collaborators = [
             { name: "SabaMart", secret: false },
             { name: "AqilDevv", secret: false },
             { name: "Wanz Preset", secret: false },
             { name: "Vion Shizawa", secret: false },
-            { name: "Alya Store", secret: true, developer: true }, // Ini yang bisa diklik untuk developer mode
+            { name: "Alya Store", secret: true, developer: true },
             { name: "Mahiro Editz", secret: false },
             { name: "Suzza Preset", secret: false },
-            { name: "Xyran", secret: false } // Support baru Xyran
+            { name: "Xyran", secret: false },
+            { name: "BotMaster ID", secret: false },
+            { name: "EditorPro", secret: false }
         ];
 
         // ==================== VARIABEL GLOBAL ====================
@@ -2242,19 +2322,15 @@
 
         // ==================== DETEKSI DEVICE ====================
         function detectDevice() {
-            // Deteksi touch device
             isTouchDevice = 'ontouchstart' in window || 
                            navigator.maxTouchPoints > 0 || 
                            navigator.msMaxTouchPoints > 0;
             
-            // Tambah class ke body untuk styling khusus
             if (isTouchDevice) {
                 document.body.classList.add('touch-device');
             } else {
                 document.body.classList.add('hover-device');
             }
-            
-            console.log(`Device: ${isTouchDevice ? 'Touch/Mobile' : 'Desktop'}`);
         }
 
         // ==================== SISTEM CAPTCHA ====================
@@ -2296,7 +2372,6 @@
                 status.className = 'captcha-status error';
                 captchaVerified = false;
                 updateSendButton();
-                // Refresh CAPTCHA setelah salah
                 setTimeout(() => {
                     renderCaptcha();
                     document.getElementById('captchaInput').value = '';
@@ -2308,7 +2383,6 @@
         function setupCaptcha() {
             renderCaptcha();
             
-            // Event listeners untuk CAPTCHA
             document.getElementById('refreshCaptcha').addEventListener('click', function() {
                 renderCaptcha();
                 document.getElementById('captchaInput').value = '';
@@ -2319,7 +2393,6 @@
             
             document.getElementById('verifyCaptcha').addEventListener('click', verifyCaptcha);
             
-            // Enter key untuk verifikasi
             document.getElementById('captchaInput').addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') {
                     e.preventDefault();
@@ -2327,7 +2400,6 @@
                 }
             });
             
-            // Audio CAPTCHA (simulasi)
             document.getElementById('audioCaptcha').addEventListener('click', function() {
                 showNotification('Fitur audio CAPTCHA akan segera hadir!', 'info');
             });
@@ -2369,20 +2441,16 @@
 
         // ==================== FUNGSI GAMBAR OTOMATIS ====================
         function getProductImageUrl(product) {
-            // Jika sudah ada URL lengkap, gunakan itu
             if (product.image && product.image !== 'auto' && product.image.startsWith('http')) {
-                // Tambahkan timestamp untuk cache busting
                 const separator = product.image.includes('?') ? '&' : '?';
                 return product.image + separator + 't=' + Date.now();
             }
             
-            // Generate URL gambar otomatis berdasarkan nama produk
             const productName = encodeURIComponent(product.name.toLowerCase()
                 .replace(/[^\w\s]/gi, '')
                 .replace(/\s+/g, '-')
                 .substring(0, 20));
             
-            // URL placeholder dengan nama produk
             return `https://via.placeholder.com/300/6a11cb/FFFFFF?text=${productName}&t=${Date.now()}`;
         }
 
@@ -2392,16 +2460,9 @@
         });
 
         function initApp() {
-            // Deteksi device
             detectDevice();
-            
-            // Setup tahun
             document.getElementById('currentYear').textContent = new Date().getFullYear();
-            
-            // Load data dari localStorage
             loadFromLocalStorage();
-            
-            // Setup UI
             setupNavigation();
             setupProductFilters();
             setupPayment();
@@ -2409,33 +2470,18 @@
             setupOrderModal();
             setupCopyButtons();
             setupCollaborators();
-            
-            // Setup verifikasi
             setupCaptcha();
             setupRobotVerification();
-            
-            // Tampilkan data
             renderProducts('all');
             renderTransactionHistory();
-            
-            // Setup order summary
             updateOrderSummary(currentProduct);
-            
-            // Load QRIS image
             loadQRISImage();
-            
-            // Setup admin panel
             setupAdminPanel();
-            
-            // Tambah listener untuk resize
             window.addEventListener('resize', handleResize);
-            
-            // Optimisasi untuk Chrome/Desktop
             optimizeForChrome();
         }
 
         function optimizeForChrome() {
-            // Force hardware acceleration untuk performa lebih baik di Chrome
             const elements = document.querySelectorAll('.product-card, .btn, .payment-option');
             elements.forEach(el => {
                 el.style.transform = 'translateZ(0)';
@@ -2443,13 +2489,11 @@
         }
 
         function handleResize() {
-            // Update device detection saat resize
             detectDevice();
         }
 
         // ==================== FUNGSI LOCALSTORAGE ====================
         function loadFromLocalStorage() {
-            // Load produk
             const savedProducts = localStorage.getItem('zarrstore_products');
             if (savedProducts) {
                 try {
@@ -2460,7 +2504,6 @@
                 }
             }
             
-            // Load config
             const savedConfig = localStorage.getItem('zarrstore_config');
             if (savedConfig) {
                 try {
@@ -2470,11 +2513,9 @@
                 }
             }
             
-            // Load developer mode
             const savedDevMode = localStorage.getItem('zarrstore_devmode');
             isDeveloperMode = savedDevMode === 'true';
             
-            // Update UI dengan config
             updateUIFromConfig();
         }
 
@@ -2485,24 +2526,20 @@
         }
 
         function updateUIFromConfig() {
-            // Update nomor pembayaran
             document.querySelectorAll('.payment-number').forEach(el => {
                 const number = STORE_CONFIG.phoneNumber.replace('62', '0');
                 el.textContent = number;
                 el.setAttribute('data-number', number);
             });
             
-            // Update nama toko
             document.getElementById('storeNameFooter').textContent = STORE_CONFIG.storeName;
             document.getElementById('storeNameCopyright').textContent = STORE_CONFIG.storeName;
             
-            // Update floating WhatsApp
             const floatingWA = document.querySelector('.floating-wa');
             if (floatingWA) {
                 floatingWA.href = `https://wa.me/${STORE_CONFIG.phoneNumber}?text=Halo%20${encodeURIComponent(STORE_CONFIG.storeName)}%2C%20saya%20ingin%20bertanya%20tentang%20produk`;
             }
             
-            // Update form pengaturan
             if (document.getElementById('storeName')) {
                 document.getElementById('storeName').value = STORE_CONFIG.storeName;
                 document.getElementById('storePhone').value = STORE_CONFIG.phoneNumber;
@@ -2510,21 +2547,19 @@
                 document.getElementById('storeLogo').value = STORE_CONFIG.storeLogo;
             }
             
-            // Update logo
             const logoImg = document.querySelector('.logo-img');
             if (logoImg && STORE_CONFIG.storeLogo) {
                 logoImg.src = STORE_CONFIG.storeLogo;
             }
         }
 
-        // ==================== FUNGSI COLLABORATOR (NYAMAR SEMPURNA) ====================
+        // ==================== FUNGSI COLLABORATOR ====================
         function setupCollaborators() {
             const container = document.getElementById('collaboratorsList');
             if (!container) return;
             
             container.innerHTML = '';
             
-            // Acak urutan collaborator untuk lebih natural
             const shuffled = [...collaborators].sort(() => Math.random() - 0.5);
             
             shuffled.forEach(collab => {
@@ -2533,22 +2568,12 @@
                 supporter.textContent = collab.name;
                 supporter.title = `Supporter ZarrStoreID: ${collab.name}`;
                 
-                // SEMUA TAMPILAN SAMA PERSIS - BENAR-BENAR NYAMAR
-                // Tidak ada perbedaan visual sama sekali
                 if (collab.secret && collab.developer) {
-                    // Ini adalah tombol developer yang tersamar
                     supporter.classList.add('developer-hidden');
                     secretElement = supporter;
-                    
-                    // Tambah event listener dengan pola klik rahasia yang TIDAK TERLIHAT
                     supporter.addEventListener('click', handleSecretDeveloperClick);
-                    // Cursor tetap default untuk menyamarkan
                     supporter.style.cursor = 'default';
-                    
-                    // Debug mode: hanya tampilkan di console
-                    console.log('Developer button terdeteksi: ' + collab.name);
                 } else {
-                    // Yang lain hanya teks biasa
                     supporter.style.cursor = 'default';
                 }
                 
@@ -2559,7 +2584,6 @@
         function handleSecretDeveloperClick(e) {
             const currentTime = new Date().getTime();
             
-            // Reset jika lebih dari 2 detik dari klik terakhir
             if (currentTime - lastSecretClickTime > 2000) {
                 secretClickCount = 0;
             }
@@ -2567,18 +2591,15 @@
             secretClickCount++;
             lastSecretClickTime = currentTime;
             
-            // Feedback yang sangat minimal dan natural - sama seperti supporter lain
             this.style.transform = 'translateY(-2px)';
             setTimeout(() => {
                 this.style.transform = '';
             }, 150);
             
-            // Pola rahasia: 3x klik dalam 1.5 detik
             if (secretClickCount >= 3) {
                 activateDeveloperMode();
                 secretClickCount = 0;
                 
-                // Feedback visual yang sangat halus
                 this.style.boxShadow = '0 0 0 2px rgba(106, 17, 203, 0.2)';
                 setTimeout(() => {
                     this.style.boxShadow = '';
@@ -2589,32 +2610,25 @@
         function activateDeveloperMode() {
             isDeveloperMode = true;
             saveToLocalStorage();
-            
             showNotification('Developer mode diaktifkan', 'success');
-            
-            // Buka panel admin setelah 0.5 detik
             setTimeout(() => {
                 openAdminPanel();
             }, 500);
         }
 
         function setupAdminPanel() {
-            // Setup admin panel close
             document.getElementById('adminClose').addEventListener('click', function() {
                 document.getElementById('adminPanel').style.display = 'none';
             });
             
-            // Close panel saat klik di luar
             document.getElementById('adminPanel').addEventListener('click', function(e) {
                 if (e.target === this) {
                     this.style.display = 'none';
                 }
             });
             
-            // Setup form admin
             document.getElementById('adminForm').addEventListener('submit', addProduct);
             
-            // Setup import file
             document.getElementById('importFile').addEventListener('change', function(e) {
                 const file = e.target.files[0];
                 if (!file) return;
@@ -2645,8 +2659,6 @@
             document.getElementById('adminPanel').style.display = 'flex';
             updateProductList();
             updateUIFromConfig();
-            
-            // Reset form produk
             resetProductForm();
         }
 
@@ -2655,10 +2667,7 @@
                 isDeveloperMode = false;
                 secretClickCount = 0;
                 saveToLocalStorage();
-                
-                // Tutup panel
                 document.getElementById('adminPanel').style.display = 'none';
-                
                 showNotification('Developer Mode telah dimatikan', 'success');
             }
         }
@@ -2673,13 +2682,11 @@
                 return;
             }
             
-            // Validasi ukuran file (max 5MB)
             if (file.size > 5 * 1024 * 1024) {
                 showNotification('Ukuran gambar maksimal 5MB!', 'error');
                 return;
             }
             
-            // Validasi tipe file
             if (!file.type.startsWith('image/')) {
                 showNotification('File harus berupa gambar!', 'error');
                 return;
@@ -2688,7 +2695,6 @@
             try {
                 showNotification('Mengupload gambar...', 'info');
                 
-                // Tampilkan preview
                 const preview = document.getElementById('uploadPreview');
                 const reader = new FileReader();
                 
@@ -2700,7 +2706,6 @@
                 };
                 reader.readAsDataURL(file);
                 
-                // Simulasi upload ke catbox
                 setTimeout(() => {
                     const productName = document.getElementById('adminProductName').value || 'product';
                     const fileName = productName.toLowerCase()
@@ -2708,15 +2713,9 @@
                         .replace(/\s+/g, '-')
                         .substring(0, 20);
                     
-                    // Generate URL dummy (ganti dengan API catbox sebenarnya)
                     const dummyUrl = `https://files.catbox.moe/${fileName}-${Date.now()}.jpg`;
-                    
-                    // Masukkan URL ke form
                     document.getElementById('adminProductImage').value = dummyUrl;
-                    
                     showNotification('Gambar siap digunakan! URL otomatis diisi', 'success');
-                    
-                    // Reset input file
                     input.value = '';
                 }, 1500);
                 
@@ -2727,6 +2726,25 @@
         }
 
         // ==================== FUNGSI PRODUK ====================
+        function getCategoryName(category) {
+            const names = { 
+                game: 'Game', 
+                pulsa: 'Pulsa', 
+                kuota: 'Kuota',
+                bot: 'Sewa Bot',
+                editor: 'Video Editor'
+            };
+            return names[category] || category;
+        }
+
+        function getCategoryClass(category) {
+            const classes = {
+                bot: 'category-bot',
+                editor: 'category-editor'
+            };
+            return classes[category] || '';
+        }
+
         function renderProducts(filter) {
             const container = document.getElementById('productsContainer');
             if (!container) return;
@@ -2752,11 +2770,12 @@
                 const imageUrl = getProductImageUrl(product);
                 const card = document.createElement('div');
                 card.className = 'product-card';
+                const categoryClass = getCategoryClass(product.category);
                 card.innerHTML = `
                     <img src="${imageUrl}" alt="${product.name}" class="product-img" 
                          onerror="this.onerror=null; this.src='https://via.placeholder.com/300/6a11cb/FFFFFF?text=${encodeURIComponent(product.name.substring(0, 20))}'">
                     <div class="product-content">
-                        <div class="product-category">${getCategoryName(product.category)}</div>
+                        <div class="product-category ${categoryClass}">${getCategoryName(product.category)}</div>
                         <h3 class="product-title">${product.name}</h3>
                         <div class="product-price">Rp ${product.price.toLocaleString('id-ID')}</div>
                         <p class="product-desc">${product.description}</p>
@@ -2774,11 +2793,6 @@
             });
         }
 
-        function getCategoryName(category) {
-            const names = { game: 'Game', pulsa: 'Pulsa', kuota: 'Kuota' };
-            return names[category] || category;
-        }
-
         function addProduct(event) {
             event.preventDefault();
             
@@ -2793,11 +2807,9 @@
                 return;
             }
             
-            // Jika tidak ada URL gambar, gunakan 'auto'
             const imageUrl = image || 'auto';
             
             if (currentEditProductId) {
-                // Edit produk yang ada
                 const productIndex = products.findIndex(p => p.id === currentEditProductId);
                 if (productIndex !== -1) {
                     products[productIndex] = {
@@ -2812,7 +2824,6 @@
                 }
                 currentEditProductId = null;
             } else {
-                // Tambah produk baru
                 const newProduct = {
                     id: products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1,
                     name,
@@ -2833,7 +2844,6 @@
             updateProductList();
             resetProductForm();
             
-            // Reset preview upload
             const preview = document.getElementById('uploadPreview');
             if (preview) preview.innerHTML = '';
         }
@@ -2878,15 +2888,12 @@
             if (!product) return;
             
             currentEditProductId = id;
-            
             document.getElementById('adminProductName').value = product.name;
             document.getElementById('adminProductCategory').value = product.category;
             document.getElementById('adminProductPrice').value = product.price;
             document.getElementById('adminProductDescription').value = product.description;
             document.getElementById('adminProductImage').value = product.image;
-            
             document.querySelector('button[type="submit"]').innerHTML = '<i class="fas fa-save"></i> Update Produk';
-            
             showNotification('Edit produk - perbarui data lalu klik Update', 'info');
         }
 
@@ -2900,10 +2907,8 @@
             if (confirm('Hapus produk ini?')) {
                 products = products.filter(p => p.id !== id);
                 saveToLocalStorage();
-                
                 const activeFilter = document.querySelector('.filter-btn.active');
                 renderProducts(activeFilter ? activeFilter.getAttribute('data-filter') : 'all');
-                
                 updateProductList();
                 showNotification('Produk berhasil dihapus!', 'success');
             }
@@ -2928,7 +2933,6 @@
             link.setAttribute('href', dataUri);
             link.setAttribute('download', fileName);
             link.click();
-            
             showNotification('Produk berhasil diexport!', 'success');
         }
 
@@ -2936,12 +2940,9 @@
             document.getElementById('importFile').click();
         }
 
-        // ==================== FUNGSI REFRESH GAMBAR ====================
         function refreshProductImages() {
-            // Tambahkan timestamp ke semua gambar untuk refresh cache
             products.forEach(product => {
                 if (product.image && product.image !== 'auto') {
-                    // Reset cache dengan menambahkan timestamp
                     const timestamp = Date.now();
                     if (product.image.includes('?t=')) {
                         product.image = product.image.replace(/\?t=\d+/, '?t=' + timestamp);
@@ -2953,14 +2954,11 @@
             });
             
             saveToLocalStorage();
-            
             const activeFilter = document.querySelector('.filter-btn.active');
             renderProducts(activeFilter ? activeFilter.getAttribute('data-filter') : 'all');
-            
             showNotification('Gambar produk direfresh!', 'success');
         }
 
-        // ==================== FUNGSI PENGATURAN TOKO ====================
         function saveStoreSettings() {
             const storeName = document.getElementById('storeName').value.trim();
             const storePhone = document.getElementById('storePhone').value.trim();
@@ -2980,7 +2978,6 @@
             saveToLocalStorage();
             updateUIFromConfig();
             loadQRISImage();
-            
             showNotification('Pengaturan toko disimpan!', 'success');
         }
 
@@ -2991,10 +2988,8 @@
                     e.preventDefault();
                     document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
                     this.classList.add('active');
-                    
                     document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
                     document.getElementById(this.getAttribute('data-target')).classList.add('active');
-                    
                     document.getElementById('mainNav').classList.remove('active');
                     updateMobileMenuIcon();
                 });
@@ -3012,10 +3007,8 @@
         }
 
         function setupPayment() {
-            // Update order summary
             updateOrderSummary(currentProduct);
             
-            // Payment method selection
             document.querySelectorAll('.payment-option').forEach(option => {
                 option.addEventListener('click', function() {
                     document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('selected'));
@@ -3033,7 +3026,6 @@
                 });
             });
             
-            // Pay button
             document.getElementById('payButton').addEventListener('click', function() {
                 if (!currentProduct) {
                     showNotification('Pilih produk terlebih dahulu!', 'error');
@@ -3062,7 +3054,6 @@
                         notification.classList.add('show');
                         setTimeout(() => notification.classList.remove('show'), 2000);
                     }).catch(err => {
-                        // Fallback untuk browser lama
                         const textArea = document.createElement('textarea');
                         textArea.value = number;
                         document.body.appendChild(textArea);
@@ -3132,27 +3123,22 @@
             if (orderProduct) orderProduct.value = product.name;
             if (orderPrice) orderPrice.value = `Rp ${product.price.toLocaleString('id-ID')}`;
             
-            // Reset form dan verifikasi
             document.getElementById('customerName').value = '';
             document.getElementById('customerPhone').value = '';
             document.getElementById('gameId').value = '';
             document.getElementById('paymentMethod').value = '';
             document.getElementById('additionalNotes').value = '';
             
-            // Reset CAPTCHA
             renderCaptcha();
             document.getElementById('captchaInput').value = '';
             document.getElementById('captchaStatus').textContent = '';
             captchaVerified = false;
             
-            // Reset robot verification
             document.getElementById('robotCheck').checked = false;
             document.getElementById('robotCheckbox').classList.remove('checked');
             robotChecked = false;
             
-            // Update button
             updateSendButton();
-            
             modal.style.display = 'flex';
         }
 
@@ -3240,7 +3226,6 @@
         }
 
         function sendOrderToWhatsApp(product) {
-            // Validasi verifikasi
             if (!robotChecked) {
                 showNotification('Centang "Saya Bukan Robot" terlebih dahulu!', 'error');
                 return;
@@ -3262,7 +3247,6 @@
                 return;
             }
             
-            // Validasi nomor telepon
             const phoneRegex = /^[0-9]{10,13}$/;
             const cleanPhone = phone.replace(/[^0-9]/g, '');
             if (!phoneRegex.test(cleanPhone)) {
@@ -3283,14 +3267,9 @@ ${notes ? `📝 *Catatan:* ${notes}` : ''}
 Saya sudah memesan melalui website. Bagaimana cara melanjutkan pembayaran?`;
             
             const url = `https://wa.me/${STORE_CONFIG.phoneNumber}?text=${encodeURIComponent(message)}`;
-            
-            // Simpan ke riwayat transaksi
             addTransactionHistory(product, name);
-            
-            // Tutup modal
             document.getElementById('orderModal').style.display = 'none';
             
-            // Redirect ke WhatsApp
             setTimeout(() => {
                 window.open(url, '_blank');
             }, 500);
@@ -3312,7 +3291,6 @@ Saya sudah memesan melalui website. Bagaimana cara melanjutkan pembayaran?`;
             
             history.unshift(newTransaction);
             localStorage.setItem('zarrstore_history', JSON.stringify(history));
-            
             renderTransactionHistory();
         }
 
@@ -3324,7 +3302,6 @@ Saya sudah memesan melalui website. Bagaimana cara melanjutkan pembayaran?`;
             
             container.innerHTML = '';
             
-            // Tampilkan maksimal 10 transaksi terbaru
             history.slice(0, 10).forEach(transaction => {
                 const row = document.createElement('tr');
                 const statusClass = `status-${transaction.status}`;
@@ -3341,7 +3318,6 @@ Saya sudah memesan melalui website. Bagaimana cara melanjutkan pembayaran?`;
                 container.appendChild(row);
             });
             
-            // Jika tidak ada transaksi
             if (history.length === 0) {
                 container.innerHTML = `
                     <tr>
@@ -3355,13 +3331,11 @@ Saya sudah memesan melalui website. Bagaimana cara melanjutkan pembayaran?`;
         }
 
         function showNotification(message, type) {
-            // Hapus notifikasi sebelumnya
             const oldNotification = document.querySelector('.notification');
             if (oldNotification) {
                 oldNotification.remove();
             }
             
-            // Buat notifikasi baru
             const notification = document.createElement('div');
             notification.className = `notification ${type}`;
             notification.innerHTML = `
@@ -3371,7 +3345,6 @@ Saya sudah memesan melalui website. Bagaimana cara melanjutkan pembayaran?`;
             
             document.body.appendChild(notification);
             
-            // Auto hapus setelah 3 detik
             setTimeout(() => {
                 if (notification.parentNode) {
                     document.body.removeChild(notification);
@@ -3418,11 +3391,9 @@ Saya sudah memesan melalui website. Bagaimana cara melanjutkan pembayaran?`;
             
             products.push(...sampleProducts);
             saveToLocalStorage();
-            
             const activeFilter = document.querySelector('.filter-btn.active');
             renderProducts(activeFilter ? activeFilter.getAttribute('data-filter') : 'all');
             updateProductList();
-            
             showNotification('4 produk contoh ditambahkan!', 'success');
         }
 
