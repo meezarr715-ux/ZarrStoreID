@@ -567,6 +567,146 @@
             border-color: var(--secondary);
         }
 
+        /* CAPTCHA Styles */
+        .captcha-container {
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border: 2px dashed #dee2e6;
+        }
+
+        .captcha-box {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 1rem;
+        }
+
+        .captcha-text {
+            font-family: 'Courier New', monospace;
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 5px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding: 10px 20px;
+            border-radius: 10px;
+            background-color: #f8f9ff;
+            border: 2px solid var(--secondary);
+            user-select: none;
+            text-align: center;
+            flex: 1;
+        }
+
+        .captcha-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .captcha-controls button {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 8px;
+            background: var(--secondary);
+            color: white;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .captcha-controls button:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .captcha-input {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .captcha-input input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .captcha-input input:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        .captcha-status {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            text-align: center;
+            min-height: 25px;
+        }
+
+        .captcha-status.success {
+            color: var(--success);
+        }
+
+        .captcha-status.error {
+            color: var(--danger);
+        }
+
+        .robot-verification {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            border: 2px solid #e9ecef;
+        }
+
+        .robot-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .robot-checkbox input[type="checkbox"] {
+            display: none;
+        }
+
+        .robot-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--gray);
+            border: 2px solid #dee2e6;
+            transition: all 0.3s ease;
+        }
+
+        .robot-checkbox.checked .robot-icon {
+            background: var(--success);
+            color: white;
+            border-color: var(--success);
+        }
+
+        .robot-text {
+            font-weight: 500;
+            color: var(--dark);
+        }
+
         .btn-whatsapp {
             width: 100%;
             padding: 18px;
@@ -588,6 +728,13 @@
         .btn-whatsapp:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+        }
+
+        .btn-whatsapp:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
         }
 
         /* Admin Panel Styles (Hidden for users) */
@@ -1056,6 +1203,15 @@
                 width: 150px;
                 height: 150px;
             }
+            
+            .captcha-box {
+                flex-direction: column;
+            }
+            
+            .captcha-controls {
+                flex-direction: row;
+                justify-content: center;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1082,6 +1238,12 @@
             .qr-image {
                 width: 120px;
                 height: 120px;
+            }
+            
+            .captcha-text {
+                font-size: 1.5rem;
+                letter-spacing: 3px;
+                padding: 8px 15px;
             }
         }
     </style>
@@ -1346,7 +1508,7 @@
         </section>
     </main>
 
-    <!-- Modal Order -->
+    <!-- Modal Order dengan CAPTCHA -->
     <div class="modal" id="orderModal">
         <div class="modal-content">
             <button class="modal-close" id="modalClose">&times;</button>
@@ -1394,7 +1556,47 @@
                     <textarea id="additionalNotes" class="form-control" rows="3" placeholder="Keterangan tambahan jika ada"></textarea>
                 </div>
                 
-                <button type="button" class="btn-whatsapp" id="sendWhatsApp">
+                <!-- Verifikasi Saya Bukan Robot -->
+                <div class="robot-verification">
+                    <label class="robot-checkbox" id="robotCheckbox">
+                        <input type="checkbox" id="robotCheck">
+                        <div class="robot-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <span class="robot-text">Saya Bukan Robot</span>
+                    </label>
+                </div>
+                
+                <!-- CAPTCHA Container -->
+                <div class="captcha-container">
+                    <h4 style="color: var(--primary); margin-bottom: 1rem;">Verifikasi Keamanan</h4>
+                    <p style="color: var(--gray); font-size: 0.9rem; margin-bottom: 1rem;">
+                        Masukkan teks di bawah ini untuk membuktikan bahwa Anda manusia:
+                    </p>
+                    
+                    <div class="captcha-box">
+                        <div class="captcha-text" id="captchaText"></div>
+                        <div class="captcha-controls">
+                            <button type="button" id="refreshCaptcha" title="Refresh CAPTCHA">
+                                <i class="fas fa-redo"></i>
+                            </button>
+                            <button type="button" id="audioCaptcha" title="Audio CAPTCHA">
+                                <i class="fas fa-volume-up"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="captcha-input">
+                        <input type="text" id="captchaInput" placeholder="Masukkan kode di atas" maxlength="6" autocomplete="off">
+                        <button type="button" id="verifyCaptcha" style="padding: 12px 20px;">
+                            <i class="fas fa-check"></i> Verifikasi
+                        </button>
+                    </div>
+                    
+                    <div class="captcha-status" id="captchaStatus"></div>
+                </div>
+                
+                <button type="button" class="btn-whatsapp" id="sendWhatsApp" disabled>
                     <i class="fab fa-whatsapp"></i> Kirim ke WhatsApp
                 </button>
             </form>
@@ -1649,6 +1851,119 @@
         let secretClickCount = 0;
         let lastSecretClickTime = 0;
         let secretElement = null;
+        let currentCaptcha = '';
+        let captchaVerified = false;
+        let robotChecked = false;
+
+        // ==================== SISTEM CAPTCHA ====================
+        function generateCaptcha() {
+            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789';
+            let captcha = '';
+            for (let i = 0; i < 6; i++) {
+                captcha += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            currentCaptcha = captcha;
+            return captcha;
+        }
+
+        function renderCaptcha() {
+            const captchaText = document.getElementById('captchaText');
+            if (captchaText) {
+                captchaText.textContent = generateCaptcha();
+            }
+        }
+
+        function verifyCaptcha() {
+            const input = document.getElementById('captchaInput').value.toUpperCase();
+            const status = document.getElementById('captchaStatus');
+            
+            if (!input) {
+                status.textContent = 'Masukkan kode verifikasi';
+                status.className = 'captcha-status error';
+                return false;
+            }
+            
+            if (input === currentCaptcha.toUpperCase()) {
+                status.textContent = '✓ Verifikasi berhasil!';
+                status.className = 'captcha-status success';
+                captchaVerified = true;
+                updateSendButton();
+                return true;
+            } else {
+                status.textContent = '✗ Kode tidak sesuai. Coba lagi.';
+                status.className = 'captcha-status error';
+                captchaVerified = false;
+                updateSendButton();
+                // Refresh CAPTCHA setelah salah
+                setTimeout(() => {
+                    renderCaptcha();
+                    document.getElementById('captchaInput').value = '';
+                }, 1000);
+                return false;
+            }
+        }
+
+        function setupCaptcha() {
+            renderCaptcha();
+            
+            // Event listeners untuk CAPTCHA
+            document.getElementById('refreshCaptcha').addEventListener('click', function() {
+                renderCaptcha();
+                document.getElementById('captchaInput').value = '';
+                document.getElementById('captchaStatus').textContent = '';
+                captchaVerified = false;
+                updateSendButton();
+            });
+            
+            document.getElementById('verifyCaptcha').addEventListener('click', verifyCaptcha);
+            
+            // Enter key untuk verifikasi
+            document.getElementById('captchaInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    verifyCaptcha();
+                }
+            });
+            
+            // Audio CAPTCHA (simulasi)
+            document.getElementById('audioCaptcha').addEventListener('click', function() {
+                showNotification('Fitur audio CAPTCHA akan segera hadir!', 'info');
+            });
+        }
+
+        // ==================== VERIFIKASI ROBOT ====================
+        function setupRobotVerification() {
+            const checkbox = document.getElementById('robotCheckbox');
+            const checkInput = document.getElementById('robotCheck');
+            
+            checkbox.addEventListener('click', function() {
+                robotChecked = !robotChecked;
+                checkInput.checked = robotChecked;
+                
+                if (robotChecked) {
+                    checkbox.classList.add('checked');
+                    this.style.background = '#e8f5e9';
+                } else {
+                    checkbox.classList.remove('checked');
+                    this.style.background = '';
+                }
+                
+                updateSendButton();
+            });
+        }
+
+        function updateSendButton() {
+            const sendButton = document.getElementById('sendWhatsApp');
+            if (robotChecked && captchaVerified) {
+                sendButton.disabled = false;
+                sendButton.innerHTML = '<i class="fab fa-whatsapp"></i> Kirim ke WhatsApp';
+                sendButton.style.background = 'linear-gradient(to right, #25D366, #128C7E)';
+            } else {
+                sendButton.disabled = true;
+                sendButton.innerHTML = '<i class="fas fa-lock"></i> Selesaikan Verifikasi';
+                sendButton.style.background = '#6c757d';
+            }
+        }
 
         // ==================== FUNGSI GAMBAR OTOMATIS ====================
         function getProductImageUrl(product) {
@@ -1689,6 +2004,10 @@
             setupOrderModal();
             setupCopyButtons();
             setupCollaborators();
+            
+            // Setup verifikasi
+            setupCaptcha();
+            setupRobotVerification();
             
             // Tampilkan data
             renderProducts('all');
@@ -1781,9 +2100,6 @@
                 supporter.textContent = collab.name;
                 supporter.title = "Supporter ZarrStoreID";
                 
-                // SEMUA TAMPILAN SAMA PERSIS!
-                // Tidak ada perbedaan warna, animasi, atau style khusus
-                
                 if (collab.secret) {
                     // Simpan element rahasia
                     secretElement = supporter;
@@ -1827,9 +2143,6 @@
         function activateDeveloperMode() {
             isDeveloperMode = true;
             saveToLocalStorage();
-            
-            // Tidak ada perubahan visual di Alya Store!
-            // Tetap terlihat sama seperti supporter lainnya
             
             showNotification('Developer mode diaktifkan', 'success');
             
@@ -1942,7 +2255,6 @@
                 reader.readAsDataURL(file);
                 
                 // Simulasi upload ke catbox
-                // Catatan: Untuk implementasi nyata, gunakan API catbox.moe
                 setTimeout(() => {
                     const productName = document.getElementById('adminProductName').value || 'product';
                     const fileName = productName.toLowerCase()
@@ -2366,6 +2678,38 @@
             }
         }
 
+        function openOrderModal(product) {
+            const modal = document.getElementById('orderModal');
+            const orderProduct = document.getElementById('orderProduct');
+            const orderPrice = document.getElementById('orderPrice');
+            
+            if (orderProduct) orderProduct.value = product.name;
+            if (orderPrice) orderPrice.value = `Rp ${product.price.toLocaleString('id-ID')}`;
+            
+            // Reset form dan verifikasi
+            document.getElementById('customerName').value = '';
+            document.getElementById('customerPhone').value = '';
+            document.getElementById('gameId').value = '';
+            document.getElementById('paymentMethod').value = '';
+            document.getElementById('additionalNotes').value = '';
+            
+            // Reset CAPTCHA
+            renderCaptcha();
+            document.getElementById('captchaInput').value = '';
+            document.getElementById('captchaStatus').textContent = '';
+            captchaVerified = false;
+            
+            // Reset robot verification
+            document.getElementById('robotCheck').checked = false;
+            document.getElementById('robotCheckbox').classList.remove('checked');
+            robotChecked = false;
+            
+            // Update button
+            updateSendButton();
+            
+            modal.style.display = 'flex';
+        }
+
         // ==================== FUNGSI BANTUAN ====================
         function loadQRISImage() {
             const qrisContainer = document.getElementById('qrisContainer');
@@ -2422,24 +2766,6 @@
             }
         };
 
-        function openOrderModal(product) {
-            const modal = document.getElementById('orderModal');
-            const orderProduct = document.getElementById('orderProduct');
-            const orderPrice = document.getElementById('orderPrice');
-            
-            if (orderProduct) orderProduct.value = product.name;
-            if (orderPrice) orderPrice.value = `Rp ${product.price.toLocaleString('id-ID')}`;
-            
-            // Reset form
-            document.getElementById('customerName').value = '';
-            document.getElementById('customerPhone').value = '';
-            document.getElementById('gameId').value = '';
-            document.getElementById('paymentMethod').value = '';
-            document.getElementById('additionalNotes').value = '';
-            
-            modal.style.display = 'flex';
-        }
-
         function showQRISModal() {
             const modal = document.getElementById('orderModal');
             const modalContent = modal.querySelector('.modal-content');
@@ -2468,6 +2794,17 @@
         }
 
         function sendOrderToWhatsApp(product) {
+            // Validasi verifikasi
+            if (!robotChecked) {
+                showNotification('Centang "Saya Bukan Robot" terlebih dahulu!', 'error');
+                return;
+            }
+            
+            if (!captchaVerified) {
+                showNotification('Verifikasi CAPTCHA terlebih dahulu!', 'error');
+                return;
+            }
+            
             const name = document.getElementById('customerName').value.trim();
             const phone = document.getElementById('customerPhone').value.trim();
             const gameId = document.getElementById('gameId').value.trim();
