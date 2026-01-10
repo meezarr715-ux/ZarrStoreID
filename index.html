@@ -1451,10 +1451,13 @@
                 <button class="filter-btn" data-filter="kuota">Kuota</button>
                 <button class="filter-btn" data-filter="bot">Sewa Bot</button>
                 <button class="filter-btn" data-filter="editor">Apk Prem</button>
+                <button class="filter-btn" id="syncProductsBtn" style="background: var(--accent); color: white;">
+                    <i class="fas fa-sync-alt"></i> Sync
+                </button>
             </div>
             
             <div class="products-grid" id="productsContainer">
-                <!-- Produk akan dimuat otomatis oleh JavaScript -->
+                <!-- Produk akan muncul otomatis di SEMUA DEVICE -->
             </div>
         </section>
 
@@ -1766,212 +1769,114 @@
             storeLogo: "https://files.catbox.moe/gua633.jpg"
         };
 
-        // ==================== AREA EDIT PRODUK ====================
-        // EDIT PRODUK DI BAWAH INI SESUAI KEBUTUHAN ANDA
-        // Untuk tambah produk: tambahkan object baru di array DEFAULT_PRODUCTS
-        // Untuk hapus produk: hapus object dari array DEFAULT_PRODUCTS
-        // Untuk update produk: edit object yang sudah ada
-
+        // ==================== PRODUK DEFAULT (INI YANG AKAN MUNCUL DI SEMUA DEVICE) ====================
         const DEFAULT_PRODUCTS = [
             // Produk Game
             {
                 id: 1,
-                name: "Free Fire 5 Diamond",
+                name: "Mobile Legends 86 Diamond",
                 category: "game",
-                price: 5000,
-                description: "Diamond Free Fire termurah se-Indonesia",
-                image: "https://files.catbox.moe/26if9q.jpg"
+                price: 25000,
+                description: "Diamond MLBB termurah se-Indonesia",
+                image: "https://files.catbox.moe/iqls6w.jpg"
             },
             {
                 id: 2,
-                name: "Free Fire 70 Diamond",
+                name: "Free Fire 100 Diamond",
                 category: "game",
+                price: 30000,
+                description: "Diamond FF siap kirim instan",
+                image: "https://files.catbox.moe/izpnc9.jpg"
+            },
+            // Produk Pulsa
+            {
+                id: 3,
+                name: "Pulsa Telkomsel 10.000",
+                category: "pulsa",
+                price: 12000,
+                description: "Pulsa semua operator 24 jam",
+                image: "https://files.catbox.moe/izpnc9.jpg"
+            },
+            // Produk Sewa Bot
+            {
+                id: 4,
+                name: "Sewa Bot WhatsApp 1 Minggu",
+                category: "bot",
+                price: 15000,
+                description: "Bot WA multifungsi premium",
+                image: "https://files.catbox.moe/m6n7u4.jpg"
+            },
+            // Produk Apk Prem
+            {
+                id: 5,
+                name: "Alight Motion Premium 1 Tahun",
+                category: "Apk Prem",
                 price: 10000,
-                description: "Diamond Free Fire termurah se-Indonesia",
-                image: "https://files.catbox.moe/26if9q.jpg"
+                description: "Full fitur tanpa watermark",
+                image: "https://files.catbox.moe/z9a0b7.jpg"
             }
         ];
 
-        // ==================== SISTEM PRODUK DINAMIS ====================
-        let products = [];
-
-        // ==================== DATA COLLABORATOR ====================
-        const collaborators = [
-            { name: "SabaMart" },
-            { name: "AqilDevv" },
-            { name: "Wanz Preset" },
-            { name: "Vion Shizawa" },
-            { name: "Mahiro Editz" },
-            { name: "Suzza Preset" },
-            { name: "Xyran" }
-        ];
-
         // ==================== VARIABEL GLOBAL ====================
+        let products = []; // Ini array produk yang akan ditampilkan
         let currentProduct = null;
         let selectedPaymentMethod = null;
         let currentCaptcha = '';
         let captchaVerified = false;
         let robotChecked = false;
-        let isTouchDevice = false;
 
-        // ==================== SISTEM AUTO-UPDATE PRODUK ====================
-        const PRODUCT_MANAGER = {
-            currentHash: "",
-            lastUpdateTime: 0,
-            updateCheckInterval: 30000, // Check update setiap 30 detik
-            notificationTimeout: 5000,
-            isFirstLoad: true,
+        // ==================== FUNGSI UTAMA: LOAD PRODUK DI SEMUA DEVICE ====================
+        function loadProductsForAllDevices() {
+            console.log("🔄 Loading produk untuk SEMUA device...");
             
-            generateProductsHash(productsArray) {
-                const productsString = JSON.stringify(productsArray);
-                let hash = 0;
-                for (let i = 0; i < productsString.length; i++) {
-                    const char = productsString.charCodeAt(i);
-                    hash = ((hash << 5) - hash) + char;
-                    hash = hash & hash;
-                }
-                return hash.toString(16);
-            },
+            // SELALU pakai DEFAULT_PRODUCTS sebagai sumber utama
+            products = [...DEFAULT_PRODUCTS];
             
-            checkForProductUpdates() {
-                const newHash = this.generateProductsHash(DEFAULT_PRODUCTS);
-                const storedHash = localStorage.getItem('zarrstore_products_hash');
-                const storedProducts = JSON.parse(localStorage.getItem('zarrstore_products') || '[]');
-                
-                if (!storedHash || storedHash !== newHash) {
-                    this.handleProductChanges(storedProducts, DEFAULT_PRODUCTS, storedHash, newHash);
-                }
-            },
+            // Simpan ke localStorage (untuk device ini saja)
+            localStorage.setItem('zarrstore_products', JSON.stringify(products));
+            localStorage.setItem('zarrstore_last_update', Date.now().toString());
             
-            handleProductChanges(oldProducts, newProducts, oldHash, newHash) {
-                const oldIds = oldProducts.map(p => p.id);
-                const newIds = newProducts.map(p => p.id);
-                
-                const deletedIds = oldIds.filter(id => !newIds.includes(id));
-                const deletedProducts = oldProducts.filter(p => deletedIds.includes(p.id));
-                
-                const addedIds = newIds.filter(id => !oldIds.includes(id));
-                const addedProducts = newProducts.filter(p => addedIds.includes(p.id));
-                
-                const updatedProducts = [];
-                newProducts.forEach(newProd => {
-                    const oldProd = oldProducts.find(p => p.id === newProd.id);
-                    if (oldProd && JSON.stringify(oldProd) !== JSON.stringify(newProd)) {
-                        updatedProducts.push({ old: oldProd, new: newProd });
-                    }
-                });
-                
-                localStorage.setItem('zarrstore_products', JSON.stringify(newProducts));
-                localStorage.setItem('zarrstore_products_hash', newHash);
-                localStorage.setItem('zarrstore_last_update', Date.now().toString());
-                
-                products = newProducts;
-                currentProduct = products.length > 0 ? products[0] : null;
-                
-                if (!this.isFirstLoad) {
-                    this.showUpdateNotifications(addedProducts, deletedProducts, updatedProducts);
-                }
-                
-                this.isFirstLoad = false;
-                
-                if (document.querySelector('#produk.active')) {
-                    renderProducts('all');
-                }
-                
-                if (currentProduct) {
-                    updateOrderSummary(currentProduct);
-                }
-            },
-            
-            showUpdateNotifications(added, deleted, updated) {
-                const notifications = [];
-                
-                if (added.length > 0) {
-                    const productNames = added.map(p => p.name).join(', ');
-                    notifications.push({
-                        type: 'success',
-                        message: `🆕 ${added.length} produk baru: ${productNames}`
-                    });
-                }
-                
-                if (deleted.length > 0) {
-                    const productNames = deleted.map(p => p.name).join(', ');
-                    notifications.push({
-                        type: 'info',
-                        message: `🗑️ ${deleted.length} produk dihapus: ${productNames}`
-                    });
-                }
-                
-                if (updated.length > 0) {
-                    notifications.push({
-                        type: 'warning',
-                        message: `✏️ ${updated.length} produk telah diperbarui`
-                    });
-                }
-                
-                if (notifications.length > 0) {
-                    this.showBatchNotifications(notifications);
-                }
-            },
-            
-            showBatchNotifications(notifications) {
-                let index = 0;
-                
-                const showNext = () => {
-                    if (index >= notifications.length) return;
-                    
-                    const notif = notifications[index];
-                    showNotification(notif.message, notif.type);
-                    
-                    index++;
-                    setTimeout(showNext, this.notificationTimeout);
-                };
-                
-                showNext();
-            },
-            
-            init() {
-                this.checkForProductUpdates();
-                
-                setInterval(() => {
-                    this.checkForProductUpdates();
-                }, this.updateCheckInterval);
-                
-                document.addEventListener('visibilitychange', () => {
-                    if (!document.hidden) {
-                        this.checkForProductUpdates();
-                    }
-                });
-                
-                this.addRefreshButton();
-            },
-            
-            addRefreshButton() {
-                const filterContainer = document.querySelector('.product-filters');
-                if (!filterContainer) return;
-                
-                const refreshBtn = document.createElement('button');
-                refreshBtn.className = 'filter-btn';
-                refreshBtn.id = 'refreshProductsBtn';
-                refreshBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Refresh Produk';
-                refreshBtn.title = 'Cek update produk terbaru';
-                
-                refreshBtn.addEventListener('click', () => {
-                    refreshBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Checking...';
-                    refreshBtn.disabled = true;
-                    
-                    setTimeout(() => {
-                        PRODUCT_MANAGER.checkForProductUpdates();
-                        showNotification('Produk berhasil di-refresh!', 'success');
-                        
-                        refreshBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Refresh Produk';
-                        refreshBtn.disabled = false;
-                    }, 1000);
-                });
-                
-                filterContainer.appendChild(refreshBtn);
+            console.log(`✅ ${products.length} produk siap di SEMUA device!`);
+            return products;
+        }
+
+        // ==================== FUNGSI SYNC PRODUK ====================
+        function syncProducts() {
+            const syncBtn = document.getElementById('syncProductsBtn');
+            if (syncBtn) {
+                syncBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Syncing...';
+                syncBtn.disabled = true;
             }
-        };
+            
+            // Force reload produk dari default
+            products = [...DEFAULT_PRODUCTS];
+            
+            // Update localStorage
+            localStorage.setItem('zarrstore_products', JSON.stringify(products));
+            localStorage.setItem('zarrstore_last_update', Date.now().toString());
+            
+            // Render ulang
+            if (document.querySelector('#produk.active')) {
+                renderProducts('all');
+            }
+            
+            // Update current product
+            if (products.length > 0) {
+                currentProduct = products[0];
+                updateOrderSummary(currentProduct);
+            }
+            
+            // Show notification
+            showNotification(`✅ ${products.length} produk tersedia di semua device!`, 'success');
+            
+            // Reset button
+            if (syncBtn) {
+                setTimeout(() => {
+                    syncBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Sync';
+                    syncBtn.disabled = false;
+                }, 1000);
+            }
+        }
 
         // ==================== FUNGSI BANTUAN ====================
         function getCategoryName(category) {
@@ -1979,7 +1884,7 @@
                 game: 'Game', 
                 pulsa: 'Pulsa', 
                 kuota: 'Kuota',
-                bot: 'Sewa Bot Wa',
+                bot: 'Sewa Bot',
                 editor: 'Apk Prem'
             };
             return names[category] || category;
@@ -1995,16 +1900,16 @@
 
         function getProductImageUrl(product) {
             if (product.image && product.image !== 'auto' && product.image.startsWith('http')) {
-                const separator = product.image.includes('?') ? '&' : '?';
-                return product.image + separator + 't=' + Date.now();
+                return product.image;
             }
             
+            // Fallback image
             const productName = encodeURIComponent(product.name.toLowerCase()
                 .replace(/[^\w\s]/gi, '')
                 .replace(/\s+/g, '-')
                 .substring(0, 20));
             
-            return `https://via.placeholder.com/300/6a11cb/FFFFFF?text=${productName}&t=${Date.now()}`;
+            return `https://via.placeholder.com/300/6a11cb/FFFFFF?text=${productName}`;
         }
 
         // ==================== FUNGSI NOTIFIKASI ====================
@@ -2043,35 +1948,33 @@
             
             container.innerHTML = '';
             
+            // Filter produk
             const filteredProducts = filter === 'all' 
                 ? products 
                 : products.filter(p => p.category === filter);
             
+            // Jika tidak ada produk
             if (filteredProducts.length === 0) {
                 container.innerHTML = `
                     <div style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
                         <i class="fas fa-box-open" style="font-size: 3rem; color: var(--gray); margin-bottom: 1rem;"></i>
                         <h3 style="color: var(--gray);">Belum ada produk di kategori ini</h3>
-                        <p>Produk sedang dalam update, silakan refresh halaman</p>
-                        <button onclick="PRODUCT_MANAGER.checkForProductUpdates()" class="btn" style="margin-top: 1rem;">
-                            <i class="fas fa-sync-alt"></i> Refresh Produk
+                        <button onclick="syncProducts()" class="btn" style="margin-top: 1rem;">
+                            <i class="fas fa-sync-alt"></i> Sync Produk
                         </button>
                     </div>
                 `;
                 return;
             }
             
+            // Render semua produk
             filteredProducts.forEach(product => {
                 const imageUrl = getProductImageUrl(product);
                 const card = document.createElement('div');
                 card.className = 'product-card';
                 const categoryClass = getCategoryClass(product.category);
                 
-                const lastUpdate = parseInt(localStorage.getItem('zarrstore_last_update') || '0');
-                const isNew = (Date.now() - lastUpdate) < 24 * 60 * 60 * 1000;
-                
                 card.innerHTML = `
-                    ${isNew ? '<div class="new-badge">BARU!</div>' : ''}
                     <img src="${imageUrl}" alt="${product.name}" class="product-img" 
                          onerror="this.onerror=null; this.src='https://via.placeholder.com/300/6a11cb/FFFFFF?text=${encodeURIComponent(product.name.substring(0, 20))}'">
                     <div class="product-content">
@@ -2159,10 +2062,6 @@
                     verifyCaptcha();
                 }
             });
-            
-            document.getElementById('audioCaptcha').addEventListener('click', function() {
-                showNotification('Fitur audio CAPTCHA akan segera hadir!', 'info');
-            });
         }
 
         // ==================== VERIFIKASI ROBOT ====================
@@ -2199,9 +2098,19 @@
 
         // ==================== FUNGSI INISIALISASI ====================
         function initApp() {
-            detectDevice();
+            // Set tahun copyright
             document.getElementById('currentYear').textContent = new Date().getFullYear();
-            loadFromLocalStorage();
+            
+            // STEP 1: LOAD PRODUK UNTUK SEMUA DEVICE
+            console.log("🚀 Inisialisasi ZarrStoreID...");
+            products = loadProductsForAllDevices();
+            
+            // Set current product
+            if (products.length > 0) {
+                currentProduct = products[0];
+            }
+            
+            // Setup UI
             setupNavigation();
             setupProductFilters();
             setupPayment();
@@ -2212,70 +2121,30 @@
             setupCaptcha();
             setupRobotVerification();
             
-            PRODUCT_MANAGER.init();
+            // Setup sync button
+            document.getElementById('syncProductsBtn').addEventListener('click', syncProducts);
             
+            // Render produk pertama kali
             renderProducts('all');
             renderTransactionHistory();
             
+            // Update order summary
             if (currentProduct) {
                 updateOrderSummary(currentProduct);
             }
             
+            // Load QRIS
             loadQRISImage();
-            window.addEventListener('resize', handleResize);
             
-            setupFloatingInfoButton();
-        }
-
-        function detectDevice() {
-            isTouchDevice = 'ontouchstart' in window || 
-                           navigator.maxTouchPoints > 0 || 
-                           navigator.msMaxTouchPoints > 0;
-            
-            if (isTouchDevice) {
-                document.body.classList.add('touch-device');
-            } else {
-                document.body.classList.add('hover-device');
-            }
-        }
-
-        function handleResize() {
-            detectDevice();
-        }
-
-        // ==================== FUNGSI LOCALSTORAGE ====================
-        function loadFromLocalStorage() {
-            const savedConfig = localStorage.getItem('zarrstore_config');
-            if (savedConfig) {
-                try {
-                    Object.assign(STORE_CONFIG, JSON.parse(savedConfig));
-                } catch (e) {
-                    console.error("Error parsing config:", e);
+            // Emergency check: jika produk kosong, force sync
+            setTimeout(() => {
+                if (products.length === 0) {
+                    console.log("⚠️ Produk kosong, emergency sync...");
+                    syncProducts();
                 }
-            }
+            }, 2000);
             
-            updateUIFromConfig();
-        }
-
-        function updateUIFromConfig() {
-            document.querySelectorAll('.payment-number').forEach(el => {
-                const number = STORE_CONFIG.phoneNumber.replace('62', '0');
-                el.textContent = number;
-                el.setAttribute('data-number', number);
-            });
-            
-            document.getElementById('storeNameFooter').textContent = STORE_CONFIG.storeName;
-            document.getElementById('storeNameCopyright').textContent = STORE_CONFIG.storeName;
-            
-            const floatingWA = document.querySelector('.floating-wa');
-            if (floatingWA) {
-                floatingWA.href = `https://wa.me/${STORE_CONFIG.phoneNumber}?text=Halo%20${encodeURIComponent(STORE_CONFIG.storeName)}%2C%20saya%20ingin%20bertanya%20tentang%20produk`;
-            }
-            
-            const logoImg = document.querySelector('.logo-img');
-            if (logoImg && STORE_CONFIG.storeLogo) {
-                logoImg.src = STORE_CONFIG.storeLogo;
-            }
+            console.log("✅ ZarrStoreID siap di SEMUA device!");
         }
 
         // ==================== FUNGSI COLLABORATOR ====================
@@ -2284,6 +2153,17 @@
             if (!container) return;
             
             container.innerHTML = '';
+            
+            const collaborators = [
+                { name: "SabaMart" },
+                { name: "AqilDevv" },
+                { name: "Wanz Preset" },
+                { name: "Vion Shizawa" },
+                { name: "Mahiro Editz" },
+                { name: "Suzza Preset" },
+                { name: "Xyran" },
+                { name: "ZAAR" }
+            ];
             
             const shuffled = [...collaborators].sort(() => Math.random() - 0.5);
             
@@ -2315,11 +2195,13 @@
 
         function setupProductFilters() {
             document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    renderProducts(this.getAttribute('data-filter'));
-                });
+                if (btn.id !== 'syncProductsBtn') {
+                    btn.addEventListener('click', function() {
+                        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                        this.classList.add('active');
+                        renderProducts(this.getAttribute('data-filter'));
+                    });
+                }
             });
         }
 
@@ -2369,6 +2251,7 @@
                         notification.classList.add('show');
                         setTimeout(() => notification.classList.remove('show'), 2000);
                     }).catch(err => {
+                        // Fallback untuk browser lama
                         const textArea = document.createElement('textarea');
                         textArea.value = number;
                         document.body.appendChild(textArea);
@@ -2438,17 +2321,20 @@
             if (orderProduct) orderProduct.value = product.name;
             if (orderPrice) orderPrice.value = `Rp ${product.price.toLocaleString('id-ID')}`;
             
+            // Reset form
             document.getElementById('customerName').value = '';
             document.getElementById('customerPhone').value = '';
             document.getElementById('gameId').value = '';
             document.getElementById('paymentMethod').value = '';
             document.getElementById('additionalNotes').value = '';
             
+            // Reset CAPTCHA
             renderCaptcha();
             document.getElementById('captchaInput').value = '';
             document.getElementById('captchaStatus').textContent = '';
             captchaVerified = false;
             
+            // Reset robot verification
             document.getElementById('robotCheck').checked = false;
             document.getElementById('robotCheckbox').classList.remove('checked');
             robotChecked = false;
@@ -2643,63 +2529,6 @@ Saya sudah memesan melalui website. Bagaimana cara melanjutkan pembayaran?`;
                     </tr>
                 `;
             }
-        }
-
-        // ==================== FUNGSI INFO UPDATE ====================
-        function showUpdateInfo() {
-            const lastUpdate = localStorage.getItem('zarrstore_last_update');
-            const totalProducts = products.length;
-            
-            const message = `
-                📦 Info Produk:
-                • Total produk: ${totalProducts}
-                • Update terakhir: ${lastUpdate ? new Date(parseInt(lastUpdate)).toLocaleString() : 'Belum ada update'}
-                • Hash produk: ${localStorage.getItem('zarrstore_products_hash')?.substring(0, 8)}...
-                
-                Sistem auto-update aktif setiap 30 detik.
-            `;
-            
-            alert(message);
-        }
-
-        function setupFloatingInfoButton() {
-            setTimeout(() => {
-                const infoBtn = document.createElement('button');
-                infoBtn.className = 'floating-info';
-                infoBtn.innerHTML = '<i class="fas fa-info-circle"></i>';
-                infoBtn.title = 'Info Update Produk';
-                infoBtn.style.cssText = `
-                    position: fixed;
-                    bottom: 100px;
-                    right: 30px;
-                    width: 50px;
-                    height: 50px;
-                    background: linear-gradient(to right, var(--primary), var(--secondary));
-                    color: white;
-                    border-radius: 50%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    font-size: 1.5rem;
-                    box-shadow: 0 5px 15px var(--shadow);
-                    z-index: 99;
-                    cursor: pointer;
-                    border: none;
-                    transition: all 0.3s ease;
-                `;
-                
-                infoBtn.onmouseenter = () => {
-                    infoBtn.style.transform = 'scale(1.1)';
-                };
-                
-                infoBtn.onmouseleave = () => {
-                    infoBtn.style.transform = 'scale(1)';
-                };
-                
-                infoBtn.onclick = showUpdateInfo;
-                
-                document.body.appendChild(infoBtn);
-            }, 2000);
         }
 
         // ==================== INISIALISASI APLIKASI ====================
