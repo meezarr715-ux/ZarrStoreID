@@ -1635,7 +1635,7 @@
         </section>
     </main>
 
-    <!-- Modal Order dengan CAPTCHA -->
+    <!-- Modal Order dengan CAPTCHA - YANG SUDAH DIFIX -->
     <div class="modal" id="orderModal">
         <div class="modal-content">
             <button class="modal-close" id="modalClose">&times;</button>
@@ -1683,15 +1683,15 @@
                     <textarea id="additionalNotes" class="form-control" rows="3" placeholder="Keterangan tambahan jika ada"></textarea>
                 </div>
                 
-                <!-- Verifikasi Saya Bukan Robot -->
+                <!-- Verifikasi Saya Bukan Robot - YANG SUDAH DIFIX -->
                 <div class="robot-verification">
-                    <label class="robot-checkbox" id="robotCheckbox">
+                    <div class="robot-checkbox" id="robotCheckbox">
                         <input type="checkbox" id="robotCheck">
-                        <div class="robot-icon">
+                        <div class="robot-icon" id="robotIcon">
                             <i class="fas fa-robot"></i>
                         </div>
                         <span class="robot-text">Saya Bukan Robot</span>
-                    </label>
+                    </div>
                 </div>
                 
                 <!-- CAPTCHA Container -->
@@ -1769,9 +1769,8 @@
             storeLogo: "https://files.catbox.moe/gua633.jpg"
         };
 
-        // ==================== PRODUK DEFAULT (INI YANG AKAN MUNCUL DI SEMUA DEVICE) ====================
+        // ==================== PRODUK DEFAULT ====================
         const DEFAULT_PRODUCTS = [
-            // Produk Game
             {
                 id: 1,
                 name: "Mobile Legends 86 Diamond",
@@ -1788,7 +1787,6 @@
                 description: "Diamond FF siap kirim instan",
                 image: "https://files.catbox.moe/izpnc9.jpg"
             },
-            // Produk Pulsa
             {
                 id: 3,
                 name: "Pulsa Telkomsel 10.000",
@@ -1797,7 +1795,6 @@
                 description: "Pulsa semua operator 24 jam",
                 image: "https://files.catbox.moe/izpnc9.jpg"
             },
-            // Produk Sewa Bot
             {
                 id: 4,
                 name: "Sewa Bot WhatsApp 1 Minggu",
@@ -1806,11 +1803,10 @@
                 description: "Bot WA multifungsi premium",
                 image: "https://files.catbox.moe/m6n7u4.jpg"
             },
-            // Produk Apk Prem
             {
                 id: 5,
                 name: "Alight Motion Premium 1 Tahun",
-                category: "Apk Prem",
+                category: "editor",
                 price: 10000,
                 description: "Full fitur tanpa watermark",
                 image: "https://files.catbox.moe/z9a0b7.jpg"
@@ -1818,12 +1814,94 @@
         ];
 
         // ==================== VARIABEL GLOBAL ====================
-        let products = []; // Ini array produk yang akan ditampilkan
+        let products = [];
         let currentProduct = null;
         let selectedPaymentMethod = null;
         let currentCaptcha = '';
         let captchaVerified = false;
         let robotChecked = false;
+
+        // ==================== FIX UNTUK ROBOT VERIFICATION ====================
+        function setupRobotVerification() {
+            const checkbox = document.getElementById('robotCheckbox');
+            const checkInput = document.getElementById('robotCheck');
+            const robotIcon = document.getElementById('robotIcon');
+            
+            if (!checkbox || !checkInput || !robotIcon) {
+                console.error("❌ Element robot verification tidak ditemukan!");
+                return;
+            }
+            
+            console.log("✅ Setup robot verification...");
+            
+            // Click handler untuk checkbox
+            checkbox.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                robotChecked = !robotChecked;
+                checkInput.checked = robotChecked;
+                
+                if (robotChecked) {
+                    checkbox.classList.add('checked');
+                    robotIcon.innerHTML = '<i class="fas fa-check"></i>';
+                    robotIcon.style.background = 'var(--success)';
+                    robotIcon.style.borderColor = 'var(--success)';
+                } else {
+                    checkbox.classList.remove('checked');
+                    robotIcon.innerHTML = '<i class="fas fa-robot"></i>';
+                    robotIcon.style.background = '#e9ecef';
+                    robotIcon.style.borderColor = '#dee2e6';
+                }
+                
+                console.log("🤖 Robot checked:", robotChecked);
+                updateSendButton();
+            });
+            
+            // Juga handle input change
+            checkInput.addEventListener('change', function() {
+                robotChecked = this.checked;
+                
+                if (robotChecked) {
+                    checkbox.classList.add('checked');
+                    robotIcon.innerHTML = '<i class="fas fa-check"></i>';
+                    robotIcon.style.background = 'var(--success)';
+                    robotIcon.style.borderColor = 'var(--success)';
+                } else {
+                    checkbox.classList.remove('checked');
+                    robotIcon.innerHTML = '<i class="fas fa-robot"></i>';
+                    robotIcon.style.background = '#e9ecef';
+                    robotIcon.style.borderColor = '#dee2e6';
+                }
+                
+                console.log("🤖 Robot change:", robotChecked);
+                updateSendButton();
+            });
+            
+            // Touch support untuk HP
+            checkbox.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                this.click();
+            });
+        }
+
+        // ==================== FUNGSI UPDATE SEND BUTTON ====================
+        function updateSendButton() {
+            const sendButton = document.getElementById('sendWhatsApp');
+            if (!sendButton) return;
+            
+            if (robotChecked && captchaVerified) {
+                sendButton.disabled = false;
+                sendButton.innerHTML = '<i class="fab fa-whatsapp"></i> Kirim ke WhatsApp';
+                sendButton.style.background = 'linear-gradient(to right, #25D366, #128C7E)';
+                sendButton.style.cursor = 'pointer';
+            } else {
+                sendButton.disabled = true;
+                sendButton.innerHTML = '<i class="fas fa-lock"></i> Selesaikan Verifikasi';
+                sendButton.style.background = '#6c757d';
+                sendButton.style.cursor = 'not-allowed';
+            }
+        }
 
         // ==================== FUNGSI UTAMA: LOAD PRODUK DI SEMUA DEVICE ====================
         function loadProductsForAllDevices() {
@@ -2021,6 +2099,8 @@
             if (!input) {
                 status.textContent = 'Masukkan kode verifikasi';
                 status.className = 'captcha-status error';
+                captchaVerified = false;
+                updateSendButton();
                 return false;
             }
             
@@ -2064,38 +2144,6 @@
             });
         }
 
-        // ==================== VERIFIKASI ROBOT ====================
-        function setupRobotVerification() {
-            const checkbox = document.getElementById('robotCheckbox');
-            const checkInput = document.getElementById('robotCheck');
-            
-            checkbox.addEventListener('click', function() {
-                robotChecked = !robotChecked;
-                checkInput.checked = robotChecked;
-                
-                if (robotChecked) {
-                    checkbox.classList.add('checked');
-                } else {
-                    checkbox.classList.remove('checked');
-                }
-                
-                updateSendButton();
-            });
-        }
-
-        function updateSendButton() {
-            const sendButton = document.getElementById('sendWhatsApp');
-            if (robotChecked && captchaVerified) {
-                sendButton.disabled = false;
-                sendButton.innerHTML = '<i class="fab fa-whatsapp"></i> Kirim ke WhatsApp';
-                sendButton.style.background = 'linear-gradient(to right, #25D366, #128C7E)';
-            } else {
-                sendButton.disabled = true;
-                sendButton.innerHTML = '<i class="fas fa-lock"></i> Selesaikan Verifikasi';
-                sendButton.style.background = '#6c757d';
-            }
-        }
-
         // ==================== FUNGSI INISIALISASI ====================
         function initApp() {
             // Set tahun copyright
@@ -2118,11 +2166,20 @@
             setupOrderModal();
             setupCopyButtons();
             setupCollaborators();
+            
+            // 🔥 SETUP CAPTCHA & ROBOT DULU SEBELUM RENDER
             setupCaptcha();
-            setupRobotVerification();
+            setupRobotVerification(); // INI YANG SUDAH DIFIX
             
             // Setup sync button
             document.getElementById('syncProductsBtn').addEventListener('click', syncProducts);
+            
+            // Setup WhatsApp button di modal
+            document.getElementById('sendWhatsApp').addEventListener('click', function() {
+                if (currentProduct) {
+                    sendOrderToWhatsApp(currentProduct);
+                }
+            });
             
             // Render produk pertama kali
             renderProducts('all');
@@ -2302,15 +2359,6 @@
                     modal.style.display = 'none';
                 }
             });
-            
-            const sendButton = document.getElementById('sendWhatsApp');
-            if (sendButton) {
-                sendButton.addEventListener('click', function() {
-                    if (currentProduct) {
-                        sendOrderToWhatsApp(currentProduct);
-                    }
-                });
-            }
         }
 
         function openOrderModal(product) {
@@ -2336,10 +2384,20 @@
             
             // Reset robot verification
             document.getElementById('robotCheck').checked = false;
-            document.getElementById('robotCheckbox').classList.remove('checked');
+            const checkbox = document.getElementById('robotCheckbox');
+            const robotIcon = document.getElementById('robotIcon');
+            if (checkbox && robotIcon) {
+                checkbox.classList.remove('checked');
+                robotIcon.innerHTML = '<i class="fas fa-robot"></i>';
+                robotIcon.style.background = '#e9ecef';
+                robotIcon.style.borderColor = '#dee2e6';
+            }
             robotChecked = false;
             
+            // Update button state
             updateSendButton();
+            
+            // Show modal
             modal.style.display = 'flex';
         }
 
@@ -2426,28 +2484,35 @@
             modal.style.display = 'flex';
         }
 
+        // ==================== FUNGSI SEND WHATSAPP YANG DIPERBAIKI ====================
         function sendOrderToWhatsApp(product) {
+            console.log("📱 Mengirim order ke WhatsApp...");
+            console.log("Status verifikasi:", { robot: robotChecked, captcha: captchaVerified });
+            
+            // Validasi robot
             if (!robotChecked) {
                 showNotification('Centang "Saya Bukan Robot" terlebih dahulu!', 'error');
                 return;
             }
             
+            // Validasi CAPTCHA
             if (!captchaVerified) {
                 showNotification('Verifikasi CAPTCHA terlebih dahulu!', 'error');
                 return;
             }
             
+            // Validasi form
             const name = document.getElementById('customerName').value.trim();
             const phone = document.getElementById('customerPhone').value.trim();
             const gameId = document.getElementById('gameId').value.trim();
             const paymentMethod = document.getElementById('paymentMethod').value;
-            const notes = document.getElementById('additionalNotes').value.trim();
             
             if (!name || !phone || !gameId || !paymentMethod) {
                 showNotification('Lengkapi semua field wajib!', 'error');
                 return;
             }
             
+            // Validasi nomor HP
             const phoneRegex = /^[0-9]{10,13}$/;
             const cleanPhone = phone.replace(/[^0-9]/g, '');
             if (!phoneRegex.test(cleanPhone)) {
@@ -2455,6 +2520,8 @@
                 return;
             }
             
+            // Buat pesan
+            const notes = document.getElementById('additionalNotes').value.trim();
             const message = `Halo ${STORE_CONFIG.storeName}, saya ingin memesan:
 
 📦 *Produk:* ${product.name}
@@ -2468,9 +2535,14 @@ ${notes ? `📝 *Catatan:* ${notes}` : ''}
 Saya sudah memesan melalui website. Bagaimana cara melanjutkan pembayaran?`;
             
             const url = `https://wa.me/${STORE_CONFIG.phoneNumber}?text=${encodeURIComponent(message)}`;
+            
+            // Simpan transaksi
             addTransactionHistory(product, name);
+            
+            // Tutup modal
             document.getElementById('orderModal').style.display = 'none';
             
+            // Buka WhatsApp
             setTimeout(() => {
                 window.open(url, '_blank');
             }, 500);
