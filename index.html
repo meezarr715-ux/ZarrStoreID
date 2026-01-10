@@ -6,7 +6,6 @@
     <title>ZarrStoreID | Top Up Game & Pulsa All Operator</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@800;900&display=swap">
-    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
     <style>
         :root {
             --primary: #6a11cb;
@@ -777,61 +776,38 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* STYLE BARU UNTUK AUTO SYNC SYSTEM */
-        .sync-panel {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 15px;
-            padding: 1.5rem;
-            margin-top: 1.5rem;
-            color: white;
+        .auto-update-panel {
+            background: #f0f9ff;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #17a2b8;
         }
 
-        .sync-controls {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 1rem;
-        }
-
-        .sync-btn {
-            background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .sync-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        .sync-btn.active {
+        .interval-btn {
+            padding: 5px 10px;
             background: white;
-            color: #667eea;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            margin-right: 5px;
         }
 
-        .qr-modal {
-            max-width: 400px;
-            text-align: center;
+        .interval-btn.active {
+            background: var(--secondary);
+            color: white;
+            border-color: var(--secondary);
         }
 
-        #qrCodeContainer {
-            margin: 20px 0;
-            display: flex;
-            justify-content: center;
-        }
-
-        .sync-status-badge {
+        .sync-status {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
+            gap: 5px;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
             font-weight: 600;
-            margin-left: 10px;
         }
 
         .sync-online {
@@ -858,84 +834,63 @@
             animation: spin 1s linear infinite;
         }
 
-        .device-list {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 15px;
-            margin-top: 15px;
-            max-height: 200px;
-            overflow-y: auto;
-        }
-
-        .device-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 12px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .device-item:last-child {
-            border-bottom: none;
-        }
-
-        .device-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .device-time {
+        /* Multi Device Sync Indicator */
+        .multi-device-indicator {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 10px 15px;
+            border-radius: 20px;
             font-size: 0.8rem;
-            opacity: 0.8;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 100;
         }
 
-        /* QR Scanner */
-        .scanner-container {
-            width: 100%;
-            max-width: 400px;
-            margin: 0 auto;
-        }
-
-        #qrScanner {
-            width: 100%;
-            height: 300px;
-            border: 2px solid var(--secondary);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .scanner-placeholder {
-            width: 100%;
-            height: 100%;
+        .device-count {
+            background: white;
+            color: var(--primary);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #f8f9fa;
+            font-weight: bold;
+        }
+
+        /* Real-time Update Notification */
+        .update-notification {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: white;
+            border-radius: 15px;
+            padding: 1rem 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border-left: 5px solid var(--success);
+            z-index: 1000;
+            max-width: 350px;
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .update-notification h4 {
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .update-notification p {
             color: var(--gray);
-        }
-
-        /* Sync Log */
-        .sync-log {
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 15px;
-            margin-top: 15px;
-            max-height: 200px;
-            overflow-y: auto;
-            font-family: monospace;
-            font-size: 0.85rem;
-        }
-
-        .log-entry {
-            padding: 5px 0;
-            border-bottom: 1px solid #eee;
-            color: #555;
-        }
-
-        .log-time {
-            color: #888;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
         }
 
         @media (max-width: 768px) {
@@ -962,8 +917,16 @@
                 padding: 1.5rem;
             }
             
-            .sync-controls {
-                flex-direction: column;
+            .multi-device-indicator {
+                bottom: 80px;
+                right: 20px;
+                font-size: 0.7rem;
+            }
+            
+            .update-notification {
+                left: 20px;
+                right: 20px;
+                max-width: calc(100% - 40px);
             }
         }
     </style>
@@ -974,8 +937,8 @@
             <div class="logo">
                 <img src="https://files.catbox.moe/gua633.jpg" alt="ZarrStoreID Logo" class="logo-img">
                 <h1>Zarr<span>Store</span>ID</h1>
-                <div class="sync-status-badge sync-online" id="syncStatus">
-                    <i class="fas fa-circle"></i> <span id="syncStatusText">Online</span>
+                <div class="sync-status sync-offline" id="syncStatus">
+                    <i class="fas fa-circle"></i> <span id="syncText">Offline</span>
                 </div>
             </div>
             
@@ -990,7 +953,6 @@
                     <li><a href="#" class="nav-link" data-target="payment"><i class="fas fa-credit-card"></i> Payment</a></li>
                     <li><a href="#" class="nav-link" data-target="riwayat"><i class="fas fa-history"></i> Riwayat</a></li>
                     <li><a href="#" class="nav-link" data-target="informasi"><i class="fas fa-info-circle"></i> Informasi</a></li>
-                    <li><a href="#" class="nav-link" data-target="sync"><i class="fas fa-sync-alt"></i> Sync</a></li>
                 </ul>
             </nav>
         </div>
@@ -1005,7 +967,9 @@
                     <h2>ZarrStoreID</h2>
                     <p>Top Up Game & Pulsa All Operator Terpercaya</p>
                     <div style="margin-top: 1rem; font-size: 0.9rem; color: var(--gray);">
-                        <i class="fas fa-sync-alt"></i> Auto Sync: <span id="autoSyncStatus">Aktif</span>
+                        <i class="fas fa-sync-alt"></i> Auto Sync: <span id="syncStatusText">Aktif</span>
+                        <br>
+                        <i class="fas fa-users"></i> Pengguna Aktif: <span id="activeUsers">1</span>
                     </div>
                 </div>
                 
@@ -1049,7 +1013,9 @@
         <section id="produk">
             <h2 class="section-title"><i class="fas fa-shopping-bag"></i> Produk Top Up & Pulsa</h2>
             <div style="margin-bottom: 1rem; color: var(--gray); font-size: 0.9rem;">
-                <i class="fas fa-info-circle"></i> Produk update otomatis setiap 30 detik
+                <i class="fas fa-info-circle"></i> 
+                <span id="productUpdateInfo">Produk update otomatis ke semua perangkat</span>
+                <span id="lastUpdateTime" style="margin-left: 10px;"></span>
             </div>
             
             <div class="product-filters">
@@ -1130,7 +1096,9 @@
                         </div>
                         <div class="payment-info">
                             <h4>QRIS</h4>
-                            <p>Scan QR Code untuk pembayaran</p>
+                            <div class="payment-number">
+                                Scan QR Code via aplikasi e-wallet
+                            </div>
                         </div>
                     </div>
                     
@@ -1199,79 +1167,11 @@
                 </div>
                 
                 <div class="info-card">
-                    <h3 style="color: var(--primary); margin-bottom: 1.5rem;">Support & Collaboration</h3>
+                    <h3 style="color: var(--primary); margin-bottom: 1.5rem;">Support & Collaborators</h3>
                     <p>Terima kasih kepada semua yang telah mendukung:</p>
                     
                     <div class="supporters" id="collaboratorsList">
                         <!-- Daftar supporter -->
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION BARU: AUTO SYNC SYSTEM -->
-        <section id="sync">
-            <h2 class="section-title"><i class="fas fa-sync-alt"></i> Multi-Device Sync System</h2>
-            
-            <div class="sync-panel">
-                <h3 style="color: white; margin-bottom: 1rem;">
-                    <i class="fas fa-cloud"></i> Cloud Sync Tanpa Server
-                </h3>
-                <p style="opacity: 0.9;">Sistem sync otomatis ke semua perangkat menggunakan localStorage dan QR Code.</p>
-                
-                <div class="sync-controls">
-                    <button class="sync-btn active" onclick="generateQRCode()">
-                        <i class="fas fa-qrcode"></i> Generate QR Code
-                    </button>
-                    <button class="sync-btn" onclick="openQRScanner()">
-                        <i class="fas fa-camera"></i> Scan QR Code
-                    </button>
-                    <button class="sync-btn" onclick="forceSync()">
-                        <i class="fas fa-sync"></i> Sync Sekarang
-                    </button>
-                    <button class="sync-btn" onclick="exportData()">
-                        <i class="fas fa-download"></i> Export Data
-                    </button>
-                    <button class="sync-btn" onclick="importData()">
-                        <i class="fas fa-upload"></i> Import Data
-                    </button>
-                </div>
-                
-                <div class="device-list" id="deviceList">
-                    <h4 style="margin-bottom: 10px;">Perangkat Terhubung:</h4>
-                    <!-- Device list akan diisi otomatis -->
-                </div>
-            </div>
-            
-            <div class="sync-log" id="syncLog">
-                <h4 style="margin-bottom: 10px;">Log Sync:</h4>
-                <!-- Log akan diisi otomatis -->
-            </div>
-            
-            <div style="margin-top: 2rem;">
-                <h3 style="color: var(--primary); margin-bottom: 1rem;">
-                    <i class="fas fa-cogs"></i> Admin Sync Settings
-                </h3>
-                <div style="background: #f8f9ff; padding: 1.5rem; border-radius: 10px;">
-                    <div style="margin-bottom: 1rem;">
-                        <label style="display: block; margin-bottom: 5px; font-weight: 500;">
-                            <i class="fas fa-clock"></i> Auto Sync Interval:
-                        </label>
-                        <div style="display: flex; gap: 10px;">
-                            <button class="sync-btn" onclick="setSyncInterval(15000)">15 detik</button>
-                            <button class="sync-btn active" onclick="setSyncInterval(30000)">30 detik</button>
-                            <button class="sync-btn" onclick="setSyncInterval(60000)">1 menit</button>
-                            <button class="sync-btn" onclick="setSyncInterval(300000)">5 menit</button>
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <button class="btn-admin" onclick="toggleAutoSync()">
-                            <i class="fas fa-power-off"></i> <span id="autoSyncToggleText">Matikan Auto Sync</span>
-                        </button>
-                        <button class="btn-admin" onclick="clearSyncData()" style="background: #dc3545; margin-top: 10px;">
-                            <i class="fas fa-trash"></i> Reset Sync Data
-                        </button>
                     </div>
                 </div>
             </div>
@@ -1330,6 +1230,9 @@
                     <button class="interval-btn" onclick="shareCloudLink()">
                         <i class="fas fa-share-alt"></i> Share Cloud Link
                     </button>
+                    <button class="interval-btn" onclick="showDeviceStats()">
+                        <i class="fas fa-users"></i> Device Stats
+                    </button>
                 </div>
                 <div style="font-size: 0.85rem; color: var(--gray); margin-top: 0.5rem;">
                     <i class="fas fa-info-circle"></i> Update produk akan otomatis sync ke semua HP/Laptop
@@ -1364,7 +1267,7 @@
                 </div>
                 
                 <button type="submit" class="btn-admin">
-                    <i class="fas fa-save"></i> Simpan & Sync ke Cloud
+                    <i class="fas fa-save"></i> Simpan & Sync ke semua device
                 </button>
             </form>
             
@@ -1397,43 +1300,20 @@
         </div>
     </div>
 
-    <!-- QR Code Modal -->
-    <div class="modal" id="qrModal">
-        <div class="modal-content qr-modal">
-            <button class="modal-close" onclick="closeQRModal()">&times;</button>
-            <h2 style="color: var(--primary); margin-bottom: 1rem;">Sync QR Code</h2>
-            <p>Scan QR Code ini di perangkat lain untuk sync data</p>
-            <div id="qrCodeContainer"></div>
-            <div style="margin-top: 1rem;">
-                <button class="sync-btn" onclick="copySyncLink()">
-                    <i class="fas fa-copy"></i> Copy Sync Link
-                </button>
-                <button class="sync-btn" onclick="downloadQRCode()">
-                    <i class="fas fa-download"></i> Download QR
-                </button>
-            </div>
-        </div>
+    <!-- Multi Device Sync Indicator -->
+    <div class="multi-device-indicator" id="multiDeviceIndicator" style="display: none;">
+        <i class="fas fa-sync-alt"></i>
+        <span id="deviceCountText">1 Device</span>
+        <div class="device-count" id="deviceCount">1</div>
     </div>
 
-    <!-- QR Scanner Modal -->
-    <div class="modal" id="scannerModal">
-        <div class="modal-content qr-modal">
-            <button class="modal-close" onclick="closeScanner()">&times;</button>
-            <h2 style="color: var(--primary); margin-bottom: 1rem;">Scan QR Code</h2>
-            <div class="scanner-container">
-                <div id="qrScanner">
-                    <div class="scanner-placeholder" id="scannerPlaceholder">
-                        <i class="fas fa-camera fa-3x"></i>
-                        <p>Kamera sedang diinisialisasi...</p>
-                    </div>
-                    <video id="scannerVideo" style="display: none; width: 100%; height: 100%;"></video>
-                    <canvas id="scannerCanvas" style="display: none;"></canvas>
-                </div>
-            </div>
-            <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--gray);">
-                Arahkan kamera ke QR Code untuk sync data
-            </p>
-        </div>
+    <!-- Real-time Update Notification -->
+    <div class="update-notification" id="updateNotification" style="display: none;">
+        <h4><i class="fas fa-bell"></i> Update Produk!</h4>
+        <p id="updateMessage">Produk berhasil diperbarui</p>
+        <button onclick="hideUpdateNotification()" style="background: none; border: none; color: var(--primary); cursor: pointer; font-size: 0.8rem; margin-top: 5px;">
+            Tutup
+        </button>
     </div>
 
     <!-- Floating WhatsApp -->
@@ -1448,6 +1328,8 @@
                 <p>Toko online terpercaya untuk top up game dan pulsa semua operator</p>
                 <div style="margin-top: 1rem; font-size: 0.9rem;">
                     <i class="fas fa-sync-alt"></i> Auto Sync: <span id="footerSyncStatus">Aktif</span>
+                    <br>
+                    <i class="fas fa-database"></i> Total Produk: <span id="footerProductCount">0</span>
                 </div>
             </div>
             
@@ -1460,6 +1342,7 @@
                 <h3>Layanan Pelanggan</h3>
                 <p>WhatsApp: +62 882-9503-9238</p>
                 <p>Email: zaenulenka@gmail.com</p>
+                <p>TikTok: @iki.sizarr</p>
             </div>
         </div>
         
@@ -1472,15 +1355,20 @@
     <input type="file" id="importFileInput" accept=".json" style="display: none;">
 
     <script>
-        // ==================== AUTO SYNC SYSTEM ====================
+        // ==================== SISTEM MULTI DEVICE SYNC ====================
+        // Sistem ini menggunakan localStorage + BroadcastChannel untuk sync real-time
+        
         const SYNC_CONFIG = {
-            syncKey: 'zarrstore_multi_sync_v2',
-            version: '2.0.0',
-            defaultInterval: 30000, // 30 detik
-            maxDevices: 10,
-            qrCodeSize: 300
+            channelName: 'zarrstore_sync_channel',
+            storageKey: 'zarrstore_products_v2',
+            lastUpdateKey: 'zarrstore_last_update',
+            syncInterval: 10000, // 10 detik
+            deviceIdKey: 'zarrstore_device_id',
+            activeDevicesKey: 'zarrstore_active_devices',
+            version: '2.0.0'
         };
 
+        // ==================== VARIABEL GLOBAL ====================
         let products = [];
         let currentProduct = null;
         let selectedPaymentMethod = null;
@@ -1488,14 +1376,11 @@
         let secretClickCount = 0;
         let lastSecretClickTime = 0;
         let syncInterval = null;
-        let isSyncing = false;
-        let autoSyncEnabled = true;
-        let connectedDevices = [];
-        let syncLogs = [];
-        let qrScanner = null;
-        let scannerActive = false;
-
-        // Tambahan supporters
+        let broadcastChannel = null;
+        let currentDeviceId = null;
+        let activeDevices = {};
+        
+        // Collaborators yang diminta
         const collaborators = [
             { name: "SabaMart" },
             { name: "AqilDevv" },
@@ -1507,7 +1392,7 @@
             { name: "Suzza Preset" }
         ];
 
-        // Data awal
+        // Data awal jika belum ada
         const INITIAL_PRODUCTS = [
             {
                 id: 1,
@@ -1515,7 +1400,8 @@
                 category: "game",
                 price: 25000,
                 description: "Diamond MLBB termurah se-Indonesia",
-                createdAt: new Date().toISOString()
+                createdAt: new Date().toISOString(),
+                updatedAt: new Date().toISOString()
             },
             {
                 id: 2,
@@ -1523,7 +1409,8 @@
                 category: "game",
                 price: 30000,
                 description: "Diamond FF siap kirim instan",
-                createdAt: new Date().toISOString()
+                createdAt: new Date().toISOString(),
+                updatedAt: new Date().toISOString()
             },
             {
                 id: 3,
@@ -1531,669 +1418,348 @@
                 category: "pulsa",
                 price: 12000,
                 description: "Pulsa semua operator 24 jam",
-                createdAt: new Date().toISOString()
+                createdAt: new Date().toISOString(),
+                updatedAt: new Date().toISOString()
             }
         ];
 
-        // ==================== SYNC FUNCTIONS ====================
-        function initSyncSystem() {
-            loadSyncData();
-            setupCrossTabSync();
-            startAutoSync();
-            updateDeviceList();
-            updateSyncLog();
-            
-            // Simpan device info
-            saveDeviceInfo();
-        }
-
-        function loadSyncData() {
-            // Load products
-            const savedProducts = localStorage.getItem('zarrstore_products');
-            if (savedProducts) {
-                products = JSON.parse(savedProducts);
-            } else {
-                products = [...INITIAL_PRODUCTS];
-                saveProducts();
+        // ==================== SISTEM MULTI DEVICE SYNC ====================
+        function initMultiDeviceSync() {
+            // Generate unique device ID
+            currentDeviceId = localStorage.getItem(SYNC_CONFIG.deviceIdKey);
+            if (!currentDeviceId) {
+                currentDeviceId = 'device_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                localStorage.setItem(SYNC_CONFIG.deviceIdKey, currentDeviceId);
             }
             
-            // Load sync settings
-            const syncSettings = localStorage.getItem('zarrstore_sync_settings');
-            if (syncSettings) {
-                const settings = JSON.parse(syncSettings);
-                autoSyncEnabled = settings.autoSyncEnabled !== false;
-                SYNC_CONFIG.defaultInterval = settings.interval || 30000;
-            }
-            
-            // Load devices
-            const savedDevices = localStorage.getItem('zarrstore_devices');
-            if (savedDevices) {
-                connectedDevices = JSON.parse(savedDevices);
-            }
-            
-            // Load logs
-            const savedLogs = localStorage.getItem('zarrstore_logs');
-            if (savedLogs) {
-                syncLogs = JSON.parse(savedLogs);
-            }
-            
-            updateSyncUI();
-        }
-
-        function saveSyncData() {
-            localStorage.setItem('zarrstore_sync_settings', JSON.stringify({
-                autoSyncEnabled,
-                interval: SYNC_CONFIG.defaultInterval,
-                lastSync: new Date().toISOString()
-            }));
-            
-            localStorage.setItem('zarrstore_devices', JSON.stringify(connectedDevices));
-            localStorage.setItem('zarrstore_logs', JSON.stringify(syncLogs));
-        }
-
-        function saveProducts() {
-            localStorage.setItem('zarrstore_products', JSON.stringify(products));
-            addSyncLog('Products saved', 'info');
-            triggerSync();
-        }
-
-        function triggerSync() {
-            if (!autoSyncEnabled) return;
-            
-            // Update localStorage timestamp untuk cross-tab sync
-            localStorage.setItem('zarrstore_sync_trigger', Date.now().toString());
-            
-            // Broadcast ke tab lain
+            // Setup BroadcastChannel untuk komunikasi real-time antar tab
             if (typeof BroadcastChannel !== 'undefined') {
-                const channel = new BroadcastChannel('zarrstore_sync');
-                channel.postMessage({ 
-                    type: 'sync', 
-                    timestamp: Date.now(),
-                    deviceId: getDeviceId() 
-                });
-            }
-            
-            addSyncLog('Sync triggered', 'info');
-        }
-
-        function setupCrossTabSync() {
-            // localStorage event untuk cross-tab sync
-            window.addEventListener('storage', function(event) {
-                if (event.key === 'zarrstore_sync_trigger') {
-                    handleSyncFromOtherTab();
-                }
-            });
-            
-            // BroadcastChannel untuk komunikasi antar tab
-            if (typeof BroadcastChannel !== 'undefined') {
-                const channel = new BroadcastChannel('zarrstore_sync');
-                channel.onmessage = function(event) {
-                    if (event.data.type === 'sync') {
-                        handleSyncFromOtherTab();
-                    }
+                broadcastChannel = new BroadcastChannel(SYNC_CONFIG.channelName);
+                
+                broadcastChannel.onmessage = function(event) {
+                    handleSyncMessage(event.data);
                 };
-            }
-        }
-
-        function handleSyncFromOtherTab() {
-            addSyncLog('Sync received from other tab', 'info');
-            loadProductsFromStorage();
-            updateProductDisplay();
-        }
-
-        function loadProductsFromStorage() {
-            const savedProducts = localStorage.getItem('zarrstore_products');
-            if (savedProducts) {
-                products = JSON.parse(savedProducts);
-                addSyncLog('Products loaded from storage', 'success');
-            }
-        }
-
-        function startAutoSync() {
-            if (syncInterval) clearInterval(syncInterval);
-            
-            if (autoSyncEnabled) {
-                syncInterval = setInterval(() => {
-                    checkForUpdates();
-                }, SYNC_CONFIG.defaultInterval);
                 
-                addSyncLog(`Auto sync started (${SYNC_CONFIG.defaultInterval/1000}s interval)`, 'success');
-            }
-        }
-
-        function checkForUpdates() {
-            if (isSyncing) return;
-            
-            isSyncing = true;
-            updateSyncStatus('syncing');
-            
-            // Simulasi check update
-            setTimeout(() => {
-                // Di sini bisa ditambahkan logic untuk check update dari sumber eksternal
-                isSyncing = false;
-                updateSyncStatus('online');
-                addSyncLog('Auto sync check completed', 'info');
-            }, 1000);
-        }
-
-        function updateSyncStatus(status) {
-            const statusElement = document.getElementById('syncStatus');
-            const statusText = document.getElementById('syncStatusText');
-            const footerSync = document.getElementById('footerSyncStatus');
-            const autoSyncStatus = document.getElementById('autoSyncStatus');
-            
-            if (status === 'syncing') {
-                statusElement.className = 'sync-status-badge sync-syncing syncing';
-                statusElement.innerHTML = '<i class="fas fa-sync-alt"></i> <span>Syncing...</span>';
-                statusText.textContent = 'Syncing...';
-                footerSync.textContent = 'Syncing...';
-                autoSyncStatus.textContent = 'Sync...';
-            } else if (status === 'online') {
-                statusElement.className = 'sync-status-badge sync-online';
-                statusElement.innerHTML = '<i class="fas fa-circle"></i> <span>Online</span>';
-                statusText.textContent = 'Online';
-                footerSync.textContent = 'Aktif';
-                autoSyncStatus.textContent = 'Aktif';
-            } else {
-                statusElement.className = 'sync-status-badge sync-offline';
-                statusElement.innerHTML = '<i class="fas fa-circle"></i> <span>Offline</span>';
-                statusText.textContent = 'Offline';
-                footerSync.textContent = 'Offline';
-                autoSyncStatus.textContent = 'Offline';
-            }
-        }
-
-        function addSyncLog(message, type = 'info') {
-            const logEntry = {
-                timestamp: new Date().toLocaleTimeString(),
-                message: message,
-                type: type
-            };
-            
-            syncLogs.unshift(logEntry);
-            
-            // Keep only last 50 logs
-            if (syncLogs.length > 50) {
-                syncLogs = syncLogs.slice(0, 50);
+                // Kirim heartbeat untuk announce device ini aktif
+                sendHeartbeat();
             }
             
-            saveSyncData();
-            updateSyncLog();
+            // Load active devices dari localStorage
+            loadActiveDevices();
+            
+            // Update device indicator
+            updateDeviceIndicator();
         }
 
-        function updateSyncLog() {
-            const logContainer = document.getElementById('syncLog');
-            if (!logContainer) return;
+        function handleSyncMessage(message) {
+            console.log('Sync message received:', message.type);
             
-            let logHTML = '<h4 style="margin-bottom: 10px;">Log Sync:</h4>';
-            
-            syncLogs.forEach(log => {
-                const icon = log.type === 'success' ? 'fa-check-circle' : 
-                           log.type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle';
-                const color = log.type === 'success' ? '#28a745' : 
-                            log.type === 'error' ? '#dc3545' : '#17a2b8';
-                
-                logHTML += `
-                    <div class="log-entry">
-                        <span style="color: ${color}">
-                            <i class="fas ${icon}"></i>
-                            ${log.message}
-                        </span>
-                        <span class="log-time">${log.timestamp}</span>
-                    </div>
-                `;
-            });
-            
-            logContainer.innerHTML = logHTML;
-        }
-
-        function updateDeviceList() {
-            const deviceList = document.getElementById('deviceList');
-            if (!deviceList) return;
-            
-            let deviceHTML = '<h4 style="margin-bottom: 10px;">Perangkat Terhubung:</h4>';
-            
-            if (connectedDevices.length === 0) {
-                deviceHTML += '<p style="text-align: center; opacity: 0.7;">Belum ada perangkat terhubung</p>';
-            } else {
-                // Sort by last seen (newest first)
-                const sortedDevices = [...connectedDevices].sort((a, b) => 
-                    new Date(b.lastSeen) - new Date(a.lastSeen)
-                );
-                
-                sortedDevices.forEach(device => {
-                    const timeAgo = getTimeAgo(new Date(device.lastSeen));
-                    deviceHTML += `
-                        <div class="device-item">
-                            <div class="device-info">
-                                <i class="fas fa-mobile-alt"></i>
-                                <div>
-                                    <strong>${device.name}</strong>
-                                    <div class="device-time">${timeAgo}</div>
-                                </div>
-                            </div>
-                            <div>
-                                ${device.isCurrent ? '<span style="background: #28a745; color: white; padding: 2px 8px; border-radius: 10px; font-size: 0.8rem;">This Device</span>' : ''}
-                            </div>
-                        </div>
-                    `;
-                });
+            switch (message.type) {
+                case 'heartbeat':
+                    handleHeartbeat(message);
+                    break;
+                case 'product_update':
+                    handleProductUpdate(message);
+                    break;
+                case 'product_delete':
+                    handleProductDelete(message);
+                    break;
+                case 'products_refresh':
+                    handleProductsRefresh(message);
+                    break;
+                case 'clear_all_products':
+                    handleClearAllProducts(message);
+                    break;
             }
             
-            deviceList.innerHTML = deviceHTML;
+            // Update device indicator
+            updateDeviceIndicator();
         }
 
-        function getDeviceId() {
-            let deviceId = localStorage.getItem('zarrstore_device_id');
-            if (!deviceId) {
-                deviceId = 'device_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-                localStorage.setItem('zarrstore_device_id', deviceId);
-            }
-            return deviceId;
-        }
-
-        function saveDeviceInfo() {
-            const deviceId = getDeviceId();
-            const deviceName = navigator.userAgentData ? 
-                navigator.userAgentData.platform : 
-                navigator.platform;
+        function sendHeartbeat() {
+            if (!broadcastChannel) return;
             
-            const deviceInfo = {
-                id: deviceId,
-                name: `${deviceName} - ${navigator.userAgent.split(' ')[0]}`,
-                lastSeen: new Date().toISOString(),
-                isCurrent: true
-            };
-            
-            // Cek apakah device sudah ada
-            const existingIndex = connectedDevices.findIndex(d => d.id === deviceId);
-            if (existingIndex >= 0) {
-                connectedDevices[existingIndex] = deviceInfo;
-            } else {
-                connectedDevices.unshift(deviceInfo);
-                
-                // Keep only max devices
-                if (connectedDevices.length > SYNC_CONFIG.maxDevices) {
-                    connectedDevices = connectedDevices.slice(0, SYNC_CONFIG.maxDevices);
-                }
-            }
-            
-            // Update other devices (remove current flag)
-            connectedDevices.forEach(device => {
-                if (device.id !== deviceId) {
-                    device.isCurrent = false;
-                }
-            });
-            
-            saveSyncData();
-            updateDeviceList();
-        }
-
-        function getTimeAgo(date) {
-            const now = new Date();
-            const diffMs = now - date;
-            const diffMins = Math.floor(diffMs / 60000);
-            
-            if (diffMins < 1) return 'Baru saja';
-            if (diffMins < 60) return `${diffMins} menit lalu`;
-            
-            const diffHours = Math.floor(diffMins / 60);
-            if (diffHours < 24) return `${diffHours} jam lalu`;
-            
-            const diffDays = Math.floor(diffHours / 24);
-            return `${diffDays} hari lalu`;
-        }
-
-        // ==================== QR CODE SYSTEM ====================
-        function generateQRCode() {
-            // Buat data untuk sync
-            const syncData = {
-                type: 'zarrstore_sync',
-                version: SYNC_CONFIG.version,
-                products: products,
+            const heartbeat = {
+                type: 'heartbeat',
+                deviceId: currentDeviceId,
                 timestamp: Date.now(),
-                deviceId: getDeviceId()
+                userAgent: navigator.userAgent
             };
             
-            const dataString = JSON.stringify(syncData);
-            const encodedData = btoa(encodeURIComponent(dataString));
+            broadcastChannel.postMessage(heartbeat);
             
-            // Generate QR Code
-            const qrContainer = document.getElementById('qrCodeContainer');
-            qrContainer.innerHTML = '';
-            
-            QRCode.toCanvas(qrContainer, encodedData, {
-                width: SYNC_CONFIG.qrCodeSize,
-                height: SYNC_CONFIG.qrCodeSize,
-                margin: 2,
-                color: {
-                    dark: '#000000',
-                    light: '#FFFFFF'
-                }
-            }, function(error) {
-                if (error) {
-                    console.error('QR Code error:', error);
-                    showNotification('Gagal generate QR Code', 'error');
-                    return;
-                }
-                
-                // Simpan sync link untuk sharing
-                const syncLink = `${window.location.origin}${window.location.pathname}#sync=${encodedData}`;
-                localStorage.setItem('zarrstore_last_sync_link', syncLink);
-                
-                // Show modal
-                document.getElementById('qrModal').style.display = 'flex';
-                addSyncLog('QR Code generated for sync', 'success');
-            });
+            // Juga simpan ke localStorage untuk sync antar device
+            saveActiveDevice(currentDeviceId);
         }
 
-        function copySyncLink() {
-            const syncLink = localStorage.getItem('zarrstore_last_sync_link');
-            if (syncLink) {
-                navigator.clipboard.writeText(syncLink).then(() => {
-                    showNotification('Sync link disalin!', 'success');
-                });
+        function handleHeartbeat(message) {
+            saveActiveDevice(message.deviceId);
+            
+            // Update UI jika ada perubahan
+            if (Object.keys(activeDevices).length > 1) {
+                showMultiDeviceIndicator();
             }
         }
 
-        function downloadQRCode() {
-            const canvas = document.querySelector('#qrCodeContainer canvas');
-            if (canvas) {
-                const link = document.createElement('a');
-                link.download = `zarrstore-sync-${Date.now()}.png`;
-                link.href = canvas.toDataURL('image/png');
-                link.click();
-                addSyncLog('QR Code downloaded', 'success');
-            }
+        function saveActiveDevice(deviceId) {
+            activeDevices[deviceId] = Date.now();
+            
+            // Simpan ke localStorage dengan expiration (5 menit)
+            localStorage.setItem(SYNC_CONFIG.activeDevicesKey, JSON.stringify({
+                devices: activeDevices,
+                timestamp: Date.now()
+            }));
         }
 
-        function closeQRModal() {
-            document.getElementById('qrModal').style.display = 'none';
-        }
-
-        // ==================== QR SCANNER ====================
-        function openQRScanner() {
-            document.getElementById('scannerModal').style.display = 'flex';
-            
-            // Inisialisasi scanner
-            setTimeout(() => {
-                initQRScanner();
-            }, 500);
-        }
-
-        function initQRScanner() {
-            const video = document.getElementById('scannerVideo');
-            const canvas = document.getElementById('scannerCanvas');
-            const placeholder = document.getElementById('scannerPlaceholder');
-            
-            if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-                placeholder.innerHTML = '<p>Kamera tidak didukung di browser ini</p>';
-                return;
-            }
-            
-            navigator.mediaDevices.getUserMedia({ 
-                video: { 
-                    facingMode: 'environment',
-                    width: { ideal: 1280 },
-                    height: { ideal: 720 }
-                } 
-            })
-            .then(function(stream) {
-                video.srcObject = stream;
-                video.play();
-                video.style.display = 'block';
-                placeholder.style.display = 'none';
-                scannerActive = true;
-                
-                // Start scanning
-                scanQRCode(video, canvas);
-            })
-            .catch(function(error) {
-                console.error('Camera error:', error);
-                placeholder.innerHTML = '<p>Gagal mengakses kamera</p>';
-            });
-        }
-
-        function scanQRCode(video, canvas) {
-            const context = canvas.getContext('2d');
-            
-            function tick() {
-                if (!scannerActive) return;
-                
-                if (video.readyState === video.HAVE_ENOUGH_DATA) {
-                    canvas.height = video.videoHeight;
-                    canvas.width = video.videoWidth;
-                    
-                    context.drawImage(video, 0, 0, canvas.width, canvas.height);
-                    
-                    try {
-                        const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-                        const code = jsQR(imageData.data, imageData.width, imageData.height);
-                        
-                        if (code) {
-                            // QR Code found!
-                            handleScannedQRCode(code.data);
-                            return;
-                        }
-                    } catch (e) {
-                        console.error('QR scan error:', e);
-                    }
-                }
-                
-                requestAnimationFrame(tick);
-            }
-            
-            tick();
-        }
-
-        function handleScannedQRCode(data) {
+        function loadActiveDevices() {
             try {
-                // Stop scanner
-                scannerActive = false;
-                closeScanner();
-                
-                // Decode data
-                const decodedData = decodeURIComponent(atob(data));
-                const syncData = JSON.parse(decodedData);
-                
-                if (syncData.type === 'zarrstore_sync' && syncData.products) {
-                    // Update products
-                    products = syncData.products;
-                    saveProducts();
+                const saved = localStorage.getItem(SYNC_CONFIG.activeDevicesKey);
+                if (saved) {
+                    const data = JSON.parse(saved);
+                    activeDevices = data.devices || {};
                     
-                    // Update UI
-                    updateProductDisplay();
-                    
-                    showNotification(`Data berhasil di-sync (${products.length} produk)`, 'success');
-                    addSyncLog('Data synced from QR Code', 'success');
-                    
-                    // Add device info
-                    if (syncData.deviceId) {
-                        const sourceDevice = {
-                            id: syncData.deviceId,
-                            name: 'QR Source Device',
-                            lastSeen: new Date().toISOString(),
-                            isCurrent: false
-                        };
-                        
-                        const existingIndex = connectedDevices.findIndex(d => d.id === syncData.deviceId);
-                        if (existingIndex >= 0) {
-                            connectedDevices[existingIndex] = sourceDevice;
-                        } else {
-                            connectedDevices.unshift(sourceDevice);
+                    // Hapus device yang sudah expired (> 5 menit)
+                    const now = Date.now();
+                    for (const deviceId in activeDevices) {
+                        if (now - activeDevices[deviceId] > 5 * 60 * 1000) {
+                            delete activeDevices[deviceId];
                         }
-                        
-                        saveSyncData();
-                        updateDeviceList();
                     }
                 }
-            } catch (error) {
-                console.error('QR decode error:', error);
-                showNotification('QR Code tidak valid', 'error');
+            } catch (e) {
+                activeDevices = {};
+            }
+            
+            // Pastikan device saat ini selalu aktif
+            if (currentDeviceId) {
+                activeDevices[currentDeviceId] = Date.now();
             }
         }
 
-        function closeScanner() {
-            scannerActive = false;
-            document.getElementById('scannerModal').style.display = 'none';
+        function updateDeviceIndicator() {
+            const activeCount = Object.keys(activeDevices).length;
+            const indicator = document.getElementById('multiDeviceIndicator');
+            const deviceCount = document.getElementById('deviceCount');
+            const deviceCountText = document.getElementById('deviceCountText');
+            const activeUsers = document.getElementById('activeUsers');
             
-            // Stop camera
-            const video = document.getElementById('scannerVideo');
-            if (video.srcObject) {
-                video.srcObject.getTracks().forEach(track => track.stop());
-            }
-        }
-
-        // ==================== IMPORT/EXPORT FUNCTIONS ====================
-        function exportData() {
-            const exportData = {
-                products: products,
-                settings: {
-                    autoSyncEnabled,
-                    interval: SYNC_CONFIG.defaultInterval
-                },
-                exportedAt: new Date().toISOString(),
-                version: SYNC_CONFIG.version
-            };
-            
-            const dataStr = JSON.stringify(exportData, null, 2);
-            const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
-            const fileName = `zarrstore-backup-${new Date().toISOString().slice(0,10)}.json`;
-            
-            const link = document.createElement('a');
-            link.setAttribute('href', dataUri);
-            link.setAttribute('download', fileName);
-            link.click();
-            
-            showNotification(`Data diexport (${products.length} produk)`, 'success');
-            addSyncLog('Data exported', 'info');
-        }
-
-        function importData() {
-            document.getElementById('importFileInput').click();
-        }
-
-        document.getElementById('importFileInput').addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-            
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                try {
-                    const data = JSON.parse(e.target.result);
-                    
-                    if (data.products && Array.isArray(data.products)) {
-                        // Import products
-                        products = data.products.map(product => ({
-                            ...product,
-                            id: product.id || Date.now() + Math.floor(Math.random() * 1000),
-                            createdAt: product.createdAt || new Date().toISOString()
-                        }));
-                        
-                        // Import settings jika ada
-                        if (data.settings) {
-                            autoSyncEnabled = data.settings.autoSyncEnabled !== false;
-                            SYNC_CONFIG.defaultInterval = data.settings.interval || 30000;
-                        }
-                        
-                        saveProducts();
-                        saveSyncData();
-                        
-                        showNotification(`${products.length} produk diimport!`, 'success');
-                        addSyncLog('Data imported from file', 'success');
-                        
-                        // Update UI
-                        updateProductDisplay();
-                        updateSyncUI();
-                        startAutoSync();
-                    } else {
-                        showNotification('Format file tidak valid', 'error');
-                    }
-                } catch (error) {
-                    showNotification('Gagal membaca file', 'error');
-                }
-                
-                event.target.value = '';
-            };
-            reader.readAsText(file);
-        });
-
-        // ==================== SYNC CONTROLS ====================
-        function forceSync() {
-            addSyncLog('Manual sync triggered', 'info');
-            triggerSync();
-            showNotification('Sync manual dilakukan', 'success');
-        }
-
-        function setSyncInterval(interval) {
-            SYNC_CONFIG.defaultInterval = interval;
-            saveSyncData();
-            startAutoSync();
-            
-            // Update UI
-            document.querySelectorAll('.sync-controls .sync-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-            
-            showNotification(`Sync interval diubah: ${interval/1000} detik`, 'success');
-            addSyncLog(`Sync interval changed to ${interval/1000}s`, 'info');
-        }
-
-        function toggleAutoSync() {
-            autoSyncEnabled = !autoSyncEnabled;
-            saveSyncData();
-            updateSyncUI();
-            
-            if (autoSyncEnabled) {
-                startAutoSync();
-                showNotification('Auto Sync diaktifkan', 'success');
-                addSyncLog('Auto sync enabled', 'success');
+            if (activeCount > 1) {
+                indicator.style.display = 'flex';
+                deviceCount.textContent = activeCount;
+                deviceCountText.textContent = activeCount + ' Devices';
             } else {
-                if (syncInterval) {
-                    clearInterval(syncInterval);
-                    syncInterval = null;
-                }
-                showNotification('Auto Sync dimatikan', 'info');
-                addSyncLog('Auto sync disabled', 'info');
-            }
-        }
-
-        function clearSyncData() {
-            if (confirm('Reset semua data sync? Device list dan log akan dihapus.')) {
-                connectedDevices = [];
-                syncLogs = [];
-                saveSyncData();
-                
-                // Keep only current device
-                saveDeviceInfo();
-                
-                updateDeviceList();
-                updateSyncLog();
-                
-                showNotification('Sync data direset', 'success');
-                addSyncLog('Sync data cleared', 'info');
-            }
-        }
-
-        function updateSyncUI() {
-            const toggleBtn = document.getElementById('autoSyncToggleText');
-            if (toggleBtn) {
-                toggleBtn.textContent = autoSyncEnabled ? 'Matikan Auto Sync' : 'Aktifkan Auto Sync';
+                indicator.style.display = 'none';
             }
             
-            const statusElement = document.getElementById('syncStatusText');
-            if (statusElement) {
-                statusElement.textContent = autoSyncEnabled ? 'Online' : 'Manual';
+            if (activeUsers) {
+                activeUsers.textContent = activeCount;
             }
         }
 
-        // ==================== PRODUCT FUNCTIONS ====================
-        function updateProductDisplay() {
+        function showMultiDeviceIndicator() {
+            // Update indicator
+            updateDeviceIndicator();
+        }
+
+        function handleProductUpdate(message) {
+            const { product, sourceDevice } = message;
+            
+            // Cek apakah product sudah ada
+            const existingIndex = products.findIndex(p => p.id === product.id);
+            
+            if (existingIndex >= 0) {
+                // Update product yang ada
+                products[existingIndex] = {
+                    ...product,
+                    updatedAt: new Date().toISOString()
+                };
+                showUpdateNotification(`Produk "${product.name}" diperbarui oleh ${sourceDevice}`);
+            } else {
+                // Tambah product baru
+                products.push({
+                    ...product,
+                    createdAt: new Date().toISOString(),
+                    updatedAt: new Date().toISOString()
+                });
+                showUpdateNotification(`Produk baru "${product.name}" ditambahkan oleh ${sourceDevice}`);
+            }
+            
+            // Simpan dan update UI
+            saveProductsToStorage();
             const activeFilter = document.querySelector('.filter-btn.active');
             const currentFilter = activeFilter ? activeFilter.getAttribute('data-filter') : 'all';
             renderProducts(currentFilter);
             updateProductList();
+            
+            // Update last update time
+            updateLastUpdateTime();
+        }
+
+        function handleProductDelete(message) {
+            const { productId, sourceDevice } = message;
+            
+            const product = products.find(p => p.id === productId);
+            if (product) {
+                products = products.filter(p => p.id !== productId);
+                showUpdateNotification(`Produk "${product.name}" dihapus oleh ${sourceDevice}`);
+                
+                // Simpan dan update UI
+                saveProductsToStorage();
+                const activeFilter = document.querySelector('.filter-btn.active');
+                const currentFilter = activeFilter ? activeFilter.getAttribute('data-filter') : 'all';
+                renderProducts(currentFilter);
+                updateProductList();
+            }
+        }
+
+        function handleProductsRefresh(message) {
+            const { sourceDevice } = message;
+            
+            // Reload products dari storage
+            loadProductsFromStorage();
+            
+            // Update UI
+            const activeFilter = document.querySelector('.filter-btn.active');
+            const currentFilter = activeFilter ? activeFilter.getAttribute('data-filter') : 'all';
+            renderProducts(currentFilter);
+            updateProductList();
+            
+            showUpdateNotification(`Produk direfresh oleh ${sourceDevice}`);
+        }
+
+        function handleClearAllProducts(message) {
+            const { sourceDevice } = message;
+            
+            if (confirm(`Semua produk akan dihapus oleh ${sourceDevice}. Lanjutkan?`)) {
+                products = [];
+                saveProductsToStorage();
+                
+                // Update UI
+                const activeFilter = document.querySelector('.filter-btn.active');
+                const currentFilter = activeFilter ? activeFilter.getAttribute('data-filter') : 'all';
+                renderProducts(currentFilter);
+                updateProductList();
+                
+                showUpdateNotification(`Semua produk dihapus oleh ${sourceDevice}`, 'warning');
+            }
+        }
+
+        function broadcastProductUpdate(product) {
+            if (!broadcastChannel) return;
+            
+            const message = {
+                type: 'product_update',
+                product: product,
+                sourceDevice: currentDeviceId,
+                timestamp: Date.now()
+            };
+            
+            broadcastChannel.postMessage(message);
+        }
+
+        function broadcastProductDelete(productId) {
+            if (!broadcastChannel) return;
+            
+            const message = {
+                type: 'product_delete',
+                productId: productId,
+                sourceDevice: currentDeviceId,
+                timestamp: Date.now()
+            };
+            
+            broadcastChannel.postMessage(message);
+        }
+
+        function broadcastProductsRefresh() {
+            if (!broadcastChannel) return;
+            
+            const message = {
+                type: 'products_refresh',
+                sourceDevice: currentDeviceId,
+                timestamp: Date.now()
+            };
+            
+            broadcastChannel.postMessage(message);
+        }
+
+        function broadcastClearAllProducts() {
+            if (!broadcastChannel) return;
+            
+            const message = {
+                type: 'clear_all_products',
+                sourceDevice: currentDeviceId,
+                timestamp: Date.now()
+            };
+            
+            broadcastChannel.postMessage(message);
+        }
+
+        function showUpdateNotification(message, type = 'info') {
+            const notification = document.getElementById('updateNotification');
+            const messageElement = document.getElementById('updateMessage');
+            
+            messageElement.textContent = message;
+            notification.style.display = 'block';
+            notification.style.borderLeftColor = type === 'warning' ? '#ffc107' : 
+                                               type === 'error' ? '#dc3545' : 
+                                               type === 'success' ? '#28a745' : 
+                                               '#17a2b8';
+            
+            // Auto hide setelah 5 detik
+            setTimeout(() => {
+                if (notification.style.display === 'block') {
+                    notification.style.display = 'none';
+                }
+            }, 5000);
+        }
+
+        window.hideUpdateNotification = function() {
+            document.getElementById('updateNotification').style.display = 'none';
+        };
+
+        // ==================== PRODUCT FUNCTIONS ====================
+        function loadProductsFromStorage() {
+            try {
+                const savedProducts = localStorage.getItem(SYNC_CONFIG.storageKey);
+                if (savedProducts) {
+                    products = JSON.parse(savedProducts);
+                } else {
+                    // Gunakan data awal
+                    products = [...INITIAL_PRODUCTS];
+                    saveProductsToStorage();
+                }
+            } catch (e) {
+                console.error('Error loading products:', e);
+                products = [...INITIAL_PRODUCTS];
+            }
+        }
+
+        function saveProductsToStorage() {
+            try {
+                localStorage.setItem(SYNC_CONFIG.storageKey, JSON.stringify(products));
+                localStorage.setItem(SYNC_CONFIG.lastUpdateKey, new Date().toISOString());
+                
+                // Update UI
+                updateLastUpdateTime();
+                updateFooterProductCount();
+            } catch (e) {
+                console.error('Error saving products:', e);
+            }
+        }
+
+        function updateLastUpdateTime() {
+            const lastUpdateElement = document.getElementById('lastUpdateTime');
+            if (lastUpdateElement) {
+                const now = new Date();
+                lastUpdateElement.textContent = `Terakhir update: ${now.toLocaleTimeString('id-ID')}`;
+            }
+        }
+
+        function updateFooterProductCount() {
+            const footerCount = document.getElementById('footerProductCount');
+            if (footerCount) {
+                footerCount.textContent = products.length;
+            }
         }
 
         function getCategoryName(category) {
@@ -2208,8 +1774,6 @@
 
         function renderProducts(filter) {
             const container = document.getElementById('productsContainer');
-            if (!container) return;
-            
             container.innerHTML = '';
             
             const filteredProducts = filter === 'all' 
@@ -2220,6 +1784,9 @@
                 container.innerHTML = '<p style="text-align: center; color: var(--gray); padding: 2rem;">Belum ada produk</p>';
                 return;
             }
+            
+            // Sort by updatedAt (newest first)
+            filteredProducts.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
             
             filteredProducts.forEach(product => {
                 const card = document.createElement('div');
@@ -2267,33 +1834,38 @@
             }
             
             const newProduct = {
-                id: Date.now(),
+                id: Date.now(), // Generate unique ID
                 name,
                 category,
                 price,
                 description: description || "Produk terbaru dari ZarrStoreID",
-                createdAt: new Date().toISOString()
+                createdAt: new Date().toISOString(),
+                updatedAt: new Date().toISOString()
             };
             
+            // Tambah ke array
             products.push(newProduct);
-            saveProducts();
+            
+            // Save to storage
+            saveProductsToStorage();
+            
+            // Broadcast ke semua device
+            broadcastProductUpdate(newProduct);
             
             // Update UI
             const activeFilter = document.querySelector('.filter-btn.active').getAttribute('data-filter');
             renderProducts(activeFilter);
             updateProductList();
             
+            // Reset form
             document.getElementById('adminForm').reset();
             
-            showNotification('Produk berhasil ditambahkan', 'success');
-            addSyncLog(`Product added: ${name}`, 'info');
+            showNotification('Produk berhasil ditambahkan dan disinkronkan ke semua device!', 'success');
         }
 
         function updateProductList() {
             const container = document.getElementById('productList');
             const countElement = document.getElementById('productCount');
-            
-            if (!container || !countElement) return;
             
             container.innerHTML = '';
             countElement.textContent = products.length;
@@ -2303,7 +1875,10 @@
                 return;
             }
             
-            const sortedProducts = [...products].sort((a, b) => b.id - a.id);
+            // Sort by updatedAt (newest first)
+            const sortedProducts = [...products].sort((a, b) => 
+                new Date(b.updatedAt) - new Date(a.updatedAt)
+            );
             
             sortedProducts.forEach(product => {
                 const item = document.createElement('div');
@@ -2312,6 +1887,10 @@
                     <div>
                         <strong>${product.name}</strong><br>
                         <small>Rp ${product.price.toLocaleString('id-ID')} • ${getCategoryName(product.category)}</small>
+                        <br>
+                        <small style="color: var(--gray); font-size: 0.8rem;">
+                            <i class="far fa-clock"></i> ${new Date(product.updatedAt).toLocaleDateString('id-ID')}
+                        </small>
                     </div>
                     <button class="btn-delete" onclick="deleteProduct(${product.id})">
                         <i class="fas fa-trash"></i>
@@ -2322,107 +1901,147 @@
         }
 
         window.deleteProduct = function(productId) {
-            if (!confirm('Hapus produk ini?')) return;
+            if (!confirm('Hapus produk ini dari semua device?')) return;
             
             const product = products.find(p => p.id === productId);
-            products = products.filter(p => p.id !== productId);
-            saveProducts();
             
+            products = products.filter(p => p.id !== productId);
+            saveProductsToStorage();
+            
+            // Broadcast ke semua device
+            broadcastProductDelete(productId);
+            
+            // Update UI
             const activeFilter = document.querySelector('.filter-btn.active').getAttribute('data-filter');
             renderProducts(activeFilter);
             updateProductList();
             
-            showNotification('Produk berhasil dihapus!', 'success');
-            addSyncLog(`Product deleted: ${product ? product.name : productId}`, 'info');
+            showNotification('Produk berhasil dihapus dari semua device!', 'success');
         };
 
         window.clearAllProducts = function() {
-            if (!confirm('HAPUS SEMUA PRODUK? Tindakan ini tidak bisa dibatalkan!')) return;
+            if (!confirm('HAPUS SEMUA PRODUK DARI SEMUA DEVICE? Tindakan ini tidak bisa dibatalkan!')) return;
             
             products = [];
-            saveProducts();
+            saveProductsToStorage();
             
+            // Broadcast ke semua device
+            broadcastClearAllProducts();
+            
+            // Update UI
             const activeFilter = document.querySelector('.filter-btn.active').getAttribute('data-filter');
             renderProducts(activeFilter);
             updateProductList();
             
-            showNotification('Semua produk telah dihapus!', 'success');
-            addSyncLog('All products cleared', 'warning');
+            showNotification('Semua produk telah dihapus dari semua device!', 'success');
         };
 
         window.refreshProductList = function() {
+            // Load ulang dari storage
             loadProductsFromStorage();
-            updateProductDisplay();
-            showNotification("Products refreshed", "info");
+            
+            // Broadcast refresh ke semua device
+            broadcastProductsRefresh();
+            
+            // Update UI
+            const activeFilter = document.querySelector('.filter-btn.active').getAttribute('data-filter');
+            renderProducts(activeFilter);
+            updateProductList();
+            
+            showNotification("Products refreshed!", "info");
         };
 
         window.forceCheckForUpdates = function() {
-            checkForUpdates();
+            // Kirim heartbeat dan cek update
+            sendHeartbeat();
+            loadActiveDevices();
+            updateDeviceIndicator();
+            
+            showNotification("Checking for updates...", "info");
         };
 
-        // ==================== UI FUNCTIONS ====================
-        document.addEventListener('DOMContentLoaded', function() {
-            initApp();
-        });
+        window.showDeviceStats = function() {
+            const deviceList = Object.keys(activeDevices)
+                .map(id => `• Device ${id === currentDeviceId ? '(This Device)' : ''}`)
+                .join('\n');
+            
+            alert(`Active Devices: ${Object.keys(activeDevices).length}\n\n${deviceList}`);
+        };
 
-        function initApp() {
-            // Initialize sync system
-            initSyncSystem();
+        // ==================== IMPORT/EXPORT ====================
+        function exportProducts() {
+            const data = {
+                products: products,
+                exportedAt: new Date().toISOString(),
+                count: products.length,
+                version: SYNC_CONFIG.version
+            };
             
-            // Setup UI
-            setupEventListeners();
-            loadFromLocalStorage();
-            renderTransactionHistory();
-            setupCollaborators();
+            const dataStr = JSON.stringify(data, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            const fileName = `zarrstore-products-backup-${new Date().toISOString().slice(0,10)}.json`;
             
-            // Check for hash parameters (for QR code sync)
-            checkHashParameters();
+            const link = document.createElement('a');
+            link.setAttribute('href', dataUri);
+            link.setAttribute('download', fileName);
+            link.click();
             
-            // Update year
-            document.querySelector('.copyright p').innerHTML = `&copy; 2023-${new Date().getFullYear()} ZarrStoreID. All rights reserved.`;
-            
-            // Initial sync status
-            updateSyncStatus('online');
+            showNotification(`Data diexport (${products.length} produk)`, 'success');
         }
 
-        function checkHashParameters() {
-            const hash = window.location.hash;
-            if (hash.includes('sync=')) {
-                const encodedData = hash.split('sync=')[1];
+        function importProducts() {
+            document.getElementById('importFileInput').click();
+        }
+
+        document.getElementById('importFileInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
                 try {
-                    const decodedData = decodeURIComponent(atob(encodedData));
-                    const syncData = JSON.parse(decodedData);
+                    const data = JSON.parse(e.target.result);
                     
-                    if (syncData.type === 'zarrstore_sync' && syncData.products) {
-                        // Auto-apply sync data from URL
-                        products = syncData.products;
-                        saveProducts();
-                        updateProductDisplay();
+                    if (data.products && Array.isArray(data.products)) {
+                        // Import products dengan ID baru
+                        const importedProducts = data.products.map(product => ({
+                            ...product,
+                            id: Date.now() + Math.floor(Math.random() * 1000),
+                            createdAt: new Date().toISOString(),
+                            updatedAt: new Date().toISOString()
+                        }));
                         
-                        showNotification(`Data berhasil di-sync dari URL (${products.length} produk)`, 'success');
-                        addSyncLog('Data synced from URL', 'success');
+                        // Tambah ke products yang ada
+                        products.push(...importedProducts);
+                        saveProductsToStorage();
                         
-                        // Clear hash
-                        window.location.hash = '';
+                        // Broadcast setiap product ke semua device
+                        importedProducts.forEach(product => {
+                            broadcastProductUpdate(product);
+                        });
+                        
+                        showNotification(`${importedProducts.length} produk diimport dan disinkronkan ke semua device!`, 'success');
+                        
+                        // Update UI
+                        const activeFilter = document.querySelector('.filter-btn.active').getAttribute('data-filter');
+                        renderProducts(activeFilter);
+                        updateProductList();
+                    } else {
+                        showNotification('Format file tidak valid', 'error');
                     }
                 } catch (error) {
-                    console.error('URL sync error:', error);
+                    showNotification('Gagal membaca file', 'error');
                 }
-            }
-        }
+                
+                // Reset input
+                event.target.value = '';
+            };
+            reader.readAsText(file);
+        });
 
-        function loadFromLocalStorage() {
-            // Already loaded in initSyncSystem
-            updateProductDisplay();
-            
-            const savedDevMode = localStorage.getItem('zarrstore_devmode');
-            isDeveloperMode = savedDevMode === 'true';
-        }
-
+        // ==================== DEVELOPER MODE ====================
         function setupCollaborators() {
             const container = document.getElementById('collaboratorsList');
-            if (!container) return;
-            
             container.innerHTML = '';
             
             collaborators.forEach(collab => {
@@ -2480,16 +2099,77 @@
             const url = window.location.href;
             if (navigator.share) {
                 navigator.share({
-                    title: 'ZarrStoreID Cloud Sync',
+                    title: 'ZarrStoreID Multi-Device Sync',
                     text: 'Update produk otomatis sync ke semua perangkat!',
                     url: url
                 });
             } else {
                 navigator.clipboard.writeText(url);
-                showNotification('Link disalin! Bagikan ke perangkat lain.', 'success');
+                showNotification('Link disalin! Bagikan ke perangkat lain untuk sync.', 'success');
             }
         }
 
+        // ==================== INITIALIZATION ====================
+        document.addEventListener('DOMContentLoaded', function() {
+            initApp();
+        });
+
+        function initApp() {
+            // Initialize multi-device sync system
+            initMultiDeviceSync();
+            
+            // Setup event listeners
+            setupEventListeners();
+            
+            // Load data
+            loadProductsFromStorage();
+            renderTransactionHistory();
+            setupCollaborators();
+            
+            // Setup periodic heartbeat
+            setInterval(() => {
+                sendHeartbeat();
+                loadActiveDevices();
+                updateDeviceIndicator();
+            }, 30000); // Every 30 seconds
+            
+            // Initial UI update
+            const activeFilter = document.querySelector('.filter-btn.active');
+            const currentFilter = activeFilter ? activeFilter.getAttribute('data-filter') : 'all';
+            renderProducts(currentFilter);
+            updateProductList();
+            updateLastUpdateTime();
+            updateFooterProductCount();
+            
+            // Set tahun di footer
+            document.querySelector('.copyright p').innerHTML = `&copy; 2023-${new Date().getFullYear()} ZarrStoreID. All rights reserved.`;
+            
+            // Update sync status
+            updateSyncStatus();
+        }
+
+        function updateSyncStatus() {
+            const statusElement = document.getElementById('syncStatus');
+            const statusText = document.getElementById('syncText');
+            const syncStatusText = document.getElementById('syncStatusText');
+            const footerSync = document.getElementById('footerSyncStatus');
+            
+            if (typeof BroadcastChannel !== 'undefined' && broadcastChannel) {
+                statusElement.className = "sync-status sync-online";
+                statusText.textContent = "Online";
+                syncStatusText.textContent = "Aktif";
+                footerSync.textContent = "Aktif";
+                footerSync.style.color = "#28a745";
+            } else {
+                statusElement.className = "sync-status sync-offline";
+                statusText.textContent = "Offline";
+                syncStatusText.textContent = "Offline";
+                footerSync.textContent = "Offline";
+                footerSync.style.color = "#6c757d";
+            }
+        }
+
+        // ==================== UI FUNCTIONS ====================
         function setupEventListeners() {
             // Navigation
             document.querySelectorAll('.nav-link').forEach(link => {
@@ -2522,6 +2202,11 @@
                     document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('selected'));
                     this.classList.add('selected');
                     selectedPaymentMethod = this.getAttribute('data-method');
+                    
+                    // Untuk QRIS, tampilkan gambar QR code
+                    if (selectedPaymentMethod === 'qris') {
+                        showQRCode();
+                    }
                 });
             });
 
@@ -2559,14 +2244,56 @@
             document.querySelectorAll('.payment-number').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const number = this.getAttribute('data-number');
-                    navigator.clipboard.writeText(number).then(() => {
-                        showNotification('Nomor berhasil disalin!', 'success');
-                    });
+                    if (number) {
+                        navigator.clipboard.writeText(number).then(() => {
+                            showNotification('Nomor berhasil disalin!', 'success');
+                        });
+                    }
                 });
             });
         }
 
+        function showQRCode() {
+            // Buat modal untuk QR code
+            const qrModal = document.createElement('div');
+            qrModal.className = 'modal';
+            qrModal.style.display = 'flex';
+            qrModal.innerHTML = `
+                <div class="modal-content">
+                    <button class="modal-close" onclick="this.parentElement.parentElement.remove()">&times;</button>
+                    <h2 style="color: var(--primary); margin-bottom: 1rem;">QRIS Payment</h2>
+                    <p style="margin-bottom: 1.5rem; color: var(--gray);">Scan QR code di bawah ini menggunakan aplikasi e-wallet Anda:</p>
+                    <div style="text-align: center; padding: 1rem; background: #f8f9fa; border-radius: 10px;">
+                        <div id="qrcode" style="display: inline-block; padding: 20px; background: white; border-radius: 10px;"></div>
+                    </div>
+                    <p style="margin-top: 1.5rem; color: var(--gray); font-size: 0.9rem; text-align: center;">
+                        QR code untuk pembayaran via DANA, GOPAY, OVO, atau aplikasi bank
+                    </p>
+                </div>
+            `;
+            
+            document.body.appendChild(qrModal);
+            
+            // Generate simple QR code (text representation)
+            setTimeout(() => {
+                const qrcodeDiv = document.getElementById('qrcode');
+                qrcodeDiv.innerHTML = `
+                    <div style="font-family: monospace; line-height: 1; letter-spacing: 2px;">
+                        <div>█████████████████</div>
+                        <div>██           ██</div>
+                        <div>██   █████   ██</div>
+                        <div>██   █   █   ██</div>
+                        <div>██   █████   ██</div>
+                        <div>██           ██</div>
+                        <div>█████████████████</div>
+                        <div style="margin-top: 10px; font-size: 0.8rem;">ZarrStoreID</div>
+                    </div>
+                `;
+            }, 100);
+        }
+
         function switchSection(sectionId) {
+            // Remove active class from all sections and nav links
             document.querySelectorAll('section').forEach(section => {
                 section.classList.remove('active');
             });
@@ -2574,9 +2301,11 @@
                 link.classList.remove('active');
             });
             
+            // Add active class to target section and nav link
             document.getElementById(sectionId).classList.add('active');
             document.querySelector(`[data-target="${sectionId}"]`).classList.add('active');
             
+            // Close mobile menu if open
             document.getElementById('mainNav').classList.remove('active');
         }
 
@@ -2602,6 +2331,11 @@
                 return;
             }
             
+            const methodName = selectedPaymentMethod === 'dana' ? 'DANA' :
+                              selectedPaymentMethod === 'gopay' ? 'GOPAY' :
+                              selectedPaymentMethod === 'ovo' ? 'OVO' :
+                              selectedPaymentMethod === 'qris' ? 'QRIS' : 'Belum dipilih';
+            
             const message = `Halo ZarrStoreID, saya ingin memesan:
 
 📦 Produk: ${currentProduct.name}
@@ -2609,7 +2343,7 @@
 👤 Nama: ${name}
 📱 WhatsApp: ${phone}
 🎮 ID Game/No HP: ${gameId}
-💳 Metode Bayar: ${selectedPaymentMethod || 'Belum dipilih'}
+💳 Metode Bayar: ${methodName}
 
 Saya sudah memesan melalui website.`;
             
@@ -2632,6 +2366,7 @@ Saya sudah memesan melalui website.`;
                 id: `TRX${String(history.length + 1).padStart(3, '0')}`,
                 product: product.name,
                 date: new Date().toLocaleDateString('id-ID'),
+                time: new Date().toLocaleTimeString('id-ID'),
                 amount: product.price,
                 customer: customerName,
                 status: 'pending'
@@ -2645,8 +2380,6 @@ Saya sudah memesan melalui website.`;
         function renderTransactionHistory() {
             const history = JSON.parse(localStorage.getItem('zarrstore_history') || '[]');
             const container = document.getElementById('historyTableBody');
-            if (!container) return;
-            
             container.innerHTML = '';
             
             if (history.length === 0) {
@@ -2665,7 +2398,7 @@ Saya sudah memesan melalui website.`;
                 row.innerHTML = `
                     <td>${transaction.id}</td>
                     <td>${transaction.product}</td>
-                    <td>${transaction.date}</td>
+                    <td>${transaction.date}<br><small>${transaction.time}</small></td>
                     <td>Rp ${transaction.amount.toLocaleString('id-ID')}</td>
                     <td><span class="status status-pending">${transaction.status}</span></td>
                 `;
@@ -2687,12 +2420,6 @@ Saya sudah memesan melalui website.`;
                 notification.remove();
             }, 3000);
         }
-
-        // Simple QR Code decoder (fallback if jsQR not available)
-        window.jsQR = window.jsQR || function() {
-            console.warn('jsQR not loaded, using simple decoder');
-            return null;
-        };
     </script>
 </body>
 </html>
