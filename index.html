@@ -207,36 +207,89 @@
             margin-top: 0.5rem;
         }
 
-        .profile-section {
-            width: 100%;
-            text-align: center;
-            order: 2;
+        /* Profile Section - DI PINDAH KE ATAS */
+        .profile-top-section {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 16px;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(106, 17, 203, 0.2);
+            color: white;
+            position: relative;
+            overflow: hidden;
         }
 
-        .profile-img {
-            width: 180px;
-            height: 180px;
+        .profile-top-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: translate(30%, -30%);
+        }
+
+        .profile-img-top {
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
             object-fit: cover;
-            border: 6px solid white;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            margin-bottom: 1.2rem;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            flex-shrink: 0;
+            z-index: 1;
         }
 
-        .profile-section h2 {
+        .profile-info-top {
+            flex-grow: 1;
+            z-index: 1;
+        }
+
+        .profile-info-top h2 {
             font-size: 1.8rem;
-            color: var(--primary);
             margin-bottom: 0.5rem;
+            font-weight: 700;
         }
 
-        .profile-section p {
-            color: var(--gray);
-            font-size: 0.95rem;
+        .profile-info-top p {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 0.8rem;
+        }
+
+        .profile-stats {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-value {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            opacity: 0.8;
         }
 
         .welcome-section {
             width: 100%;
-            order: 1;
         }
 
         .welcome-card {
@@ -1068,9 +1121,31 @@
                 margin-bottom: 1rem;
             }
             
-            .profile-img {
-                width: 150px;
-                height: 150px;
+            /* Profile top section mobile */
+            .profile-top-section {
+                flex-direction: column;
+                text-align: center;
+                padding: 1.5rem;
+            }
+            
+            .profile-img-top {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .profile-info-top h2 {
+                font-size: 1.5rem;
+            }
+            
+            .profile-stats {
+                flex-direction: column;
+                gap: 0.8rem;
+                width: 100%;
+            }
+            
+            .stat-item {
+                width: 100%;
+                padding: 0.8rem;
             }
             
             .welcome-card h2 {
@@ -1103,34 +1178,21 @@
             }
             
             .hero {
-                flex-direction: row;
-            }
-            
-            .profile-section {
-                order: 1;
-                flex: 1;
+                flex-direction: column;
             }
             
             .welcome-section {
-                order: 2;
-                flex: 2;
+                width: 100%;
             }
         }
 
         @media (min-width: 1025px) {
             .hero {
-                flex-direction: row;
-                align-items: flex-start;
-            }
-            
-            .profile-section {
-                flex: 1;
-                order: 1;
+                flex-direction: column;
             }
             
             .welcome-section {
-                flex: 2;
-                order: 2;
+                width: 100%;
             }
             
             .info-grid {
@@ -1218,51 +1280,63 @@
         <section id="beranda" class="active">
             <h2 class="section-title"><i class="fas fa-star"></i> Selamat Datang</h2>
             
+            <!-- PROFILE SECTION DIPINDAH KE ATAS -->
+            <div class="profile-top-section">
+                <img src="https://files.catbox.moe/vhjccr.jpg" alt="Profil ZarrStoreID" class="profile-img-top">
+                <div class="profile-info-top">
+                    <h2>ZarrStoreID</h2>
+                    <p>Top Up Game & Pulsa All Operator Terpercaya</p>
+                    <div class="profile-stats">
+                        <div class="stat-item">
+                            <span class="stat-value" id="productCountDisplay">12</span>
+                            <span class="stat-label">Produk</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="userCountDisplay">248</span>
+                            <span class="stat-label">Pengguna</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">24/7</span>
+                            <span class="stat-label">Aktif</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
             <div class="cloud-update-info">
                 <h4><i class="fas fa-cloud"></i> Multi-Device Sync Aktif</h4>
                 <p>Produk diupdate otomatis ke semua pengguna! Update produk di satu perangkat akan langsung muncul di semua perangkat lain.</p>
             </div>
             
-            <div class="hero">
-                <div class="profile-section">
-                    <img src="https://files.catbox.moe/vhjccr.jpg" alt="Profil ZarrStoreID" class="profile-img">
-                    <h2>ZarrStoreID</h2>
-                    <p>Top Up Game & Pulsa All Operator Terpercaya</p>
-                    <div style="margin-top: 1rem; font-size: 0.9rem; color: var(--gray);">
-                        <i class="fas fa-sync-alt"></i> Sync Status: <span id="syncStatusText">Aktif</span>
-                    </div>
-                </div>
-                
-                <div class="welcome-section">
-                    <div class="welcome-card">
-                        <h2>Halo Gamers! <span>Selamat Datang</span></h2>
-                        <p>ZarrStoreID adalah toko online terpercaya untuk top up semua game favorit dan isi pulsa/kuota semua operator di Indonesia.</p>
+            <div class="welcome-section">
+                <div class="welcome-card">
+                    <h2>Halo Gamers! <span>Selamat Datang</span></h2>
+                    <p>ZarrStoreID adalah toko online terpercaya untuk top up semua game favorit dan isi pulsa/kuota semua operator di Indonesia.</p>
+                    
+                    <div class="guide-steps">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.1rem;">Cara Order Mudah:</h3>
                         
-                        <div class="guide-steps">
-                            <h3 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.1rem;">Cara Order Mudah:</h3>
-                            
-                            <div class="step">
-                                <div class="step-number">1</div>
-                                <div>
-                                    <h4>Pilih Produk</h4>
-                                    <p>Buka menu Produk dan pilih game atau pulsa yang kamu butuhkan</p>
-                                </div>
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div>
+                                <h4>Pilih Produk</h4>
+                                <p>Buka menu Produk dan pilih game atau pulsa yang kamu butuhkan</p>
                             </div>
-                            
-                            <div class="step">
-                                <div class="step-number">2</div>
-                                <div>
-                                    <h4>Isi Form Order</h4>
-                                    <p>Klik tombol "Beli" dan isi data yang diperlukan</p>
-                                </div>
+                        </div>
+                        
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div>
+                                <h4>Isi Form Order</h4>
+                                <p>Klik tombol "Beli" dan isi data yang diperlukan</p>
                             </div>
-                            
-                            <div class="step">
-                                <div class="step-number">3</div>
-                                <div>
-                                    <h4>Konfirmasi via WhatsApp</h4>
-                                    <p>Pesan akan langsung terkirim ke WhatsApp kami untuk konfirmasi</p>
-                                </div>
+                        </div>
+                        
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div>
+                                <h4>Konfirmasi via WhatsApp</h4>
+                                <p>Pesan akan langsung terkirim ke WhatsApp kami untuk konfirmasi</p>
                             </div>
                         </div>
                     </div>
@@ -1598,7 +1672,7 @@
     <script>
         // ==================== SISTEM CLOUD MULTI-DEVICE ====================
         const CLOUD_CONFIG = {
-            syncInterval: 30000,
+            syncInterval: 1000, // DIUBAH: 1 DETIK SAJA!
             storageKey: 'zarrstore_cloud_data',
             usersKey: 'zarrstore_active_users',
             versionKey: 'zarrstore_data_version',
@@ -1613,7 +1687,6 @@
         let secretClickCount = 0;
         let lastSecretClickTime = 0;
         let syncInterval = null;
-        let lastSyncTime = null;
         let isSyncing = false;
         let userId = null;
         
@@ -1713,7 +1786,9 @@
                 localStorage.setItem(CLOUD_CONFIG.storageKey, JSON.stringify(cloudData));
                 localStorage.setItem(CLOUD_CONFIG.versionKey, Date.now().toString());
                 
-                lastSyncTime = Date.now();
+                // Update product count display
+                updateProductCountDisplay();
+                
                 showNotification("✅ Produk disimpan & sync ke semua perangkat!", "success");
                 
                 return true;
@@ -1722,7 +1797,7 @@
                 showNotification("❌ Gagal sync ke cloud", "error");
                 return false;
             } finally {
-                updateSyncStatus("online");
+                setTimeout(() => updateSyncStatus("online"), 500);
             }
         }
 
@@ -1737,11 +1812,26 @@
             return hash.toString(16);
         }
 
+        function updateProductCountDisplay() {
+            const productCountElement = document.getElementById('productCountDisplay');
+            const userCountElement = document.getElementById('userCountDisplay');
+            
+            if (productCountElement) {
+                productCountElement.textContent = products.length;
+            }
+            
+            // Simulate user count (random number for demo)
+            if (userCountElement) {
+                const baseUsers = 248;
+                const randomAdd = Math.floor(Math.random() * 20);
+                userCountElement.textContent = baseUsers + randomAdd;
+            }
+        }
+
         function checkForCloudUpdates() {
             if (isSyncing) return;
             
             isSyncing = true;
-            updateSyncStatus("syncing");
             
             try {
                 const cloudData = getCloudData();
@@ -1758,16 +1848,15 @@
                         const currentFilter = activeFilter ? activeFilter.getAttribute('data-filter') : 'all';
                         renderProducts(currentFilter);
                         updateProductList();
+                        updateProductCountDisplay();
                         
                         showNotification("📦 Produk diperbarui dari cloud!", "success");
-                        lastSyncTime = Date.now();
                     }
                 }
             } catch (error) {
                 console.log("Cloud sync failed:", error);
             } finally {
                 isSyncing = false;
-                updateSyncStatus("online");
             }
         }
 
@@ -1790,9 +1879,10 @@
                 clearInterval(syncInterval);
             }
             
+            // DIUBAH: Check updates every 1 second!
             syncInterval = setInterval(checkForCloudUpdates, CLOUD_CONFIG.syncInterval);
             
-            console.log("Multi-device auto sync started");
+            console.log("Multi-device auto sync started (1 second interval)");
         }
 
         function stopAutoSync() {
@@ -1800,6 +1890,29 @@
                 clearInterval(syncInterval);
                 syncInterval = null;
             }
+        }
+
+        // ==================== REAL-TIME SYNC ENHANCEMENT ====================
+        function setupRealTimeSync() {
+            // Listen for storage changes more aggressively
+            window.addEventListener('storage', function(event) {
+                if (event.key === CLOUD_CONFIG.versionKey) {
+                    // Immediate sync when data changes
+                    setTimeout(checkForCloudUpdates, 100);
+                }
+            });
+            
+            // Also sync when page becomes visible
+            document.addEventListener('visibilitychange', function() {
+                if (!document.hidden) {
+                    setTimeout(checkForCloudUpdates, 100);
+                }
+            });
+            
+            // Sync on focus
+            window.addEventListener('focus', function() {
+                setTimeout(checkForCloudUpdates, 100);
+            });
         }
 
         // ==================== INITIALIZATION ====================
@@ -1811,6 +1924,7 @@
             document.getElementById('currentYear').textContent = new Date().getFullYear();
             
             setupCrossTabSync();
+            setupRealTimeSync();
             startAutoSync();
             
             setupEventListeners();
@@ -1820,9 +1934,13 @@
             
             checkForImportFromURL();
             
+            // Initial update for product count display
+            updateProductCountDisplay();
+            
+            // Initial sync check
             setTimeout(() => {
                 checkForCloudUpdates();
-            }, 1000);
+            }, 500);
         }
 
         // ==================== LOCALSTORAGE FUNCTIONS ====================
@@ -1831,7 +1949,6 @@
             
             if (cloudData && cloudData.products) {
                 products = cloudData.products;
-                lastSyncTime = cloudData.lastUpdated;
             } else {
                 products = [...INITIAL_PRODUCTS];
                 saveToCloud();
@@ -1844,6 +1961,7 @@
             const currentFilter = activeFilter ? activeFilter.getAttribute('data-filter') : 'all';
             renderProducts(currentFilter);
             updateProductList();
+            updateProductCountDisplay();
         }
 
         function saveToLocalStorage() {
@@ -1935,6 +2053,7 @@
             const activeFilter = document.querySelector('.filter-btn.active').getAttribute('data-filter');
             renderProducts(activeFilter);
             updateProductList();
+            updateProductCountDisplay();
             
             document.getElementById('adminForm').reset();
             
@@ -1980,6 +2099,7 @@
             const activeFilter = document.querySelector('.filter-btn.active').getAttribute('data-filter');
             renderProducts(activeFilter);
             updateProductList();
+            updateProductCountDisplay();
             
             showNotification('Produk dihapus dari semua perangkat!', 'success');
         };
@@ -1993,6 +2113,7 @@
             const activeFilter = document.querySelector('.filter-btn.active').getAttribute('data-filter');
             renderProducts(activeFilter);
             updateProductList();
+            updateProductCountDisplay();
             
             showNotification('Semua produk telah dihapus dari semua perangkat!', 'success');
         };
@@ -2006,68 +2127,6 @@
             checkForCloudUpdates();
             showNotification("Memeriksa update...", "info");
         };
-
-        // ==================== IMPORT/EXPORT ====================
-        function exportProducts() {
-            const data = {
-                products: products,
-                exportedAt: new Date().toISOString(),
-                count: products.length,
-                version: CLOUD_CONFIG.currentVersion,
-                type: 'zarrstore_export'
-            };
-            
-            const dataStr = JSON.stringify(data, null, 2);
-            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
-            const fileName = `zarrstore-products-${new Date().toISOString().slice(0,10)}.json`;
-            
-            const link = document.createElement('a');
-            link.setAttribute('href', dataUri);
-            link.setAttribute('download', fileName);
-            link.click();
-            
-            showNotification(`Data diexport (${products.length} produk)`, 'success');
-        }
-
-        function importProducts() {
-            document.getElementById('importFileInput').click();
-        }
-
-        document.getElementById('importFileInput').addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-            
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                try {
-                    const data = JSON.parse(e.target.result);
-                    
-                    if (data.type === 'zarrstore_export' && data.products && Array.isArray(data.products)) {
-                        if (confirm(`Import ${data.products.length} produk? Data saat ini akan diganti.`)) {
-                            products = [];
-                            
-                            data.products.forEach(product => {
-                                product.id = Date.now() + Math.floor(Math.random() * 1000);
-                                product.createdAt = new Date().toISOString();
-                                product.updatedAt = new Date().toISOString();
-                                products.push(product);
-                            });
-                            
-                            saveToCloud();
-                            
-                            showNotification(`${data.products.length} produk diimport & sync ke semua perangkat!`, 'success');
-                        }
-                    } else {
-                        showNotification('Format file tidak valid', 'error');
-                    }
-                } catch (error) {
-                    showNotification('Gagal membaca file', 'error');
-                }
-                
-                event.target.value = '';
-            };
-            reader.readAsText(file);
-        });
 
         // ==================== DEVELOPER MODE ====================
         function setupCollaborators() {
