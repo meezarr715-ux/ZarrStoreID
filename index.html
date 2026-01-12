@@ -583,856 +583,144 @@
             border-color: var(--secondary);
         }
 
-        /* ==================== VERIFIKASI SEDERHANA SESUAI SCREENSHOT ==================== */
-        .verification-container {
-            background: #f8f9fa;
-            padding: 1.5rem;
-            border-radius: 15px;
+        /* CAPTCHA Styles */
+        .captcha-container {
             margin: 1.5rem 0;
-            border: 2px solid #e9ecef;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border: 2px dashed #dee2e6;
         }
 
-        .verification-checkbox {
+        .captcha-box {
             display: flex;
             align-items: center;
             gap: 15px;
-            cursor: pointer;
+            margin-bottom: 1rem;
+        }
+
+        .captcha-text {
+            font-family: 'Courier New', monospace;
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 5px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding: 10px 20px;
+            border-radius: 10px;
+            background-color: #f8f9ff;
+            border: 2px solid var(--secondary);
             user-select: none;
-            padding: 15px;
-            background: white;
-            border-radius: 10px;
-            border: 2px solid #dee2e6;
-            transition: all 0.3s ease;
+            text-align: center;
+            flex: 1;
         }
 
-        .verification-checkbox:hover {
-            border-color: var(--secondary);
-            background: #f0f7ff;
-        }
-
-        .verification-checkbox.checked {
-            border-color: #28a745;
-            background: #d4edda;
-        }
-
-        .verification-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            background: #e9ecef;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-            color: #6c757d;
-            border: 2px solid #dee2e6;
-            transition: all 0.3s ease;
-        }
-
-        .verification-checkbox.checked .verification-icon {
-            background: #28a745;
-            color: white;
-            border-color: #28a745;
-        }
-
-        .verification-text {
-            font-weight: 600;
-            color: #212529;
-            font-size: 1.1rem;
-        }
-
-        .verification-hint {
-            margin-top: 10px;
-            font-size: 0.9rem;
-            color: #6c757d;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding-left: 55px;
-        }
-
-        .btn-whatsapp {
-            width: 100%;
-            padding: 18px;
-            font-size: 1.2rem;
-            background: linear-gradient(to right, #25D366, #128C7E);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            margin-top: 1.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .btn-whatsapp:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
-        }
-
-        .btn-whatsapp:disabled {
-            background: #6c757d;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        .history-container {
-            overflow-x: auto;
-        }
-
-        .history-table {
-            width: 100%;
-            border-collapse: collapse;
-            min-width: 800px;
-        }
-
-        .history-table th, .history-table td {
-            padding: 1.2rem 1rem;
-            text-align: left;
-            border-bottom: 1px solid #eee;
-        }
-
-        .history-table th {
-            background: #f8f9ff;
-            color: var(--primary);
-            font-weight: 600;
-        }
-
-        .history-table tr:hover {
-            background: #f9f9ff;
-        }
-
-        .status {
-            padding: 8px 15px;
-            border-radius: 30px;
-            font-weight: 500;
-            font-size: 0.9rem;
-        }
-
-        .status-completed {
-            background: #d4edda;
-            color: #155724;
-        }
-
-        .status-pending {
-            background: #fff3cd;
-            color: #856404;
-        }
-
-        .status-processing {
-            background: #d1ecf1;
-            color: #0c5460;
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .info-card {
-            background: #f8f9ff;
-            padding: 2rem;
-            border-radius: 18px;
-            border-left: 5px solid var(--secondary);
-        }
-
-        /* Kontak Kami dengan logo responsif */
-        .contact-info div {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 1.2rem;
-        }
-
-        .contact-info i {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-            transition: transform 0.3s ease;
-            flex-shrink: 0;
-        }
-
-        .contact-info i:hover {
-            transform: scale(1.1);
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .social-links a {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZarrStoreID | Konter Digital</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@800;900&display=swap">
-    <style>
-        :root {
-            --primary: #6a11cb;
-            --secondary: #2575fc;
-            --accent: #ff4da6;
-            --light: #f8f9fa;
-            --dark: #212529;
-            --gray: #6c757d;
-            --success: #28a745;
-            --warning: #ffc107;
-            --danger: #dc3545;
-            --shadow: rgba(106, 17, 203, 0.15);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
-            color: var(--dark);
-            line-height: 1.6;
-            min-height: 100vh;
+        .captcha-controls {
             display: flex;
             flex-direction: column;
+            gap: 10px;
         }
 
-        header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
+        .captcha-controls button {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 8px;
+            background: var(--secondary);
             color: white;
-            padding: 1rem 5%;
-            box-shadow: 0 4px 12px var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .logo {
+            cursor: pointer;
+            font-size: 0.9rem;
             display: flex;
             align-items: center;
-            gap: 15px;
-        }
-
-        .logo-img {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            border: 3px solid white;
-            background: white;
-            padding: 5px;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .logo-img:hover {
-            transform: rotate(5deg);
-        }
-
-        .logo h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 900;
-            font-size: 1.8rem;
-            letter-spacing: 1px;
-        }
-
-        .logo span {
-            color: var(--accent);
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1.1rem;
-            padding: 8px 12px;
-            border-radius: 30px;
+            gap: 5px;
             transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
 
-        nav a:hover, nav a.active {
-            background: rgba(255, 255, 255, 0.2);
+        .captcha-controls button:hover {
+            background: var(--primary);
             transform: translateY(-2px);
         }
 
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        main {
-            flex: 1;
-            max-width: 1400px;
-            width: 100%;
-            margin: 2rem auto;
-            padding: 0 5%;
-        }
-
-        section {
-            background: white;
-            border-radius: 20px;
-            padding: 2.5rem;
-            margin-bottom: 2.5rem;
-            box-shadow: 0 10px 30px var(--shadow);
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-
-        section.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .section-title {
-            font-family: 'Montserrat', sans-serif;
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-            padding-bottom: 15px;
-            border-bottom: 3px solid var(--secondary);
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .hero {
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 3rem;
-            margin-top: 1rem;
-        }
-
-        .profile-section {
-            flex: 1;
-            min-width: 300px;
-            text-align: center;
-        }
-
-        .profile-img {
-            width: 250px;
-            height: 250px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 8px solid white;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-            margin-bottom: 1.5rem;
-            transition: transform 0.5s ease;
-        }
-
-        .profile-img:hover {
-            transform: scale(1.03);
-        }
-
-        .profile-section h2 {
-            font-size: 2.2rem;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .profile-section p {
-            color: var(--gray);
-            font-size: 1.1rem;
-        }
-
-        .welcome-section {
-            flex: 2;
-            min-width: 300px;
-        }
-
-        .welcome-card {
-            background: linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 100%);
-            padding: 2.5rem;
-            border-radius: 20px;
-            border-left: 6px solid var(--secondary);
-        }
-
-        .welcome-card h2 {
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 1.5rem;
-        }
-
-        .welcome-card h2 span {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .guide-steps {
-            margin-top: 2rem;
-        }
-
-        .step {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            margin-bottom: 1.5rem;
-            padding: 1.2rem;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .step:hover {
-            transform: translateX(10px);
-        }
-
-        .step-number {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1.5rem;
-            flex-shrink: 0;
-        }
-
-        .product-filters {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-bottom: 2.5rem;
-        }
-
-        .filter-btn {
-            padding: 10px 25px;
-            background: white;
-            border: 2px solid #e0e0e0;
-            border-radius: 30px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .filter-btn:hover, .filter-btn.active {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: white;
-            border-color: transparent;
-        }
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .product-card {
-            background: white;
-            border-radius: 18px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-            transition: all 0.4s ease;
-            border: 1px solid #f0f0f0;
-            position: relative;
-        }
-
-        .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px var(--shadow);
-        }
-
-        .product-img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-bottom: 1px solid #f0f0f0;
-            transition: transform 0.5s ease;
-        }
-
-        .product-card:hover .product-img {
-            transform: scale(1.05);
-        }
-
-        .product-content {
-            padding: 1.5rem;
-        }
-
-        .product-category {
-            display: inline-block;
-            background: rgba(106, 17, 203, 0.1);
-            color: var(--primary);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            margin-bottom: 10px;
-        }
-
-        .product-title {
-            font-size: 1.3rem;
-            color: var(--dark);
-            margin-bottom: 10px;
-            min-height: 60px;
-        }
-
-        .product-price {
-            color: var(--secondary);
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
-
-        .product-desc {
-            color: var(--gray);
-            font-size: 0.95rem;
-            margin-bottom: 1.5rem;
-            min-height: 45px;
-        }
-
-        .product-actions {
+        .captcha-input {
             display: flex;
             gap: 10px;
+            align-items: center;
         }
 
-        .btn {
-            padding: 12px 25px;
+        .captcha-input input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #dee2e6;
             border-radius: 10px;
-            border: none;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            text-align: center;
+            font-weight: bold;
         }
 
-        .btn-detail {
-            flex: 2;
-            background: #f0f4ff;
-            color: var(--secondary);
+        .captcha-input input:focus {
+            border-color: var(--primary);
+            outline: none;
         }
 
-        .btn-buy {
-            flex: 1;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: white;
+        .captcha-status {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            text-align: center;
+            min-height: 25px;
         }
 
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 7px 15px rgba(0, 0, 0, 0.1);
+        .captcha-status.success {
+            color: var(--success);
         }
 
-        .payment-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2.5rem;
+        .captcha-status.error {
+            color: var(--danger);
         }
 
-        .order-summary {
-            background: #f8f9ff;
-            padding: 2rem;
-            border-radius: 20px;
-            border: 2px dashed #cce7ff;
-        }
-
-        .order-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 1rem 0;
-            border-bottom: 1px solid #eaeaea;
-        }
-
-        .order-total {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-top: 1.5rem;
-            text-align: right;
-        }
-
-        .payment-methods {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .payment-option {
-            background: white;
-            border: 2px solid #eaeaea;
-            border-radius: 15px;
-            padding: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .payment-option:hover, .payment-option.selected {
-            border-color: var(--secondary);
-            background: #f0f7ff;
-        }
-
-        .payment-icon {
-            font-size: 2.5rem;
-            width: 70px;
-            height: 70px;
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-        }
-
-        .dana { background: #008BFF; }
-        .gopay { background: #00AA13; }
-        .ovo { background: #4C2A86; }
-        .qris { background: #FF6B00; }
-
-        .payment-info h4 {
-            margin-bottom: 8px;
-            color: var(--dark);
-        }
-
-        .payment-info p {
-            color: var(--gray);
-            font-size: 0.95rem;
-        }
-
-        .payment-number {
+        .robot-verification {
             background: #f8f9fa;
             padding: 15px;
             border-radius: 10px;
-            margin-top: 10px;
-            font-family: monospace;
-            font-size: 1.1rem;
-            text-align: center;
-            cursor: pointer;
-            position: relative;
-        }
-
-        .payment-number:hover {
-            background: #e9ecef;
-        }
-
-        .copy-notification {
-            position: absolute;
-            top: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--primary);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 0.8rem;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .copy-notification.show {
-            opacity: 1;
-        }
-
-        .qr-container {
-            text-align: center;
-            padding: 1rem;
-            background: white;
-            border-radius: 15px;
-            margin-top: 1rem;
-            border: 2px dashed #e0e0e0;
-        }
-
-        .qr-image {
-            width: 200px;
-            height: 200px;
-            object-fit: contain;
-            margin: 0 auto 1rem;
-            display: block;
-            border-radius: 10px;
-            border: 1px solid #eee;
-        }
-
-        .btn-pay {
-            width: 100%;
-            padding: 18px;
-            font-size: 1.2rem;
-            margin-top: 2rem;
-            background: linear-gradient(to right, #00b09b, #96c93d);
-            color: white;
-        }
-
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .modal-content {
-            background: white;
-            border-radius: 20px;
-            padding: 2.5rem;
-            max-width: 500px;
-            width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
-            position: relative;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--gray);
-            cursor: pointer;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: var(--dark);
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: var(--secondary);
-        }
-
-        /* ==================== VERIFIKASI SEDERHANA SESUAI SCREENSHOT ==================== */
-        .verification-container {
-            background: #f8f9fa;
-            padding: 1.5rem;
-            border-radius: 15px;
             margin: 1.5rem 0;
             border: 2px solid #e9ecef;
         }
 
-        .verification-checkbox {
+        .robot-checkbox {
             display: flex;
             align-items: center;
             gap: 15px;
             cursor: pointer;
             user-select: none;
-            padding: 15px;
-            background: white;
-            border-radius: 10px;
-            border: 2px solid #dee2e6;
-            transition: all 0.3s ease;
         }
 
-        .verification-checkbox:hover {
-            border-color: var(--secondary);
-            background: #f0f7ff;
+        .robot-checkbox input[type="checkbox"] {
+            display: none;
         }
 
-        .verification-checkbox.checked {
-            border-color: #28a745;
-            background: #d4edda;
-        }
-
-        .verification-icon {
+        .robot-icon {
             width: 40px;
             height: 40px;
-            border-radius: 8px;
+            border-radius: 10px;
             background: #e9ecef;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.3rem;
-            color: #6c757d;
+            font-size: 1.5rem;
+            color: var(--gray);
             border: 2px solid #dee2e6;
             transition: all 0.3s ease;
         }
 
-        .verification-checkbox.checked .verification-icon {
-            background: #28a745;
+        .robot-checkbox.checked .robot-icon {
+            background: var(--success);
             color: white;
-            border-color: #28a745;
+            border-color: var(--success);
         }
 
-        .verification-text {
-            font-weight: 600;
-            color: #212529;
-            font-size: 1.1rem;
-        }
-
-        .verification-hint {
-            margin-top: 10px;
-            font-size: 0.9rem;
-            color: #6c757d;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding-left: 55px;
+        .robot-text {
+            font-weight: 500;
+            color: var(--dark);
         }
 
         .btn-whatsapp {
@@ -1565,7 +853,8 @@
             border-radius: 50%;
             display: flex;
             align-items: center;
-                 color: white;
+            justify-content: center;
+            color: white;
             font-size: 1.3rem;
             text-decoration: none;
             transition: transform 0.3s ease;
@@ -1813,6 +1102,15 @@
                 height: 150px;
             }
             
+            .captcha-box {
+                flex-direction: column;
+            }
+            
+            .captcha-controls {
+                flex-direction: row;
+                justify-content: center;
+            }
+            
             .modal-content {
                 padding: 1.5rem;
                 width: 95%;
@@ -1871,6 +1169,12 @@
                 height: 120px;
             }
             
+            .captcha-text {
+                font-size: 1.5rem;
+                letter-spacing: 3px;
+                padding: 8px 15px;
+            }
+            
             .footer-content {
                 flex-direction: column;
             }
@@ -1911,6 +1215,14 @@
             .btn {
                 padding: 10px 15px;
                 font-size: 0.9rem;
+            }
+            
+            .captcha-input {
+                flex-direction: column;
+            }
+            
+            .captcha-input button {
+                width: 100%;
             }
             
             .supporter {
@@ -2323,7 +1635,7 @@
         </section>
     </main>
 
-    <!-- Modal Order dengan VERIFIKASI SEDERHANA -->
+    <!-- Modal Order dengan CAPTCHA -->
     <div class="modal" id="orderModal">
         <div class="modal-content">
             <button class="modal-close" id="modalClose">&times;</button>
@@ -2371,19 +1683,41 @@
                     <textarea id="additionalNotes" class="form-control" rows="3" placeholder="Keterangan tambahan jika ada"></textarea>
                 </div>
                 
-                <!-- VERIFIKASI SEDERHANA seperti screenshot -->
-                <div class="verification-container">
-                    <div class="verification-checkbox" id="verificationCheckbox">
-                        <input type="checkbox" id="verificationCheck" style="display: none;">
-                        <div class="verification-icon">
-                            <i class="fas fa-shield-alt"></i>
+                <!-- Verifikasi Saya Bukan Robot -->
+                <div class="robot-verification">
+                    <div class="robot-checkbox" id="robotCheckbox">
+                        <input type="checkbox" id="robotCheck" style="display: none;">
+                        <div class="robot-icon">
+                            <i class="fas fa-robot"></i>
                         </div>
-                        <span class="verification-text">Saya Bukan Robot</span>
+                        <span class="robot-text">Saya Bukan Robot</span>
                     </div>
-                    <div class="verification-hint">
-                        <i class="fas fa-info-circle"></i>
-                        Klik kotak di atas untuk verifikasi
+                </div>
+                
+                <!-- CAPTCHA Container -->
+                <div class="captcha-container">
+                    <h4 style="color: var(--primary); margin-bottom: 1rem;">Verifikasi Keamanan</h4>
+                    <p style="color: var(--gray); font-size: 0.9rem; margin-bottom: 1rem;">
+                        Masukkan teks di bawah ini untuk membuktikan bahwa Anda manusia:
+                    </p>
+                    
+                    <div class="captcha-box">
+                        <div class="captcha-text" id="captchaText"></div>
+                        <div class="captcha-controls">
+                            <button type="button" id="refreshCaptcha" title="Refresh CAPTCHA">
+                                <i class="fas fa-redo"></i>
+                            </button>
+                        </div>
                     </div>
+                    
+                    <div class="captcha-input">
+                        <input type="text" id="captchaInput" placeholder="Masukkan kode di atas" maxlength="6" autocomplete="off">
+                        <button type="button" id="verifyCaptcha" style="padding: 12px 20px;">
+                            <i class="fas fa-check"></i> Verifikasi
+                        </button>
+                    </div>
+                    
+                    <div class="captcha-status" id="captchaStatus"></div>
                 </div>
                 
                 <button type="button" class="btn-whatsapp" id="sendWhatsApp" disabled>
@@ -2493,7 +1827,256 @@
         let products = [];
         let currentProduct = null;
         let selectedPaymentMethod = null;
-        let verificationChecked = false;
+        let currentCaptcha = '';
+        let captchaVerified = false;
+        let robotChecked = false;
+
+        // ==================== DAFTAR PLATFORM HOSTING GAMBAR YANG DIDUKUNG ====================
+        const SUPPORTED_IMAGE_PLATFORMS = [
+            // Termai & Platform Indonesia
+            'termai.com',
+            'term.ai',
+            'kirim.ee',
+            'geekhost.id',
+            'singkat.my.id',
+            'singkat.web.id',
+            'singkatsi.my.id',
+            'myfile.id',
+            
+            // Catbox & Sejenis
+            'catbox.moe',
+            'pomf.cat',
+            'litterbox.catbox.moe',
+            
+            // Imgur & Variasi
+            'imgur.com',
+            'i.imgur.com',
+            'm.imgur.com',
+            'imgur.io',
+            
+            // Discord
+            'cdn.discordapp.com',
+            'media.discordapp.net',
+            
+            // Telegram
+            'telegra.ph',
+            'telegra.ph/file',
+            
+            // Google
+            'lh3.googleusercontent.com',
+            'drive.google.com',
+            'photos.google.com',
+            
+            // Social Media
+            'instagram.com',
+            'cdninstagram.com',
+            'fbcdn.net',
+            'twimg.com',
+            
+            // Cloud Storage
+            'dropbox.com',
+            'dl.dropbox.com',
+            'onedrive.live.com',
+            'sharepoint.com',
+            
+            // Image Hosting Populer
+            'postimg.cc',
+            'postimages.org',
+            'ibb.co',
+            'imageshack.com',
+            'tinypic.com',
+            'photobucket.com',
+            
+            // Developer Platforms
+            'githubusercontent.com',
+            'gitlab.com',
+            'raw.githubusercontent.com',
+            
+            // CDN & Cloud
+            'cloudinary.com',
+            'res.cloudinary.com',
+            's3.amazonaws.com',
+            'amazonaws.com',
+            
+            // Lainnya
+            'wikipedia.org',
+            'wikimedia.org',
+            'pximg.net',
+            'pixiv.net',
+            'deviantart.com',
+            'artstation.com',
+            'unsplash.com',
+            'picsum.photos',
+            'placeholder.com',
+            'picsum.photos',
+            'loremflickr.com',
+            
+            // Shorteners (biasanya redirect ke gambar)
+            'bit.ly',
+            'tinyurl.com',
+            'is.gd',
+            'shorturl.at',
+            'ow.ly',
+            'buff.ly',
+            't.co',
+            'goo.gl',
+            'bitly.com'
+        ];
+
+        // ==================== FUNGSI VALIDASI LINK GAMBAR - SUPER FLEKSIBEL ====================
+        function isValidImageUrl(url) {
+            if (!url || typeof url !== 'string') return false;
+            
+            // URL harus dimulai dengan http/https
+            if (!url.toLowerCase().startsWith('http://') && !url.toLowerCase().startsWith('https://')) {
+                return false;
+            }
+            
+            // Daftar ekstensi gambar yang umum
+            const imageExtensions = [
+                '.jpg', '.jpeg', '.png', '.gif', '.webp', '.bmp', '.svg',
+                '.jfif', '.pjpeg', '.pjp', '.apng', '.avif', '.tiff', '.tif',
+                '.ico', '.cur', '.jpe', '.jif', '.jfif', '.jfi'
+            ];
+            
+            // Daftar pattern yang menunjukkan ini adalah gambar
+            const imagePatterns = [
+                'image/', 'img/', 'photo/', 'picture/', 'foto/', 'gambar/',
+                'thumbnail', 'preview', 'display', 'media', 'asset', 'content'
+            ];
+            
+            const urlLower = url.toLowerCase();
+            
+            // Cek ekstensi gambar
+            for (const ext of imageExtensions) {
+                if (urlLower.includes(ext)) {
+                    return true;
+                }
+            }
+            
+            // Cek pattern gambar
+            for (const pattern of imagePatterns) {
+                if (urlLower.includes(pattern)) {
+                    return true;
+                }
+            }
+            
+            // Cek platform yang didukung
+            for (const platform of SUPPORTED_IMAGE_PLATFORMS) {
+                if (urlLower.includes(platform.toLowerCase())) {
+                    return true;
+                }
+            }
+            
+            // Untuk link pendek, kita anggap valid (biasanya redirect ke gambar)
+            if (urlLower.includes('/img/') || urlLower.includes('/image/') || 
+                urlLower.includes('/media/') || urlLower.includes('/assets/') ||
+                urlLower.includes('/uploads/') || urlLower.includes('/files/') ||
+                urlLower.includes('/storage/') || urlLower.includes('/p/') ||
+                urlLower.includes('/i/') || urlLower.includes('/u/')) {
+                return true;
+            }
+            
+            // Jika URL mengandung parameter gambar
+            if (urlLower.includes('?') && (
+                urlLower.includes('image') || 
+                urlLower.includes('img') || 
+                urlLower.includes('photo') ||
+                urlLower.includes('picture'))) {
+                return true;
+            }
+            
+            // Jika semua pengecekan gagal, anggap ini link gambar untuk fleksibilitas maksimal
+            // Kita hanya akan memblokir URL yang jelas-jelas bukan gambar
+            const blockedPatterns = [
+                '.html', '.php', '.asp', '.aspx', '.jsp', '.do', '.action',
+                '/video/', '/audio/', '/file/', '/download/', '.pdf', '.doc',
+                '.docx', '.xls', '.xlsx', '.zip', '.rar', '.7z', '.tar',
+                '.mp4', '.mp3', '.avi', '.mkv', '.mov', '.wmv'
+            ];
+            
+            for (const blocked of blockedPatterns) {
+                if (urlLower.includes(blocked)) {
+                    return false;
+                }
+            }
+            
+            // Default: anggap valid untuk fleksibilitas maksimal
+            return true;
+        }
+
+        // ==================== FUNGSI FALLBACK IMAGE HANDLER ====================
+        function handleImageError(imgElement, product) {
+            console.warn(`Gambar gagal dimuat: ${imgElement.src}`);
+            
+            // Coba alternatif pertama: ubah ukuran jika dari placeholder
+            if (imgElement.src.includes('via.placeholder.com')) {
+                const originalUrl = imgElement.src;
+                const newSizeUrl = originalUrl.replace('/300/', '/150/');
+                if (newSizeUrl !== originalUrl) {
+                    imgElement.src = newSizeUrl;
+                    return;
+                }
+            }
+            
+            // Fallback ke placeholder berdasarkan kategori
+            let color = '6a11cb';
+            if (product.category === 'game') color = '2575fc';
+            if (product.category === 'pulsa') color = '00AA13';
+            if (product.category === 'kuota') color = 'FF6B00';
+            if (product.category === 'bot') color = 'ff4da6';
+            if (product.category === 'editor') color = '4C2A86';
+            
+            const productName = encodeURIComponent(
+                product.name.substring(0, 15).replace(/[^\w\s]/gi, '')
+            );
+            
+            imgElement.src = `https://via.placeholder.com/150/${color}/FFFFFF?text=${productName}`;
+            imgElement.style.objectFit = 'contain';
+            imgElement.style.padding = '10px';
+            imgElement.style.backgroundColor = `#${color}20`;
+        }
+
+        // ==================== FUNGSI GET PRODUCT IMAGE URL - SUPER FLEKSIBEL ====================
+        function getProductImageUrl(product) {
+            // Jika produk punya gambar dan valid, pakai itu
+            if (product.image && isValidImageUrl(product.image)) {
+                return product.image;
+            }
+            
+            // Fallback ke placeholder yang menarik
+            let color = '6a11cb';
+            let icon = '📱';
+            
+            switch(product.category) {
+                case 'game':
+                    color = '2575fc';
+                    icon = '🎮';
+                    break;
+                case 'pulsa':
+                    color = '00AA13';
+                    icon = '📞';
+                    break;
+                case 'kuota':
+                    color = 'FF6B00';
+                    icon = '📶';
+                    break;
+                case 'bot':
+                    color = 'ff4da6';
+                    icon = '🤖';
+                    break;
+                case 'editor':
+                    color = '4C2A86';
+                    icon = '👑';
+                    break;
+            }
+            
+            const productName = encodeURIComponent(
+                product.name.substring(0, 12).replace(/[^\w\s]/gi, '')
+            );
+            
+            return `https://via.placeholder.com/300/${color}/FFFFFF?text=${icon}+${productName}`;
+        }
 
         // ==================== FUNGSI UTAMA: LOAD PRODUK DI SEMUA DEVICE ====================
         function loadProductsForAllDevices() {
@@ -2502,7 +2085,7 @@
             // SELALU pakai DEFAULT_PRODUCTS sebagai sumber utama
             products = [...DEFAULT_PRODUCTS];
             
-            // Simpan ke localStorage
+            // Simpan ke localStorage (untuk device ini saja)
             localStorage.setItem('zarrstore_products', JSON.stringify(products));
             localStorage.setItem('zarrstore_last_update', Date.now().toString());
             
@@ -2597,7 +2180,7 @@
             }, 5000);
         }
 
-        // ==================== FUNGSI RENDER PRODUK ====================
+        // ==================== FUNGSI RENDER PRODUK - DIPERBAIKI ====================
         function renderProducts(filter) {
             const container = document.getElementById('productsContainer');
             if (!container) return;
@@ -2631,7 +2214,9 @@
                 const categoryClass = getCategoryClass(product.category);
                 
                 card.innerHTML = `
-                    <img src="${imageUrl}" alt="${product.name}" class="product-img">
+                    <img src="${imageUrl}" alt="${product.name}" class="product-img" 
+                         data-product-id="${product.id}"
+                         onerror="handleProductImageError(this, ${product.id})">
                     <div class="product-content">
                         <div class="product-category ${categoryClass}">${getCategoryName(product.category)}</div>
                         <h3 class="product-title">${product.name}</h3>
@@ -2651,88 +2236,101 @@
             });
         }
 
-        // ==================== FUNGSI GET PRODUCT IMAGE URL ====================
-        function getProductImageUrl(product) {
-            // Jika produk punya gambar dan valid, pakai itu
-            if (product.image && isValidImageUrl(product.image)) {
-                return product.image;
+        // ==================== HANDLE IMAGE ERROR GLOBAL ====================
+        window.handleProductImageError = function(imgElement, productId) {
+            const product = products.find(p => p.id === productId);
+            if (product) {
+                handleImageError(imgElement, product);
             }
-            
-            // Fallback ke placeholder yang menarik
-            let color = '6a11cb';
-            let icon = '📱';
-            
-            switch(product.category) {
-                case 'game':
-                    color = '2575fc';
-                    icon = '🎮';
-                    break;
-                case 'pulsa':
-                    color = '00AA13';
-                    icon = '📞';
-                    break;
-                case 'kuota':
-                    color = 'FF6B00';
-                    icon = '📶';
-                    break;
-                case 'bot':
-                    color = 'ff4da6';
-                    icon = '🤖';
-                    break;
-                case 'editor':
-                    color = '4C2A86';
-                    icon = '👑';
-                    break;
+        };
+
+        // ==================== SISTEM CAPTCHA ====================
+        function generateCaptcha() {
+            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789';
+            let captcha = '';
+            for (let i = 0; i < 6; i++) {
+                captcha += chars.charAt(Math.floor(Math.random() * chars.length));
             }
-            
-            const productName = encodeURIComponent(
-                product.name.substring(0, 12).replace(/[^\w\s]/gi, '')
-            );
-            
-            return `https://via.placeholder.com/300/${color}/FFFFFF?text=${icon}+${productName}`;
+            currentCaptcha = captcha;
+            return captcha;
         }
 
-        // ==================== FUNGSI VALIDASI LINK GAMBAR ====================
-        function isValidImageUrl(url) {
-            if (!url || typeof url !== 'string') return false;
+        function renderCaptcha() {
+            const captchaText = document.getElementById('captchaText');
+            if (captchaText) {
+                captchaText.textContent = generateCaptcha();
+            }
+        }
+
+        function verifyCaptcha() {
+            const input = document.getElementById('captchaInput').value.toUpperCase();
+            const status = document.getElementById('captchaStatus');
             
-            // URL harus dimulai dengan http/https
-            if (!url.toLowerCase().startsWith('http://') && !url.toLowerCase().startsWith('https://')) {
+            if (!input) {
+                status.textContent = 'Masukkan kode verifikasi';
+                status.className = 'captcha-status error';
                 return false;
             }
             
-            return true;
+            if (input === currentCaptcha.toUpperCase()) {
+                status.textContent = '✓ Verifikasi berhasil!';
+                status.className = 'captcha-status success';
+                captchaVerified = true;
+                updateSendButton();
+                return true;
+            } else {
+                status.textContent = '✗ Kode tidak sesuai. Coba lagi.';
+                status.className = 'captcha-status error';
+                captchaVerified = false;
+                updateSendButton();
+                setTimeout(() => {
+                    renderCaptcha();
+                    document.getElementById('captchaInput').value = '';
+                }, 1000);
+                return false;
+            }
         }
 
-        // ==================== VERIFIKASI SEDERHANA ====================
-        function setupVerification() {
-            const checkbox = document.getElementById('verificationCheckbox');
+        function setupCaptcha() {
+            renderCaptcha();
+            
+            document.getElementById('refreshCaptcha').addEventListener('click', function() {
+                renderCaptcha();
+                document.getElementById('captchaInput').value = '';
+                document.getElementById('captchaStatus').textContent = '';
+                captchaVerified = false;
+                updateSendButton();
+            });
+            
+            document.getElementById('verifyCaptcha').addEventListener('click', verifyCaptcha);
+            
+            document.getElementById('captchaInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    verifyCaptcha();
+                }
+            });
+        }
+
+        // ==================== VERIFIKASI ROBOT ====================
+        function setupRobotVerification() {
+            const checkbox = document.getElementById('robotCheckbox');
             
             if (!checkbox) {
-                console.error("Elemen verificationCheckbox tidak ditemukan!");
+                console.error("Elemen robotCheckbox tidak ditemukan!");
                 return;
             }
             
             checkbox.addEventListener('click', function() {
-                verificationChecked = !verificationChecked;
+                robotChecked = !robotChecked;
                 
-                if (verificationChecked) {
+                if (robotChecked) {
                     checkbox.classList.add('checked');
-                    updateSendButton();
-                    
-                    // Auto enable button setelah verifikasi
-                    setTimeout(() => {
-                        const sendButton = document.getElementById('sendWhatsApp');
-                        if (sendButton) {
-                            sendButton.disabled = false;
-                            sendButton.innerHTML = '<i class="fab fa-whatsapp"></i> Kirim ke WhatsApp';
-                            sendButton.style.background = 'linear-gradient(to right, #25D366, #128C7E)';
-                        }
-                    }, 300);
                 } else {
                     checkbox.classList.remove('checked');
-                    updateSendButton();
                 }
+                
+                updateSendButton();
             });
         }
 
@@ -2744,7 +2342,7 @@
                 return;
             }
             
-            if (verificationChecked) {
+            if (robotChecked && captchaVerified) {
                 sendButton.disabled = false;
                 sendButton.innerHTML = '<i class="fab fa-whatsapp"></i> Kirim ke WhatsApp';
                 sendButton.style.background = 'linear-gradient(to right, #25D366, #128C7E)';
@@ -2777,7 +2375,8 @@
             setupOrderModal();
             setupCopyButtons();
             setupCollaborators();
-            setupVerification();
+            setupCaptcha();
+            setupRobotVerification();
             
             // Setup sync button
             document.getElementById('syncProductsBtn').addEventListener('click', syncProducts);
@@ -2793,6 +2392,14 @@
             
             // Load QRIS
             loadQRISImage();
+            
+            // Emergency check: jika produk kosong, force sync
+            setTimeout(() => {
+                if (products.length === 0) {
+                    console.log("⚠️ Produk kosong, emergency sync...");
+                    syncProducts();
+                }
+            }, 2000);
             
             console.log("✅ ZarrStoreID siap di SEMUA device!");
         }
@@ -2978,13 +2585,19 @@
             document.getElementById('paymentMethod').value = '';
             document.getElementById('additionalNotes').value = '';
             
-            // Reset verifikasi
-            document.getElementById('verificationCheck').checked = false;
-            const verificationCheckbox = document.getElementById('verificationCheckbox');
-            if (verificationCheckbox) {
-                verificationCheckbox.classList.remove('checked');
+            // Reset CAPTCHA
+            renderCaptcha();
+            document.getElementById('captchaInput').value = '';
+            document.getElementById('captchaStatus').textContent = '';
+            captchaVerified = false;
+            
+            // Reset robot verification
+            document.getElementById('robotCheck').checked = false;
+            const robotCheckbox = document.getElementById('robotCheckbox');
+            if (robotCheckbox) {
+                robotCheckbox.classList.remove('checked');
             }
-            verificationChecked = false;
+            robotChecked = false;
             
             updateSendButton();
             modal.style.display = 'flex';
@@ -3074,8 +2687,13 @@
         }
 
         function sendOrderToWhatsApp(product) {
-            if (!verificationChecked) {
-                showNotification('Verifikasi "Saya Bukan Robot" terlebih dahulu!', 'error');
+            if (!robotChecked) {
+                showNotification('Centang "Saya Bukan Robot" terlebih dahulu!', 'error');
+                return;
+            }
+            
+            if (!captchaVerified) {
+                showNotification('Verifikasi CAPTCHA terlebih dahulu!', 'error');
                 return;
             }
             
@@ -3175,6 +2793,54 @@ Jangan Hapus Id Transaksi Ini!!`;
                 `;
             }
         }
+
+        // ==================== CARA MENGGANTI LINK GAMBAR ====================
+        /* 
+        CONTOH LINK GAMBAR YANG BISA DIGUNAKAN:
+        
+        1. TERMAI & Platform Indonesia:
+           - https://termai.com/xxxxx.jpg
+           - https://term.ai/image/xxxx
+           - https://kirim.ee/xxxxx
+           - https://geekhost.id/xxxxx
+           
+        2. Catbox & Litterbox:
+           - https://files.catbox.moe/xxxxxx.jpg
+           - https://litterbox.catbox.moe/xxxxxx.png
+           
+        3. Imgur:
+           - https://i.imgur.com/xxxxx.jpg
+           - https://imgur.com/a/xxxxx
+           
+        4. Discord:
+           - https://cdn.discordapp.com/attachments/xxx/xxx/image.png
+           
+        5. Telegram:
+           - https://telegra.ph/file/xxxxxx.jpg
+           
+        6. Google:
+           - https://lh3.googleusercontent.com/xxxxx
+           - https://drive.google.com/file/d/xxxxx/view
+           
+        7. Social Media:
+           - https://instagram.com/p/xxxxx/media
+           - https://cdninstagram.com/xxxxx
+           
+        8. Cloud Storage:
+           - https://dropbox.com/s/xxxxx/image.jpg
+           - https://onedrive.live.com/xxxxx
+           
+        9. Image Hosting Lain:
+           - https://postimg.cc/xxxxx
+           - https://ibb.co/xxxxx
+           - https://tinypic.com/xxxxx
+           
+        10. Short Links (otomatis redirect):
+            - https://bit.ly/xxxxx
+            - https://tinyurl.com/xxxxx
+            
+        DAN MASIH BANYAK LAGI!
+        */
 
         // ==================== INISIALISASI APLIKASI ====================
         document.addEventListener('DOMContentLoaded', function() {
