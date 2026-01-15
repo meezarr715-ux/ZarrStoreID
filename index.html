@@ -146,6 +146,34 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* ANIMASI UNTUK CLOUDFLARE VERIFICATION */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        @keyframes progressShimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        @keyframes checkmark {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
         .section-title {
             font-family: 'Montserrat', sans-serif;
             color: var(--primary);
@@ -157,44 +185,88 @@
             gap: 15px;
         }
 
-        .hero {
+        /* ==================== BANNER WELCOME DENGAN TEKS & BORDER BAYANGAN ==================== */
+        .welcome-banner {
+            width: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            position: relative;
+            height: auto;
+            max-height: 450px;
+            min-height: 200px;
             display: flex;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 3rem;
-            margin-top: 1rem;
+            justify-content: center;
+            aspect-ratio: 21/9;
         }
 
-        .profile-section {
-            flex: 1;
-            min-width: 300px;
-            text-align: center;
-        }
-
-        .profile-img {
-            width: 250px;
-            height: 250px;
-            border-radius: 50%;
+        .welcome-banner-img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
-            border: 8px solid white;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-            margin-bottom: 1.5rem;
             transition: transform 0.5s ease;
+            position: absolute;
+            top: 0;
+            left: 0;
         }
 
-        .profile-img:hover {
+        .welcome-banner:hover .welcome-banner-img {
             transform: scale(1.03);
         }
 
-        .profile-section h2 {
-            font-size: 2.2rem;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
+        .welcome-banner-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            padding: 2rem 3rem;
+            text-align: center;
+            width: 90%;
+            max-width: 800px;
+            margin: 2rem;
         }
 
-        .profile-section p {
-            color: var(--gray);
-            font-size: 1.1rem;
+        .welcome-banner-content h2 {
+            font-size: clamp(2rem, 5vw, 4rem); /* Lebih besar untuk nama store */
+            margin-bottom: 0.5rem;
+            font-family: 'Montserrat', sans-serif;
+            text-shadow: 
+                0 2px 4px rgba(0,0,0,0.8),
+                0 4px 8px rgba(0,0,0,0.6),
+                0 8px 16px rgba(0,0,0,0.4); /* Efek bayangan teks multiple layer */
+            font-weight: 900;
+            letter-spacing: 1px;
+            line-height: 1.1;
+        }
+
+        .welcome-banner-content p {
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem); /* Ukuran font responsif */
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.5;
+            text-shadow: 
+                0 1px 2px rgba(0,0,0,0.8),
+                0 2px 4px rgba(0,0,0,0.6); /* Bayangan untuk subtitle */
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* Tambahkan overlay gradient untuk keterbacaan yang lebih baik */
+        .welcome-banner::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(0, 0, 0, 0.3) 0%,
+                rgba(0, 0, 0, 0.1) 100%
+            );
+            z-index: 1;
         }
 
         .welcome-section {
@@ -512,15 +584,6 @@
             border: 1px solid #eee;
         }
 
-        .btn-pay {
-            width: 100%;
-            padding: 18px;
-            font-size: 1.2rem;
-            margin-top: 2rem;
-            background: linear-gradient(to right, #00b09b, #96c93d);
-            color: white;
-        }
-
         /* Modal Styles */
         .modal {
             display: none;
@@ -801,6 +864,30 @@
             color: #0c5460;
         }
 
+        .status-cancelled {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .action-btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0 2px;
+        }
+
+        .action-btn.cancel {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .action-btn.cancel:hover {
+            background: #f5c6cb;
+        }
+
         .info-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -973,12 +1060,6 @@
             animation: pulse 2s infinite;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
         footer {
             background: linear-gradient(to right, var(--dark), #343a40);
             color: white;
@@ -1055,6 +1136,27 @@
                 width: 40px;
                 height: 40px;
                 font-size: 1.1rem;
+            }
+
+            /* ==================== BANNER RESPONSIF TABLET ==================== */
+            .welcome-banner {
+                aspect-ratio: 16/9;
+                max-height: 350px;
+                border-radius: 15px;
+            }
+            
+            .welcome-banner-content {
+                padding: 1.5rem 2rem;
+                margin: 1.5rem;
+                width: 95%;
+            }
+            
+            .welcome-banner-content h2 {
+                font-size: clamp(1.8rem, 4vw, 3rem);
+            }
+            
+            .welcome-banner-content p {
+                font-size: clamp(1.1rem, 2vw, 1.5rem);
             }
         }
 
@@ -1141,6 +1243,29 @@
                 height: 45px;
                 font-size: 1.2rem;
             }
+
+            /* ==================== BANNER RESPONSIF HP ==================== */
+            .welcome-banner {
+                aspect-ratio: 4/3;
+                max-height: 280px;
+                border-radius: 12px;
+                min-height: 180px;
+            }
+            
+            .welcome-banner-content {
+                padding: 1.2rem 1.5rem;
+                margin: 1rem;
+            }
+            
+            .welcome-banner-content h2 {
+                font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+                margin-bottom: 0.3rem;
+            }
+            
+            .welcome-banner-content p {
+                font-size: clamp(1rem, 1.8vw, 1.3rem);
+                line-height: 1.4;
+            }
         }
 
         @media (max-width: 576px) {
@@ -1196,6 +1321,26 @@
             
             .social-links {
                 justify-content: center;
+            }
+
+            /* ==================== BANNER RESPONSIF HP KECIL ==================== */
+            .welcome-banner {
+                aspect-ratio: 1/1;
+                max-height: 250px;
+                border-radius: 10px;
+            }
+            
+            .welcome-banner-content {
+                padding: 1rem;
+                margin: 0.8rem;
+            }
+            
+            .welcome-banner-content h2 {
+                font-size: clamp(1.4rem, 3vw, 2rem);
+            }
+            
+            .welcome-banner-content p {
+                font-size: clamp(0.9rem, 1.5vw, 1.1rem);
             }
         }
 
@@ -1327,6 +1472,24 @@
                 flex-direction: row;
                 align-items: center;
             }
+
+            /* ==================== BANNER DESKTOP BESAR ==================== */
+            .welcome-banner {
+                max-height: 500px;
+                aspect-ratio: 21/9;
+            }
+            
+            .welcome-banner-content {
+                padding: 3rem 4rem;
+            }
+            
+            .welcome-banner-content h2 {
+                font-size: clamp(2.5rem, 6vw, 4.5rem);
+            }
+            
+            .welcome-banner-content p {
+                font-size: clamp(1.5rem, 3vw, 2rem);
+            }
         }
 
         @media (min-width: 1441px) {
@@ -1344,6 +1507,42 @@
                 width: 60px;
                 height: 60px;
                 font-size: 1.5rem;
+            }
+
+            .welcome-banner-content h2 {
+                font-size: 5rem;
+                text-shadow: 
+                    0 3px 6px rgba(0,0,0,0.8),
+                    0 6px 12px rgba(0,0,0,0.6),
+                    0 12px 24px rgba(0,0,0,0.4);
+            }
+
+            .welcome-banner-content p {
+                font-size: 2.2rem;
+                text-shadow: 
+                    0 2px 4px rgba(0,0,0,0.8),
+                    0 4px 8px rgba(0,0,0,0.6);
+            }
+        }
+
+        /* ==================== BANNER LANDSCAPE MODE ==================== */
+        @media (max-height: 600px) and (orientation: landscape) {
+            .welcome-banner {
+                aspect-ratio: 21/9;
+                max-height: 250px;
+            }
+            
+            .welcome-banner-content {
+                padding: 1rem 2rem;
+                margin: 1rem;
+            }
+            
+            .welcome-banner-content h2 {
+                font-size: 2rem;
+            }
+            
+            .welcome-banner-content p {
+                font-size: 1.2rem;
             }
         }
 
@@ -1397,13 +1596,17 @@
     <main>
         <section id="beranda" class="active">
             <h2 class="section-title"><i class="fas fa-star"></i> Selamat Datang di ZarrStoreID</h2>
-            <div class="hero">
-                <div class="profile-section">
-                    <img src="https://files.catbox.moe/vhjccr.jpg" alt="Profil ZarrStoreID" class="profile-img" onerror="this.src='https://via.placeholder.com/300/6a11cb/FFFFFF?text=Zarr+Store'">
-                    <h2>ZarrStoreID</h2>
-                    <p>Top Up Game & Pulsa All Operator Terpercaya</p>
+            
+            <!-- BANNER WELCOME DENGAN TEKS & BORDER BAYANGAN SAJA -->
+            <div class="welcome-banner" id="welcomeBanner">
+                <img src="" alt="Welcome Banner" class="welcome-banner-img" id="welcomeBannerImg">
+                <div class="welcome-banner-content">
+                    <h2 id="bannerTitle">ZarrStoreID</h2>
+                    <p id="bannerSubtitle">Agen Konter Digital Yang Aman & Terpercaya</p>
                 </div>
-                
+            </div>
+            
+            <div class="hero">
                 <div class="welcome-section">
                     <div class="welcome-card">
                         <h2>Halo Gamers! <span>Selamat Datang</span></h2>
@@ -1545,9 +1748,7 @@
                         </div>
                     </div>
                     
-                    <button class="btn btn-pay" id="payButton">
-                        <i class="fas fa-lock"></i> Lanjut ke Form Order
-                    </button>
+                    <!-- TOMBOL "LANJUT KE FORM ORDER" TELAH DIHAPUS -->
                 </div>
             </div>
         </section>
@@ -1564,6 +1765,7 @@
                             <th>Tanggal</th>
                             <th>Total</th>
                             <th>Status</th>
+                            <th>Aksi</th> <!-- Kolom baru untuk aksi -->
                         </tr>
                     </thead>
                     <tbody id="historyTableBody">
@@ -1635,7 +1837,7 @@
         </section>
     </main>
 
-    <!-- Modal Order dengan CAPTCHA -->
+    <!-- Modal Order dengan VERIFIKASI CLOUDFLARE STYLE -->
     <div class="modal" id="orderModal">
         <div class="modal-content">
             <button class="modal-close" id="modalClose">&times;</button>
@@ -1694,30 +1896,259 @@
                     </div>
                 </div>
                 
-                <!-- CAPTCHA Container -->
+                <!-- CLOUDFLARE STYLE VERIFICATION CONTAINER -->
                 <div class="captcha-container">
                     <h4 style="color: var(--primary); margin-bottom: 1rem;">Verifikasi Keamanan</h4>
-                    <p style="color: var(--gray); font-size: 0.9rem; margin-bottom: 1rem;">
-                        Masukkan teks di bawah ini untuk membuktikan bahwa Anda manusia:
+                    <p style="color: var(--gray); font-size: 0.9rem; margin-bottom: 1.5rem;">
+                        Lengkapi verifikasi di bawah ini untuk melanjutkan:
                     </p>
                     
-                    <div class="captcha-box">
-                        <div class="captcha-text" id="captchaText"></div>
-                        <div class="captcha-controls">
-                            <button type="button" id="refreshCaptcha" title="Refresh CAPTCHA">
-                                <i class="fas fa-redo"></i>
+                    <!-- CloudFlare Style Verification Box -->
+                    <div class="cloudflare-verification" style="
+                        background: linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 100%);
+                        border-radius: 12px;
+                        padding: 2rem;
+                        border: 1px solid #d1e3ff;
+                        text-align: center;
+                        margin-bottom: 1.5rem;
+                        box-shadow: 0 5px 15px rgba(106, 17, 203, 0.08);
+                        position: relative;
+                        overflow: hidden;
+                    ">
+                        <!-- Background decorative elements -->
+                        <div style="
+                            position: absolute;
+                            top: -50px;
+                            right: -50px;
+                            width: 100px;
+                            height: 100px;
+                            background: linear-gradient(135deg, rgba(106, 17, 203, 0.05) 0%, rgba(37, 117, 252, 0.05) 100%);
+                            border-radius: 50%;
+                        "></div>
+                        <div style="
+                            position: absolute;
+                            bottom: -30px;
+                            left: -30px;
+                            width: 80px;
+                            height: 80px;
+                            background: linear-gradient(135deg, rgba(255, 77, 166, 0.05) 0%, rgba(255, 107, 0, 0.05) 100%);
+                            border-radius: 50%;
+                        "></div>
+                        
+                        <!-- CloudFlare Logo & Header -->
+                        <div style="
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            gap: 12px;
+                            margin-bottom: 20px;
+                            position: relative;
+                            z-index: 2;
+                        ">
+                            <div style="
+                                width: 40px;
+                                height: 40px;
+                                background: linear-gradient(135deg, #fa5d75, #f68b1a);
+                                border-radius: 50%;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                color: white;
+                                font-weight: bold;
+                                font-size: 18px;
+                                box-shadow: 0 4px 10px rgba(250, 93, 117, 0.3);
+                                border: 2px solid white;
+                                animation: pulse 2s infinite;
+                            ">
+                                C
+                            </div>
+                            <div style="text-align: left;">
+                                <span style="
+                                    font-weight: 800;
+                                    color: #212529;
+                                    font-size: 1.3rem;
+                                    letter-spacing: 0.5px;
+                                    font-family: 'Montserrat', sans-serif;
+                                    display: block;
+                                    line-height: 1;
+                                ">
+                                    CLOUDFLARE
+                                </span>
+                                <span style="
+                                    font-size: 0.85rem;
+                                    color: #6c757d;
+                                    letter-spacing: 0.3px;
+                                ">
+                                    Security Verification
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <!-- Verification Status Text -->
+                        <div style="
+                            color: #495057;
+                            margin-bottom: 25px;
+                            font-size: 0.95rem;
+                            line-height: 1.6;
+                            position: relative;
+                            z-index: 2;
+                            background: rgba(255, 255, 255, 0.7);
+                            padding: 15px;
+                            border-radius: 8px;
+                            border: 1px solid rgba(0,0,0,0.05);
+                        ">
+                            <div style="
+                                margin-bottom: 8px; 
+                                font-weight: 600;
+                                color: #6a11cb;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                gap: 8px;
+                            ">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Privasi • Suarat</span>
+                            </div>
+                            <div id="verificationText" style="
+                                font-size: 0.9rem;
+                                color: #6c757d;
+                                font-weight: 500;
+                            ">
+                                Melakukan verifikasi...
+                            </div>
+                        </div>
+                        
+                        <!-- Animated Progress Bar -->
+                        <div style="
+                            width: 100%;
+                            height: 8px;
+                            background: linear-gradient(90deg, #e9ecef, #dee2e6);
+                            border-radius: 4px;
+                            margin-bottom: 30px;
+                            overflow: hidden;
+                            position: relative;
+                            z-index: 2;
+                            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+                        ">
+                            <div id="cloudflareProgress" style="
+                                width: 0%;
+                                height: 100%;
+                                background: linear-gradient(90deg, #6a11cb 0%, #2575fc 50%, #6a11cb 100%);
+                                background-size: 200% 100%;
+                                border-radius: 4px;
+                                transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+                                position: relative;
+                                overflow: hidden;
+                                animation: progressShimmer 2s infinite linear;
+                            ">
+                                <div style="
+                                    position: absolute;
+                                    top: 0;
+                                    left: 0;
+                                    width: 100%;
+                                    height: 100%;
+                                    background: linear-gradient(90deg, 
+                                        rgba(255,255,255,0) 0%, 
+                                        rgba(255,255,255,0.8) 50%, 
+                                        rgba(255,255,255,0) 100%);
+                                    animation: shimmer 1.5s infinite;
+                                "></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Verification Controls -->
+                        <div class="verification-controls" style="
+                            display: flex; 
+                            gap: 12px;
+                            position: relative;
+                            z-index: 2;
+                        ">
+                            <button type="button" id="startVerification" style="
+                                flex: 1;
+                                padding: 16px 24px;
+                                background: linear-gradient(135deg, #6a11cb, #2575fc);
+                                color: white;
+                                border: none;
+                                border-radius: 10px;
+                                font-weight: 600;
+                                cursor: pointer;
+                                transition: all 0.3s ease;
+                                font-size: 1rem;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                gap: 10px;
+                                box-shadow: 0 6px 20px rgba(106, 17, 203, 0.25);
+                                position: relative;
+                                overflow: hidden;
+                            ">
+                                <div style="
+                                    position: absolute;
+                                    top: 0;
+                                    left: -100%;
+                                    width: 100%;
+                                    height: 100%;
+                                    background: linear-gradient(90deg, 
+                                        rgba(255,255,255,0) 0%, 
+                                        rgba(255,255,255,0.3) 50%, 
+                                        rgba(255,255,255,0) 100%);
+                                    transition: left 0.5s;
+                                "></div>
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Mulai Verifikasi</span>
                             </button>
+                        </div>
+                        
+                        <!-- Verification Info -->
+                        <div style="
+                            margin-top: 20px;
+                            padding: 15px;
+                            background: rgba(106, 17, 203, 0.08);
+                            border-radius: 10px;
+                            font-size: 0.85rem;
+                            color: #495057;
+                            border-left: 4px solid #6a11cb;
+                            position: relative;
+                            z-index: 2;
+                            text-align: left;
+                            display: flex;
+                            align-items: flex-start;
+                            gap: 12px;
+                        ">
+                            <i class="fas fa-info-circle" style="
+                                margin-top: 2px;
+                                color: #6a11cb;
+                                font-size: 1.1rem;
+                            "></i>
+                            <div>
+                                <div style="font-weight: 600; margin-bottom: 4px; color: #6a11cb;">
+                                    Keamanan Terverifikasi
+                                </div>
+                                <div style="color: #6c757d;">
+                                    Verifikasi ini membantu mencegah akses tidak sah dan melindungi data Anda
+                                </div>
+                            </div>
                         </div>
                     </div>
                     
-                    <div class="captcha-input">
-                        <input type="text" id="captchaInput" placeholder="Masukkan kode di atas" maxlength="6" autocomplete="off">
-                        <button type="button" id="verifyCaptcha" style="padding: 12px 20px;">
-                            <i class="fas fa-check"></i> Verifikasi
-                        </button>
-                    </div>
-                    
-                    <div class="captcha-status" id="captchaStatus"></div>
+                    <!-- Status Display -->
+                    <div class="captcha-status" id="captchaStatus" style="
+                        text-align: center;
+                        padding: 16px 20px;
+                        border-radius: 10px;
+                        margin-top: 15px;
+                        font-size: 0.95rem;
+                        min-height: 20px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 12px;
+                        opacity: 0;
+                        transform: translateY(-10px);
+                        transition: all 0.4s ease;
+                        background: linear-gradient(135deg, #f8f9ff, #f0f4ff);
+                        border: 1px solid #e0e9ff;
+                    "></div>
                 </div>
                 
                 <button type="button" class="btn-whatsapp" id="sendWhatsApp" disabled>
@@ -1763,7 +2194,14 @@
             storeName: "ZarrStoreID",
             phoneNumber: "6288295039238",
             qrisUrl: "https://files.catbox.moe/xxxxxx.png",
-            storeLogo: "https://files.catbox.moe/gua633.jpg"
+            storeLogo: "https://files.catbox.moe/gua633.jpg",
+            // KONFIGURASI BANNER WELCOME BARU - BISA DICUStOM
+            welcomeBanner: {
+                imageUrl: "https://res.cloudinary.com/dtbecoist/image/upload/v1768388950/BENNER_ZARR_f7wyhq.png", // Link gambar banner bisa diganti
+                title: "ZarrStoreID",
+                subtitle: "Agen Konter Digital Yang Aman & Terpercaya",
+                showOnAllDevices: true
+            }
         };
 
         // ==================== PRODUK DEFAULT (MENDUKUNG SEMUA LINK GAMBAR) ====================
@@ -1827,119 +2265,32 @@
         let products = [];
         let currentProduct = null;
         let selectedPaymentMethod = null;
-        let currentCaptcha = '';
         let captchaVerified = false;
         let robotChecked = false;
 
         // ==================== DAFTAR PLATFORM HOSTING GAMBAR YANG DIDUKUNG ====================
         const SUPPORTED_IMAGE_PLATFORMS = [
-            // Termai & Platform Indonesia
-            'termai.com',
-            'term.ai',
-            'kirim.ee',
-            'geekhost.id',
-            'singkat.my.id',
-            'singkat.web.id',
-            'singkatsi.my.id',
-            'myfile.id',
-            
-            // Catbox & Sejenis
-            'catbox.moe',
-            'pomf.cat',
-            'litterbox.catbox.moe',
-            
-            // Imgur & Variasi
-            'imgur.com',
-            'i.imgur.com',
-            'm.imgur.com',
-            'imgur.io',
-            
-            // Discord
-            'cdn.discordapp.com',
-            'media.discordapp.net',
-            
-            // Telegram
-            'telegra.ph',
-            'telegra.ph/file',
-            
-            // Google
-            'lh3.googleusercontent.com',
-            'drive.google.com',
-            'photos.google.com',
-            
-            // Social Media
-            'instagram.com',
-            'cdninstagram.com',
-            'fbcdn.net',
-            'twimg.com',
-            
-            // Cloud Storage
-            'dropbox.com',
-            'dl.dropbox.com',
-            'onedrive.live.com',
-            'sharepoint.com',
-            
-            // Image Hosting Populer
-            'postimg.cc',
-            'postimages.org',
-            'ibb.co',
-            'imageshack.com',
-            'tinypic.com',
-            'photobucket.com',
-            
-            // Developer Platforms
-            'githubusercontent.com',
-            'gitlab.com',
-            'raw.githubusercontent.com',
-            
-            // CDN & Cloud
-            'cloudinary.com',
-            'res.cloudinary.com',
-            's3.amazonaws.com',
-            'amazonaws.com',
-            
-            // Lainnya
-            'wikipedia.org',
-            'wikimedia.org',
-            'pximg.net',
-            'pixiv.net',
-            'deviantart.com',
-            'artstation.com',
-            'unsplash.com',
-            'picsum.photos',
-            'placeholder.com',
-            'picsum.photos',
-            'loremflickr.com',
-            
-            // Shorteners (biasanya redirect ke gambar)
-            'bit.ly',
-            'tinyurl.com',
-            'is.gd',
-            'shorturl.at',
-            'ow.ly',
-            'buff.ly',
-            't.co',
-            'goo.gl',
-            'bitly.com'
+            'termai.com', 'term.ai', 'kirim.ee', 'geekhost.id', 'singkat.my.id',
+            'catbox.moe', 'pomf.cat', 'litterbox.catbox.moe', 'imgur.com',
+            'cdn.discordapp.com', 'telegra.ph', 'lh3.googleusercontent.com',
+            'instagram.com', 'dropbox.com', 'postimg.cc', 'ibb.co',
+            'githubusercontent.com', 'cloudinary.com', 'bit.ly', 'tinyurl.com',
+            'files.catbox.moe', 'i.postimg.cc', 'i.imgur.com', 'drive.google.com'
         ];
 
-        // ==================== FUNGSI VALIDASI LINK GAMBAR - SUPER FLEKSIBEL ====================
+        // ==================== FUNGSI VALIDASI LINK GAMBAR ====================
         function isValidImageUrl(url) {
             if (!url || typeof url !== 'string') return false;
             
-            // URL harus dimulai dengan http/https
             if (!url.toLowerCase().startsWith('http://') && !url.toLowerCase().startsWith('https://')) {
                 return false;
             }
             
-            // Daftar ekstensi gambar yang umum
             const imageExtensions = [
                 '.jpg', '.jpeg', '.png', '.gif', '.webp', '.bmp', '.svg',
-                '.jfif', '.pjpeg', '.pjp', '.apng', '.avif', '.tiff', '.tif',
-                '.ico', '.cur', '.jpe', '.jif', '.jfif', '.jfi'
+                '.jfif', '.pjpeg', '.pjp', '.apng', '.avif', '.tiff', '.tif'
             ];
             
-            // Daftar pattern yang menunjukkan ini adalah gambar
             const imagePatterns = [
                 'image/', 'img/', 'photo/', 'picture/', 'foto/', 'gambar/',
                 'thumbnail', 'preview', 'display', 'media', 'asset', 'content'
@@ -1947,47 +2298,31 @@
             
             const urlLower = url.toLowerCase();
             
-            // Cek ekstensi gambar
             for (const ext of imageExtensions) {
                 if (urlLower.includes(ext)) {
                     return true;
                 }
             }
             
-            // Cek pattern gambar
             for (const pattern of imagePatterns) {
                 if (urlLower.includes(pattern)) {
                     return true;
                 }
             }
             
-            // Cek platform yang didukung
             for (const platform of SUPPORTED_IMAGE_PLATFORMS) {
                 if (urlLower.includes(platform.toLowerCase())) {
                     return true;
                 }
             }
             
-            // Untuk link pendek, kita anggap valid (biasanya redirect ke gambar)
             if (urlLower.includes('/img/') || urlLower.includes('/image/') || 
                 urlLower.includes('/media/') || urlLower.includes('/assets/') ||
                 urlLower.includes('/uploads/') || urlLower.includes('/files/') ||
-                urlLower.includes('/storage/') || urlLower.includes('/p/') ||
-                urlLower.includes('/i/') || urlLower.includes('/u/')) {
+                urlLower.includes('/storage/') || urlLower.includes('/p/')) {
                 return true;
             }
             
-            // Jika URL mengandung parameter gambar
-            if (urlLower.includes('?') && (
-                urlLower.includes('image') || 
-                urlLower.includes('img') || 
-                urlLower.includes('photo') ||
-                urlLower.includes('picture'))) {
-                return true;
-            }
-            
-            // Jika semua pengecekan gagal, anggap ini link gambar untuk fleksibilitas maksimal
-            // Kita hanya akan memblokir URL yang jelas-jelas bukan gambar
             const blockedPatterns = [
                 '.html', '.php', '.asp', '.aspx', '.jsp', '.do', '.action',
                 '/video/', '/audio/', '/file/', '/download/', '.pdf', '.doc',
@@ -2001,7 +2336,6 @@
                 }
             }
             
-            // Default: anggap valid untuk fleksibilitas maksimal
             return true;
         }
 
@@ -2009,7 +2343,6 @@
         function handleImageError(imgElement, product) {
             console.warn(`Gambar gagal dimuat: ${imgElement.src}`);
             
-            // Coba alternatif pertama: ubah ukuran jika dari placeholder
             if (imgElement.src.includes('via.placeholder.com')) {
                 const originalUrl = imgElement.src;
                 const newSizeUrl = originalUrl.replace('/300/', '/150/');
@@ -2019,7 +2352,6 @@
                 }
             }
             
-            // Fallback ke placeholder berdasarkan kategori
             let color = '6a11cb';
             if (product.category === 'game') color = '2575fc';
             if (product.category === 'pulsa') color = '00AA13';
@@ -2037,14 +2369,12 @@
             imgElement.style.backgroundColor = `#${color}20`;
         }
 
-        // ==================== FUNGSI GET PRODUCT IMAGE URL - SUPER FLEKSIBEL ====================
+        // ==================== FUNGSI GET PRODUCT IMAGE URL ====================
         function getProductImageUrl(product) {
-            // Jika produk punya gambar dan valid, pakai itu
             if (product.image && isValidImageUrl(product.image)) {
                 return product.image;
             }
             
-            // Fallback ke placeholder yang menarik
             let color = '6a11cb';
             let icon = '📱';
             
@@ -2078,14 +2408,282 @@
             return `https://via.placeholder.com/300/${color}/FFFFFF?text=${icon}+${productName}`;
         }
 
+        // ==================== FUNGSI SETUP BANNER WELCOME ====================
+        function setupWelcomeBanner() {
+            const bannerImg = document.getElementById('welcomeBannerImg');
+            const bannerTitle = document.getElementById('bannerTitle');
+            const bannerSubtitle = document.getElementById('bannerSubtitle');
+            
+            if (bannerImg && bannerTitle && bannerSubtitle) {
+                const bannerConfig = STORE_CONFIG.welcomeBanner;
+                
+                // Set gambar banner dengan validasi
+                if (bannerConfig.imageUrl && isValidImageUrl(bannerConfig.imageUrl)) {
+                    bannerImg.src = bannerConfig.imageUrl;
+                    bannerImg.onerror = function() {
+                        console.warn('Gambar banner gagal dimuat, menggunakan gambar default');
+                        bannerImg.src = 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80';
+                    };
+                } else {
+                    bannerImg.src = 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80';
+                }
+                
+                // Set teks banner
+                bannerTitle.textContent = bannerConfig.title || STORE_CONFIG.storeName;
+                bannerSubtitle.textContent = bannerConfig.subtitle || 'Agen Konter Digital Yang Aman & Terpercaya';
+                
+                // Pastikan banner muncul di semua device
+                const banner = document.getElementById('welcomeBanner');
+                if (banner && bannerConfig.showOnAllDevices !== false) {
+                    banner.style.display = 'flex';
+                }
+            }
+        }
+
+        // ==================== SISTEM VERIFIKASI CLOUDFLARE STYLE ====================
+        let cloudflareVerification = {
+            isVerifying: false,
+            isVerified: false,
+            progress: 0,
+            timer: null
+        };
+
+        function setupCloudFlareVerification() {
+            const startBtn = document.getElementById('startVerification');
+            const progressBar = document.getElementById('cloudflareProgress');
+            const statusEl = document.getElementById('captchaStatus');
+            const verificationText = document.getElementById('verificationText');
+            
+            if (!startBtn) {
+                console.error("Tombol verifikasi tidak ditemukan!");
+                return;
+            }
+            
+            function startVerification() {
+                if (cloudflareVerification.isVerifying || cloudflareVerification.isVerified) return;
+                
+                cloudflareVerification.isVerifying = true;
+                cloudflareVerification.progress = 0;
+                
+                startBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memverifikasi...';
+                startBtn.style.background = 'linear-gradient(135deg, #4a0ca8, #1c60d1)';
+                startBtn.disabled = true;
+                
+                if (verificationText) {
+                    verificationText.innerHTML = 'Melakukan verifikasi keamanan...';
+                    verificationText.style.color = '#6a11cb';
+                    verificationText.style.fontWeight = '600';
+                }
+                
+                statusEl.innerHTML = '<i class="fas fa-sync-alt fa-spin"></i> Memulai verifikasi keamanan...';
+                statusEl.style.opacity = '1';
+                statusEl.style.transform = 'translateY(0)';
+                statusEl.style.color = '#6c757d';
+                statusEl.style.background = 'linear-gradient(135deg, #f8f9ff, #f0f4ff)';
+                statusEl.style.border = '1px solid #d1e3ff';
+                
+                const startBtnHover = startBtn.querySelector('div');
+                if (startBtnHover) {
+                    startBtnHover.style.left = '100%';
+                    setTimeout(() => {
+                        startBtnHover.style.left = '-100%';
+                    }, 500);
+                }
+                
+                cloudflareVerification.timer = setInterval(() => {
+                    const increment = Math.random() * 8 + 4;
+                    cloudflareVerification.progress += increment;
+                    
+                    if (cloudflareVerification.progress > 100) {
+                        cloudflareVerification.progress = 100;
+                    }
+                    
+                    progressBar.style.width = cloudflareVerification.progress + '%';
+                    
+                    if (cloudflareVerification.progress < 25) {
+                        statusEl.innerHTML = '<i class="fas fa-sync-alt fa-spin"></i> Inisialisasi sistem...';
+                        if (verificationText) verificationText.innerHTML = 'Memuat modul keamanan...';
+                    } else if (cloudflareVerification.progress < 50) {
+                        statusEl.innerHTML = '<i class="fas fa-sync-alt fa-spin"></i> Memeriksa keamanan...';
+                        if (verificationText) verificationText.innerHTML = 'Scanning sistem...';
+                    } else if (cloudflareVerification.progress < 75) {
+                        statusEl.innerHTML = '<i class="fas fa-sync-alt fa-spin"></i> Validasi data...';
+                        if (verificationText) verificationText.innerHTML = 'Verifikasi identitas...';
+                    } else if (cloudflareVerification.progress < 90) {
+                        statusEl.innerHTML = '<i class="fas fa-sync-alt fa-spin"></i> Finalisasi...';
+                        if (verificationText) verificationText.innerHTML = 'Menyelesaikan verifikasi...';
+                    }
+                    
+                    if (cloudflareVerification.progress >= 100) {
+                        clearInterval(cloudflareVerification.timer);
+                        
+                        setTimeout(() => {
+                            completeVerification();
+                        }, 600);
+                    }
+                }, 150);
+            }
+            
+            function completeVerification() {
+                cloudflareVerification.isVerifying = false;
+                cloudflareVerification.isVerified = true;
+                
+                captchaVerified = true;
+                
+                startBtn.innerHTML = '<i class="fas fa-check-circle"></i> Terverifikasi';
+                startBtn.style.background = 'linear-gradient(135deg, #00b09b, #96c93d)';
+                startBtn.disabled = true;
+                
+                progressBar.style.background = 'linear-gradient(90deg, #00b09b, #96c93d)';
+                progressBar.style.animation = 'none';
+                
+                if (verificationText) {
+                    verificationText.innerHTML = '<span style="color:#00b09b;font-weight:600;">✓ Verifikasi berhasil</span>';
+                    verificationText.style.color = '#00b09b';
+                }
+                
+                statusEl.innerHTML = `
+                    <div style="
+                        background: #00b09b;
+                        width: 24px;
+                        height: 24px;
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        color: white;
+                        animation: checkmark 0.5s ease;
+                    ">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div>
+                        <div style="font-weight: 600; color: #155724;">Verifikasi Berhasil!</div>
+                        <div style="font-size: 0.85rem; color: #28a745;">Anda dapat melanjutkan proses pemesanan</div>
+                    </div>
+                `;
+                statusEl.style.color = '#155724';
+                statusEl.style.background = '#d4edda';
+                statusEl.style.border = '1px solid #c3e6cb';
+                
+                updateSendButton();
+                
+                showNotification('✓ Verifikasi keamanan berhasil!', 'success');
+                
+                createConfettiEffect();
+            }
+            
+            function createConfettiEffect() {
+                const verificationBox = document.querySelector('.cloudflare-verification');
+                if (!verificationBox) return;
+                
+                for (let i = 0; i < 15; i++) {
+                    setTimeout(() => {
+                        const confetti = document.createElement('div');
+                        confetti.style.position = 'absolute';
+                        confetti.style.width = '6px';
+                        confetti.style.height = '6px';
+                        confetti.style.background = ['#6a11cb', '#2575fc', '#00b09b', '#96c93d'][Math.floor(Math.random() * 4)];
+                        confetti.style.borderRadius = '50%';
+                        confetti.style.top = '50%';
+                        confetti.style.left = '50%';
+                        confetti.style.transform = 'translate(-50%, -50%)';
+                        confetti.style.zIndex = '1';
+                        confetti.style.opacity = '0';
+                        
+                        verificationBox.appendChild(confetti);
+                        
+                        const angle = Math.random() * Math.PI * 2;
+                        const distance = 50 + Math.random() * 50;
+                        const duration = 800 + Math.random() * 400;
+                        
+                        confetti.animate([
+                            { 
+                                opacity: 0,
+                                transform: 'translate(-50%, -50%) scale(0)',
+                                offset: 0 
+                            },
+                            { 
+                                opacity: 1,
+                                transform: `translate(-50%, -50%) scale(1)`,
+                                offset: 0.1 
+                            },
+                            {
+                                opacity: 1,
+                                transform: `translate(${Math.cos(angle) * distance - 50}%, ${Math.sin(angle) * distance - 50}%) scale(0.5)`,
+                                offset: 0.8
+                            },
+                            {
+                                opacity: 0,
+                                transform: `translate(${Math.cos(angle) * distance - 50}%, ${Math.sin(angle) * distance - 50}%) scale(0)`,
+                                offset: 1
+                            }
+                        ], {
+                            duration: duration,
+                            easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
+                        });
+                        
+                        setTimeout(() => {
+                            if (confetti.parentNode) {
+                                confetti.remove();
+                            }
+                        }, duration);
+                    }, i * 50);
+                }
+            }
+            
+            startBtn.addEventListener('click', startVerification);
+            
+            startBtn.addEventListener('mouseenter', function() {
+                if (!cloudflareVerification.isVerifying && !cloudflareVerification.isVerified) {
+                    this.style.transform = 'translateY(-3px)';
+                    this.style.boxShadow = '0 8px 25px rgba(106, 17, 203, 0.35)';
+                    
+                    const hoverDiv = this.querySelector('div');
+                    if (hoverDiv) {
+                        hoverDiv.style.left = '100%';
+                        setTimeout(() => {
+                            hoverDiv.style.left = '-100%';
+                        }, 1000);
+                    }
+                }
+            });
+            
+            startBtn.addEventListener('mouseleave', function() {
+                if (!cloudflareVerification.isVerifying && !cloudflareVerification.isVerified) {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = '0 6px 20px rgba(106, 17, 203, 0.25)';
+                }
+            });
+            
+            setTimeout(() => {
+                if (!cloudflareVerification.isVerified && !cloudflareVerification.isVerifying) {
+                    statusEl.innerHTML = `
+                        <i class="fas fa-mouse-pointer" style="color: #6a11cb;"></i>
+                        <div>
+                            <div style="font-weight: 600; color: #6a11cb;">Klik "Mulai Verifikasi"</div>
+                            <div style="font-size: 0.85rem; color: #6c757d;">untuk melanjutkan proses pemesanan</div>
+                        </div>
+                    `;
+                    statusEl.style.opacity = '1';
+                    statusEl.style.transform = 'translateY(0)';
+                    statusEl.style.background = 'linear-gradient(135deg, #f8f9ff, #f0f4ff)';
+                    statusEl.style.border = '1px solid #d1e3ff';
+                    statusEl.style.animation = 'bounce 2s infinite';
+                }
+            }, 2000);
+            
+            window.cloudflareVerification = {
+                start: startVerification,
+                getStatus: () => cloudflareVerification.isVerified
+            };
+        }
+
         // ==================== FUNGSI UTAMA: LOAD PRODUK DI SEMUA DEVICE ====================
         function loadProductsForAllDevices() {
             console.log("🔄 Loading produk untuk SEMUA device...");
             
-            // SELALU pakai DEFAULT_PRODUCTS sebagai sumber utama
             products = [...DEFAULT_PRODUCTS];
             
-            // Simpan ke localStorage (untuk device ini saja)
             localStorage.setItem('zarrstore_products', JSON.stringify(products));
             localStorage.setItem('zarrstore_last_update', Date.now().toString());
             
@@ -2101,28 +2699,22 @@
                 syncBtn.disabled = true;
             }
             
-            // Force reload produk dari default
             products = [...DEFAULT_PRODUCTS];
             
-            // Update localStorage
             localStorage.setItem('zarrstore_products', JSON.stringify(products));
             localStorage.setItem('zarrstore_last_update', Date.now().toString());
             
-            // Render ulang
             if (document.querySelector('#produk.active')) {
                 renderProducts('all');
             }
             
-            // Update current product
             if (products.length > 0) {
                 currentProduct = products[0];
                 updateOrderSummary(currentProduct);
             }
             
-            // Show notification
             showNotification(`✅ ${products.length} produk tersedia di semua device!`, 'success');
             
-            // Reset button
             if (syncBtn) {
                 setTimeout(() => {
                     syncBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Sync';
@@ -2180,19 +2772,17 @@
             }, 5000);
         }
 
-        // ==================== FUNGSI RENDER PRODUK - DIPERBAIKI ====================
+        // ==================== FUNGSI RENDER PRODUK ====================
         function renderProducts(filter) {
             const container = document.getElementById('productsContainer');
             if (!container) return;
             
             container.innerHTML = '';
             
-            // Filter produk
             const filteredProducts = filter === 'all' 
                 ? products 
                 : products.filter(p => p.category === filter);
             
-            // Jika tidak ada produk
             if (filteredProducts.length === 0) {
                 container.innerHTML = `
                     <div style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
@@ -2206,7 +2796,6 @@
                 return;
             }
             
-            // Render semua produk
             filteredProducts.forEach(product => {
                 const imageUrl = getProductImageUrl(product);
                 const card = document.createElement('div');
@@ -2244,74 +2833,6 @@
             }
         };
 
-        // ==================== SISTEM CAPTCHA ====================
-        function generateCaptcha() {
-            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789';
-            let captcha = '';
-            for (let i = 0; i < 6; i++) {
-                captcha += chars.charAt(Math.floor(Math.random() * chars.length));
-            }
-            currentCaptcha = captcha;
-            return captcha;
-        }
-
-        function renderCaptcha() {
-            const captchaText = document.getElementById('captchaText');
-            if (captchaText) {
-                captchaText.textContent = generateCaptcha();
-            }
-        }
-
-        function verifyCaptcha() {
-            const input = document.getElementById('captchaInput').value.toUpperCase();
-            const status = document.getElementById('captchaStatus');
-            
-            if (!input) {
-                status.textContent = 'Masukkan kode verifikasi';
-                status.className = 'captcha-status error';
-                return false;
-            }
-            
-            if (input === currentCaptcha.toUpperCase()) {
-                status.textContent = '✓ Verifikasi berhasil!';
-                status.className = 'captcha-status success';
-                captchaVerified = true;
-                updateSendButton();
-                return true;
-            } else {
-                status.textContent = '✗ Kode tidak sesuai. Coba lagi.';
-                status.className = 'captcha-status error';
-                captchaVerified = false;
-                updateSendButton();
-                setTimeout(() => {
-                    renderCaptcha();
-                    document.getElementById('captchaInput').value = '';
-                }, 1000);
-                return false;
-            }
-        }
-
-        function setupCaptcha() {
-            renderCaptcha();
-            
-            document.getElementById('refreshCaptcha').addEventListener('click', function() {
-                renderCaptcha();
-                document.getElementById('captchaInput').value = '';
-                document.getElementById('captchaStatus').textContent = '';
-                captchaVerified = false;
-                updateSendButton();
-            });
-            
-            document.getElementById('verifyCaptcha').addEventListener('click', verifyCaptcha);
-            
-            document.getElementById('captchaInput').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    verifyCaptcha();
-                }
-            });
-        }
-
         // ==================== VERIFIKASI ROBOT ====================
         function setupRobotVerification() {
             const checkbox = document.getElementById('robotCheckbox');
@@ -2342,32 +2863,36 @@
                 return;
             }
             
-            if (robotChecked && captchaVerified) {
+            const isCloudFlareVerified = window.cloudflareVerification ? 
+                window.cloudflareVerification.getStatus() : captchaVerified;
+            
+            if (robotChecked && isCloudFlareVerified) {
                 sendButton.disabled = false;
                 sendButton.innerHTML = '<i class="fab fa-whatsapp"></i> Kirim ke WhatsApp';
                 sendButton.style.background = 'linear-gradient(to right, #25D366, #128C7E)';
+                sendButton.style.boxShadow = '0 6px 20px rgba(37, 211, 102, 0.3)';
+                sendButton.style.animation = 'pulse 2s infinite';
             } else {
                 sendButton.disabled = true;
                 sendButton.innerHTML = '<i class="fas fa-lock"></i> Selesaikan Verifikasi';
                 sendButton.style.background = '#6c757d';
+                sendButton.style.boxShadow = 'none';
+                sendButton.style.animation = 'none';
             }
         }
 
         // ==================== FUNGSI INISIALISASI ====================
         function initApp() {
-            // Set tahun copyright
             document.getElementById('currentYear').textContent = new Date().getFullYear();
             
-            // STEP 1: LOAD PRODUK UNTUK SEMUA DEVICE
             console.log("🚀 Inisialisasi ZarrStoreID...");
             products = loadProductsForAllDevices();
             
-            // Set current product
             if (products.length > 0) {
                 currentProduct = products[0];
             }
             
-            // Setup UI
+            setupWelcomeBanner(); // Setup banner welcome baru
             setupNavigation();
             setupProductFilters();
             setupPayment();
@@ -2375,25 +2900,20 @@
             setupOrderModal();
             setupCopyButtons();
             setupCollaborators();
-            setupCaptcha();
+            setupCloudFlareVerification();
             setupRobotVerification();
             
-            // Setup sync button
             document.getElementById('syncProductsBtn').addEventListener('click', syncProducts);
             
-            // Render produk pertama kali
             renderProducts('all');
             renderTransactionHistory();
             
-            // Update order summary
             if (currentProduct) {
                 updateOrderSummary(currentProduct);
             }
             
-            // Load QRIS
             loadQRISImage();
             
-            // Emergency check: jika produk kosong, force sync
             setTimeout(() => {
                 if (products.length === 0) {
                     console.log("⚠️ Produk kosong, emergency sync...");
@@ -2468,35 +2988,11 @@
                     document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('selected'));
                     this.classList.add('selected');
                     selectedPaymentMethod = this.getAttribute('data-method');
-                    
-                    const payButton = document.getElementById('payButton');
-                    if (selectedPaymentMethod === 'qris') {
-                        payButton.innerHTML = '<i class="fas fa-qrcode"></i> Scan QRIS untuk Bayar';
-                        payButton.style.background = 'linear-gradient(to right, #FF6B00, #FF8E00)';
-                    } else {
-                        payButton.innerHTML = '<i class="fas fa-lock"></i> Lanjut ke Form Order';
-                        payButton.style.background = 'linear-gradient(to right, #00b09b, #96c93d)';
-                    }
                 });
             });
             
-            document.getElementById('payButton').addEventListener('click', function() {
-                if (!currentProduct) {
-                    showNotification('Pilih produk terlebih dahulu!', 'error');
-                    return;
-                }
-                
-                if (!selectedPaymentMethod) {
-                    showNotification('Pilih metode pembayaran!', 'error');
-                    return;
-                }
-                
-                if (selectedPaymentMethod === 'qris') {
-                    showQRISModal();
-                } else {
-                    openOrderModal(currentProduct);
-                }
-            });
+            // TOMBOL "LANJUT KE FORM ORDER" TELAH DIHAPUS
+            // Tidak ada lagi event listener untuk tombol ini
         }
 
         function setupCopyButtons() {
@@ -2508,7 +3004,6 @@
                         notification.classList.add('show');
                         setTimeout(() => notification.classList.remove('show'), 2000);
                     }).catch(err => {
-                        // Fallback untuk browser lama
                         const textArea = document.createElement('textarea');
                         textArea.value = number;
                         document.body.appendChild(textArea);
@@ -2568,6 +3063,66 @@
                     }
                 });
             }
+            
+            // Reset verifikasi ketika modal dibuka
+            const modalObserver = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    if (mutation.attributeName === 'style') {
+                        const displayValue = modal.style.display;
+                        if (displayValue === 'flex') {
+                            // Reset verifikasi state
+                            cloudflareVerification.isVerifying = false;
+                            cloudflareVerification.isVerified = false;
+                            cloudflareVerification.progress = 0;
+                            
+                            if (cloudflareVerification.timer) {
+                                clearInterval(cloudflareVerification.timer);
+                            }
+                            
+                            // Reset UI
+                            const startBtn = document.getElementById('startVerification');
+                            if (startBtn) {
+                                startBtn.innerHTML = '<i class="fas fa-shield-alt"></i> Mulai Verifikasi';
+                                startBtn.style.background = 'linear-gradient(135deg, #6a11cb, #2575fc)';
+                                startBtn.disabled = false;
+                            }
+                            
+                            const progressBar = document.getElementById('cloudflareProgress');
+                            if (progressBar) {
+                                progressBar.style.width = '0%';
+                                progressBar.style.background = 'linear-gradient(90deg, #6a11cb, #2575fc)';
+                                progressBar.style.animation = 'progressShimmer 2s infinite linear';
+                            }
+                            
+                            const statusEl = document.getElementById('captchaStatus');
+                            if (statusEl) {
+                                statusEl.innerHTML = '';
+                                statusEl.style.opacity = '0';
+                                statusEl.style.transform = 'translateY(-10px)';
+                            }
+                            
+                            const verificationText = document.getElementById('verificationText');
+                            if (verificationText) {
+                                verificationText.innerHTML = 'Melakukan verifikasi...';
+                                verificationText.style.color = '#6c757d';
+                            }
+                            
+                            captchaVerified = false;
+                            robotChecked = false;
+                            
+                            // Reset robot checkbox
+                            const robotCheckbox = document.getElementById('robotCheckbox');
+                            if (robotCheckbox) {
+                                robotCheckbox.classList.remove('checked');
+                            }
+                            
+                            updateSendButton();
+                        }
+                    }
+                });
+            });
+            
+            modalObserver.observe(modal, { attributes: true });
         }
 
         function openOrderModal(product) {
@@ -2578,28 +3133,12 @@
             if (orderProduct) orderProduct.value = product.name;
             if (orderPrice) orderPrice.value = `Rp ${product.price.toLocaleString('id-ID')}`;
             
-            // Reset form
             document.getElementById('customerName').value = '';
             document.getElementById('customerPhone').value = '';
             document.getElementById('gameId').value = '';
             document.getElementById('paymentMethod').value = '';
             document.getElementById('additionalNotes').value = '';
             
-            // Reset CAPTCHA
-            renderCaptcha();
-            document.getElementById('captchaInput').value = '';
-            document.getElementById('captchaStatus').textContent = '';
-            captchaVerified = false;
-            
-            // Reset robot verification
-            document.getElementById('robotCheck').checked = false;
-            const robotCheckbox = document.getElementById('robotCheckbox');
-            if (robotCheckbox) {
-                robotCheckbox.classList.remove('checked');
-            }
-            robotChecked = false;
-            
-            updateSendButton();
             modal.style.display = 'flex';
         }
 
@@ -2692,8 +3231,11 @@
                 return;
             }
             
-            if (!captchaVerified) {
-                showNotification('Verifikasi CAPTCHA terlebih dahulu!', 'error');
+            const isCloudFlareVerified = window.cloudflareVerification ? 
+                window.cloudflareVerification.getStatus() : captchaVerified;
+            
+            if (!isCloudFlareVerified) {
+                showNotification('Verifikasi keamanan terlebih dahulu!', 'error');
                 return;
             }
             
@@ -2758,6 +3300,25 @@ Jangan Hapus Id Transaksi Ini!!`;
             renderTransactionHistory();
         }
 
+        // ==================== FUNGSI BATALKAN PESANAN ====================
+        function cancelOrder(transactionId) {
+            if (confirm(`Apakah Anda yakin ingin membatalkan pesanan ${transactionId}?`)) {
+                let history = JSON.parse(localStorage.getItem('zarrstore_history') || '[]');
+                const transactionIndex = history.findIndex(t => t.id === transactionId);
+                
+                if (transactionIndex !== -1 && history[transactionIndex].status === 'pending') {
+                    history[transactionIndex].status = 'cancelled';
+                    localStorage.setItem('zarrstore_history', JSON.stringify(history));
+                    renderTransactionHistory();
+                    showNotification(`Pesanan ${transactionId} berhasil dibatalkan!`, 'success');
+                } else if (history[transactionIndex].status === 'cancelled') {
+                    showNotification('Pesanan ini sudah dibatalkan sebelumnya!', 'info');
+                } else {
+                    showNotification('Pesanan tidak dapat dibatalkan karena sudah diproses!', 'error');
+                }
+            }
+        }
+
         function renderTransactionHistory() {
             const history = JSON.parse(localStorage.getItem('zarrstore_history') || '[]');
             const container = document.getElementById('historyTableBody');
@@ -2769,8 +3330,27 @@ Jangan Hapus Id Transaksi Ini!!`;
             history.slice(0, 10).forEach(transaction => {
                 const row = document.createElement('tr');
                 const statusClass = `status-${transaction.status}`;
-                const statusText = transaction.status === 'completed' ? 'Selesai' : 
-                                 transaction.status === 'processing' ? 'Diproses' : 'Menunggu';
+                
+                let statusText = '';
+                switch(transaction.status) {
+                    case 'completed': statusText = 'Selesai'; break;
+                    case 'processing': statusText = 'Diproses'; break;
+                    case 'cancelled': statusText = 'Dibatalkan'; break;
+                    default: statusText = 'Menunggu';
+                }
+                
+                let actionButtons = '';
+                if (transaction.status === 'pending') {
+                    actionButtons = `
+                        <button class="action-btn cancel" onclick="cancelOrder('${transaction.id}')">
+                            <i class="fas fa-times"></i> Batalkan
+                        </button>
+                    `;
+                } else if (transaction.status === 'cancelled') {
+                    actionButtons = `<span style="color: var(--gray); font-style: italic;">Dibatalkan</span>`;
+                } else {
+                    actionButtons = `<span style="color: var(--gray); font-style: italic;">-</span>`;
+                }
                 
                 row.innerHTML = `
                     <td>${transaction.id}</td>
@@ -2778,6 +3358,7 @@ Jangan Hapus Id Transaksi Ini!!`;
                     <td>${transaction.date}</td>
                     <td>Rp ${transaction.amount.toLocaleString('id-ID')}</td>
                     <td><span class="status ${statusClass}">${statusText}</span></td>
+                    <td>${actionButtons}</td>
                 `;
                 container.appendChild(row);
             });
@@ -2785,7 +3366,7 @@ Jangan Hapus Id Transaksi Ini!!`;
             if (history.length === 0) {
                 container.innerHTML = `
                     <tr>
-                        <td colspan="5" style="text-align: center; padding: 2rem; color: var(--gray);">
+                        <td colspan="6" style="text-align: center; padding: 2rem; color: var(--gray);">
                             <i class="fas fa-history" style="font-size: 2rem; margin-bottom: 1rem;"></i>
                             <p>Belum ada transaksi</p>
                         </td>
@@ -2793,54 +3374,6 @@ Jangan Hapus Id Transaksi Ini!!`;
                 `;
             }
         }
-
-        // ==================== CARA MENGGANTI LINK GAMBAR ====================
-        /* 
-        CONTOH LINK GAMBAR YANG BISA DIGUNAKAN:
-        
-        1. TERMAI & Platform Indonesia:
-           - https://termai.com/xxxxx.jpg
-           - https://term.ai/image/xxxx
-           - https://kirim.ee/xxxxx
-           - https://geekhost.id/xxxxx
-           
-        2. Catbox & Litterbox:
-           - https://files.catbox.moe/xxxxxx.jpg
-           - https://litterbox.catbox.moe/xxxxxx.png
-           
-        3. Imgur:
-           - https://i.imgur.com/xxxxx.jpg
-           - https://imgur.com/a/xxxxx
-           
-        4. Discord:
-           - https://cdn.discordapp.com/attachments/xxx/xxx/image.png
-           
-        5. Telegram:
-           - https://telegra.ph/file/xxxxxx.jpg
-           
-        6. Google:
-           - https://lh3.googleusercontent.com/xxxxx
-           - https://drive.google.com/file/d/xxxxx/view
-           
-        7. Social Media:
-           - https://instagram.com/p/xxxxx/media
-           - https://cdninstagram.com/xxxxx
-           
-        8. Cloud Storage:
-           - https://dropbox.com/s/xxxxx/image.jpg
-           - https://onedrive.live.com/xxxxx
-           
-        9. Image Hosting Lain:
-           - https://postimg.cc/xxxxx
-           - https://ibb.co/xxxxx
-           - https://tinypic.com/xxxxx
-           
-        10. Short Links (otomatis redirect):
-            - https://bit.ly/xxxxx
-            - https://tinyurl.com/xxxxx
-            
-        DAN MASIH BANYAK LAGI!
-        */
 
         // ==================== INISIALISASI APLIKASI ====================
         document.addEventListener('DOMContentLoaded', function() {
