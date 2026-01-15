@@ -327,6 +327,122 @@
             flex-shrink: 0;
         }
 
+        /* ==================== STATUS TOKO STYLE ==================== */
+        .store-status-container {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            border: 2px solid rgba(106, 17, 203, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+        }
+
+        .store-status-left {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            flex: 1;
+        }
+
+        .store-status-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            flex-shrink: 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .store-status-icon.open {
+            background: linear-gradient(135deg, var(--success), #20c997);
+            color: white;
+        }
+
+        .store-status-icon.closed {
+            background: linear-gradient(135deg, var(--danger), #ff6b6b);
+            color: white;
+        }
+
+        .store-status-info h4 {
+            font-size: 1.3rem;
+            color: var(--dark);
+            margin-bottom: 0.3rem;
+            font-weight: 600;
+        }
+
+        .store-status-info p {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .store-status-right {
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        .countdown-timer {
+            font-family: 'Courier New', monospace;
+            font-size: 1.4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            background-color: rgba(106, 17, 203, 0.08);
+            border: 2px solid rgba(106, 17, 203, 0.2);
+            min-width: 120px;
+            text-align: center;
+        }
+
+        .timer-label {
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-top: 0.3rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .next-status-time {
+            font-size: 0.9rem;
+            color: var(--primary);
+            font-weight: 500;
+            margin-top: 0.5rem;
+            padding-top: 0.5rem;
+            border-top: 1px dashed rgba(106, 17, 203, 0.2);
+        }
+
+        .open-hours-info {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(106, 17, 203, 0.05);
+            border-radius: 10px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .open-hours-info p {
+            margin: 0.3rem 0;
+            color: var(--dark);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .open-hours-info i {
+            color: var(--primary);
+            width: 20px;
+        }
+
+        /* ==================== PRODUCT STYLES ==================== */
         .product-filters {
             display: flex;
             flex-wrap: wrap;
@@ -1138,6 +1254,23 @@
                 font-size: 1.1rem;
             }
 
+            /* Store Status Responsive */
+            .store-status-container {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            
+            .store-status-left {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .store-status-right {
+                text-align: center;
+                width: 100%;
+            }
+
             /* ==================== BANNER RESPONSIF TABLET ==================== */
             .welcome-banner {
                 aspect-ratio: 16/9;
@@ -1323,6 +1456,18 @@
                 justify-content: center;
             }
 
+            /* Store Status Mobile */
+            .store-status-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+            
+            .countdown-timer {
+                font-size: 1.2rem;
+                min-width: 110px;
+            }
+
             /* ==================== BANNER RESPONSIF HP KECIL ==================== */
             .welcome-banner {
                 aspect-ratio: 1/1;
@@ -1395,6 +1540,20 @@
                 width: 40px;
                 height: 40px;
                 font-size: 1.2rem;
+            }
+            
+            /* Store Status Small Mobile */
+            .store-status-container {
+                padding: 1rem;
+            }
+            
+            .store-status-info h4 {
+                font-size: 1.1rem;
+            }
+            
+            .countdown-timer {
+                font-size: 1rem;
+                min-width: 100px;
             }
         }
 
@@ -1606,6 +1765,37 @@
                 </div>
             </div>
             
+            <!-- STATUS TOKO -->
+            <div class="store-status-container" id="storeStatusContainer">
+                <div class="store-status-left">
+                    <div class="store-status-icon" id="storeStatusIcon">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <div class="store-status-info">
+                        <h4 id="storeStatusTitle">Toko Sedang Buka</h4>
+                        <p id="storeStatusMessage">Layanan tersedia untuk pemesanan</p>
+                        <p id="storeHours">Jam Buka: <span id="currentOpenHours">06:00 - 22:00 WIB</span></p>
+                    </div>
+                </div>
+                <div class="store-status-right">
+                    <div class="countdown-timer" id="countdownTimer">
+                        --:--:--
+                    </div>
+                    <div class="timer-label" id="timerLabel">
+                        Waktu tersisa
+                    </div>
+                    <div class="next-status-time" id="nextStatusTime">
+                        Buka kembali pukul 06:00 WIB
+                    </div>
+                </div>
+            </div>
+            
+            <!-- INFO JAM BUKA -->
+            <div class="open-hours-info">
+                <p><i class="fas fa-clock"></i> <strong>Jam Operasional:</strong> Setiap Hari pukul 06:00 - 22:00 WIB</p>
+                <p><i class="fas fa-info-circle"></i> <strong>Catatan:</strong> Pemesanan di luar jam operasional akan diproses pada hari berikutnya</p>
+            </div>
+            
             <div class="hero">
                 <div class="welcome-section">
                     <div class="welcome-card">
@@ -1747,8 +1937,6 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- TOMBOL "LANJUT KE FORM ORDER" TELAH DIHAPUS -->
                 </div>
             </div>
         </section>
@@ -1765,7 +1953,7 @@
                             <th>Tanggal</th>
                             <th>Total</th>
                             <th>Status</th>
-                            <th>Aksi</th> <!-- Kolom baru untuk aksi -->
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody id="historyTableBody">
@@ -2197,10 +2385,18 @@
             storeLogo: "https://files.catbox.moe/gua633.jpg",
             // KONFIGURASI BANNER WELCOME BARU - BISA DICUStOM
             welcomeBanner: {
-                imageUrl: "https://res.cloudinary.com/dtbecoist/image/upload/v1768388950/BENNER_ZARR_f7wyhq.png", // Link gambar banner bisa diganti
+                imageUrl: "https://res.cloudinary.com/dtbecoist/image/upload/v1768388950/BENNER_ZARR_f7wyhq.png",
                 title: "ZarrStoreID",
                 subtitle: "Agen Konter Digital Yang Aman & Terpercaya",
                 showOnAllDevices: true
+            },
+            // ==================== KONFIGURASI JAM BUKA TOKO ====================
+            storeHours: {
+                open: 6,    // Jam buka (24 jam format): 6 = 06:00
+                close: 22,  // Jam tutup (24 jam format): 22 = 22:00
+                timezone: "WIB", // Zona waktu
+                autoProcess: true, // Apakah pemesanan di luar jam operasional tetap diproses otomatis?
+                alwaysOpen: false // Jika true, toko selalu buka 24/7
             }
         };
 
@@ -2267,6 +2463,224 @@
         let selectedPaymentMethod = null;
         let captchaVerified = false;
         let robotChecked = false;
+        let storeStatusTimer = null;
+
+        // ==================== SISTEM WAKTU BUKA/TUTUP TOKO ====================
+        function initStoreHoursSystem() {
+            updateStoreStatus();
+            storeStatusTimer = setInterval(updateStoreStatus, 60000); // Update setiap 1 menit
+            
+            // Cek status toko sebelum membuka modal order
+            const buyButtons = document.querySelectorAll('.btn-buy');
+            buyButtons.forEach(button => {
+                const originalOnClick = button.getAttribute('onclick');
+                if (originalOnClick) {
+                    button.removeAttribute('onclick');
+                    button.addEventListener('click', function() {
+                        const productId = parseInt(originalOnClick.match(/buyProduct\((\d+)\)/)[1]);
+                        handleBuyClick(productId);
+                    });
+                }
+            });
+        }
+
+        function handleBuyClick(productId) {
+            const storeStatus = getStoreStatus();
+            
+            if (!storeStatus.isOpen && !STORE_CONFIG.storeHours.alwaysOpen) {
+                showNotification(`⚠️ Toko sedang tutup. Buka kembali pukul ${formatTime(STORE_CONFIG.storeHours.open)} ${STORE_CONFIG.storeHours.timezone}`, 'error');
+                
+                // Tampilkan detail status toko
+                const nextOpenTime = calculateNextOpenTime();
+                const currentTime = new Date();
+                const timeUntilOpen = Math.max(0, nextOpenTime - currentTime);
+                const hoursUntil = Math.floor(timeUntilOpen / (1000 * 60 * 60));
+                const minutesUntil = Math.floor((timeUntilOpen % (1000 * 60 * 60)) / (1000 * 60));
+                
+                alert(`Toko ZarrStoreID saat ini tutup.\n\n📅 Jam Operasional:\nSetiap Hari: ${formatTime(STORE_CONFIG.storeHours.open)} - ${formatTime(STORE_CONFIG.storeHours.close)} ${STORE_CONFIG.storeHours.timezone}\n\n⏰ Buka kembali dalam: ${hoursUntil} jam ${minutesUntil} menit\n\n📝 Catatan: Pemesanan di luar jam operasional akan diproses pada hari berikutnya.`);
+                return;
+            }
+            
+            // Jika toko buka atau alwaysOpen=true, lanjutkan dengan pembelian
+            const product = products.find(p => p.id === productId);
+            if (product) {
+                currentProduct = product;
+                updateOrderSummary(product);
+                openOrderModal(product);
+            }
+        }
+
+        function getStoreStatus() {
+            const now = new Date();
+            const currentHour = now.getHours();
+            const currentMinute = now.getMinutes();
+            const currentTimeInMinutes = currentHour * 60 + currentMinute;
+            
+            const openTimeInMinutes = STORE_CONFIG.storeHours.open * 60;
+            const closeTimeInMinutes = STORE_CONFIG.storeHours.close * 60;
+            
+            if (STORE_CONFIG.storeHours.alwaysOpen) {
+                return {
+                    isOpen: true,
+                    nextStatusChange: null,
+                    message: "Toko buka 24/7",
+                    nextStatus: "tutup"
+                };
+            }
+            
+            // Jika jam buka lebih kecil dari jam tutup (operasional normal dalam 1 hari)
+            if (openTimeInMinutes < closeTimeInMinutes) {
+                const isOpen = currentTimeInMinutes >= openTimeInMinutes && currentTimeInMinutes < closeTimeInMinutes;
+                let nextStatusChange = null;
+                
+                if (isOpen) {
+                    // Hitung waktu sampai tutup
+                    nextStatusChange = new Date(now);
+                    nextStatusChange.setHours(STORE_CONFIG.storeHours.close, 0, 0, 0);
+                } else {
+                    // Hitung waktu sampai buka
+                    nextStatusChange = new Date(now);
+                    if (currentTimeInMinutes >= closeTimeInMinutes) {
+                        // Jika sudah lewat jam tutup, buka besok
+                        nextStatusChange.setDate(nextStatusChange.getDate() + 1);
+                    }
+                    nextStatusChange.setHours(STORE_CONFIG.storeHours.open, 0, 0, 0);
+                }
+                
+                return {
+                    isOpen,
+                    nextStatusChange,
+                    message: isOpen ? "Toko sedang buka" : "Toko sedang tutup",
+                    nextStatus: isOpen ? "tutup" : "buka"
+                };
+            } else {
+                // Jika jam buka lebih besar dari jam tutup (operasional melewati tengah malam)
+                const isOpen = currentTimeInMinutes >= openTimeInMinutes || currentTimeInMinutes < closeTimeInMinutes;
+                let nextStatusChange = new Date(now);
+                
+                if (isOpen) {
+                    // Hitung waktu sampai tutup
+                    if (currentTimeInMinutes >= openTimeInMinutes) {
+                        // Jika sudah lewat jam buka hari ini, tutup hari ini
+                        nextStatusChange.setHours(STORE_CONFIG.storeHours.close, 0, 0, 0);
+                    } else {
+                        // Jika sebelum jam buka hari ini, tutup hari ini
+                        nextStatusChange.setHours(STORE_CONFIG.storeHours.close, 0, 0, 0);
+                    }
+                } else {
+                    // Hitung waktu sampai buka
+                    nextStatusChange.setHours(STORE_CONFIG.storeHours.open, 0, 0, 0);
+                }
+                
+                return {
+                    isOpen,
+                    nextStatusChange,
+                    message: isOpen ? "Toko sedang buka" : "Toko sedang tutup",
+                    nextStatus: isOpen ? "tutup" : "buka"
+                };
+            }
+        }
+
+        function updateStoreStatus() {
+            const status = getStoreStatus();
+            const container = document.getElementById('storeStatusContainer');
+            const icon = document.getElementById('storeStatusIcon');
+            const title = document.getElementById('storeStatusTitle');
+            const message = document.getElementById('storeStatusMessage');
+            const timer = document.getElementById('countdownTimer');
+            const timerLabel = document.getElementById('timerLabel');
+            const nextStatusTime = document.getElementById('nextStatusTime');
+            const openHours = document.getElementById('currentOpenHours');
+            
+            if (!container || !icon || !title || !message || !timer || !timerLabel || !nextStatusTime || !openHours) {
+                console.error("Elemen status toko tidak ditemukan!");
+                return;
+            }
+            
+            // Update status toko
+            if (status.isOpen) {
+                icon.className = "store-status-icon open";
+                icon.innerHTML = '<i class="fas fa-store"></i>';
+                title.textContent = "Toko Sedang Buka";
+                message.textContent = "Layanan tersedia untuk pemesanan";
+                container.style.border = "2px solid rgba(40, 167, 69, 0.3)";
+                container.style.background = "linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%)";
+            } else {
+                icon.className = "store-status-icon closed";
+                icon.innerHTML = '<i class="fas fa-store-slash"></i>';
+                title.textContent = "Toko Sedang Tutup";
+                message.textContent = "Pemesanan akan diproses saat toko buka";
+                container.style.border = "2px solid rgba(220, 53, 69, 0.3)";
+                container.style.background = "linear-gradient(135deg, #ffffff 0%, #fff5f5 100%)";
+            }
+            
+            // Update jam operasional
+            openHours.textContent = `${formatTime(STORE_CONFIG.storeHours.open)} - ${formatTime(STORE_CONFIG.storeHours.close)} ${STORE_CONFIG.storeHours.timezone}`;
+            
+            // Update countdown timer
+            if (status.nextStatusChange) {
+                updateCountdownTimer(status.nextStatusChange, timer, timerLabel);
+                
+                const nextTime = formatTime(status.nextStatusChange.getHours());
+                nextStatusTime.textContent = `${status.nextStatus === 'buka' ? 'Buka' : 'Tutup'} pukul ${nextTime} ${STORE_CONFIG.storeHours.timezone}`;
+            } else {
+                timer.textContent = "24/7";
+                timerLabel.textContent = "Toko buka terus";
+                nextStatusTime.textContent = "Layanan tersedia setiap saat";
+            }
+        }
+
+        function updateCountdownTimer(targetTime, timerElement, labelElement) {
+            function update() {
+                const now = new Date();
+                const diff = targetTime - now;
+                
+                if (diff <= 0) {
+                    timerElement.textContent = "00:00:00";
+                    labelElement.textContent = "Memperbarui status...";
+                    updateStoreStatus();
+                    return;
+                }
+                
+                const hours = Math.floor(diff / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                
+                timerElement.textContent = 
+                    `${hours.toString().padStart(2, '0')}:` +
+                    `${minutes.toString().padStart(2, '0')}:` +
+                    `${seconds.toString().padStart(2, '0')}`;
+                
+                labelElement.textContent = hours > 0 ? 
+                    `Waktu tersisa` : 
+                    `Menit tersisa`;
+            }
+            
+            update();
+            setInterval(update, 1000);
+        }
+
+        function formatTime(hour) {
+            if (typeof hour === 'number') {
+                return hour.toString().padStart(2, '0') + ":00";
+            } else if (hour instanceof Date) {
+                return hour.getHours().toString().padStart(2, '0') + ":00";
+            }
+            return hour;
+        }
+
+        function calculateNextOpenTime() {
+            const now = new Date();
+            const nextOpen = new Date(now);
+            
+            if (now.getHours() >= STORE_CONFIG.storeHours.close) {
+                // Jika sudah lewat jam tutup, buka besok
+                nextOpen.setDate(nextOpen.getDate() + 1);
+            }
+            
+            nextOpen.setHours(STORE_CONFIG.storeHours.open, 0, 0, 0);
+            return nextOpen;
+        }
 
         // ==================== DAFTAR PLATFORM HOSTING GAMBAR YANG DIDUKUNG ====================
         const SUPPORTED_IMAGE_PLATFORMS = [
@@ -2815,13 +3229,21 @@
                             <button class="btn btn-detail" onclick="showProductDetail(${product.id})">
                                 <i class="fas fa-eye"></i> Detail
                             </button>
-                            <button class="btn btn-buy" onclick="buyProduct(${product.id})">
+                            <button class="btn btn-buy" data-product-id="${product.id}">
                                 <i class="fas fa-shopping-cart"></i> Beli
                             </button>
                         </div>
                     </div>
                 `;
                 container.appendChild(card);
+            });
+            
+            // Attach event listeners to buy buttons
+            document.querySelectorAll('.btn-buy').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productId = parseInt(this.getAttribute('data-product-id'));
+                    handleBuyClick(productId);
+                });
             });
         }
 
@@ -2892,7 +3314,8 @@
                 currentProduct = products[0];
             }
             
-            setupWelcomeBanner(); // Setup banner welcome baru
+            setupWelcomeBanner();
+            initStoreHoursSystem(); // Inisialisasi sistem jam buka toko
             setupNavigation();
             setupProductFilters();
             setupPayment();
@@ -2990,9 +3413,6 @@
                     selectedPaymentMethod = this.getAttribute('data-method');
                 });
             });
-            
-            // TOMBOL "LANJUT KE FORM ORDER" TELAH DIHAPUS
-            // Tidak ada lagi event listener untuk tombol ini
         }
 
         function setupCopyButtons() {
@@ -3189,15 +3609,6 @@
             }
         };
 
-        window.buyProduct = function(id) {
-            const product = products.find(p => p.id === id);
-            if (product) {
-                currentProduct = product;
-                updateOrderSummary(product);
-                openOrderModal(product);
-            }
-        };
-
         function showQRISModal() {
             const modal = document.getElementById('orderModal');
             const modalContent = modal.querySelector('.modal-content');
@@ -3257,6 +3668,16 @@
                 return;
             }
             
+            // Cek status toko sebelum mengirim pesanan
+            const storeStatus = getStoreStatus();
+            let storeStatusNote = '';
+            
+            if (!storeStatus.isOpen && !STORE_CONFIG.storeHours.alwaysOpen) {
+                storeStatusNote = `\n📌 *Status Toko:* Saat ini tutup (Buka pukul ${formatTime(STORE_CONFIG.storeHours.open)} ${STORE_CONFIG.storeHours.timezone})\n   Pesanan akan diproses saat toko buka`;
+            } else {
+                storeStatusNote = `\n📌 *Status Toko:* Buka (${formatTime(STORE_CONFIG.storeHours.open)} - ${formatTime(STORE_CONFIG.storeHours.close)} ${STORE_CONFIG.storeHours.timezone})`;
+            }
+            
             const message = `Halo ${STORE_CONFIG.storeName}, saya ingin memesan:
 
 📦 *Produk:* ${product.name}
@@ -3266,6 +3687,7 @@
 🎮 *ID Game/No HP:* ${gameId}
 💳 *Metode Bayar:* ${paymentMethod}
 ${notes ? `📝 *Catatan:* ${notes}` : ''}
+${storeStatusNote}
 
 Jika sudah memesan melalui website. Silahkan Ketik *.payment* untuk melanjutkan pembayaram
 
