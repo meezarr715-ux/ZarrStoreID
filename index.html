@@ -185,6 +185,15 @@
             gap: 15px;
         }
 
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
         /* ==================== BANNER WELCOME DENGAN TEKS & BORDER BAYANGAN ==================== */
         .welcome-banner {
             width: 100%;
@@ -539,28 +548,360 @@
             flex-shrink: 0;
         }
 
-        /* ==================== PRODUCT STYLES ==================== */
-        .product-filters {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-bottom: 2.5rem;
+        /* ==================== FOLDER SYSTEM STYLES ==================== */
+        .folder-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
         }
 
-        .filter-btn {
-            padding: 10px 25px;
+        .folder-card {
             background: white;
-            border: 2px solid #e0e0e0;
-            border-radius: 30px;
-            font-weight: 500;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            border: 2px solid #f0f0f0;
             cursor: pointer;
-            transition: all 0.3s ease;
+            position: relative;
         }
 
-        .filter-btn:hover, .filter-btn.active {
+        .folder-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 35px var(--shadow);
+            border-color: var(--secondary);
+        }
+
+        .folder-header {
+            padding: 1.5rem 1.5rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .folder-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .folder-info {
+            flex: 1;
+        }
+
+        .folder-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .folder-desc {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .folder-content {
+            padding: 1rem 1.5rem;
+        }
+
+        .subfolder-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 10px;
+            background: #f8f9ff;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid #eef2ff;
+        }
+
+        .subfolder-item:hover {
+            background: #f0f4ff;
+            transform: translateX(5px);
+            border-color: #d1e3ff;
+        }
+
+        .subfolder-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            background: white;
+            color: var(--dark);
+            flex-shrink: 0;
+        }
+
+        .subfolder-info {
+            flex: 1;
+        }
+
+        .subfolder-name {
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 1rem;
+        }
+
+        .subfolder-count {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        .folder-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fafbff;
+        }
+
+        .product-count {
+            font-size: 0.9rem;
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .folder-action {
+            padding: 8px 20px;
             background: linear-gradient(to right, var(--primary), var(--secondary));
             color: white;
-            border-color: transparent;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .folder-action:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(106, 17, 203, 0.2);
+        }
+
+        /* Subfolder Products View */
+        .subfolder-products-container {
+            margin-top: 2rem;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .subfolder-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f0f4ff;
+        }
+
+        .back-to-folders {
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .back-to-folders:hover {
+            background: #f0f4ff;
+        }
+
+        .current-folder-info {
+            flex: 1;
+        }
+
+        .current-folder-title {
+            font-size: 1.8rem;
+            color: var(--dark);
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .current-folder-desc {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+
+        /* Breadcrumb Navigation */
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 1.5rem;
+            padding: 10px 15px;
+            background: #f8f9ff;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            flex-wrap: wrap;
+        }
+
+        .breadcrumb-item {
+            color: var(--gray);
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .breadcrumb-item:hover {
+            color: var(--primary);
+        }
+
+        .breadcrumb-separator {
+            color: var(--gray);
+        }
+
+        .breadcrumb-current {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* Subfolder Product Grid */
+        .subfolder-product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .subfolder-product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #f0f0f0;
+            position: relative;
+        }
+
+        .subfolder-product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px var(--shadow);
+            border-color: var(--secondary);
+        }
+
+        .subfolder-product-content {
+            padding: 1.5rem;
+        }
+
+        .subfolder-product-badge {
+            display: inline-block;
+            background: rgba(106, 17, 203, 0.1);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .subfolder-product-name {
+            font-size: 1.2rem;
+            color: var(--dark);
+            margin-bottom: 10px;
+            min-height: 40px;
+        }
+
+        .subfolder-product-price {
+            color: var(--secondary);
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .subfolder-product-desc {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            min-height: 40px;
+        }
+
+        .subfolder-product-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: auto;
+        }
+
+        /* TOMBOL HAPUS DIHAPUS DARI SINI */
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--gray);
+            width: 100%;
+        }
+
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .empty-state-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .empty-state-desc {
+            max-width: 500px;
+            margin: 0 auto 2rem;
+        }
+
+        /* ==================== PRODUCT STYLES ==================== */
+        .sync-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid #f0f4ff;
+        }
+
+        .sync-btn {
+            padding: 10px 25px;
+            background: linear-gradient(to right, var(--accent), #ff0066);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 5px 15px rgba(255, 77, 166, 0.2);
+        }
+
+        .sync-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 77, 166, 0.3);
+        }
+
+        .sync-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
         }
 
         .products-grid {
@@ -615,7 +956,7 @@
             font-size: 1.3rem;
             color: var(--dark);
             margin-bottom: 10px;
-            min-height: 60px;
+            min-height: 40px;
         }
 
         .product-price {
@@ -629,7 +970,7 @@
             color: var(--gray);
             font-size: 0.95rem;
             margin-bottom: 1.5rem;
-            min-height: 45px;
+            min-height: 40px;
         }
 
         .product-actions {
@@ -1273,6 +1614,204 @@
             animation: pulse 2s infinite;
         }
 
+        /* Kategori baru untuk produk spesial */
+        .category-bot { background: rgba(255, 77, 166, 0.1); color: #ff4da6; }
+        .category-editor { background: rgba(37, 117, 252, 0.1); color: #2575fc; }
+
+        /* EDIT MODE STYLES */
+        .edit-mode-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: #f8f9ff;
+            border-radius: 15px;
+            border: 2px solid var(--primary);
+        }
+
+        .edit-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .edit-btn.edit {
+            background: linear-gradient(to right, var(--warning), #ff9500);
+            color: white;
+        }
+
+        .edit-btn.add {
+            background: linear-gradient(to right, var(--success), #28a745);
+            color: white;
+        }
+
+        .edit-btn.delete {
+            background: linear-gradient(to right, var(--danger), #dc3545);
+            color: white;
+        }
+
+        .edit-btn.admin {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+        }
+
+        .edit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .edit-indicator {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--warning);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+            animation: pulse 2s infinite;
+        }
+
+        .delete-confirm-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .delete-confirm-content {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .delete-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .admin-login-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .admin-login-content {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        /* TOMBOL EDIT DI SETIAP PRODUK */
+        .product-edit-btns {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            gap: 5px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 2;
+        }
+
+        .subfolder-product-card:hover .product-edit-btns,
+        .folder-card:hover .product-edit-btns {
+            opacity: 1;
+        }
+
+        .edit-icon-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: white;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .edit-icon-btn.edit {
+            background: var(--warning);
+        }
+
+        .edit-icon-btn.delete {
+            background: var(--danger);
+        }
+
+        .edit-icon-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .folder-edit-btns {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            display: flex;
+            gap: 5px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 2;
+        }
+
+        .folder-card:hover .folder-edit-btns {
+            opacity: 1;
+        }
+
+        /* TOMBOL TAMBAH SUBFOLDER */
+        .add-subfolder-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 10px;
+            background: #f0f4ff;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px dashed var(--primary);
+            color: var(--primary);
+            justify-content: center;
+        }
+
+        .add-subfolder-btn:hover {
+            background: #e6f7ff;
+            transform: translateX(5px);
+            border-color: var(--secondary);
+        }
+
         footer {
             background: linear-gradient(to right, var(--dark), #343a40);
             color: white;
@@ -1308,9 +1847,76 @@
             color: rgba(255, 255, 255, 0.7);
         }
 
-        /* Kategori baru untuk produk spesial */
-        .category-bot { background: rgba(255, 77, 166, 0.1); color: #ff4da6; }
-        .category-editor { background: rgba(37, 117, 252, 0.1); color: #2575fc; }
+        /* Responsive Folder System */
+        @media (max-width: 992px) {
+            .folder-container {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .subfolder-product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .current-folder-title {
+                font-size: 1.5rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .folder-container {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            }
+            
+            .folder-header {
+                padding: 1.2rem 1.2rem 0.8rem;
+            }
+            
+            .folder-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.7rem;
+            }
+            
+            .current-folder-title {
+                font-size: 1.3rem;
+            }
+            
+            .subfolder-product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            }
+            
+            .sync-container {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .folder-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .subfolder-product-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .subfolder-product-actions {
+                flex-direction: column;
+            }
+            
+            .btn-detail, .btn-buy {
+                width: 100%;
+            }
+        }
 
         /* Responsive Styles */
         @media (max-width: 1200px) {
@@ -1328,10 +1934,6 @@
             nav ul {
                 flex-wrap: wrap;
                 justify-content: center;
-            }
-            
-            .products-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             }
             
             .hero {
@@ -1405,10 +2007,6 @@
             
             section {
                 padding: 1.5rem;
-            }
-            
-            .product-filters {
-                justify-content: center;
             }
             
             .floating-wa {
@@ -1883,6 +2481,12 @@
             .store-hours-badge {
                 min-height: 44px;
             }
+            
+            .delete-product-btn {
+                opacity: 1;
+                min-width: 44px;
+                min-height: 44px;
+            }
         }
     </style>
 </head>
@@ -1902,7 +2506,7 @@
                 <ul>
                     <li><a href="#" class="nav-link active" data-target="beranda"><i class="fas fa-home"></i> Beranda</a></li>
                     <li><a href="#" class="nav-link" data-target="produk"><i class="fas fa-gamepad"></i> Produk</a></li>
-                    <li><a href="#" class="nav-link" data-target="payment"><i class="fas fa-credit-card"></i> Payment</a></li>
+                    <li><a href="#" class="nav-link" data-target="payment"><i class="fas fa-credit-card"></i> Pembayaran</a></li>
                     <li><a href="#" class="nav-link" data-target="riwayat"><i class="fas fa-history"></i> Riwayat</a></li>
                     <li><a href="#" class="nav-link" data-target="informasi"><i class="fas fa-info-circle"></i> Informasi</a></li>
                 </ul>
@@ -1974,22 +2578,68 @@
         </section>
 
         <section id="produk">
-            <h2 class="section-title"><i class="fas fa-shopping-bag"></i> Produk Top Up Game, Isi Pulsa/Kuota, Sewa Bot, & Aplikasi Premium</h2>
-            
-            <div class="product-filters">
-                <button class="filter-btn active" data-filter="all">Semua Produk</button>
-                <button class="filter-btn" data-filter="game">Game</button>
-                <button class="filter-btn" data-filter="pulsa">Pulsa</button>
-                <button class="filter-btn" data-filter="kuota">Kuota</button>
-                <button class="filter-btn" data-filter="bot">Sewa Bot</button>
-                <button class="filter-btn" data-filter="editor">Apk Prem</button>
-                <button class="filter-btn" id="syncProductsBtn" style="background: var(--accent); color: white;">
-                    <i class="fas fa-sync-alt"></i> Sync
-                </button>
+            <div class="section-header">
+                <h2 class="section-title"><i class="fas fa-shopping-bag"></i> Produk Top Up Game, Isi Pulsa/Kuota, Sewa Bot, & Aplikasi Premium</h2>
+                <div style="display: flex; gap: 10px;">
+                    <button class="sync-btn" id="syncProductsBtn">
+                        <i class="fas fa-sync-alt"></i> Refresh Produk
+                    </button>
+                    <button class="sync-btn edit-btn admin" id="adminToggleBtn" style="background: linear-gradient(to right, #6a11cb, #2575fc);">
+                        <i class="fas fa-user-shield"></i> Admin Mode
+                    </button>
+                </div>
             </div>
             
-            <div class="products-grid" id="productsContainer">
-                <!-- Produk akan muncul otomatis di SEMUA DEVICE -->
+            <!-- Controls for Edit Mode -->
+            <div class="edit-mode-controls" id="editModeControls" style="display: none;">
+                <div style="flex: 1;">
+                    <strong style="color: var(--primary);">EDIT MODE AKTIF</strong>
+                    <p style="font-size: 0.9rem; color: var(--gray); margin-top: 5px;">Klik tombol di bawah untuk mengelola produk</p>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <button class="edit-btn add" onclick="openAddFolderModal()">
+                        <i class="fas fa-folder-plus"></i> Folder Baru
+                    </button>
+                    <button class="edit-btn edit" onclick="toggleEditMode()">
+                        <i class="fas fa-edit"></i> Edit Mode: ON
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Container untuk sistem folder -->
+            <div class="products-container">
+                <!-- Folder View -->
+                <div class="folder-container" id="folderView"></div>
+                
+                <!-- Subfolder Products View -->
+                <div class="subfolder-products-container" id="subfolderView" style="display: none;">
+                    <div class="subfolder-header">
+                        <button class="back-to-folders" id="backToFolders">
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                        <div class="current-folder-info">
+                            <h2 class="current-folder-title" id="currentFolderTitle">
+                                <span id="folderIcon"></span>
+                                <span id="folderTitle">Folder</span>
+                            </h2>
+                            <p class="current-folder-desc" id="currentFolderDesc">Deskripsi folder</p>
+                        </div>
+                        <button class="sync-btn edit-btn add" id="addProductBtn" style="display: none;" onclick="openAddProductModal()">
+                            <i class="fas fa-plus"></i> Tambah Produk
+                        </button>
+                    </div>
+                    
+                    <div class="breadcrumb" id="breadcrumb">
+                        <span class="breadcrumb-item" data-action="show-all">Semua Folder</span>
+                        <span class="breadcrumb-separator">›</span>
+                        <span class="breadcrumb-current" id="currentBreadcrumb">Subfolder</span>
+                    </div>
+                    
+                    <div class="subfolder-product-grid" id="subfolderProductGrid"></div>
+                </div>
+                
+                <!-- All Products Grid View (backup) -->
+                <div class="products-grid" id="allProductsView" style="display: none;"></div>
             </div>
         </section>
 
@@ -2112,7 +2762,14 @@
                         <div>
                             <i class="fas fa-phone-alt"></i>
                             <div>
-                                <h4>Telepon / WhatsApp</h4>
+                                <h4>Telepon / WhatsApp (Bot)</h4>
+                                <p>+62 822-7696-9027</p>
+                            </div>
+                        </div>
+                        <div>
+                            <i class="fas fa-headset"></i>
+                            <div>
+                                <h4>Customer Service</h4>
                                 <p>+62 882-9503-9238</p>
                             </div>
                         </div>
@@ -2134,7 +2791,7 @@
                     
                     <h4 style="color: var(--primary); margin-top: 2rem;">Media Sosial</h4>
                     <div class="social-links">
-                        <a href="https://wa.me/6288295039238" class="wa" target="_blank">
+                        <a href="https://wa.me/62882276969027" class="wa" target="_blank">
                             <i class="fab fa-whatsapp"></i>
                         </a>
                         <a href="https://instagram.com/mee.zarr" class="ig" target="_blank">
@@ -2448,8 +3105,6 @@
                             padding: 15px;
                             background: rgba(106, 17, 203, 0.08);
                             border-radius: 10px;
-                            font-size: 0.85rem;
-                            color: #495057;
                             border-left: 4px solid #6a11cb;
                             position: relative;
                             z-index: 2;
@@ -2501,8 +3156,155 @@
         </div>
     </div>
 
+    <!-- MODAL ADMIN LOGIN -->
+    <div class="admin-login-modal" id="adminLoginModal">
+        <div class="admin-login-content">
+            <button class="modal-close" id="adminModalClose">&times;</button>
+            <h2 style="color: var(--primary); margin-bottom: 1.5rem;">Login Admin</h2>
+            <div class="form-group">
+                <label for="adminPassword">Password Admin</label>
+                <input type="password" id="adminPassword" class="form-control" placeholder="Masukkan password admin">
+                <small style="color: var(--gray); display: block; margin-top: 5px;">Password default: admin123</small>
+            </div>
+            <button class="btn-whatsapp" id="adminLoginBtn" style="margin-top: 1.5rem;">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </button>
+        </div>
+    </div>
+
+    <!-- MODAL TAMBAH/EDIT FOLDER -->
+    <div class="modal" id="folderModal">
+        <div class="modal-content">
+            <button class="modal-close" id="folderModalClose">&times;</button>
+            <h2 style="color: var(--primary); margin-bottom: 1.5rem;" id="folderModalTitle">Tambah Folder Baru</h2>
+            
+            <form id="folderForm">
+                <div class="form-group">
+                    <label for="folderKey">Kode Folder *</label>
+                    <input type="text" id="folderKey" class="form-control" required placeholder="Contoh: game, pulsa, kuota">
+                    <small style="color: var(--gray);">Harus unik, gunakan huruf kecil tanpa spasi</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="folderName">Nama Folder *</label>
+                    <input type="text" id="folderName" class="form-control" required placeholder="Contoh: Top Up Game">
+                </div>
+                
+                <div class="form-group">
+                    <label for="folderDescription">Deskripsi Folder</label>
+                    <textarea id="folderDescription" class="form-control" rows="3" placeholder="Deskripsi singkat tentang folder ini"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="folderIconType">Jenis Ikon</label>
+                    <select id="folderIconType" class="form-control">
+                        <option value="emoji">Emoji</option>
+                        <option value="fontawesome">FontAwesome</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="folderIconEmoji">Ikon Emoji</label>
+                    <input type="text" id="folderIconEmoji" class="form-control" placeholder="🎮" value="📁">
+                    <small style="color: var(--gray);">Masukkan emoji untuk ikon folder</small>
+                </div>
+                
+                <div class="form-group" id="folderIconFontAwesomeGroup" style="display: none;">
+                    <label for="folderIconFontAwesome">Ikon FontAwesome</label>
+                    <input type="text" id="folderIconFontAwesome" class="form-control" placeholder="fas fa-gamepad">
+                    <small style="color: var(--gray);">Contoh: fas fa-gamepad, fas fa-phone-alt</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="folderColor">Warna Folder</label>
+                    <input type="color" id="folderColor" class="form-control" value="#6a11cb" style="height: 50px;">
+                </div>
+                
+                <button type="submit" class="btn-whatsapp" id="saveFolderBtn">
+                    <i class="fas fa-save"></i> Simpan Folder
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL TAMBAH/EDIT PRODUK -->
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <button class="modal-close" id="productModalClose">&times;</button>
+            <h2 style="color: var(--primary); margin-bottom: 1.5rem;" id="productModalTitle">Tambah Produk Baru</h2>
+            
+            <form id="productForm">
+                <div class="form-group">
+                    <label for="productFolder">Folder *</label>
+                    <select id="productFolder" class="form-control" required onchange="updateSubfolderOptions()">
+                        <option value="">Pilih Folder</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="productSubfolder">Subfolder *</label>
+                    <select id="productSubfolder" class="form-control" required>
+                        <option value="">Pilih Subfolder</option>
+                        <option value="new">+ Buat Subfolder Baru</option>
+                    </select>
+                </div>
+                
+                <div class="form-group" id="newSubfolderGroup" style="display: none;">
+                    <label for="newSubfolderName">Nama Subfolder Baru *</label>
+                    <input type="text" id="newSubfolderName" class="form-control" placeholder="Contoh: Valorant">
+                    
+                    <label for="newSubfolderKey" style="margin-top: 10px;">Kode Subfolder *</label>
+                    <input type="text" id="newSubfolderKey" class="form-control" placeholder="Contoh: valorant">
+                    <small style="color: var(--gray);">Huruf kecil tanpa spasi</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="productName">Nama Produk *</label>
+                    <input type="text" id="productName" class="form-control" required placeholder="Contoh: 86 Diamond">
+                </div>
+                
+                <div class="form-group">
+                    <label for="productPrice">Harga (Rp) *</label>
+                    <input type="number" id="productPrice" class="form-control" required placeholder="25000" min="1000">
+                </div>
+                
+                <div class="form-group">
+                    <label for="productDescription">Deskripsi Produk</label>
+                    <textarea id="productDescription" class="form-control" rows="3" placeholder="Deskripsi singkat produk"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="productImage">URL Gambar Produk (Opsional)</label>
+                    <input type="url" id="productImage" class="form-control" placeholder="https://example.com/image.jpg">
+                    <small style="color: var(--gray);">Link gambar produk (jika ada)</small>
+                </div>
+                
+                <button type="submit" class="btn-whatsapp" id="saveProductBtn">
+                    <i class="fas fa-save"></i> Simpan Produk
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL KONFIRMASI HAPUS -->
+    <div class="delete-confirm-modal" id="deleteConfirmModal">
+        <div class="delete-confirm-content">
+            <h3 style="color: var(--danger); margin-bottom: 1.5rem;" id="deleteConfirmTitle">Konfirmasi Hapus</h3>
+            <p id="deleteConfirmMessage">Apakah Anda yakin ingin menghapus item ini?</p>
+            
+            <div class="delete-actions">
+                <button class="edit-btn delete" id="confirmDeleteBtn">
+                    <i class="fas fa-trash"></i> Ya, Hapus
+                </button>
+                <button class="edit-btn edit" id="cancelDeleteBtn">
+                    <i class="fas fa-times"></i> Batal
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Floating WhatsApp -->
-    <a href="https://wa.me/6288295039238?text=Halo%20ZarrStoreID,%20saya%20ingin%20bertanya%20tentang%20produk" class="floating-wa" target="_blank">
+    <a href="https://wa.me/62882276969027?text=Halo%20ZarrStoreID,%20saya%20ingin%20bertanya%20tentang%20produk" class="floating-wa" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
 
@@ -2521,7 +3323,8 @@
             
             <div class="footer-section">
                 <h3>Layanan Pelanggan</h3>
-                <p>WhatsApp: +62 882-9503-9238</p>
+                <p>WhatsApp Bot: +62 822-7696-9027</p>
+                <p>Customer Service: +62 882-9503-9238</p>
                 <p>Email: zaenulenka@gmail.com</p>
             </div>
         </div>
@@ -2535,9 +3338,11 @@
         // ==================== KONFIGURASI TOKO ====================
         const STORE_CONFIG = {
             storeName: "ZarrStoreID",
-            phoneNumber: "6288295039238",
+            phoneNumber: "62882276969027", // NOMOR BOT
+            customerServiceNumber: "6288295039238", // NOMOR CUSTOMER SERVICE
             qrisUrl: "https://files.catbox.moe/xxxxxx.png",
             storeLogo: "https://files.catbox.moe/gua633.jpg",
+            
             // KONFIGURASI BANNER WELCOME BARU - BISA DICUStOM
             welcomeBanner: {
                 imageUrl: "https://res.cloudinary.com/dtbecoist/image/upload/v1768388950/BENNER_ZARR_f7wyhq.png",
@@ -2545,82 +3350,1658 @@
                 subtitle: "Agen Konter Digital Yang Aman & Terpercaya",
                 showOnAllDevices: true
             },
+            
             // ==================== KONFIGURASI JAM OPERASIONAL ====================
             storeHours: {
-                // Senin - Kamis: 06:00 - 22:00
-                // Jumat - Sabtu: 06:00 - 23:00
-                // Minggu: 06:00 - 22:00
-                regular: {
-                    open: 6,    // 06:00
-                    close: 22   // 22:00
-                },
-                weekend: {
-                    open: 6,    // 06:00
-                    close: 23   // 23:00 (Jumat & Sabtu)
-                },
+                regular: { open: 6, close: 22 },
+                weekend: { open: 6, close: 23 },
                 timezone: "WIB"
+            },
+            
+            // ==================== KONFIGURASI IKON KUSTOM ====================
+            customIcons: {
+                // Ikon untuk folder utama
+                folderIcons: {
+                    game: { 
+                        emoji: "🎮", 
+                        fontAwesome: "fas fa-gamepad",
+                        color: "#2575fc",
+                        type: "emoji"
+                    },
+                    pulsa: { 
+                        emoji: "📞", 
+                        fontAwesome: "fas fa-phone-alt",
+                        color: "#00AA13",
+                        type: "emoji"
+                    },
+                    kuota: { 
+                        emoji: "📶", 
+                        fontAwesome: "fas fa-wifi",
+                        color: "#FF6B00",
+                        type: "emoji"
+                    },
+                    bot: { 
+                        emoji: "🤖", 
+                        fontAwesome: "fas fa-robot",
+                        color: "#ff4da6",
+                        type: "emoji"
+                    },
+                    editor: { 
+                        emoji: "👑", 
+                        fontAwesome: "fas fa-crown",
+                        color: "#4C2A86",
+                        type: "emoji"
+                    }
+                },
+                
+                // Ikon untuk subfolder
+                subfolderIcons: {
+                    mobile_legends: { 
+                        emoji: "⚔️", 
+                        fontAwesome: "fas fa-swords",
+                        type: "emoji"
+                    },
+                    free_fire: { 
+                        emoji: "🔫", 
+                        fontAwesome: "fas fa-gun",
+                        type: "emoji"
+                    },
+                    pubg_mobile: { 
+                        emoji: "🎯", 
+                        fontAwesome: "fas fa-bullseye",
+                        type: "emoji"
+                    },
+                    telkomsel: { 
+                        emoji: "📱", 
+                        fontAwesome: "fas fa-mobile-alt",
+                        type: "emoji"
+                    },
+                    indosat: { 
+                        emoji: "📶", 
+                        fontAwesome: "fas fa-signal",
+                        type: "emoji"
+                    },
+                    xl: { 
+                        emoji: "📳", 
+                        fontAwesome: "fas fa-vibrate",
+                        type: "emoji"
+                    },
+                    telkomsel_kuota: { 
+                        emoji: "🌐", 
+                        fontAwesome: "fas fa-globe",
+                        type: "emoji"
+                    },
+                    indosat_kuota: { 
+                        emoji: "📡", 
+                        fontAwesome: "fas fa-satellite-dish",
+                        type: "emoji"
+                    },
+                    bot_basic: { 
+                        emoji: "🤖", 
+                        fontAwesome: "fas fa-robot",
+                        type: "emoji"
+                    },
+                    bot_premium: { 
+                        emoji: "👑", 
+                        fontAwesome: "fas fa-crown",
+                        type: "emoji"
+                    },
+                    video_editor: { 
+                        emoji: "🎬", 
+                        fontAwesome: "fas fa-video",
+                        type: "emoji"
+                    },
+                    photo_editor: { 
+                        emoji: "🖼️", 
+                        fontAwesome: "fas fa-image",
+                        type: "emoji"
+                    }
+                },
+                
+                // Pengaturan global ikon
+                settings: {
+                    defaultType: "emoji", // "emoji" atau "fontawesome"
+                    useCustomIcons: true,
+                    allowDeveloperOverride: true
+                }
             }
         };
 
-        // ==================== PRODUK DEFAULT ====================
-        const DEFAULT_PRODUCTS = [
-            {
-                id: 1,
-                name: "Mobile Legends 86 Diamond",
-                category: "game",
-                price: 25000,
-                description: "Diamond MLBB termurah se-Indonesia",
-                image: "https://res.cloudinary.com/duemncbn0/image/upload/v1768468561/MLjpg_pccrcz.jpg"
+        // ==================== SISTEM PRODUK BERBASIS FOLDER ====================
+        let PRODUCT_FOLDERS = {
+            game: {
+                name: "Top Up Game",
+                description: "Top up semua game favorit Anda",
+                subfolders: {
+                    mobile_legends: {
+                        name: "Mobile Legends",
+                        products: [
+                            { id: 1, name: "86 Diamond", price: 25000, description: "Diamond termurah" },
+                            { id: 2, name: "172 Diamond", price: 50000, description: "Pilihan terpopuler" },
+                            { id: 3, name: "257 Diamond", price: 75000, description: "Value terbaik" },
+                            { id: 4, name: "344 Diamond", price: 100000, description: "Diamond banyak" },
+                            { id: 5, name: "429 Diamond", price: 125000, description: "Untuk pro player" }
+                        ]
+                    },
+                    free_fire: {
+                        name: "Free Fire",
+                        products: [
+                            { id: 6, name: "100 Diamond", price: 30000, description: "Diamond FF" },
+                            { id: 7, name: "210 Diamond", price: 60000, description: "Hemat 10%" },
+                            { id: 8, name: "530 Diamond", price: 150000, description: "Best seller" },
+                            { id: 9, name: "1060 Diamond", price: 300000, description: "Maximal" }
+                        ]
+                    },
+                    pubg_mobile: {
+                        name: "PUBG Mobile",
+                        products: [
+                            { id: 10, name: "125 UC", price: 35000, description: "UC PUBG" },
+                            { id: 11, name: "420 UC", price: 115000, description: "Paket hemat" }
+                        ]
+                    }
+                }
             },
-            {
-                id: 2,
-                name: "Free Fire 100 Diamond",
-                category: "game",
-                price: 30000,
-                description: "Diamond FF siap kirim instan",
-                image: "https://res.cloudinary.com/duemncbn0/image/upload/v1768468547/FF_lwadtr.jpg"
-            },
-            {
-                id: 3,
-                name: "Pulsa Telkomsel 10.000",
-                category: "pulsa",
-                price: 12000,
+            
+            pulsa: {
+                name: "Isi Pulsa",
                 description: "Pulsa semua operator 24 jam",
-                image: "https://res.cloudinary.com/duemncbn0/image/upload/v1768468554/Telkom_rq8pej.jpg"
+                subfolders: {
+                    telkomsel: {
+                        name: "Telkomsel",
+                        products: [
+                            { id: 12, name: "Pulsa 5.000", price: 7000, description: "Reguler" },
+                            { id: 13, name: "Pulsa 10.000", price: 12000, description: "Ekonomis" },
+                            { id: 14, name: "Pulsa 25.000", price: 27000, description: "Best seller" },
+                            { id: 15, name: "Pulsa 50.000", price: 52000, description: "Hemat 4%" },
+                            { id: 16, name: "Pulsa 100.000", price: 102000, description: "Super hemat" }
+                        ]
+                    },
+                    indosat: {
+                        name: "Indosat",
+                        products: [
+                            { id: 17, name: "Pulsa 5.000", price: 6800, description: "Reguler" },
+                            { id: 18, name: "Pulsa 10.000", price: 11800, description: "Ekonomis" },
+                            { id: 19, name: "Pulsa 25.000", price: 26500, description: "Best seller" }
+                        ]
+                    },
+                    xl: {
+                        name: "XL/Axis",
+                        products: [
+                            { id: 20, name: "Pulsa 5.000", price: 6900, description: "Reguler" },
+                            { id: 21, name: "Pulsa 10.000", price: 11900, description: "Ekonomis" }
+                        ]
+                    }
+                }
             },
-            {
-                id: 4,
-                name: "Kuota Indosat 10gb",
-                category: "kuota",
-                price: 15000,
-                description: "Kuota Indosat",
-                image: "https://res.cloudinary.com/duemncbn0/image/upload/v1768468560/INDOSAT_dp8y6p.jpg"
+            
+            kuota: {
+                name: "Paket Kuota",
+                description: "Kuota internet murah",
+                subfolders: {
+                    telkomsel_kuota: {
+                        name: "Telkomsel",
+                        products: [
+                            { id: 22, name: "Kuota 1GB 7 Hari", price: 15000, description: "1GB 24 jam" },
+                            { id: 23, name: "Kuota 3GB 30 Hari", price: 35000, description: "3GB malam" },
+                            { id: 24, name: "Kuota 10GB 30 Hari", price: 75000, description: "10GB all apps" }
+                        ]
+                    },
+                    indosat_kuota: {
+                        name: "Indosat",
+                        products: [
+                            { id: 25, name: "Freedom 10GB", price: 25000, description: "10GB 24 jam" },
+                            { id: 26, name: "Super 25GB", price: 50000, description: "25GB malam" }
+                        ]
+                    }
+                }
             },
-            {
-                id: 5,
-                name: "Sewa Bot WhatsApp 1 Minggu",
-                category: "bot",
-                price: 15000,
+            
+            bot: {
+                name: "Sewa Bot WhatsApp",
                 description: "Bot WA multifungsi premium",
-                image: "https://res.cloudinary.com/duemncbn0/image/upload/v1768468525/ROBOT_WA_ef8xum.jpg"
+                subfolders: {
+                    bot_basic: {
+                        name: "Paket Basic",
+                        products: [
+                            { id: 27, name: "Sewa 1 Minggu", price: 15000, description: "Full fitur" },
+                            { id: 28, name: "Sewa 1 Bulan", price: 50000, description: "Hemat 28%" },
+                            { id: 29, name: "Sewa 3 Bulan", price: 120000, description: "Hemat 33%" }
+                        ]
+                    },
+                    bot_premium: {
+                        name: "Paket Premium",
+                        products: [
+                            { id: 30, name: "Sewa 6 Bulan", price: 200000, description: "Full support" },
+                            { id: 31, name: "Sewa 1 Tahun", price: 350000, description: "Best value" }
+                        ]
+                    }
+                }
             },
-            {
-                id: 6,
-                name: "Alight Motion Premium 1 Tahun",
-                category: "editor",
-                price: 10000,
-                description: "Full fitur tanpa watermark",
-                image: "https://res.cloudinary.com/duemncbn0/image/upload/v1768468525/AM_LOGO_ztwyl9.jpg"
+            
+            editor: {
+                name: "Aplikasi Premium",
+                description: "Aplikasi editor premium",
+                subfolders: {
+                    video_editor: {
+                        name: "Video Editor",
+                        products: [
+                            { id: 32, name: "Alight Motion Pro", price: 10000, description: "1 Tahun" },
+                            { id: 33, name: "KineMaster Pro", price: 15000, description: "Lifetime" },
+                            { id: 34, name: "InShot Pro", price: 12000, description: "Unlocked" }
+                        ]
+                    },
+                    photo_editor: {
+                        name: "Photo Editor",
+                        products: [
+                            { id: 35, name: "PicsArt Gold", price: 8000, description: "1 Tahun" },
+                            { id: 36, name: "Lightroom Pro", price: 10000, description: "Premium" }
+                        ]
+                    }
+                }
             }
-        ];
+        };
 
-        // ==================== VARIABEL GLOBAL ====================
+        // ==================== MODE EDIT & ADMIN SYSTEM ====================
+        let isEditMode = false;
+        let isAdminMode = false;
+        const ADMIN_PASSWORD = "admin123"; // Password sederhana untuk masuk mode admin
+        let currentEditingProductId = null;
+        let currentEditingSubfolder = null;
+        let currentEditingFolder = null;
+        let deleteCallback = null;
+        let deleteType = null; // 'folder', 'subfolder', 'product'
+        let deleteData = null;
+
+        // ==================== FUNGSI UNTUK MENDAPATKAN IKON ====================
+        function getFolderIcon(folderKey, iconType = null) {
+            // Jika custom icons dinonaktifkan, gunakan default
+            if (!STORE_CONFIG.customIcons.settings.useCustomIcons) {
+                const defaultIcons = {
+                    game: "🎮",
+                    pulsa: "📞",
+                    kuota: "📶",
+                    bot: "🤖",
+                    editor: "👑"
+                };
+                return { 
+                    html: defaultIcons[folderKey] || "📁", 
+                    type: "emoji",
+                    color: "#6a11cb"
+                };
+            }
+            
+            // Ambil konfigurasi ikon
+            const iconConfig = STORE_CONFIG.customIcons.folderIcons[folderKey];
+            
+            if (!iconConfig) {
+                return { 
+                    html: "", 
+                    type: "emoji",
+                    color: "#6a11cb"
+                };
+            }
+            
+            // Tentukan jenis ikon yang akan digunakan
+            const type = iconType || iconConfig.type || STORE_CONFIG.customIcons.settings.defaultType;
+            
+            let html = "";
+            if (type === "fontawesome" && iconConfig.fontAwesome) {
+                html = `<i class="${iconConfig.fontAwesome}"></i>`;
+            } else {
+                html = iconConfig.emoji || "📁";
+            }
+            
+            return {
+                html: html,
+                type: type,
+                color: iconConfig.color || "#6a11cb"
+            };
+        }
+
+        function getSubfolderIcon(folderKey, subfolderKey, iconType = null) {
+            // Jika custom icons dinonaktifkan, gunakan default
+            if (!STORE_CONFIG.customIcons.settings.useCustomIcons) {
+                const defaultIcons = {
+                    mobile_legends: "⚔️",
+                    free_fire: "🔫",
+                    pubg_mobile: "🎯",
+                    telkomsel: "📱",
+                    indosat: "📶",
+                    xl: "📳",
+                    telkomsel_kuota: "🌐",
+                    indosat_kuota: "📡",
+                    bot_basic: "🤖",
+                    bot_premium: "👑",
+                    video_editor: "🎬",
+                    photo_editor: "🖼️"
+                };
+                return { 
+                    html: defaultIcons[subfolderKey] || "📂", 
+                    type: "emoji"
+                };
+            }
+            
+            // Ambil konfigurasi ikon
+            const iconConfig = STORE_CONFIG.customIcons.subfolderIcons[subfolderKey];
+            
+            if (!iconConfig) {
+                return { 
+                    html: "📂", 
+                    type: "emoji"
+                };
+            }
+            
+            // Tentukan jenis ikon yang akan digunakan
+            const type = iconType || iconConfig.type || STORE_CONFIG.customIcons.settings.defaultType;
+            
+            let html = "";
+            if (type === "fontawesome" && iconConfig.fontAwesome) {
+                html = `<i class="${iconConfig.fontAwesome}"></i>`;
+            } else {
+                html = iconConfig.emoji || "📂";
+            }
+            
+            return {
+                html: html,
+                type: type
+            };
+        }
+
+        // ==================== FUNGSI ADMIN SYSTEM ====================
+        function toggleAdminMode() {
+            if (!isAdminMode) {
+                openAdminLoginModal();
+            } else {
+                isAdminMode = false;
+                isEditMode = false;
+                updateAdminUI();
+                showNotification("Admin mode dinonaktifkan", "info");
+            }
+        }
+
+        function openAdminLoginModal() {
+            const modal = document.getElementById('adminLoginModal');
+            modal.style.display = 'flex';
+            
+            // Setup event listeners
+            document.getElementById('adminModalClose').onclick = function() {
+                modal.style.display = 'none';
+            };
+            
+            document.getElementById('adminLoginBtn').onclick = function() {
+                const password = document.getElementById('adminPassword').value;
+                if (password === ADMIN_PASSWORD) {
+                    isAdminMode = true;
+                    modal.style.display = 'none';
+                    updateAdminUI();
+                    showNotification("Admin mode diaktifkan!", "success");
+                } else {
+                    showNotification("Password salah!", "error");
+                }
+            };
+            
+            // Enter key to submit
+            document.getElementById('adminPassword').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    document.getElementById('adminLoginBtn').click();
+                }
+            });
+        }
+
+        function updateAdminUI() {
+            const adminBtn = document.getElementById('adminToggleBtn');
+            const editControls = document.getElementById('editModeControls');
+            const addProductBtn = document.getElementById('addProductBtn');
+            
+            if (isAdminMode) {
+                adminBtn.innerHTML = '<i class="fas fa-user-shield"></i> Admin: ON';
+                adminBtn.style.background = 'linear-gradient(to right, #00b09b, #96c93d)';
+                editControls.style.display = 'flex';
+                
+                if (currentView === 'subfolder' && currentFolder) {
+                    addProductBtn.style.display = 'block';
+                }
+            } else {
+                adminBtn.innerHTML = '<i class="fas fa-user-shield"></i> Admin Mode';
+                adminBtn.style.background = 'linear-gradient(to right, #6a11cb, #2575fc)';
+                editControls.style.display = 'none';
+                addProductBtn.style.display = 'none';
+            }
+            
+            // Re-render current view to show/hide edit buttons
+            if (currentView === 'folders') {
+                renderFolderView();
+            } else if (currentView === 'subfolder' && currentFolder) {
+                renderSubfolderView(currentFolder, currentSubfolder);
+            }
+        }
+
+        function toggleEditMode() {
+            if (!isAdminMode) {
+                showNotification("Harus masuk admin mode terlebih dahulu!", "error");
+                return;
+            }
+            
+            isEditMode = !isEditMode;
+            const editBtn = document.querySelector('.edit-btn.edit');
+            
+            if (isEditMode) {
+                editBtn.innerHTML = '<i class="fas fa-edit"></i> Edit Mode: ON';
+                editBtn.style.background = 'linear-gradient(to right, #00b09b, #96c93d)';
+                showNotification("Edit mode diaktifkan", "success");
+            } else {
+                editBtn.innerHTML = '<i class="fas fa-edit"></i> Edit Mode: OFF';
+                editBtn.style.background = 'linear-gradient(to right, var(--warning), #ff9500)';
+                showNotification("Edit mode dinonaktifkan", "info");
+            }
+            
+            // Re-render current view to show/hide edit buttons
+            if (currentView === 'folders') {
+                renderFolderView();
+            } else if (currentView === 'subfolder' && currentFolder) {
+                renderSubfolderView(currentFolder, currentSubfolder);
+            }
+        }
+
+        // ==================== MODIFIKASI FUNGSI RENDER FOLDER VIEW ====================
+        function renderFolderView() {
+            const folderView = document.getElementById('folderView');
+            const subfolderView = document.getElementById('subfolderView');
+            const allProductsView = document.getElementById('allProductsView');
+            
+            // Set view state
+            currentView = 'folders';
+            currentFolder = null;
+            currentSubfolder = null;
+            
+            folderView.style.display = 'grid';
+            subfolderView.style.display = 'none';
+            allProductsView.style.display = 'none';
+            
+            // Clear folder view
+            folderView.innerHTML = '';
+            
+            // Render all folders
+            for (const folderKey in PRODUCT_FOLDERS) {
+                const folder = PRODUCT_FOLDERS[folderKey];
+                
+                // Count total products in this folder
+                let totalProducts = 0;
+                for (const subfolderKey in folder.subfolders) {
+                    totalProducts += folder.subfolders[subfolderKey].products.length;
+                }
+                
+                // Get folder icon
+                const folderIcon = getFolderIcon(folderKey);
+                
+                // Create folder card
+                const folderCard = document.createElement('div');
+                folderCard.className = 'folder-card';
+                folderCard.dataset.folder = folderKey;
+                
+                // Add edit indicator if in edit mode
+                let editIndicator = '';
+                let editButtons = '';
+                
+                if (isEditMode && isAdminMode) {
+                    editIndicator = '<div class="edit-indicator">EDIT</div>';
+                    editButtons = `
+                        <div class="folder-edit-btns">
+                            <button class="edit-icon-btn edit" onclick="editFolder('${folderKey}')" title="Edit Folder">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="edit-icon-btn delete" onclick="confirmDeleteFolder('${folderKey}')" title="Hapus Folder">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    `;
+                }
+                
+                folderCard.innerHTML = `
+                    ${editIndicator}
+                    ${editButtons}
+                    <div class="folder-header">
+                        <div class="folder-icon" style="background: ${folderIcon.color}">
+                            ${folderIcon.html}
+                        </div>
+                        <div class="folder-info">
+                            <h3 class="folder-title">${folder.name}</h3>
+                            <p class="folder-desc">${folder.description}</p>
+                        </div>
+                    </div>
+                    <div class="folder-content">
+                        ${Object.keys(folder.subfolders).map(subfolderKey => {
+                            const subfolder = folder.subfolders[subfolderKey];
+                            const subfolderIcon = getSubfolderIcon(folderKey, subfolderKey);
+                            
+                            let subfolderEditBtns = '';
+                            if (isEditMode && isAdminMode) {
+                                subfolderEditBtns = `
+                                    <div style="display: flex; gap: 5px; margin-left: auto;">
+                                        <button class="edit-icon-btn edit" onclick="editSubfolder('${folderKey}', '${subfolderKey}')" title="Edit Subfolder" style="width: 25px; height: 25px; font-size: 0.7rem;">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="edit-icon-btn delete" onclick="confirmDeleteSubfolder('${folderKey}', '${subfolderKey}')" title="Hapus Subfolder" style="width: 25px; height: 25px; font-size: 0.7rem;">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                `;
+                            }
+                            
+                            return `
+                                <div class="subfolder-item" data-folder="${folderKey}" data-subfolder="${subfolderKey}">
+                                    <div class="subfolder-icon">${subfolderIcon.html}</div>
+                                    <div class="subfolder-info">
+                                        <div class="subfolder-name">${subfolder.name}</div>
+                                        <div class="subfolder-count">${subfolder.products.length} produk</div>
+                                    </div>
+                                    ${subfolderEditBtns}
+                                    ${!isEditMode ? '<i class="fas fa-chevron-right" style="color: var(--gray);"></i>' : ''}
+                                </div>
+                            `;
+                        }).join('')}
+                        
+                        ${isEditMode && isAdminMode ? `
+                            <div class="add-subfolder-btn" onclick="openAddSubfolderModal('${folderKey}')">
+                                <i class="fas fa-plus-circle"></i>
+                                <span>Tambah Subfolder</span>
+                            </div>
+                        ` : ''}
+                    </div>
+                    <div class="folder-footer">
+                        <div class="product-count">
+                            <i class="fas fa-box"></i> ${totalProducts} produk
+                        </div>
+                        <button class="folder-action" data-folder="${folderKey}">
+                            Lihat Semua
+                        </button>
+                    </div>
+                `;
+                
+                folderView.appendChild(folderCard);
+            }
+            
+            // Add event listeners for subfolder items
+            document.querySelectorAll('.subfolder-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const folderKey = this.dataset.folder;
+                    const subfolderKey = this.dataset.subfolder;
+                    renderSubfolderView(folderKey, subfolderKey);
+                });
+            });
+            
+            // Add event listeners for folder actions
+            document.querySelectorAll('.folder-action').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const folderKey = this.dataset.folder;
+                    renderSubfolderView(folderKey, 'all');
+                });
+            });
+            
+            // If no folders to show
+            if (folderView.children.length === 0) {
+                folderView.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1 / -1;">
+                        <div class="empty-state-icon">
+                            <i class="fas fa-folder-open"></i>
+                        </div>
+                        <h3 class="empty-state-title">Tidak ada folder</h3>
+                        <p class="empty-state-desc">Belum ada produk yang tersedia. Klik tombol Refresh untuk memuat produk.</p>
+                        <button onclick="syncProducts()" class="sync-btn" style="margin-top: 1rem;">
+                            <i class="fas fa-sync-alt"></i> Refresh Produk
+                        </button>
+                    </div>
+                `;
+            }
+        }
+
+        // ==================== MODIFIKASI FUNGSI RENDER SUBFOLDER VIEW ====================
+        function renderSubfolderView(folderKey, subfolderKey = 'all') {
+            const folder = PRODUCT_FOLDERS[folderKey];
+            if (!folder) return;
+            
+            const folderView = document.getElementById('folderView');
+            const subfolderView = document.getElementById('subfolderView');
+            const allProductsView = document.getElementById('allProductsView');
+            
+            // Set view state
+            currentView = 'subfolder';
+            currentFolder = folderKey;
+            currentSubfolder = subfolderKey;
+            
+            folderView.style.display = 'none';
+            subfolderView.style.display = 'block';
+            allProductsView.style.display = 'none';
+            
+            // Get folder icon
+            const folderIcon = getFolderIcon(folderKey);
+            
+            // Update header
+            const folderTitle = document.getElementById('folderTitle');
+            const folderIconEl = document.getElementById('folderIcon');
+            const folderDesc = document.getElementById('currentFolderDesc');
+            const breadcrumb = document.getElementById('currentBreadcrumb');
+            const addProductBtn = document.getElementById('addProductBtn');
+            
+            if (folderTitle) folderTitle.textContent = folder.name;
+            if (folderIconEl) folderIconEl.innerHTML = folderIcon.html + ' ';
+            if (folderDesc) folderDesc.textContent = folder.description;
+            
+            // Show/hide add product button
+            if (addProductBtn) {
+                if (isAdminMode && subfolderKey !== 'all') {
+                    addProductBtn.style.display = 'block';
+                } else {
+                    addProductBtn.style.display = 'none';
+                }
+            }
+            
+            // Update breadcrumb
+            const breadcrumbContainer = document.getElementById('breadcrumb');
+            if (breadcrumbContainer) {
+                if (subfolderKey === 'all') {
+                    breadcrumb.textContent = 'Semua Produk';
+                    breadcrumbContainer.innerHTML = `
+                        <span class="breadcrumb-item" data-action="show-all">Semua Folder</span>
+                        <span class="breadcrumb-separator">›</span>
+                        <span class="breadcrumb-current">${folder.name}</span>
+                    `;
+                } else {
+                    const subfolder = folder.subfolders[subfolderKey];
+                    if (subfolder) {
+                        const subfolderIcon = getSubfolderIcon(folderKey, subfolderKey);
+                        breadcrumb.textContent = subfolder.name;
+                        breadcrumbContainer.innerHTML = `
+                            <span class="breadcrumb-item" data-action="show-all">Semua Folder</span>
+                            <span class="breadcrumb-separator">›</span>
+                            <span class="breadcrumb-current">${subfolderIcon.html} ${subfolder.name}</span>
+                        `;
+                    }
+                }
+            }
+            
+            // Render products
+            const productGrid = document.getElementById('subfolderProductGrid');
+            productGrid.innerHTML = '';
+            
+            let productsToShow = [];
+            
+            if (subfolderKey === 'all') {
+                // Show all products in this folder
+                for (const subKey in folder.subfolders) {
+                    productsToShow = productsToShow.concat(folder.subfolders[subKey].products.map(p => ({
+                        ...p,
+                        subfolderName: folder.subfolders[subKey].name,
+                        subfolderIcon: getSubfolderIcon(folderKey, subKey).html,
+                        folderKey: folderKey,
+                        subfolderKey: subKey
+                    })));
+                }
+            } else {
+                // Show products in specific subfolder
+                const subfolder = folder.subfolders[subfolderKey];
+                if (subfolder) {
+                    const subfolderIcon = getSubfolderIcon(folderKey, subfolderKey);
+                    productsToShow = subfolder.products.map(p => ({
+                        ...p,
+                        subfolderName: subfolder.name,
+                        subfolderIcon: subfolderIcon.html,
+                        folderKey: folderKey,
+                        subfolderKey: subfolderKey
+                    }));
+                }
+            }
+            
+            // Render each product
+            productsToShow.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'subfolder-product-card';
+                
+                // Add edit buttons if in edit mode
+                let editButtons = '';
+                if (isEditMode && isAdminMode) {
+                    editButtons = `
+                        <div class="product-edit-btns">
+                            <button class="edit-icon-btn edit" onclick="editProduct(${product.id}, '${product.folderKey}', '${product.subfolderKey}')" title="Edit Produk">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="edit-icon-btn delete" onclick="confirmDeleteProduct(${product.id}, '${product.folderKey}', '${product.subfolderKey}')" title="Hapus Produk">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    `;
+                }
+                
+                productCard.innerHTML = `
+                    ${editButtons}
+                    <div class="subfolder-product-content">
+                        <div class="subfolder-product-badge">
+                            ${product.subfolderIcon} ${product.subfolderName}
+                        </div>
+                        <h3 class="subfolder-product-name">${product.name}</h3>
+                        <div class="subfolder-product-price">Rp ${product.price.toLocaleString('id-ID')}</div>
+                        <p class="subfolder-product-desc">${product.description}</p>
+                        <div class="subfolder-product-actions">
+                            <button class="btn btn-detail" onclick="showProductDetail(${product.id})">
+                                <i class="fas fa-eye"></i> Detail
+                            </button>
+                            <button class="btn btn-buy" data-product-id="${product.id}">
+                                <i class="fas fa-shopping-cart"></i> Beli
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                productGrid.appendChild(productCard);
+            });
+            
+            // Add event listeners to buy buttons
+            document.querySelectorAll('.subfolder-product-actions .btn-buy').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productId = parseInt(this.getAttribute('data-product-id'));
+                    handleBuyClick(productId);
+                });
+            });
+            
+            // If no products
+            if (productsToShow.length === 0) {
+                productGrid.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1 / -1;">
+                        <div class="empty-state-icon">
+                            <i class="fas fa-box-open"></i>
+                        </div>
+                        <h3 class="empty-state-title">Tidak ada produk</h3>
+                        <p class="empty-state-desc">Belum ada produk di kategori ini.</p>
+                        <button onclick="renderFolderView()" class="sync-btn" style="margin-top: 1rem;">
+                            <i class="fas fa-arrow-left"></i> Kembali ke Folder
+                        </button>
+                        ${isAdminMode ? `
+                            <button onclick="openAddProductModal()" class="sync-btn edit-btn add" style="margin-top: 1rem; background: linear-gradient(to right, var(--success), #28a745);">
+                                <i class="fas fa-plus"></i> Tambah Produk Pertama
+                            </button>
+                        ` : ''}
+                    </div>
+                `;
+            }
+            
+            // Add breadcrumb event listeners
+            document.querySelectorAll('.breadcrumb-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const action = this.dataset.action;
+                    if (action === 'show-all') {
+                        renderFolderView();
+                    }
+                });
+            });
+        }
+
+        // ==================== FUNGSI CRUD FOLDER ====================
+        function openAddFolderModal(editKey = null) {
+            if (!isAdminMode) {
+                showNotification("Harus masuk admin mode terlebih dahulu!", "error");
+                return;
+            }
+            
+            const modal = document.getElementById('folderModal');
+            const title = document.getElementById('folderModalTitle');
+            const form = document.getElementById('folderForm');
+            
+            if (editKey) {
+                // Edit mode
+                title.textContent = "Edit Folder";
+                const folder = PRODUCT_FOLDERS[editKey];
+                const iconConfig = STORE_CONFIG.customIcons.folderIcons[editKey] || {
+                    emoji: "📁",
+                    fontAwesome: "fas fa-folder",
+                    color: "#6a11cb",
+                    type: "emoji"
+                };
+                
+                document.getElementById('folderKey').value = editKey;
+                document.getElementById('folderKey').disabled = true;
+                document.getElementById('folderName').value = folder.name;
+                document.getElementById('folderDescription').value = folder.description;
+                document.getElementById('folderIconType').value = iconConfig.type || "emoji";
+                document.getElementById('folderIconEmoji').value = iconConfig.emoji || "📁";
+                document.getElementById('folderIconFontAwesome').value = iconConfig.fontAwesome || "fas fa-folder";
+                document.getElementById('folderColor').value = iconConfig.color || "#6a11cb";
+                
+                // Show/hide icon fields based on type
+                toggleIconFields(iconConfig.type || "emoji");
+            } else {
+                // Add mode
+                title.textContent = "Tambah Folder Baru";
+                form.reset();
+                document.getElementById('folderKey').disabled = false;
+                document.getElementById('folderIconEmoji').value = "📁";
+                document.getElementById('folderIconFontAwesome').value = "fas fa-folder";
+                document.getElementById('folderColor').value = "#6a11cb";
+                toggleIconFields("emoji");
+            }
+            
+            modal.style.display = 'flex';
+            
+            // Setup event listeners
+            document.getElementById('folderModalClose').onclick = function() {
+                modal.style.display = 'none';
+            };
+            
+            // Icon type change handler
+            document.getElementById('folderIconType').addEventListener('change', function() {
+                toggleIconFields(this.value);
+            });
+            
+            // Form submit handler
+            form.onsubmit = function(e) {
+                e.preventDefault();
+                saveFolder(editKey);
+            };
+        }
+
+        function toggleIconFields(type) {
+            const emojiGroup = document.getElementById('folderIconEmoji').parentElement;
+            const faGroup = document.getElementById('folderIconFontAwesomeGroup');
+            
+            if (type === 'emoji') {
+                emojiGroup.style.display = 'block';
+                faGroup.style.display = 'none';
+            } else {
+                emojiGroup.style.display = 'none';
+                faGroup.style.display = 'block';
+            }
+        }
+
+        function saveFolder(editKey = null) {
+            const folderKey = document.getElementById('folderKey').value.trim().toLowerCase();
+            const folderName = document.getElementById('folderName').value.trim();
+            const folderDescription = document.getElementById('folderDescription').value.trim();
+            const iconType = document.getElementById('folderIconType').value;
+            const iconEmoji = document.getElementById('folderIconEmoji').value.trim();
+            const iconFontAwesome = document.getElementById('folderIconFontAwesome').value.trim();
+            const folderColor = document.getElementById('folderColor').value;
+            
+            // Validation
+            if (!folderKey || !folderName) {
+                showNotification("Harap isi kode dan nama folder!", "error");
+                return;
+            }
+            
+            if (!/^[a-z0-9_]+$/.test(folderKey)) {
+                showNotification("Kode folder hanya boleh huruf kecil, angka, dan underscore!", "error");
+                return;
+            }
+            
+            // Check if key already exists (for new folder only)
+            if (!editKey && PRODUCT_FOLDERS[folderKey]) {
+                showNotification("Kode folder sudah ada! Gunakan kode yang berbeda.", "error");
+                return;
+            }
+            
+            // Save folder data
+            if (editKey && editKey !== folderKey) {
+                // Rename folder key
+                const temp = PRODUCT_FOLDERS[editKey];
+                delete PRODUCT_FOLDERS[editKey];
+                PRODUCT_FOLDERS[folderKey] = temp;
+            } else if (!editKey) {
+                // Create new folder
+                PRODUCT_FOLDERS[folderKey] = {
+                    name: folderName,
+                    description: folderDescription,
+                    subfolders: {}
+                };
+            } else {
+                // Update existing folder
+                PRODUCT_FOLDERS[folderKey].name = folderName;
+                PRODUCT_FOLDERS[folderKey].description = folderDescription;
+            }
+            
+            // Save icon configuration
+            if (!STORE_CONFIG.customIcons.folderIcons[folderKey]) {
+                STORE_CONFIG.customIcons.folderIcons[folderKey] = {};
+            }
+            
+            STORE_CONFIG.customIcons.folderIcons[folderKey].emoji = iconEmoji;
+            STORE_CONFIG.customIcons.folderIcons[folderKey].fontAwesome = iconFontAwesome;
+            STORE_CONFIG.customIcons.folderIcons[folderKey].color = folderColor;
+            STORE_CONFIG.customIcons.folderIcons[folderKey].type = iconType;
+            
+            // Save to localStorage
+            localStorage.setItem('zarrstore_products_folders', JSON.stringify(PRODUCT_FOLDERS));
+            localStorage.setItem('zarrstore_icon_config', JSON.stringify(STORE_CONFIG.customIcons));
+            
+            // Close modal and update UI
+            document.getElementById('folderModal').style.display = 'none';
+            renderFolderView();
+            
+            showNotification(`Folder "${folderName}" berhasil ${editKey ? 'diperbarui' : 'ditambahkan'}!`, "success");
+        }
+
+        function editFolder(folderKey) {
+            if (!isAdminMode) {
+                showNotification("Harus masuk admin mode terlebih dahulu!", "error");
+                return;
+            }
+            openAddFolderModal(folderKey);
+        }
+
+        function confirmDeleteFolder(folderKey) {
+            if (!isAdminMode) {
+                showNotification("Harus masuk admin mode terlebih dahulu!", "error");
+                return;
+            }
+            
+            const folder = PRODUCT_FOLDERS[folderKey];
+            if (!folder) return;
+            
+            // Count total products in folder
+            let totalProducts = 0;
+            for (const subfolderKey in folder.subfolders) {
+                totalProducts += folder.subfolders[subfolderKey].products.length;
+            }
+            
+            deleteType = 'folder';
+            deleteData = { folderKey: folderKey };
+            
+            const modal = document.getElementById('deleteConfirmModal');
+            const title = document.getElementById('deleteConfirmTitle');
+            const message = document.getElementById('deleteConfirmMessage');
+            
+            title.textContent = "Hapus Folder";
+            message.innerHTML = `
+                Apakah Anda yakin ingin menghapus folder <strong>"${folder.name}"</strong>?<br><br>
+                <span style="color: var(--danger);">
+                    <i class="fas fa-exclamation-triangle"></i> Peringatan: Aksi ini akan menghapus:<br>
+                    • ${Object.keys(folder.subfolders).length} subfolder<br>
+                    • ${totalProducts} produk<br>
+                    <strong>Aksi ini tidak dapat dibatalkan!</strong>
+                </span>
+            `;
+            
+            modal.style.display = 'flex';
+            
+            // Setup event listeners
+            document.getElementById('confirmDeleteBtn').onclick = function() {
+                deleteFolder(folderKey);
+                modal.style.display = 'none';
+            };
+            
+            document.getElementById('cancelDeleteBtn').onclick = function() {
+                modal.style.display = 'none';
+            };
+            
+            modal.onclick = function(e) {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            };
+        }
+
+        function deleteFolder(folderKey) {
+            delete PRODUCT_FOLDERS[folderKey];
+            
+            // Remove icon config
+            if (STORE_CONFIG.customIcons.folderIcons[folderKey]) {
+                delete STORE_CONFIG.customIcons.folderIcons[folderKey];
+            }
+            
+            // Save to localStorage
+            localStorage.setItem('zarrstore_products_folders', JSON.stringify(PRODUCT_FOLDERS));
+            localStorage.setItem('zarrstore_icon_config', JSON.stringify(STORE_CONFIG.customIcons));
+            
+            // Update UI
+            renderFolderView();
+            showNotification(`Folder berhasil dihapus!`, "success");
+        }
+
+        // ==================== FUNGSI CRUD SUBFOLDER ====================
+        function openAddSubfolderModal(folderKey, editSubfolderKey = null) {
+            if (!isAdminMode) {
+                showNotification("Harus masuk admin mode terlebih dahulu!", "error");
+                return;
+            }
+            
+            const modal = document.getElementById('productModal');
+            const title = document.getElementById('productModalTitle');
+            const form = document.getElementById('productForm');
+            
+            title.textContent = editSubfolderKey ? "Edit Subfolder" : "Tambah Subfolder Baru";
+            form.reset();
+            
+            // Populate folder dropdown
+            const folderSelect = document.getElementById('productFolder');
+            folderSelect.innerHTML = '<option value="">Pilih Folder</option>';
+            for (const key in PRODUCT_FOLDERS) {
+                const folder = PRODUCT_FOLDERS[key];
+                const selected = key === folderKey ? 'selected' : '';
+                folderSelect.innerHTML += `<option value="${key}" ${selected}>${folder.name}</option>`;
+            }
+            
+            folderSelect.disabled = !!editSubfolderKey;
+            
+            // Populate subfolder dropdown
+            updateSubfolderOptions();
+            
+            if (editSubfolderKey) {
+                document.getElementById('productSubfolder').value = editSubfolderKey;
+                document.getElementById('productSubfolder').disabled = true;
+                
+                const subfolder = PRODUCT_FOLDERS[folderKey].subfolders[editSubfolderKey];
+                if (subfolder) {
+                    document.getElementById('newSubfolderName').value = subfolder.name;
+                    document.getElementById('newSubfolderKey').value = editSubfolderKey;
+                }
+            }
+            
+            // Hide product fields
+            document.querySelectorAll('#productForm .form-group').forEach(group => {
+                if (!group.querySelector('#productFolder') && 
+                    !group.querySelector('#productSubfolder') &&
+                    !group.querySelector('#newSubfolderName') &&
+                    !group.querySelector('#newSubfolderKey')) {
+                    group.style.display = 'none';
+                }
+            });
+            
+            // Show new subfolder group
+            document.getElementById('newSubfolderGroup').style.display = 'block';
+            document.getElementById('newSubfolderName').required = true;
+            document.getElementById('newSubfolderKey').required = true;
+            
+            modal.style.display = 'flex';
+            
+            // Setup event listeners
+            document.getElementById('productModalClose').onclick = function() {
+                modal.style.display = 'none';
+                resetProductModal();
+            };
+            
+            // Form submit handler
+            form.onsubmit = function(e) {
+                e.preventDefault();
+                saveSubfolder(folderKey, editSubfolderKey);
+            };
+        }
+
+        function updateSubfolderOptions() {
+            const folderKey = document.getElementById('productFolder').value;
+            const subfolderSelect = document.getElementById('productSubfolder');
+            
+            subfolderSelect.innerHTML = '<option value="">Pilih Subfolder</option>';
+            
+            if (folderKey && PRODUCT_FOLDERS[folderKey]) {
+                const folder = PRODUCT_FOLDERS[folderKey];
+                for (const key in folder.subfolders) {
+                    subfolderSelect.innerHTML += `<option value="${key}">${folder.subfolders[key].name}</option>`;
+                }
+            }
+            
+            subfolderSelect.innerHTML += '<option value="new">+ Buat Subfolder Baru</option>';
+        }
+
+        function saveSubfolder(folderKey, editSubfolderKey = null) {
+            const newSubfolderKey = document.getElementById('newSubfolderKey').value.trim().toLowerCase();
+            const newSubfolderName = document.getElementById('newSubfolderName').value.trim();
+            
+            // Validation
+            if (!newSubfolderKey || !newSubfolderName) {
+                showNotification("Harap isi kode dan nama subfolder!", "error");
+                return;
+            }
+            
+            if (!/^[a-z0-9_]+$/.test(newSubfolderKey)) {
+                showNotification("Kode subfolder hanya boleh huruf kecil, angka, dan underscore!", "error");
+                return;
+            }
+            
+            const folder = PRODUCT_FOLDERS[folderKey];
+            if (!folder) {
+                showNotification("Folder tidak ditemukan!", "error");
+                return;
+            }
+            
+            if (editSubfolderKey && editSubfolderKey !== newSubfolderKey) {
+                // Rename subfolder key
+                const temp = folder.subfolders[editSubfolderKey];
+                delete folder.subfolders[editSubfolderKey];
+                folder.subfolders[newSubfolderKey] = temp;
+                folder.subfolders[newSubfolderKey].name = newSubfolderName;
+            } else if (!editSubfolderKey) {
+                // Create new subfolder
+                if (folder.subfolders[newSubfolderKey]) {
+                    showNotification("Subfolder dengan kode ini sudah ada!", "error");
+                    return;
+                }
+                folder.subfolders[newSubfolderKey] = {
+                    name: newSubfolderName,
+                    products: []
+                };
+            } else {
+                // Update existing subfolder
+                folder.subfolders[editSubfolderKey].name = newSubfolderName;
+            }
+            
+            // Save to localStorage
+            localStorage.setItem('zarrstore_products_folders', JSON.stringify(PRODUCT_FOLDERS));
+            
+            // Close modal and update UI
+            document.getElementById('productModal').style.display = 'none';
+            resetProductModal();
+            
+            if (currentView === 'folders') {
+                renderFolderView();
+            } else if (currentView === 'subfolder' && currentFolder === folderKey) {
+                renderSubfolderView(folderKey, currentSubfolder);
+            }
+            
+            showNotification(`Subfolder "${newSubfolderName}" berhasil ${editSubfolderKey ? 'diperbarui' : 'ditambahkan'}!`, "success");
+        }
+
+        function editSubfolder(folderKey, subfolderKey) {
+            if (!isAdminMode) {
+                showNotification("Harus masuk admin mode terlebih dahulu!", "error");
+                return;
+            }
+            openAddSubfolderModal(folderKey, subfolderKey);
+        }
+
+        function confirmDeleteSubfolder(folderKey, subfolderKey) {
+            if (!isAdminMode) {
+                showNotification("Harus masuk admin mode terlebih dahulu!", "error");
+                return;
+            }
+            
+            const folder = PRODUCT_FOLDERS[folderKey];
+            const subfolder = folder?.subfolders[subfolderKey];
+            if (!folder || !subfolder) return;
+            
+            deleteType = 'subfolder';
+            deleteData = { folderKey: folderKey, subfolderKey: subfolderKey };
+            
+            const modal = document.getElementById('deleteConfirmModal');
+            const title = document.getElementById('deleteConfirmTitle');
+            const message = document.getElementById('deleteConfirmMessage');
+            
+            title.textContent = "Hapus Subfolder";
+            message.innerHTML = `
+                Apakah Anda yakin ingin menghapus subfolder <strong>"${subfolder.name}"</strong>?<br><br>
+                <span style="color: var(--danger);">
+                    <i class="fas fa-exclamation-triangle"></i> Peringatan: Aksi ini akan menghapus:<br>
+                    • ${subfolder.products.length} produk dalam subfolder ini<br>
+                    <strong>Aksi ini tidak dapat dibatalkan!</strong>
+                </span>
+            `;
+            
+            modal.style.display = 'flex';
+            
+            // Setup event listeners
+            document.getElementById('confirmDeleteBtn').onclick = function() {
+                deleteSubfolder(folderKey, subfolderKey);
+                modal.style.display = 'none';
+            };
+            
+            document.getElementById('cancelDeleteBtn').onclick = function() {
+                modal.style.display = 'none';
+            };
+            
+            modal.onclick = function(e) {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            };
+        }
+
+        function deleteSubfolder(folderKey, subfolderKey) {
+            const folder = PRODUCT_FOLDERS[folderKey];
+            if (folder && folder.subfolders[subfolderKey]) {
+                delete folder.subfolders[subfolderKey];
+                
+                // Save to localStorage
+                localStorage.setItem('zarrstore_products_folders', JSON.stringify(PRODUCT_FOLDERS));
+                
+                // Update UI
+                if (currentView === 'folders') {
+                    renderFolderView();
+                } else if (currentView === 'subfolder' && currentFolder === folderKey) {
+                    if (currentSubfolder === subfolderKey) {
+                        renderSubfolderView(folderKey, 'all');
+                    } else {
+                        renderSubfolderView(folderKey, currentSubfolder);
+                    }
+                }
+                
+                showNotification(`Subfolder berhasil dihapus!`, "success");
+            }
+        }
+
+        // ==================== FUNGSI CRUD PRODUK ====================
+        function openAddProductModal(editProductId = null, editFolderKey = null, editSubfolderKey = null) {
+            if (!isAdminMode) {
+                showNotification("Harus masuk admin mode terlebih dahulu!", "error");
+                return;
+            }
+            
+            const modal = document.getElementById('productModal');
+            const title = document.getElementById('productModalTitle');
+            const form = document.getElementById('productForm');
+            
+            title.textContent = editProductId ? "Edit Produk" : "Tambah Produk Baru";
+            form.reset();
+            
+            // Show all form groups
+            document.querySelectorAll('#productForm .form-group').forEach(group => {
+                group.style.display = 'block';
+            });
+            
+            // Hide new subfolder group by default
+            document.getElementById('newSubfolderGroup').style.display = 'none';
+            document.getElementById('newSubfolderName').required = false;
+            document.getElementById('newSubfolderKey').required = false;
+            
+            // Populate folder dropdown
+            const folderSelect = document.getElementById('productFolder');
+            folderSelect.innerHTML = '<option value="">Pilih Folder</option>';
+            for (const key in PRODUCT_FOLDERS) {
+                const folder = PRODUCT_FOLDERS[key];
+                const selected = (editFolderKey && key === editFolderKey) || (!editFolderKey && key === currentFolder) ? 'selected' : '';
+                folderSelect.innerHTML += `<option value="${key}" ${selected}>${folder.name}</option>`;
+            }
+            
+            // Populate subfolder dropdown
+            updateSubfolderOptions();
+            
+            if (editProductId) {
+                // Find product to edit
+                let productToEdit = null;
+                let foundFolderKey = null;
+                let foundSubfolderKey = null;
+                
+                for (const fKey in PRODUCT_FOLDERS) {
+                    const folder = PRODUCT_FOLDERS[fKey];
+                    for (const sKey in folder.subfolders) {
+                        const subfolder = folder.subfolders[sKey];
+                        const product = subfolder.products.find(p => p.id === editProductId);
+                        if (product) {
+                            productToEdit = product;
+                            foundFolderKey = fKey;
+                            foundSubfolderKey = sKey;
+                            break;
+                        }
+                    }
+                    if (productToEdit) break;
+                }
+                
+                if (productToEdit) {
+                    // Set form values
+                    document.getElementById('productFolder').value = foundFolderKey;
+                    folderSelect.disabled = true;
+                    
+                    updateSubfolderOptions();
+                    document.getElementById('productSubfolder').value = foundSubfolderKey;
+                    document.getElementById('productSubfolder').disabled = true;
+                    
+                    document.getElementById('productName').value = productToEdit.name;
+                    document.getElementById('productPrice').value = productToEdit.price;
+                    document.getElementById('productDescription').value = productToEdit.description || '';
+                    document.getElementById('productImage').value = productToEdit.image || '';
+                }
+            } else {
+                // Default to current folder/subfolder if available
+                if (currentFolder && currentSubfolder && currentSubfolder !== 'all') {
+                    document.getElementById('productFolder').value = currentFolder;
+                    updateSubfolderOptions();
+                    document.getElementById('productSubfolder').value = currentSubfolder;
+                }
+                folderSelect.disabled = false;
+                document.getElementById('productSubfolder').disabled = false;
+            }
+            
+            modal.style.display = 'flex';
+            
+            // Setup event listeners
+            document.getElementById('productModalClose').onclick = function() {
+                modal.style.display = 'none';
+                resetProductModal();
+            };
+            
+            // Subfolder change handler
+            document.getElementById('productSubfolder').addEventListener('change', function() {
+                const newSubfolderGroup = document.getElementById('newSubfolderGroup');
+                if (this.value === 'new') {
+                    newSubfolderGroup.style.display = 'block';
+                    document.getElementById('newSubfolderName').required = true;
+                    document.getElementById('newSubfolderKey').required = true;
+                } else {
+                    newSubfolderGroup.style.display = 'none';
+                    document.getElementById('newSubfolderName').required = false;
+                    document.getElementById('newSubfolderKey').required = false;
+                }
+            });
+            
+            // Form submit handler
+            form.onsubmit = function(e) {
+                e.preventDefault();
+                saveProduct(editProductId);
+            };
+        }
+
+        function resetProductModal() {
+            // Show all form groups
+            document.querySelectorAll('#productForm .form-group').forEach(group => {
+                group.style.display = 'block';
+            });
+            
+            // Hide new subfolder group
+            document.getElementById('newSubfolderGroup').style.display = 'none';
+            document.getElementById('newSubfolderName').required = false;
+            document.getElementById('newSubfolderKey').required = false;
+            
+            // Enable all inputs
+            document.getElementById('productFolder').disabled = false;
+            document.getElementById('productSubfolder').disabled = false;
+        }
+
+        function saveProduct(editProductId = null) {
+            const folderKey = document.getElementById('productFolder').value;
+            let subfolderKey = document.getElementById('productSubfolder').value;
+            const productName = document.getElementById('productName').value.trim();
+            const productPrice = parseInt(document.getElementById('productPrice').value);
+            const productDescription = document.getElementById('productDescription').value.trim();
+            const productImage = document.getElementById('productImage').value.trim();
+            
+            // Check if creating new subfolder
+            if (subfolderKey === 'new') {
+                const newSubfolderKey = document.getElementById('newSubfolderKey').value.trim().toLowerCase();
+                const newSubfolderName = document.getElementById('newSubfolderName').value.trim();
+                
+                if (!newSubfolderKey || !newSubfolderName) {
+                    showNotification("Harap isi kode dan nama subfolder baru!", "error");
+                    return;
+                }
+                
+                if (!/^[a-z0-9_]+$/.test(newSubfolderKey)) {
+                    showNotification("Kode subfolder hanya boleh huruf kecil, angka, dan underscore!", "error");
+                    return;
+                }
+                
+                // Create new subfolder
+                const folder = PRODUCT_FOLDERS[folderKey];
+                if (!folder) {
+                    showNotification("Folder tidak ditemukan!", "error");
+                    return;
+                }
+                
+                if (folder.subfolders[newSubfolderKey]) {
+                    showNotification("Subfolder dengan kode ini sudah ada!", "error");
+                    return;
+                }
+                
+                folder.subfolders[newSubfolderKey] = {
+                    name: newSubfolderName,
+                    products: []
+                };
+                
+                subfolderKey = newSubfolderKey;
+            }
+            
+            // Validation
+            if (!folderKey || !subfolderKey || !productName || !productPrice) {
+                showNotification("Harap isi semua field yang wajib!", "error");
+                return;
+            }
+            
+            if (productPrice < 1000) {
+                showNotification("Harga minimal Rp 1.000!", "error");
+                return;
+            }
+            
+            const folder = PRODUCT_FOLDERS[folderKey];
+            const subfolder = folder?.subfolders[subfolderKey];
+            if (!folder || !subfolder) {
+                showNotification("Folder atau subfolder tidak ditemukan!", "error");
+                return;
+            }
+            
+            if (editProductId) {
+                // Update existing product
+                const productIndex = subfolder.products.findIndex(p => p.id === editProductId);
+                if (productIndex !== -1) {
+                    subfolder.products[productIndex] = {
+                        id: editProductId,
+                        name: productName,
+                        price: productPrice,
+                        description: productDescription,
+                        image: productImage || undefined
+                    };
+                }
+            } else {
+                // Create new product
+                // Generate new ID
+                let newId = 1;
+                const allProducts = getAllProducts();
+                if (allProducts.length > 0) {
+                    newId = Math.max(...allProducts.map(p => p.id)) + 1;
+                }
+                
+                subfolder.products.push({
+                    id: newId,
+                    name: productName,
+                    price: productPrice,
+                    description: productDescription,
+                    image: productImage || undefined
+                });
+            }
+            
+            // Save to localStorage
+            localStorage.setItem('zarrstore_products_folders', JSON.stringify(PRODUCT_FOLDERS));
+            
+            // Close modal and update UI
+            document.getElementById('productModal').style.display = 'none';
+            resetProductModal();
+            
+            if (currentView === 'subfolder' && currentFolder === folderKey) {
+                renderSubfolderView(folderKey, currentSubfolder);
+            } else if (currentView === 'folders') {
+                renderFolderView();
+            }
+            
+            showNotification(`Produk "${productName}" berhasil ${editProductId ? 'diperbarui' : 'ditambahkan'}!`, "success");
+        }
+
+        function editProduct(productId, folderKey, subfolderKey) {
+            if (!isAdminMode) {
+                showNotification("Harus masuk admin mode terlebih dahulu!", "error");
+                return;
+            }
+            openAddProductModal(productId, folderKey, subfolderKey);
+        }
+
+        function confirmDeleteProduct(productId, folderKey, subfolderKey) {
+            if (!isAdminMode) {
+                showNotification("Harus masuk admin mode terlebih dahulu!", "error");
+                return;
+            }
+            
+            const folder = PRODUCT_FOLDERS[folderKey];
+            const subfolder = folder?.subfolders[subfolderKey];
+            const product = subfolder?.products.find(p => p.id === productId);
+            
+            if (!product) return;
+            
+            deleteType = 'product';
+            deleteData = { 
+                productId: productId, 
+                folderKey: folderKey, 
+                subfolderKey: subfolderKey 
+            };
+            
+            const modal = document.getElementById('deleteConfirmModal');
+            const title = document.getElementById('deleteConfirmTitle');
+            const message = document.getElementById('deleteConfirmMessage');
+            
+            title.textContent = "Hapus Produk";
+            message.innerHTML = `
+                Apakah Anda yakin ingin menghapus produk <strong>"${product.name}"</strong>?<br><br>
+                <span style="color: var(--danger);">
+                    <i class="fas fa-exclamation-triangle"></i> Peringatan:<br>
+                    <strong>Aksi ini tidak dapat dibatalkan!</strong>
+                </span>
+            `;
+            
+            modal.style.display = 'flex';
+            
+            // Setup event listeners
+            document.getElementById('confirmDeleteBtn').onclick = function() {
+                deleteProduct(productId, folderKey, subfolderKey);
+                modal.style.display = 'none';
+            };
+            
+            document.getElementById('cancelDeleteBtn').onclick = function() {
+                modal.style.display = 'none';
+            };
+            
+            modal.onclick = function(e) {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            };
+        }
+
+        function deleteProduct(productId, folderKey, subfolderKey) {
+            const folder = PRODUCT_FOLDERS[folderKey];
+            const subfolder = folder?.subfolders[subfolderKey];
+            
+            if (subfolder) {
+                const productIndex = subfolder.products.findIndex(p => p.id === productId);
+                if (productIndex !== -1) {
+                    subfolder.products.splice(productIndex, 1);
+                    
+                    // Save to localStorage
+                    localStorage.setItem('zarrstore_products_folders', JSON.stringify(PRODUCT_FOLDERS));
+                    
+                    // Update UI
+                    if (currentView === 'subfolder' && currentFolder === folderKey) {
+                        renderSubfolderView(folderKey, currentSubfolder);
+                    }
+                    
+                    showNotification(`Produk berhasil dihapus!`, "success");
+                }
+            }
+        }
+
+        // ==================== FUNGSI UNTUK UPDATE IKON SECARA REAL-TIME ====================
+        function updateIconConfig(newConfig) {
+            // Gabungkan konfigurasi baru dengan yang lama
+            if (newConfig.folderIcons) {
+                STORE_CONFIG.customIcons.folderIcons = {
+                    ...STORE_CONFIG.customIcons.folderIcons,
+                    ...newConfig.folderIcons
+                };
+            }
+            
+            if (newConfig.subfolderIcons) {
+                STORE_CONFIG.customIcons.subfolderIcons = {
+                    ...STORE_CONFIG.customIcons.subfolderIcons,
+                    ...newConfig.subfolderIcons
+                };
+            }
+            
+            if (newConfig.settings) {
+                STORE_CONFIG.customIcons.settings = {
+                    ...STORE_CONFIG.customIcons.settings,
+                    ...newConfig.settings
+                };
+            }
+            
+            // Simpan ke localStorage
+            localStorage.setItem('zarrstore_icon_config', JSON.stringify(STORE_CONFIG.customIcons));
+            
+            // Update UI jika diperlukan
+            if (currentView === 'folders') {
+                renderFolderView();
+            } else if (currentView === 'subfolder' && currentFolder) {
+                renderSubfolderView(currentFolder, currentSubfolder);
+            }
+            
+            showNotification('Konfigurasi ikon diperbarui!', 'success');
+        }
+
+        // ==================== FUNGSI UNTUK MENGUBAH JENIS IKON GLOBAL ====================
+        function setGlobalIconType(type) {
+            if (type !== 'emoji' && type !== 'fontawesome') {
+                console.error('Jenis ikon harus "emoji" atau "fontawesome"');
+                return;
+            }
+            
+            STORE_CONFIG.customIcons.settings.defaultType = type;
+            
+            // Update semua konfigurasi ikon
+            for (const key in STORE_CONFIG.customIcons.folderIcons) {
+                STORE_CONFIG.customIcons.folderIcons[key].type = type;
+            }
+            
+            for (const key in STORE_CONFIG.customIcons.subfolderIcons) {
+                STORE_CONFIG.customIcons.subfolderIcons[key].type = type;
+            }
+            
+            // Update UI
+            if (currentView === 'folders') {
+                renderFolderView();
+            } else if (currentView === 'subfolder' && currentFolder) {
+                renderSubfolderView(currentFolder, currentSubfolder);
+            }
+            
+            showNotification(`Ikon diubah ke ${type === 'fontawesome' ? 'FontAwesome' : 'Emoji'}`, 'success');
+        }
+
+        // ==================== FUNGSI UNTUK LOAD KONFIGURASI IKON DARI LOCALSTORAGE ====================
+        function loadIconConfig() {
+            const savedConfig = localStorage.getItem('zarrstore_icon_config');
+            if (savedConfig) {
+                try {
+                    const config = JSON.parse(savedConfig);
+                    updateIconConfig(config);
+                } catch (e) {
+                    console.error('Error loading icon config:', e);
+                }
+            }
+        }
+
+        // ==================== CONTOH PENGGUNAAN UNTUK DEVELOPER ====================
+        // Developer dapat memanggil fungsi ini untuk mengubah ikon secara dinamis
+        function changeFolderIcon(folderKey, newIcon) {
+            if (!STORE_CONFIG.customIcons.allowDeveloperOverride) return;
+            
+            // Contoh: Mengubah ikon folder game
+            updateIconConfig({
+                folderIcons: {
+                    [folderKey]: newIcon
+                }
+            });
+        }
+
+        function changeSubfolderIcon(subfolderKey, newIcon) {
+            if (!STORE_CONFIG.customIcons.allowDeveloperOverride) return;
+            
+            // Contoh: Mengubah ikon subfolder mobile_legends
+            updateIconConfig({
+                subfolderIcons: {
+                    [subfolderKey]: newIcon
+                }
+            });
+        }
+
+        // ==================== VARIABEL FOLDER SYSTEM ====================
         let products = [];
         let currentProduct = null;
         let selectedPaymentMethod = null;
         let captchaVerified = false;
         let robotChecked = false;
         let storeStatusTimer = null;
+        let currentView = 'folders'; // 'folders', 'subfolder', 'all'
+        let currentFolder = null;
+        let currentSubfolder = null;
 
         // ==================== SISTEM JAM OPERASIONAL ====================
         function initStoreHoursSystem() {
@@ -2933,10 +5314,12 @@
 
         // ==================== FUNGSI GET PRODUCT IMAGE URL ====================
         function getProductImageUrl(product) {
+            // First check if product has a specific image
             if (product.image && isValidImageUrl(product.image)) {
                 return product.image;
             }
             
+            // Default images based on category
             let color = '6a11cb';
             let icon = '📱';
             
@@ -3240,46 +5623,174 @@
             };
         }
 
-        // ==================== FUNGSI UTAMA: LOAD PRODUK DI SEMUA DEVICE ====================
+        // ==================== FUNGSI UNTUK MENDAPATKAN SEMUA PRODUK ====================
+        function getAllProducts() {
+            let allProducts = [];
+            
+            for (const folderKey in PRODUCT_FOLDERS) {
+                const folder = PRODUCT_FOLDERS[folderKey];
+                
+                for (const subfolderKey in folder.subfolders) {
+                    const subfolder = folder.subfolders[subfolderKey];
+                    
+                    subfolder.products.forEach(product => {
+                        allProducts.push({
+                            ...product,
+                            category: folderKey,
+                            subcategory: subfolderKey,
+                            folderName: folder.name,
+                            subfolderName: subfolder.name,
+                            folderIcon: getFolderIcon(folderKey).html,
+                            subfolderIcon: getSubfolderIcon(folderKey, subfolderKey).html,
+                            folderColor: getFolderIcon(folderKey).color
+                        });
+                    });
+                }
+            }
+            
+            return allProducts;
+        }
+
+        // ==================== FUNGSI LOAD PRODUK ====================
         function loadProductsForAllDevices() {
-            console.log("🔄 Loading produk untuk SEMUA device...");
+            console.log("🔄 Loading produk dengan folder system...");
             
-            products = [...DEFAULT_PRODUCTS];
+            // Load from localStorage if exists
+            const savedFolders = localStorage.getItem('zarrstore_products_folders');
+            if (savedFolders) {
+                try {
+                    PRODUCT_FOLDERS = JSON.parse(savedFolders);
+                } catch (e) {
+                    console.error("Error loading saved folders:", e);
+                }
+            }
             
-            localStorage.setItem('zarrstore_products', JSON.stringify(products));
+            // Save to localStorage
+            localStorage.setItem('zarrstore_products_folders', JSON.stringify(PRODUCT_FOLDERS));
             localStorage.setItem('zarrstore_last_update', Date.now().toString());
             
-            console.log(`✅ ${products.length} produk siap di SEMUA device!`);
-            return products;
+            console.log(`✅ Folder system siap di SEMUA device!`);
+            
+            // Return all products for compatibility
+            return getAllProducts();
         }
 
         // ==================== FUNGSI SYNC PRODUK ====================
         function syncProducts() {
             const syncBtn = document.getElementById('syncProductsBtn');
             if (syncBtn) {
-                syncBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Syncing...';
+                syncBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Refreshing...';
                 syncBtn.disabled = true;
             }
             
-            products = [...DEFAULT_PRODUCTS];
+            // Reset to default folders
+            PRODUCT_FOLDERS = {
+                game: {
+                    name: "Top Up Game",
+                    description: "Top up semua game favorit Anda",
+                    subfolders: {
+                        mobile_legends: {
+                            name: "Mobile Legends",
+                            products: [
+                                { id: 1, name: "86 Diamond", price: 25000, description: "Diamond termurah" },
+                                { id: 2, name: "172 Diamond", price: 50000, description: "Pilihan terpopuler" },
+                                { id: 3, name: "257 Diamond", price: 75000, description: "Value terbaik" },
+                                { id: 4, name: "344 Diamond", price: 100000, description: "Diamond banyak" },
+                                { id: 5, name: "429 Diamond", price: 125000, description: "Untuk pro player" }
+                            ]
+                        },
+                        free_fire: {
+                            name: "Free Fire",
+                            products: [
+                                { id: 6, name: "100 Diamond", price: 30000, description: "Diamond FF" },
+                                { id: 7, name: "210 Diamond", price: 60000, description: "Hemat 10%" },
+                                { id: 8, name: "530 Diamond", price: 150000, description: "Best seller" },
+                                { id: 9, name: "1060 Diamond", price: 300000, description: "Maximal" }
+                            ]
+                        }
+                    }
+                },
+                
+                pulsa: {
+                    name: "Isi Pulsa",
+                    description: "Pulsa semua operator 24 jam",
+                    subfolders: {
+                        telkomsel: {
+                            name: "Telkomsel",
+                            products: [
+                                { id: 12, name: "Pulsa 5.000", price: 7000, description: "Reguler" },
+                                { id: 13, name: "Pulsa 10.000", price: 12000, description: "Ekonomis" },
+                                { id: 14, name: "Pulsa 25.000", price: 27000, description: "Best seller" }
+                            ]
+                        }
+                    }
+                },
+                
+                kuota: {
+                    name: "Paket Kuota",
+                    description: "Kuota internet murah",
+                    subfolders: {
+                        telkomsel_kuota: {
+                            name: "Telkomsel",
+                            products: [
+                                { id: 22, name: "Kuota 1GB 7 Hari", price: 15000, description: "1GB 24 jam" },
+                                { id: 23, name: "Kuota 3GB 30 Hari", price: 35000, description: "3GB malam" }
+                            ]
+                        }
+                    }
+                },
+                
+                bot: {
+                    name: "Sewa Bot WhatsApp",
+                    description: "Bot WA multifungsi premium",
+                    subfolders: {
+                        bot_basic: {
+                            name: "Paket Basic",
+                            products: [
+                                { id: 27, name: "Sewa 1 Minggu", price: 15000, description: "Full fitur" },
+                                { id: 28, name: "Sewa 1 Bulan", price: 50000, description: "Hemat 28%" }
+                            ]
+                        }
+                    }
+                },
+                
+                editor: {
+                    name: "Aplikasi Premium",
+                    description: "Aplikasi editor premium",
+                    subfolders: {
+                        video_editor: {
+                            name: "Video Editor",
+                            products: [
+                                { id: 32, name: "Alight Motion Pro", price: 10000, description: "1 Tahun" },
+                                { id: 33, name: "KineMaster Pro", price: 15000, description: "Lifetime" }
+                            ]
+                        }
+                    }
+                }
+            };
             
-            localStorage.setItem('zarrstore_products', JSON.stringify(products));
+            // Save to localStorage
+            localStorage.setItem('zarrstore_products_folders', JSON.stringify(PRODUCT_FOLDERS));
             localStorage.setItem('zarrstore_last_update', Date.now().toString());
             
-            if (document.querySelector('#produk.active')) {
-                renderProducts('all');
+            // Update UI
+            if (currentView === 'folders') {
+                renderFolderView();
+            } else if (currentView === 'subfolder' && currentFolder) {
+                renderSubfolderView(currentFolder, currentSubfolder);
             }
             
+            products = getAllProducts();
             if (products.length > 0) {
                 currentProduct = products[0];
                 updateOrderSummary(currentProduct);
             }
             
-            showNotification(`✅ ${products.length} produk tersedia di semua device!`, 'success');
+            showNotification(`✅ Produk berhasil di-refresh!`, 'success');
             
             if (syncBtn) {
                 setTimeout(() => {
-                    syncBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Sync';
+                    syncBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Refresh Produk';
                     syncBtn.disabled = false;
                 }, 1000);
             }
@@ -3334,70 +5845,10 @@
             }, 5000);
         }
 
-        // ==================== FUNGSI RENDER PRODUK ====================
-        function renderProducts(filter) {
-            const container = document.getElementById('productsContainer');
-            if (!container) return;
-            
-            container.innerHTML = '';
-            
-            const filteredProducts = filter === 'all' 
-                ? products 
-                : products.filter(p => p.category === filter);
-            
-            if (filteredProducts.length === 0) {
-                container.innerHTML = `
-                    <div style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
-                        <i class="fas fa-box-open" style="font-size: 3rem; color: var(--gray); margin-bottom: 1rem;"></i>
-                        <h3 style="color: var(--gray);">Belum ada produk di kategori ini</h3>
-                        <button onclick="syncProducts()" class="btn" style="margin-top: 1rem;">
-                            <i class="fas fa-sync-alt"></i> Sync Produk
-                        </button>
-                    </div>
-                `;
-                return;
-            }
-            
-            filteredProducts.forEach(product => {
-                const imageUrl = getProductImageUrl(product);
-                const card = document.createElement('div');
-                card.className = 'product-card';
-                const categoryClass = getCategoryClass(product.category);
-                
-                card.innerHTML = `
-                    <img src="${imageUrl}" alt="${product.name}" class="product-img" 
-                         data-product-id="${product.id}"
-                         onerror="handleProductImageError(this, ${product.id})">
-                    <div class="product-content">
-                        <div class="product-category ${categoryClass}">${getCategoryName(product.category)}</div>
-                        <h3 class="product-title">${product.name}</h3>
-                        <div class="product-price">Rp ${product.price.toLocaleString('id-ID')}</div>
-                        <p class="product-desc">${product.description}</p>
-                        <div class="product-actions">
-                            <button class="btn btn-detail" onclick="showProductDetail(${product.id})">
-                                <i class="fas fa-eye"></i> Detail
-                            </button>
-                            <button class="btn btn-buy" data-product-id="${product.id}">
-                                <i class="fas fa-shopping-cart"></i> Beli
-                            </button>
-                        </div>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-            
-            // Attach event listeners to buy buttons
-            document.querySelectorAll('.btn-buy').forEach(button => {
-                button.addEventListener('click', function() {
-                    const productId = parseInt(this.getAttribute('data-product-id'));
-                    handleBuyClick(productId);
-                });
-            });
-        }
-
         // ==================== HANDLE IMAGE ERROR GLOBAL ====================
         window.handleProductImageError = function(imgElement, productId) {
-            const product = products.find(p => p.id === productId);
+            const allProducts = getAllProducts();
+            const product = allProducts.find(p => p.id === productId);
             if (product) {
                 handleImageError(imgElement, product);
             }
@@ -3419,7 +5870,8 @@
             }
             
             // Jika toko buka, lanjutkan dengan pembelian
-            const product = products.find(p => p.id === productId);
+            const allProducts = getAllProducts();
+            const product = allProducts.find(p => p.id === productId);
             if (product) {
                 currentProduct = product;
                 updateOrderSummary(product);
@@ -3475,11 +5927,22 @@
             }
         }
 
+        // ==================== BACK TO FOLDERS BUTTON ====================
+        function setupBackButton() {
+            const backBtn = document.getElementById('backToFolders');
+            if (backBtn) {
+                backBtn.addEventListener('click', function() {
+                    renderFolderView();
+                });
+            }
+        }
+
         // ==================== FUNGSI INISIALISASI ====================
         function initApp() {
             document.getElementById('currentYear').textContent = new Date().getFullYear();
             
-            console.log("🚀 Inisialisasi ZarrStoreID...");
+            console.log("🚀 Inisialisasi ZarrStoreID dengan Folder System...");
+            
             products = loadProductsForAllDevices();
             
             if (products.length > 0) {
@@ -3487,9 +5950,8 @@
             }
             
             setupWelcomeBanner();
-            initStoreHoursSystem(); // Inisialisasi sistem jam operasional
+            initStoreHoursSystem();
             setupNavigation();
-            setupProductFilters();
             setupPayment();
             setupMobileMenu();
             setupOrderModal();
@@ -3497,10 +5959,15 @@
             setupCollaborators();
             setupCloudFlareVerification();
             setupRobotVerification();
+            setupBackButton();
+            
+            // Setup admin button
+            document.getElementById('adminToggleBtn').addEventListener('click', toggleAdminMode);
             
             document.getElementById('syncProductsBtn').addEventListener('click', syncProducts);
             
-            renderProducts('all');
+            // Start with folder view
+            renderFolderView();
             renderTransactionHistory();
             
             if (currentProduct) {
@@ -3509,6 +5976,9 @@
             
             loadQRISImage();
             
+            // Load icon config
+            loadIconConfig();
+            
             setTimeout(() => {
                 if (products.length === 0) {
                     console.log("⚠️ Produk kosong, emergency sync...");
@@ -3516,7 +5986,7 @@
                 }
             }, 2000);
             
-            console.log("✅ ZarrStoreID siap di SEMUA device!");
+            console.log("✅ ZarrStoreID dengan Folder System siap di SEMUA device!");
         }
 
         // ==================== FUNGSI COLLABORATOR ====================
@@ -3534,7 +6004,9 @@
                 { name: "Mahiro Editz" },
                 { name: "Suzza Preset" },
                 { name: "Xyran" },
-                { name: "ZAAR" }
+                { name: "ZAAR" },
+                { name: "Zeedan Lee Natanael" },
+                { name: "Keitha" }
             ];
             
             const shuffled = [...collaborators].sort(() => Math.random() - 0.5);
@@ -3561,19 +6033,12 @@
                     document.getElementById(this.getAttribute('data-target')).classList.add('active');
                     document.getElementById('mainNav').classList.remove('active');
                     updateMobileMenuIcon();
+                    
+                    // Reset to folder view when clicking produk tab
+                    if (this.getAttribute('data-target') === 'produk') {
+                        renderFolderView();
+                    }
                 });
-            });
-        }
-
-        function setupProductFilters() {
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                if (btn.id !== 'syncProductsBtn') {
-                    btn.addEventListener('click', function() {
-                        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                        this.classList.add('active');
-                        renderProducts(this.getAttribute('data-filter'));
-                    });
-                }
             });
         }
 
@@ -3775,9 +6240,10 @@
         }
 
         window.showProductDetail = function(id) {
-            const product = products.find(p => p.id === id);
+            const allProducts = getAllProducts();
+            const product = allProducts.find(p => p.id === id);
             if (product) {
-                alert(`Detail Produk:\n\nNama: ${product.name}\nHarga: Rp ${product.price.toLocaleString('id-ID')}\nKategori: ${getCategoryName(product.category)}\nDeskripsi: ${product.description}`);
+                alert(`Detail Produk:\n\nNama: ${product.name}\nHarga: Rp ${product.price.toLocaleString('id-ID')}\nKategori: ${product.folderName}\nSubkategori: ${product.subfolderName}\nDeskripsi: ${product.description}`);
             }
         };
 
@@ -3973,6 +6439,34 @@ Jangan Hapus Id Transaksi Ini!!`;
         document.addEventListener('DOMContentLoaded', function() {
             initApp();
         });
+
+        // ==================== FUNGSI UNTUK DEVELOPER ====================
+        // Contoh fungsi yang bisa dipanggil developer untuk mengubah ikon
+        window.developerTools = {
+            setIconType: setGlobalIconType,
+            changeFolderIcon: changeFolderIcon,
+            changeSubfolderIcon: changeSubfolderIcon,
+            updateIconConfig: updateIconConfig,
+            
+            // Contoh penggunaan:
+            setAllIconsToFontAwesome: function() {
+                this.setIconType('fontawesome');
+            },
+            
+            setAllIconsToEmoji: function() {
+                this.setIconType('emoji');
+            },
+            
+            // Contoh mengubah ikon folder game
+            changeGameFolderIcon: function(newIcon) {
+                this.changeFolderIcon('game', newIcon);
+            },
+            
+            // Contoh mengubah ikon subfolder mobile_legends
+            changeMLIcon: function(newIcon) {
+                this.changeSubfolderIcon('mobile_legends', newIcon);
+            }
+        };
     </script>
 </body>
 </html>
