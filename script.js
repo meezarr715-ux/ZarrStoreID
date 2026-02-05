@@ -1,371 +1,414 @@
-// Inisialisasi aplikasi ZarrStore
+// Main JavaScript untuk ZarrStore
+
+// DOM Elements
+const loadingScreen = document.getElementById('loadingScreen');
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const navbar = document.getElementById('navbar');
+const navLinks = document.querySelectorAll('.nav-link');
+const sections = document.querySelectorAll('.section');
+const productSearch = document.getElementById('productSearch');
+const categoriesContainer = document.getElementById('categoriesContainer');
+const productsContainer = document.getElementById('productsContainer');
+const orderModal = document.getElementById('orderModal');
+const closeModal = document.getElementById('closeModal');
+const orderForm = document.getElementById('orderForm');
+const modalProductInfo = document.getElementById('modalProductInfo');
+const paymentDetails = document.getElementById('paymentDetails');
+const paymentMethod = document.getElementById('paymentMethod');
+
+// State variables
+let currentCategory = 'all';
+let currentProduct = null;
+let filteredProducts = [...zarrStoreProducts.products];
+
+// Initialize the application
 document.addEventListener('DOMContentLoaded', function() {
-    // Inisialisasi variabel global
-    let currentTheme = localStorage.getItem('theme') || 'light';
-    let currentProduct = null;
-    
-    // Elemen DOM
-    const introScreen = document.getElementById('introScreen');
-    const mainContent = document.getElementById('mainContent');
-    const themeToggle = document.getElementById('themeToggle');
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const navList = document.querySelector('.nav-list');
-    const navLinks = document.querySelectorAll('.nav-link');
-    const pages = document.querySelectorAll('.page');
-    const productFilter = document.getElementById('productFilter');
-    const productsContainer = document.getElementById('productsContainer');
-    const contactButtons = document.getElementById('contactButtons');
-    const contactForm = document.getElementById('contactForm');
-    const productModal = document.getElementById('productModal');
-    const closeModal = document.querySelector('.close-modal');
-    const modalBody = document.getElementById('modalBody');
-    
-    // Tampilkan intro screen selama 3 detik
+    // Hide loading screen after 2 seconds
     setTimeout(() => {
-        introScreen.style.display = 'none';
-        mainContent.style.display = 'block';
-        setTheme(currentTheme);
-        loadProducts();
-        loadContacts();
-        setupEventListeners();
-    }, 3000);
+        loadingScreen.style.opacity = '0';
+        loadingScreen.style.visibility = 'hidden';
+    }, 2000);
     
-    // Setup event listeners
-    function setupEventListeners() {
-        // Toggle tema
-        themeToggle.addEventListener('click', toggleTheme);
-        
-        // Toggle mobile menu
-        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
-        
-        // Navigasi antar halaman
-        navLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href').substring(1);
-                showPage(targetId);
-                
-                // Update active nav link
-                navLinks.forEach(link => link.classList.remove('active'));
-                this.classList.add('active');
-                
-                // Close mobile menu jika terbuka
-                if (navList.classList.contains('active')) {
-                    toggleMobileMenu();
-                }
-            });
-        });
-        
-        // Close modal
-        closeModal.addEventListener('click', () => {
-            productModal.classList.remove('active');
-        });
-        
-        // Close modal ketika klik di luar konten modal
-        window.addEventListener('click', (e) => {
-            if (e.target === productModal) {
-                productModal.classList.remove('active');
-            }
-        });
-        
-        // Form kontak
-        contactForm.addEventListener('submit', function(e) {
+    // Initialize event listeners
+    initEventListeners();
+    
+    // Load categories and products
+    loadCategories();
+    loadProducts();
+    
+    // Set active section based on URL hash
+    const hash = window.location.hash || '#home';
+    setActiveSection(hash.substring(1));
+    
+    // Highlight active nav link
+    highlightActiveNavLink(hash.substring(1));
+});
+
+// Initialize all event listeners
+function initEventListeners() {
+    // Mobile menu toggle
+    mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+    
+    // Navigation clicks
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
             e.preventDefault();
+            const sectionId = this.getAttribute('href').substring(1);
             
-            const name = document.getElementById('contactName').value;
-            const email = document.getElementById('contactEmail').value;
-            const message = document.getElementById('contactMessage').value;
+            // Close mobile menu if open
+            navbar.classList.remove('active');
             
-            // Simulasi pengiriman pesan
-            alert(`Terima kasih ${name}! Pesan Anda telah dikirim. Kami akan membalas ke email ${email} segera.`);
+            // Set active section
+            setActiveSection(sectionId);
             
-            // Reset form
-            this.reset();
+            // Highlight active nav link
+            highlightActiveNavLink(sectionId);
+            
+            // Update URL hash
+            window.location.hash = sectionId;
         });
-        
-        // Filter produk
-        document.addEventListener('click', function(e) {
-            if (e.target.classList.contains('filter-btn')) {
-                const categoryId = parseInt(e.target.dataset.category);
-                filterProducts(categoryId);
-                
-                // Update active filter button
-                document.querySelectorAll('.filter-btn').forEach(btn => {
-                    btn.classList.remove('active');
-                });
-                e.target.classList.add('active');
-            }
-            
-            // Detail produk
-            if (e.target.classList.contains('btn-detail') || e.target.closest('.btn-detail')) {
-                const productId = parseInt(e.target.closest('.product-card').dataset.id);
-                const folder = e.target.closest('.product-card').dataset.folder;
-                showProductDetail(folder, productId);
-            }
-            
-            // Beli produk
-            if (e.target.classList.contains('btn-buy') || e.target.closest('.btn-buy')) {
-                const productId = parseInt(e.target.closest('.product-card').dataset.id);
-                const folder = e.target.closest('.product-card').dataset.folder;
-                showOrderForm(folder, productId);
-            }
+    });
+    
+    // Product search
+    productSearch.addEventListener('input', searchProducts);
+    
+    // Order modal
+    closeModal.addEventListener('click', closeOrderModal);
+    
+    // Close modal when clicking outside
+    orderModal.addEventListener('click', function(e) {
+        if (e.target === orderModal) {
+            closeOrderModal();
+        }
+    });
+    
+    // Payment method change
+    paymentMethod.addEventListener('change', updatePaymentDetails);
+    
+    // Order form submission
+    orderForm.addEventListener('submit', submitOrder);
+}
+
+// Toggle mobile menu
+function toggleMobileMenu() {
+    navbar.classList.toggle('active');
+}
+
+// Set active section
+function setActiveSection(sectionId) {
+    sections.forEach(section => {
+        section.classList.remove('active');
+        if (section.id === sectionId) {
+            section.classList.add('active');
+        }
+    });
+}
+
+// Highlight active nav link
+function highlightActiveNavLink(sectionId) {
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${sectionId}`) {
+            link.classList.add('active');
+        }
+    });
+}
+
+// Load categories
+function loadCategories() {
+    // Clear container
+    categoriesContainer.innerHTML = '';
+    
+    // Add "All Products" button
+    const allButton = document.createElement('button');
+    allButton.className = `category-btn ${currentCategory === 'all' ? 'active' : ''}`;
+    allButton.textContent = 'Semua Produk';
+    allButton.dataset.category = 'all';
+    allButton.addEventListener('click', function() {
+        setCurrentCategory('all');
+    });
+    categoriesContainer.appendChild(allButton);
+    
+    // Add folder categories
+    zarrStoreProducts.folders.forEach(folder => {
+        const button = document.createElement('button');
+        button.className = `category-btn ${currentCategory === folder.id ? 'active' : ''}`;
+        button.textContent = folder.name;
+        button.dataset.category = folder.id;
+        button.addEventListener('click', function() {
+            setCurrentCategory(folder.id);
         });
+        categoriesContainer.appendChild(button);
+    });
+}
+
+// Set current category
+function setCurrentCategory(categoryId) {
+    currentCategory = categoryId;
+    
+    // Update active button
+    document.querySelectorAll('.category-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.dataset.category === categoryId) {
+            btn.classList.add('active');
+        }
+    });
+    
+    // Filter products
+    if (categoryId === 'all') {
+        filteredProducts = [...zarrStoreProducts.products];
+    } else {
+        filteredProducts = zarrStoreProducts.products.filter(product => product.folderId === categoryId);
     }
     
-    // Toggle tema dark/light
-    function toggleTheme() {
-        currentTheme = currentTheme === 'light' ? 'dark' : 'light';
-        setTheme(currentTheme);
-        localStorage.setItem('theme', currentTheme);
+    // Load filtered products
+    loadProducts();
+}
+
+// Load products
+function loadProducts() {
+    // Clear container
+    productsContainer.innerHTML = '';
+    
+    if (filteredProducts.length === 0) {
+        const noProducts = document.createElement('div');
+        noProducts.className = 'no-products';
+        noProducts.textContent = 'Tidak ada produk ditemukan untuk kategori ini.';
+        productsContainer.appendChild(noProducts);
+        return;
     }
     
-    // Set tema
-    function setTheme(theme) {
-        document.documentElement.setAttribute('data-theme', theme);
-    }
+    // Create product cards
+    filteredProducts.forEach(product => {
+        const folder = zarrStoreProducts.folders.find(f => f.id === product.folderId);
+        const subCategory = zarrStoreProducts.subCategories[product.folderId]?.find(s => s.id === product.subCategoryId);
+        
+        const productCard = document.createElement('div');
+        productCard.className = 'product-card';
+        productCard.dataset.productId = product.id;
+        
+        // Format price
+        const formattedPrice = new Intl.NumberFormat('id-ID', {
+            style: 'currency',
+            currency: 'IDR',
+            minimumFractionDigits: 0
+        }).format(product.price);
+        
+        productCard.innerHTML = `
+            <div class="product-image">
+                <img src="${product.thumbnail}" alt="${product.name}" onerror="this.src='https://res.cloudinary.com/demo/image/upload/v1599999999/sample.jpg'">
+            </div>
+            <div class="product-info">
+                <span class="product-category">${folder?.name || 'Produk'}</span>
+                <h3 class="product-name">${product.name}</h3>
+                <div class="product-price">${formattedPrice}</div>
+                <p class="product-description">${product.description}</p>
+                ${product.nominal ? `<p><strong>Nominal:</strong> ${product.nominal.join(', ')}</p>` : ''}
+                <button class="btn-order" data-product-id="${product.id}">Pesan Sekarang</button>
+            </div>
+        `;
+        
+        productsContainer.appendChild(productCard);
+    });
     
-    // Toggle mobile menu
-    function toggleMobileMenu() {
-        mobileMenuBtn.classList.toggle('active');
-        navList.classList.toggle('active');
-    }
-    
-    // Tampilkan halaman berdasarkan ID
-    function showPage(pageId) {
-        pages.forEach(page => {
-            page.classList.remove('active');
-            if (page.id === pageId) {
-                page.classList.add('active');
-            }
+    // Add event listeners to order buttons
+    document.querySelectorAll('.btn-order').forEach(button => {
+        button.addEventListener('click', function() {
+            const productId = this.dataset.productId;
+            openOrderModal(productId);
         });
-        
-        // Scroll ke atas halaman
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    });
+}
+
+// Search products
+function searchProducts() {
+    const searchTerm = productSearch.value.toLowerCase().trim();
     
-    // Muat produk dari data.js
-    function loadProducts() {
-        // Buat filter kategori
-        createCategoryFilters();
-        
-        // Tampilkan semua produk
-        displayProducts(productsData.products);
-    }
-    
-    // Buat filter kategori
-    function createCategoryFilters() {
-        // Tambahkan filter "Semua"
-        const allFilter = document.createElement('button');
-        allFilter.className = 'filter-btn active';
-        allFilter.textContent = 'Semua';
-        allFilter.dataset.category = '0';
-        productFilter.appendChild(allFilter);
-        
-        // Tambahkan filter untuk setiap kategori
-        productsData.categories.forEach(category => {
-            const filterBtn = document.createElement('button');
-            filterBtn.className = 'filter-btn';
-            filterBtn.textContent = category.name;
-            filterBtn.dataset.category = category.id;
-            productFilter.appendChild(filterBtn);
-        });
-    }
-    
-    // Filter produk berdasarkan kategori
-    function filterProducts(categoryId) {
-        let filteredProducts;
-        
-        if (categoryId === 0) {
-            // Tampilkan semua produk
-            filteredProducts = productsData.products;
+    if (searchTerm === '') {
+        // Reset to current category filter
+        if (currentCategory === 'all') {
+            filteredProducts = [...zarrStoreProducts.products];
         } else {
-            // Filter berdasarkan kategori
-            filteredProducts = productsData.products.filter(product => product.categoryId === categoryId);
+            filteredProducts = zarrStoreProducts.products.filter(product => product.folderId === currentCategory);
         }
-        
-        displayProducts(filteredProducts);
-    }
-    
-    // Tampilkan produk di halaman
-    function displayProducts(products) {
-        productsContainer.innerHTML = '';
-        
-        if (products.length === 0) {
-            productsContainer.innerHTML = '<p class="no-products">Tidak ada produk ditemukan.</p>';
-            return;
-        }
-        
-        products.forEach(product => {
-            const category = productsData.categories.find(cat => cat.id === product.categoryId);
+    } else {
+        // Filter by search term
+        filteredProducts = zarrStoreProducts.products.filter(product => {
+            const matchesSearch = product.name.toLowerCase().includes(searchTerm) || 
+                                 product.description.toLowerCase().includes(searchTerm) ||
+                                 (product.folderId && zarrStoreProducts.folders.find(f => f.id === product.folderId)?.name.toLowerCase().includes(searchTerm));
             
-            const productCard = document.createElement('div');
-            productCard.className = 'product-card';
-            productCard.dataset.id = product.id;
-            productCard.dataset.folder = product.folder;
+            // Apply category filter if not "all"
+            if (currentCategory !== 'all') {
+                return matchesSearch && product.folderId === currentCategory;
+            }
             
-            productCard.innerHTML = `
-                <div class="product-image">
-                    <img src="${product.thumbnail}" alt="${product.name}" loading="lazy">
-                </div>
-                <div class="product-content">
-                    <span class="product-category">${category ? category.name : 'Uncategorized'}</span>
-                    <h3 class="product-title">${product.name}</h3>
-                    <p class="product-description">${product.description}</p>
-                    <div class="product-price">Rp ${product.price.toLocaleString('id-ID')}</div>
-                    <div class="product-actions">
-                        <button class="btn-buy">Beli Sekarang</button>
-                        <button class="btn-detail">Detail</button>
-                    </div>
-                </div>
-            `;
-            
-            productsContainer.appendChild(productCard);
+            return matchesSearch;
         });
     }
     
-    // Tampilkan detail produk
-    function showProductDetail(folder, productId) {
-        const product = productsData.products.find(p => p.folder === folder && p.id === productId);
-        const category = productsData.categories.find(cat => cat.id === product.categoryId);
-        
-        if (!product) return;
-        
-        modalBody.innerHTML = `
-            <div class="product-detail">
-                <div class="product-detail-image">
-                    <img src="${product.thumbnail}" alt="${product.name}">
-                </div>
-                <div class="product-detail-content">
-                    <span class="product-category">${category ? category.name : 'Uncategorized'}</span>
-                    <h2>${product.name}</h2>
-                    <p class="product-detail-description">${product.details}</p>
-                    <div class="product-detail-price">Rp ${product.price.toLocaleString('id-ID')}</div>
-                    <button class="btn-primary" id="buyFromDetail">Beli Sekarang</button>
-                </div>
-            </div>
+    // Load filtered products
+    loadProducts();
+}
+
+// Open order modal
+function openOrderModal(productId) {
+    // Find product
+    currentProduct = zarrStoreProducts.products.find(p => p.id === productId);
+    
+    if (!currentProduct) return;
+    
+    // Find folder and subcategory
+    const folder = zarrStoreProducts.folders.find(f => f.id === currentProduct.folderId);
+    const subCategory = zarrStoreProducts.subCategories[currentProduct.folderId]?.find(s => s.id === currentProduct.subCategoryId);
+    
+    // Format price
+    const formattedPrice = new Intl.NumberFormat('id-ID', {
+        style: 'currency',
+        currency: 'IDR',
+        minimumFractionDigits: 0
+    }).format(currentProduct.price);
+    
+    // Update modal product info
+    modalProductInfo.innerHTML = `
+        <h4 class="modal-product-name">${currentProduct.name}</h4>
+        <div class="modal-product-price">${formattedPrice}</div>
+        <p><strong>Kategori:</strong> ${folder?.name || 'Produk'} ${subCategory ? `- ${subCategory.name}` : ''}</p>
+    `;
+    
+    // Reset form
+    orderForm.reset();
+    paymentDetails.innerHTML = '';
+    
+    // Show modal
+    orderModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+// Close order modal
+function closeOrderModal() {
+    orderModal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+    currentProduct = null;
+}
+
+// Update payment details
+function updatePaymentDetails() {
+    const method = paymentMethod.value;
+    paymentDetails.innerHTML = '';
+    
+    if (!method) return;
+    
+    let detailsHTML = '';
+    
+    if (method === 'dana') {
+        detailsHTML = `
+            <p><strong>Bayar ke Dana:</strong></p>
+            <p>Nama: ${paymentInfo.dana.name}</p>
+            <p>Nomor: ${paymentInfo.dana.number}</p>
         `;
-        
-        productModal.classList.add('active');
-        currentProduct = product;
-        
-        // Event listener untuk tombol beli dari detail
-        document.getElementById('buyFromDetail').addEventListener('click', () => {
-            showOrderForm(folder, productId);
-        });
-    }
-    
-    // Tampilkan form pemesanan
-    function showOrderForm(folder, productId) {
-        const product = productsData.products.find(p => p.folder === folder && p.id === productId);
-        const category = productsData.categories.find(cat => cat.id === product.categoryId);
-        
-        if (!product) return;
-        
-        currentProduct = product;
-        
-        modalBody.innerHTML = `
-            <div class="order-form">
-                <h3>Pesan ${product.name}</h3>
-                <p class="product-order-price">Harga: <strong>Rp ${product.price.toLocaleString('id-ID')}</strong></p>
-                
-                <form id="orderForm">
-                    <div class="form-group">
-                        <label for="customerName">Nama Lengkap</label>
-                        <input type="text" id="customerName" required placeholder="Masukkan nama lengkap">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="customerContact">No HP / ID Game</label>
-                        <input type="text" id="customerContact" required placeholder="Masukkan No HP atau ID Game">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="customerNote">Catatan (Opsional)</label>
-                        <textarea id="customerNote" rows="3" placeholder="Tambahkan catatan jika diperlukan"></textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Metode Pembayaran</label>
-                        <div class="payment-methods">
-                            ${productsData.paymentMethods.map(method => `
-                                <div class="payment-option">
-                                    <input type="radio" id="payment${method.id}" name="payment" value="${method.name}" ${method.id === 1 ? 'checked' : ''}>
-                                    <div class="payment-icon">
-                                        <i class="${method.icon}"></i>
-                                    </div>
-                                    <label class="payment-label" for="payment${method.id}">${method.name}</label>
-                                    ${method.account ? `<div class="payment-account">${method.account}</div>` : ''}
-                                    ${method.note ? `<div class="qris-note">${method.note}</div>` : ''}
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
-                    
-                    <button type="submit" class="btn-primary" style="width: 100%;">Lanjutkan ke WhatsApp</button>
-                </form>
-            </div>
+    } else if (method === 'ovo') {
+        detailsHTML = `
+            <p><strong>Bayar ke OVO:</strong></p>
+            <p>Nama: ${paymentInfo.ovo.name}</p>
+            <p>Nomor: ${paymentInfo.ovo.number}</p>
         `;
-        
-        productModal.classList.add('active');
-        
-        // Event listener untuk form pemesanan
-        document.getElementById('orderForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            processOrder();
-        });
+    } else if (method === 'gopay') {
+        detailsHTML = `
+            <p><strong>Bayar ke Gopay:</strong></p>
+            <p>Nama: ${paymentInfo.gopay.name}</p>
+            <p>Nomor: ${paymentInfo.gopay.number}</p>
+        `;
+    } else if (method === 'qris') {
+        detailsHTML = `
+            <p><strong>QRIS:</strong></p>
+            <p>${paymentInfo.qris.note}</p>
+        `;
     }
     
-    // Proses pesanan
-    function processOrder() {
-        const customerName = document.getElementById('customerName').value;
-        const customerContact = document.getElementById('customerContact').value;
-        const customerNote = document.getElementById('customerNote').value;
-        const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
-        
-        // Format pesan untuk WhatsApp
-        const message = `Halo ZarrStore, saya ingin memesan:\n\n` +
-                       `📦 *Produk:* ${currentProduct.name}\n` +
-                       `💰 *Harga:* Rp ${currentProduct.price.toLocaleString('id-ID')}\n` +
-                       `👤 *Nama:* ${customerName}\n` +
-                       `📱 *Kontak:* ${customerContact}\n` +
-                       `💳 *Metode Bayar:* ${paymentMethod}\n` +
-                       `${customerNote ? `📝 *Catatan:* ${customerNote}\n` : ''}\n` +
-                       `Saya sudah transfer sesuai instruksi.`;
-        
-        // Encode pesan untuk URL WhatsApp
-        const encodedMessage = encodeURIComponent(message);
-        const whatsappUrl = `https://wa.me/6288295039238?text=${encodedMessage}`;
-        
-        // Buka WhatsApp
-        window.open(whatsappUrl, '_blank');
-        
-        // Tutup modal
-        productModal.classList.remove('active');
-        
-        // Reset form
-        document.getElementById('orderForm').reset();
+    paymentDetails.innerHTML = detailsHTML;
+}
+
+// Submit order
+function submitOrder(e) {
+    e.preventDefault();
+    
+    if (!currentProduct) {
+        alert('Produk tidak ditemukan. Silakan coba lagi.');
+        return;
     }
     
-    // Muat kontak dari data.js
-    function loadContacts() {
-        contactButtons.innerHTML = '';
-        
-        productsData.contacts.forEach(contact => {
-            const contactBtn = document.createElement('a');
-            contactBtn.className = 'contact-btn';
-            contactBtn.href = contact.link;
-            contactBtn.target = '_blank';
-            contactBtn.innerHTML = `
-                <div class="contact-icon" style="background: ${contact.color}">
-                    <i class="${contact.icon}"></i>
-                </div>
-                <div class="contact-info">
-                    <div class="contact-label">${contact.label}</div>
-                    <div class="contact-value">${contact.value}</div>
-                </div>
-            `;
-            
-            contactButtons.appendChild(contactBtn);
-        });
+    const customerName = document.getElementById('customerName').value;
+    const customerContact = document.getElementById('customerContact').value;
+    const paymentMethodValue = paymentMethod.value;
+    
+    if (!customerName || !customerContact || !paymentMethodValue) {
+        alert('Harap isi semua data dengan lengkap.');
+        return;
+    }
+    
+    // Find folder and subcategory
+    const folder = zarrStoreProducts.folders.find(f => f.id === currentProduct.folderId);
+    const subCategory = zarrStoreProducts.subCategories[currentProduct.folderId]?.find(s => s.id === currentProduct.subCategoryId);
+    
+    // Format price
+    const formattedPrice = new Intl.NumberFormat('id-ID', {
+        style: 'currency',
+        currency: 'IDR',
+        minimumFractionDigits: 0
+    }).format(currentProduct.price);
+    
+    // Get payment details
+    let paymentDetailsText = '';
+    if (paymentMethodValue === 'dana') {
+        paymentDetailsText = `Dana (${paymentInfo.dana.name}: ${paymentInfo.dana.number})`;
+    } else if (paymentMethodValue === 'ovo') {
+        paymentDetailsText = `OVO (${paymentInfo.ovo.name}: ${paymentInfo.ovo.number})`;
+    } else if (paymentMethodValue === 'gopay') {
+        paymentDetailsText = `Gopay (${paymentInfo.gopay.name}: ${paymentInfo.gopay.number})`;
+    } else if (paymentMethodValue === 'qris') {
+        paymentDetailsText = `QRIS (${paymentInfo.qris.note})`;
+    }
+    
+    // Create WhatsApp message
+    const message = `Halo Kak Zarr, saya ingin memesan produk berikut:
+
+*Produk:* ${currentProduct.name}
+*Harga:* ${formattedPrice}
+*Kategori:* ${folder?.name || 'Produk'} ${subCategory ? `- ${subCategory.name}` : ''}
+
+*Data Pemesan:*
+Nama: ${customerName}
+Kontak: ${customerContact}
+
+*Metode Pembayaran:* ${paymentDetailsText}
+
+Saya sudah melakukan pembayaran sesuai dengan instruksi di atas. Mohon segera diproses pesanan saya. Terima kasih.`;
+    
+    // Encode message for URL
+    const encodedMessage = encodeURIComponent(message);
+    
+    // Open WhatsApp with pre-filled message
+    window.open(`https://wa.me/${contactInfo.whatsapp.replace(/\D/g, '')}?text=${encodedMessage}`, '_blank');
+    
+    // Close modal
+    closeOrderModal();
+    
+    // Show success message
+    alert('Terima kasih! Anda akan diarahkan ke WhatsApp untuk mengirim detail pesanan. Pastikan Anda sudah melakukan pembayaran sebelum mengirim pesan.');
+}
+
+// Handle hash change for navigation
+window.addEventListener('hashchange', function() {
+    const sectionId = window.location.hash.substring(1) || 'home';
+    setActiveSection(sectionId);
+    highlightActiveNavLink(sectionId);
+});
+
+// Handle window resize for responsive design
+window.addEventListener('resize', function() {
+    // Close mobile menu on large screens
+    if (window.innerWidth > 768) {
+        navbar.classList.remove('active');
     }
 });
