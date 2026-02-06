@@ -3,76 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZarrStore - Toko Digital Terpercaya</title>
+    <title>ZarrStore - Toko Online Premium</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon" type="image/x-icon" href="#">
+    <link rel="icon" type="image/x-icon" href="https://res.cloudinary.com/demo/image/upload/v1599999999/sample.jpg">
 </head>
 <body>
-    <!-- Intro/Loading Screen -->
-    <div class="intro-screen" id="introScreen">
-        <div class="intro-logo">
-            <div class="logo-circle">
-                <span class="logo-text">ZS</span>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <div class="logo-animation">
+                <div class="zarr-logo">Z</div>
+                <div class="store-logo">S</div>
             </div>
-            <h1 class="store-name">ZarrStore</h1>
-            <div class="loading-text">loading...</div>
+            <h1 class="loading-text">ZarrStore</h1>
             <div class="loading-bar">
                 <div class="loading-progress"></div>
             </div>
+            <p class="loading-subtext">Loading Experience...</p>
         </div>
     </div>
 
-    <!-- Main Content -->
-    <div class="container" id="mainContent" style="display: none;">
-        <!-- Header dengan Logo dan Navigasi -->
-        <header class="header">
-            <div class="logo-container">
-                <div class="logo">
-                    <span class="logo-initials">ZS</span>
-                    <span class="logo-text">ZarrStore</span>
-                </div>
-                <button class="theme-toggle" id="themeToggle">
-                    <i class="fas fa-moon"></i>
-                    <i class="fas fa-sun"></i>
-                </button>
+    <!-- Background Animation -->
+    <div class="background-animation">
+        <div class="stars"></div>
+        <div class="stars2"></div>
+        <div class="stars3"></div>
+        <div class="shooting-stars"></div>
+        <div class="floating-elements">
+            <div class="float-element element-1"></div>
+            <div class="float-element element-2"></div>
+            <div class="float-element element-3"></div>
+            <div class="float-element element-4"></div>
+            <div class="float-element element-5"></div>
+        </div>
+    </div>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/6288295039238" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Header & Navigation -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1><span class="zarr">Zarr</span><span class="store">Store</span></h1>
+                <p class="tagline">Premium Digital Solutions</p>
             </div>
             
-            <nav class="nav">
-                <ul class="nav-list">
-                    <li><a href="#beranda" class="nav-link active">Beranda</a></li>
-                    <li><a href="#produk" class="nav-link">Produk</a></li>
-                    <li><a href="#kontak" class="nav-link">Kontak</a></li>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav class="navbar" id="navbar">
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="#home" class="nav-link active">Beranda</a></li>
+                    <li class="nav-item"><a href="#products" class="nav-link">Produk</a></li>
+                    <li class="nav-item"><a href="#contact" class="nav-link">Kontak</a></li>
                 </ul>
-                
-                <div class="mobile-menu-btn" id="mobileMenuBtn">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
             </nav>
-        </header>
+        </div>
+    </header>
 
-        <!-- Konten Utama -->
-        <main class="main-content">
-            <!-- Halaman Beranda -->
-            <section id="beranda" class="page active">
-                <div class="hero">
-                    <h1 class="hero-title">Selamat Datang di <span class="highlight">ZarrStore</span></h1>
-                    <p class="hero-subtitle">Toko Digital Terpercaya untuk Kebutuhan Digital Anda</p>
-                    <div class="hero-btns">
-                        <a href="#produk" class="btn-primary">Lihat Produk</a>
-                        <a href="#kontak" class="btn-secondary">Hubungi Kami</a>
-                    </div>
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Selamat Datang di ZarrStore</h2>
+                    <p class="section-subtitle">Tempat terbaik untuk solusi digital premium</p>
                 </div>
                 
-                <div class="info-section">
-                    <div class="info-card">
-                        <div class="info-icon">
-                            <i class="fas fa-store"></i>
+                <div class="home-content">
+                    <div class="welcome-card">
+                        <div class="welcome-icon">
+                            <i class="fas fa-store-alt"></i>
                         </div>
-                        <h3>Tentang Toko</h3>
-                        <p>ZarrStore adalah toko digital yang menyediakan berbagai layanan digital seperti aplikasi premium, sewa bot WhatsApp, top up game, dan isi pulsa/kuota. Kami berkomitmen memberikan pelayanan terbaik dengan harga terjangkau.</p>
+                        <h3>Tentang ZarrStore</h3>
+                        <p>ZarrStore adalah toko online yang menyediakan berbagai solusi digital premium dengan kualitas terbaik dan harga terjangkau. Kami berkomitmen memberikan pengalaman berbelanja yang mudah, aman, dan menyenangkan untuk semua pelanggan.</p>
                     </div>
                     
                     <div class="info-card">
@@ -82,106 +92,183 @@
                         <h3>Cara Pemesanan</h3>
                         <ol class="order-steps">
                             <li>Pilih produk yang ingin dibeli</li>
-                            <li>Isi data diri (Nama & No HP/ID Game)</li>
-                            <li>Pilih metode pembayaran (Dana, Ovo/Gopay, QRIS)</li>
-                            <li>Konfirmasi pesanan dan transfer sesuai instruksi</li>
+                            <li>Klik tombol "Pesan Sekarang"</li>
+                            <li>Isi formulir pemesanan dengan data lengkap</li>
+                            <li>Pilih metode pembayaran (Dana, OVO, Gopay, atau QRIS)</li>
+                            <li>Konfirmasi pesanan dan lakukan pembayaran</li>
                             <li>Pesanan akan diproses setelah pembayaran dikonfirmasi</li>
                         </ol>
                     </div>
                     
-                    <div class="info-card">
-                        <div class="info-icon">
+                    <div class="features-grid">
+                        <div class="feature">
                             <i class="fas fa-shield-alt"></i>
+                            <h4>Aman & Terpercaya</h4>
+                            <p>Transaksi aman dengan garansi produk</p>
                         </div>
-                        <h3>Keamanan & Garansi</h3>
-                        <p>Kami menjamin keamanan transaksi dan data pribadi Anda. Setiap pembelian dilindungi dengan garansi pengembalian dana jika terjadi masalah dengan produk yang dibeli. Customer service kami siap membantu 24/7.</p>
+                        <div class="feature">
+                            <i class="fas fa-bolt"></i>
+                            <h4>Proses Cepat</h4>
+                            <p>Pesanan diproses dalam hitungan menit</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-headset"></i>
+                            <h4>CS Responsif</h4>
+                            <p>Customer service siap membantu 24/7</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-tags"></i>
+                            <h4>Harga Terjangkau</h4>
+                            <p>Harga kompetitif dengan kualitas premium</p>
+                        </div>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- Halaman Produk -->
-            <section id="produk" class="page">
-                <h2 class="page-title">Produk Kami</h2>
-                <p class="page-subtitle">Pilih produk yang Anda butuhkan</p>
-                
-                <div class="product-filter" id="productFilter">
-                    <!-- Filter kategori akan dibuat dinamis dari JavaScript -->
+        <!-- Products Section -->
+        <section id="products" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Produk Kami</h2>
+                    <p class="section-subtitle">Temukan solusi digital terbaik untuk kebutuhan Anda</p>
                 </div>
                 
+                <!-- Search Bar -->
+                <div class="search-container">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="productSearch" placeholder="Cari produk...">
+                    </div>
+                </div>
+                
+                <!-- Categories -->
+                <div class="categories-container" id="categoriesContainer">
+                    <!-- Categories will be dynamically loaded from data.js -->
+                </div>
+                
+                <!-- Products Grid -->
                 <div class="products-container" id="productsContainer">
-                    <!-- Produk akan dimuat dinamis dari JavaScript -->
+                    <!-- Products will be dynamically loaded from data.js -->
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- Halaman Kontak -->
-            <section id="kontak" class="page">
-                <h2 class="page-title">Hubungi Kami</h2>
-                <p class="page-subtitle">Kami siap membantu Anda</p>
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Kontak & Support</h2>
+                    <p class="section-subtitle">Hubungi kami untuk informasi dan bantuan</p>
+                </div>
                 
-                <div class="contact-container">
+                <div class="contact-content">
                     <div class="contact-info">
-                        <h3>Informasi Kontak</h3>
-                        <div class="contact-buttons" id="contactButtons">
-                            <!-- Kontak akan dimuat dinamis dari JavaScript -->
-                        </div>
-                        
-                        <div class="collaborators-section">
-                            <h3>Support & Collaborator</h3>
-                            <div class="collaborators-list">
-                                <span>ᴀǫɪʟᴅᴇᴠ</span>
-                                <span>sᴀʙᴀᴍᴀʀᴛ</span>
-                                <span>ᴠɪᴏɴ sʜɪᴢᴀᴡᴀ</span>
-                                <span>ᴡᴀɴᴢ ᴘʀᴇsᴇᴛ</span>
-                                <span>ᴋᴇɪᴛʜᴀ</span>
-                                <span>ᴢᴇᴇᴅᴀɴ ʟᴇᴇ ɴᴀᴛᴀɴᴀᴇʟ</span>
-                                <span>ᴀʟʏᴀ sᴛᴏʀᴇ</span>
-                                <span>ᴢᴀᴀʀ</span>
-                                <span>xʏʀᴀɴ</span>
-                                <span>ᴍᴀʜɪʀᴏ ᴇᴅɪᴛᴢ</span>
-                            </div>
+                        <h3>Kontak Customer Service</h3>
+                        <div class="contact-buttons">
+                            <a href="https://wa.me/6288295039238" class="contact-btn whatsapp" target="_blank">
+                                <i class="fab fa-whatsapp"></i> WhatsApp: +62 882-9503-9238
+                            </a>
+                            <a href="https://t.me/zarrstoreid" class="contact-btn telegram" target="_blank">
+                                <i class="fab fa-telegram"></i> Telegram: t.me/zarrstoreid
+                            </a>
+                            <a href="https://instagram.com/mee.zarr" class="contact-btn instagram" target="_blank">
+                                <i class="fab fa-instagram"></i> Instagram: @mee.zarr
+                            </a>
+                            <a href="https://tiktok.com/@iki.sizarr" class="contact-btn tiktok" target="_blank">
+                                <i class="fab fa-tiktok"></i> TikTok: @iki.sizarr
+                            </a>
+                            <a href="mailto:zaenulenka@gmail.com" class="contact-btn email" target="_blank">
+                                <i class="fas fa-envelope"></i> Email: zaenulenka@gmail.com
+                            </a>
+                            <a href="https://github.com/meezarr715-ux" class="contact-btn github" target="_blank">
+                                <i class="fab fa-github"></i> GitHub: meezarr715-ux
+                            </a>
                         </div>
                     </div>
                     
-                    <div class="contact-form">
-                        <h3>Kirim Pesan</h3>
-                        <form id="contactForm">
-                            <div class="form-group">
-                                <label for="contactName">Nama</label>
-                                <input type="text" id="contactName" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="contactEmail">Email</label>
-                                <input type="email" id="contactEmail" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="contactMessage">Pesan</label>
-                                <textarea id="contactMessage" rows="5" required></textarea>
-                            </div>
-                            <button type="submit" class="btn-primary">Kirim Pesan</button>
-                        </form>
+                    <div class="support-info">
+                        <h3>Support & Collaborator</h3>
+                        <div class="collaborators">
+                            <span class="collab-tag">ᴀǫɪʟᴅᴇᴠ</span>
+                            <span class="collab-tag">sᴀʙᴀᴍᴀʀᴛ</span>
+                            <span class="collab-tag">ᴠɪᴏɴ sʜɪᴢᴀᴡᴀ</span>
+                            <span class="collab-tag">ᴡᴀɴᴢ ᴘʀᴇsᴇᴛ</span>
+                            <span class="collab-tag">ᴋᴇɪᴛʜᴀ</span>
+                            <span class="collab-tag">ᴢᴇᴇᴅᴀɴ ʟᴇᴇ ɴᴀᴛᴀɴᴀᴇʟ</span>
+                            <span class="collab-tag">ᴀʟʏᴀ sᴛᴏʀᴇ</span>
+                            <span class="collab-tag">ᴢᴀᴀʀ</span>
+                            <span class="collab-tag">xʏʀᴀɴ</span>
+                            <span class="collab-tag">ᴍᴀʜɪʀᴏ ᴇᴅɪᴛᴢ</span>
+                        </div>
                     </div>
                 </div>
-            </section>
-        </main>
+            </div>
+        </section>
+    </main>
 
-        <!-- Floating WhatsApp Button -->
-        <a href="https://wa.me/6288295039238" class="whatsapp-float" target="_blank">
-            <i class="fab fa-whatsapp"></i>
-        </a>
-
-        <!-- Modal untuk Detail Produk -->
-        <div class="modal" id="productModal">
-            <div class="modal-content">
-                <span class="close-modal">&times;</span>
-                <div class="modal-body" id="modalBody">
-                    <!-- Konten modal akan dimuat dinamis dari JavaScript -->
+    <!-- Order Modal -->
+    <div class="modal" id="orderModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Formulir Pemesanan</h3>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="product-info" id="modalProductInfo">
+                    <!-- Product info will be dynamically inserted -->
                 </div>
+                <form id="orderForm">
+                    <div class="form-group">
+                        <label for="customerName">Nama Lengkap</label>
+                        <input type="text" id="customerName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="customerContact">No HP / ID Game</label>
+                        <input type="text" id="customerContact" required>
+                        <small class="form-hint">Isi sesuai kebutuhan produk</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="paymentMethod">Metode Pembayaran</label>
+                        <select id="paymentMethod" required>
+                            <option value="">Pilih metode pembayaran</option>
+                            <option value="dana">Dana (zaenulenka)</option>
+                            <option value="ovo">OVO (Azwar)</option>
+                            <option value="gopay">Gopay (Enka Azwar)</option>
+                            <option value="qris">QRIS (Qr Chat Owner Langsung)</option>
+                        </select>
+                    </div>
+                    <div class="payment-details" id="paymentDetails">
+                        <!-- Payment details will be dynamically shown -->
+                    </div>
+                    <button type="submit" class="btn-submit">Kirim Pesanan via WhatsApp</button>
+                </form>
             </div>
         </div>
     </div>
 
-    <!-- Script -->
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3><span class="zarr">Zarr</span><span class="store">Store</span></h3>
+                    <p>Premium Digital Solutions</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#home">Beranda</a>
+                    <a href="#products">Produk</a>
+                    <a href="#contact">Kontak</a>
+                </div>
+                <div class="footer-copyright">
+                    <p>&copy; 2023 ZarrStore. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
     <script src="data.js"></script>
     <script src="script.js"></script>
 </body>
-</html>
+    </html>
