@@ -196,7 +196,7 @@ function loadProducts() {
         
         productCard.innerHTML = `
             <div class="product-image">
-                <img src="${product.thumbnail}" alt="${product.name}" onerror="this.src='https://res.cloudinary.com/demo/image/upload/v1599999999/sample.jpg'">
+                <img src="${product.thumbnail}" alt="${product.name}" onerror="this.src='https://res.cloudinary.com/duemncbn0/image/upload/v1769854507/7a06d66c420574a2ff105d90879fa540_anyli4.jpg'">
             </div>
             <div class="product-info">
                 <span class="product-category">${folder?.name || 'Produk'}</span>
@@ -371,131 +371,6 @@ function submitOrder(e) {
     }
     
     // Create WhatsApp message
-    const message = `Halo ZarrStore, saya ingin memesan produk berikut:
-
-*Produk:* ${currentProduct.name}
-*Harga:* ${formattedPrice}
-*Kategori:* ${folder?.name || 'Produk'} ${subCategory ? `- ${subCategory.name}` : ''}
-
-*Data Pemesan:*
-Nama: ${customerName}
-Kontak: ${customerContact}
-
-*Metode Pembayaran:* ${paymentDetailsText}
-
-Saya sudah melakukan pembayaran sesuai dengan instruksi di atas. Mohon segera diproses pesanan saya. Terima kasih.`;
-    
-    // Encode message for URL
-    const encodedMessage = encodeURIComponent(message);
-    
-    // Open WhatsApp with pre-filled message
-    window.open(`https://wa.me/${contactInfo.whatsapp.replace(/\D/g, '')}?text=${encodedMessage}`, '_blank');
-    
-    // Close modal
-    closeOrderModal();
-    
-    // Show success message
-    alert('Terima kasih! Anda akan diarahkan ke WhatsApp untuk mengirim detail pesanan. Pastikan Anda sudah melakukan pembayaran sebelum mengirim pesan.');
-}
-
-// Handle hash change for navigation
-window.addEventListener('hashchange', function() {
-    const sectionId = window.location.hash.substring(1) || 'home';
-    setActiveSection(sectionId);
-    highlightActiveNavLink(sectionId);
-});
-
-// Handle window resize for responsive design
-window.addEventListener('resize', function() {
-    // Close mobile menu on large screens
-    if (window.innerWidth > 768) {
-        navbar.classList.remove('active');
-    }
-});l() {
-    orderModal.classList.remove('active');
-    document.body.style.overflow = 'auto';
-    currentProduct = null;
-}
-
-// Update payment details
-function updatePaymentDetails() {
-    const method = paymentMethod.value;
-    paymentDetails.innerHTML = '';
-    
-    if (!method) return;
-    
-    let detailsHTML = '';
-    
-    if (method === 'dana') {
-        detailsHTML = `
-            <p><strong>Bayar ke Dana:</strong></p>
-            <p>Nama: ${paymentInfo.dana.name}</p>
-            <p>Nomor: ${paymentInfo.dana.number}</p>
-        `;
-    } else if (method === 'ovo') {
-        detailsHTML = `
-            <p><strong>Bayar ke OVO:</strong></p>
-            <p>Nama: ${paymentInfo.ovo.name}</p>
-            <p>Nomor: ${paymentInfo.ovo.number}</p>
-        `;
-    } else if (method === 'gopay') {
-        detailsHTML = `
-            <p><strong>Bayar ke Gopay:</strong></p>
-            <p>Nama: ${paymentInfo.gopay.name}</p>
-            <p>Nomor: ${paymentInfo.gopay.number}</p>
-        `;
-    } else if (method === 'qris') {
-        detailsHTML = `
-            <p><strong>QRIS:</strong></p>
-            <p>${paymentInfo.qris.note}</p>
-        `;
-    }
-    
-    paymentDetails.innerHTML = detailsHTML;
-}
-
-// Submit order
-function submitOrder(e) {
-    e.preventDefault();
-    
-    if (!currentProduct) {
-        alert('Produk tidak ditemukan. Silakan coba lagi.');
-        return;
-    }
-    
-    const customerName = document.getElementById('customerName').value;
-    const customerContact = document.getElementById('customerContact').value;
-    const paymentMethodValue = paymentMethod.value;
-    
-    if (!customerName || !customerContact || !paymentMethodValue) {
-        alert('Harap isi semua data dengan lengkap.');
-        return;
-    }
-    
-    // Find folder and subcategory
-    const folder = zarrStoreProducts.folders.find(f => f.id === currentProduct.folderId);
-    const subCategory = zarrStoreProducts.subCategories[currentProduct.folderId]?.find(s => s.id === currentProduct.subCategoryId);
-    
-    // Format price
-    const formattedPrice = new Intl.NumberFormat('id-ID', {
-        style: 'currency',
-        currency: 'IDR',
-        minimumFractionDigits: 0
-    }).format(currentProduct.price);
-    
-    // Get payment details
-    let paymentDetailsText = '';
-    if (paymentMethodValue === 'dana') {
-        paymentDetailsText = `Dana (${paymentInfo.dana.name}: ${paymentInfo.dana.number})`;
-    } else if (paymentMethodValue === 'ovo') {
-        paymentDetailsText = `OVO (${paymentInfo.ovo.name}: ${paymentInfo.ovo.number})`;
-    } else if (paymentMethodValue === 'gopay') {
-        paymentDetailsText = `Gopay (${paymentInfo.gopay.name}: ${paymentInfo.gopay.number})`;
-    } else if (paymentMethodValue === 'qris') {
-        paymentDetailsText = `QRIS (${paymentInfo.qris.note})`;
-    }
-    
-    // Create WhatsApp message
     const message = `Halo Kak Zarr, saya ingin memesan produk berikut:
 
 *Produk:* ${currentProduct.name}
@@ -537,4 +412,3 @@ window.addEventListener('resize', function() {
         navbar.classList.remove('active');
     }
 });
-
