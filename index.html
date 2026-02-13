@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>ZarrStore - Toko Online Premium</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="database/logo.jpg">
+</head>
+<body>
+    <!-- Enhanced Preloader -->
+    <div class="preloader">
+        <div class="loader-container">
+            <div class="loader-spinner"></div>
+            <div class="loader-logo">
+                <span class="loader-logo-icon">Z</span>
+                <div class="loader-pulse"></div>
+            </div>
+            <div class="loader-text">
+                <h2>Zarr<span>Store</span></h2>
+                <p>Loading store...</p>
+            </div>
+            <div class="loader-progress">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/6288295039238?text=Halo%20ZarrStore%2C%20saya%20ingin%20bertanya" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-whatsapp"></i>
+        <span class="whatsapp-tooltip">Hubungi CS</span>
+    </a>
+
+    <!-- Header & Navigation -->
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <a href="#beranda" class="logo" id="logo-link">
+                    <div class="logo-icon">
+                        <span>Z</span>
+                    </div>
+                    <span class="logo-text">Zarr<span>Store</span></span>
+                </a>
+                
+                <ul class="nav-menu" id="navMenu">
+                    <li class="nav-item">
+                        <a href="#beranda" class="nav-link active" data-section="beranda">
+                            <i class="fas fa-home"></i>
+                            <span>Beranda</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#produk" class="nav-link" data-section="produk">
+                            <i class="fas fa-shopping-bag"></i>
+                            <span>Produk</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#kontak" class="nav-link" data-section="kontak">
+                            <i class="fas fa-address-book"></i>
+                            <span>Kontak</span>
+                        </a>
+                    </li>
+                </ul>
+                
+                <div class="hamburger" id="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Beranda Section -->
+        <section id="beranda" class="section active">
+            <div class="hero">
+                <div class="hero-content">
+                    <h1 class="hero-title">Selamat Datang di <span>ZarrStore</span></h1>
+                    <p class="hero-subtitle">Toko Online Terpercaya untuk Kebutuhan Digital Anda</p>
+                    <div class="hero-buttons">
+                        <a href="#produk" class="cta-button" id="exploreProducts">
+                            <i class="fas fa-shopping-bag"></i>
+                            Lihat Produk
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <a href="#kontak" class="cta-button secondary" id="contactUs">
+                            <i class="fas fa-headset"></i>
+                            Hubungi Kami
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">100+</span>
+                        <span class="stat-label">Produk</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">1000+</span>
+                        <span class="stat-label">Pelanggan</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Support</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Proses Cepat</h3>
+                    <p>Pemesanan diproses dalam hitungan menit</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Aman & Terpercaya</h3>
+                    <p>Transaksi aman dengan garansi 100%</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Support 24/7</h3>
+                    <p>Customer service siap membantu</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                    <h3>Pembayaran Mudah</h3>
+                    <p>Berbagai metode pembayaran tersedia</p>
+                </div>
+            </div>
+            
+            <div class="info-section">
+                <div class="info-card">
+                    <h2><i class="fas fa-store"></i> Informasi Toko</h2>
+                    <p class="info-description">
+                        ZarrStore adalah toko online terpercaya yang menyediakan berbagai kebutuhan digital seperti aplikasi premium, sewa bot WhatsApp, top up game, dan pulsa/kuota. Kami berkomitmen untuk memberikan layanan terbaik dengan proses cepat dan aman.
+                    </p>
+                    
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Produk Original & Berkualitas</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Transaksi Cepat & Aman</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Garansi Pengembalian Dana</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Customer Support 24/7</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="info-card">
+                    <h2><i class="fas fa-shopping-cart"></i> Cara Pemesanan</h2>
+                    <div class="order-steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h3>Pilih Produk</h3>
+                                <p>Cari dan pilih produk yang ingin Anda beli</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h3>Klik Pesan</h3>
+                                <p>Klik tombol "Pesan" pada produk pilihan</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h3>Isi Formulir</h3>
+                                <p>Masukkan data diri dan pilih pembayaran</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h3>Konfirmasi</h3>
+                                <p>Kirim pesanan via WhatsApp</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Produk Section -->
+        <section id="produk" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-shopping-bag"></i> Katalog Produk</h2>
+                <p>Temukan berbagai produk digital berkualitas untuk kebutuhan Anda</p>
+            </div>
+            
+            <!-- Search Bar -->
+            <div class="search-container">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        placeholder="Cari produk... (contoh: mobile legends, pulsa, dll)"
+                        autocomplete="off"
+                    >
+                    <button type="button" id="clearSearch" class="clear-search" aria-label="Clear search">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="search-info">
+                    <span id="searchResultCount">0</span> produk ditemukan
+                </div>
+            </div>
+            
+            <!-- Categories Filter -->
+            <div class="category-filter" id="categoryFilter">
+                <button class="category-btn active" data-category="all">
+                    <i class="fas fa-th-large"></i>
+                    Semua Produk
+                </button>
+            </div>
+            
+            <!-- Products Grid -->
+            <div class="products-grid" id="productsGrid"></div>
+            
+            <!-- Loading State -->
+            <div class="loading-state" id="loadingState">
+                <div class="loading-spinner"></div>
+                <p>Memuat produk...</p>
+            </div>
+            
+            <!-- Empty State -->
+            <div class="empty-state" id="emptyState">
+                <div class="empty-state-icon">
+                    <i class="fas fa-box-open"></i>
+                </div>
+                <h3>Tidak ada produk ditemukan</h3>
+                <p>Coba cari dengan kata kunci lain atau pilih kategori yang berbeda</p>
+                <button class="reset-search-btn" id="resetSearch">
+                    <i class="fas fa-sync-alt"></i>
+                    Tampilkan Semua Produk
+                </button>
+            </div>
+        </section>
+
+        <!-- Kontak Section -->
+        <section id="kontak" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-address-book"></i> Hubungi Kami</h2>
+                <p>Terhubung dengan kami melalui berbagai platform berikut</p>
+            </div>
+            
+            <div class="contact-grid">
+                <!-- Customer Service -->
+                <div class="contact-card">
+                    <div class="contact-card-header">
+                        <i class="fas fa-headset"></i>
+                        <h3>Customer Service</h3>
+                    </div>
+                    <p class="contact-description">Kami siap membantu Anda 24/7</p>
+                    
+                    <div class="contact-buttons">
+                        <a href="https://wa.me/6288295039238" class="contact-btn whatsapp" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-whatsapp"></i>
+                            <div class="contact-info">
+                                <span class="contact-label">WhatsApp CS</span>
+                                <span class="contact-value">+62 882-9503-9238</span>
+                            </div>
+                        </a>
+                        
+                        <a href="https://t.me/zarrstoreid" class="contact-btn telegram" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-telegram"></i>
+                            <div class="contact-info">
+                                <span class="contact-label">Telegram</span>
+                                <span class="contact-value">@zarrstoreid</span>
+                            </div>
+                        </a>
+                        
+                        <a href="mailto:zarrsenpai88@gmail.com" class="contact-btn email" target="_blank" rel="noopener noreferrer">
+                            <i class="fas fa-envelope"></i>
+                            <div class="contact-info">
+                                <span class="contact-label">Email</span>
+                                <span class="contact-value">zarrsenpai88@gmail.com</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Social Media -->
+                <div class="contact-card">
+                    <div class="contact-card-header">
+                        <i class="fas fa-share-alt"></i>
+                        <h3>Sosial Media</h3>
+                    </div>
+                    <p class="contact-description">Ikuti kami di sosial media</p>
+                    
+                    <div class="social-grid">
+                        <a href="https://instagram.com/mee.zarr" class="social-btn" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-instagram"></i>
+                            <span>@mee.zarr</span>
+                        </a>
+                        
+                        <a href="https://tiktok.com/@iki.sizarr" class="social-btn" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-tiktok"></i>
+                            <span>@iki.sizarr</span>
+                        </a>
+                        
+                        <a href="https://github.com/meezarr715-ux" class="social-btn" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-github"></i>
+                            <span>meezarr715-ux</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Testimonials -->
+                <div class="contact-card">
+                    <div class="contact-card-header">
+                        <i class="fas fa-star"></i>
+                        <h3>Testimoni</h3>
+                    </div>
+                    <p class="contact-description">Lihat testimoni dari pelanggan kami</p>
+                    
+                    <div class="testimonial-buttons">
+                        <a href="https://t.me/testizarrid" class="testimonial-btn" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-telegram"></i>
+                            <div class="testimonial-info">
+                                <span class="testimonial-label">Channel Telegram</span>
+                                <span class="testimonial-value">t.me/testizarrid</span>
+                            </div>
+                        </a>
+                        
+                        <a href="https://whatsapp.com/channel/0029Vb7SGtk8kyyDJCe3lP3h" class="testimonial-btn" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-whatsapp"></i>
+                            <div class="testimonial-info">
+                                <span class="testimonial-label">Channel WhatsApp</span>
+                                <span class="testimonial-value">Testimoni ZarrStore</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Support & Collaborator -->
+            <div class="collaborators-section">
+                <div class="collaborators-card">
+                    <div class="collaborators-header">
+                        <i class="fas fa-users"></i>
+                        <h3>Support & Collaborator</h3>
+                    </div>
+                    <p class="collaborators-description">Terima kasih kepada semua yang telah mendukung ZarrStore</p>
+                    
+                    <div class="collaborators-grid" id="collaboratorsGrid">
+                        <div class="collaborator-item">ᴀǫɪʟᴅᴇᴠ</div>
+                        <div class="collaborator-item">sᴀʙᴀᴍᴀʀᴛ</div>
+                        <div class="collaborator-item">ᴠɪᴏɴ sʜɪᴢᴀᴡᴀ</div>
+                        <div class="collaborator-item">ᴡᴀɴᴢ ᴘʀᴇsᴇᴛ</div>
+                        <div class="collaborator-item">ᴋᴇɪᴛʜᴀ</div>
+                        <div class="collaborator-item">ᴢᴇᴇᴅᴀɴ ʟᴇᴇ ɴᴀᴛᴀɴᴀᴇʟ</div>
+                        <div class="collaborator-item">ᴀʟʏᴀ sᴛᴏʀᴇ</div>
+                        <div class="collaborator-item">ᴢᴀᴀʀ</div>
+                        <div class="collaborator-item">xʏʀᴀɴ</div>
+                        <div class="collaborator-item">ᴍᴀʜɪʀᴏ ᴇᴅɪᴛᴢ</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <span class="footer-logo-icon">Z</span>
+                    <span class="footer-logo-text">Zarr<span>Store</span></span>
+                </div>
+                <p class="footer-description">Toko Online Digital Terpercaya sejak 2023</p>
+                <div class="footer-social">
+                    <a href="https://instagram.com/mee.zarr" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://tiktok.com/@iki.sizarr" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <a href="https://github.com/meezarr715-ux" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://t.me/zarrstoreid" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Menu</h4>
+                    <a href="#beranda">Beranda</a>
+                    <a href="#produk">Produk</a>
+                    <a href="#kontak">Kontak</a>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Bantuan</h4>
+                    <a href="https://wa.me/6288295039238" target="_blank">Customer Service</a>
+                    <a href="#beranda">Cara Pemesanan</a>
+                    <a href="#kontak">Testimoni</a>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Jam Operasional</h4>
+                    <p>Senin - Minggu</p>
+                    <p>24 Jam Nonstop</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 ZarrStore. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Product Detail Modal -->
+    <div class="modal" id="productModal">
+        <div class="modal-overlay" id="productModalOverlay"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 class="modal-title">Detail Produk</h3>
+                <button type="button" class="modal-close" id="closeProductModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="productModalBody">
+                <!-- Product detail will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Modal -->
+    <div class="modal" id="orderModal">
+        <div class="modal-overlay" id="orderModalOverlay"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 class="modal-title">Form Pemesanan</h3>
+                <button type="button" class="modal-close" id="closeOrderModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="orderForm" class="order-form">
+                    <input type="hidden" id="selectedProductId" name="productId">
+                    <input type="hidden" id="selectedProductName" name="productName">
+                    <input type="hidden" id="selectedProductPrice" name="productPrice">
+                    
+                    <div class="form-group">
+                        <label for="customerName">
+                            <i class="fas fa-user"></i>
+                            Nama Lengkap
+                        </label>
+                        <input 
+                            type="text" 
+                            id="customerName" 
+                            name="customerName" 
+                            required 
+                            placeholder="Masukkan nama lengkap Anda"
+                            autocomplete="name"
+                        >
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="customerContact">
+                            <i class="fas fa-phone-alt"></i>
+                            No HP / ID Game
+                        </label>
+                        <input 
+                            type="text" 
+                            id="customerContact" 
+                            name="customerContact" 
+                            required 
+                            placeholder="Contoh: 081234567890 atau 12345678 (ID Game)"
+                            autocomplete="tel"
+                        >
+                        <small class="form-help">Isi dengan nomor WhatsApp atau ID Game Anda</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>
+                            <i class="fas fa-credit-card"></i>
+                            Metode Pembayaran
+                        </label>
+                        <div class="payment-options" id="paymentOptions">
+                            <div class="payment-option">
+                                <input type="radio" id="paymentDana" name="payment" value="Dana" required>
+                                <label for="paymentDana" class="payment-label">
+                                    <div class="payment-icon dana">
+                                        <i class="fas fa-wallet"></i>
+                                    </div>
+                                    <div class="payment-details">
+                                        <span class="payment-name">Dana</span>
+                                        <span class="payment-account">a.n. zaenulenka</span>
+                                        <span class="payment-number">088295039238</span>
+                                    </div>
+                                </label>
+                            </div>
+                            
+                            <div class="payment-option">
+                                <input type="radio" id="paymentOvo" name="payment" value="Ovo" required>
+                                <label for="paymentOvo" class="payment-label">
+                                    <div class="payment-icon ovo">
+                                        <i class="fas fa-mobile-alt"></i>
+                                    </div>
+                                    <div class="payment-details">
+                                        <span class="payment-name">OVO</span>
+                                        <span class="payment-account">a.n. Azwar</span>
+                                        <span class="payment-number">088295039238</span>
+                                    </div>
+                                </label>
+                            </div>
+                            
+                            <div class="payment-option">
+                                <input type="radio" id="paymentGopay" name="payment" value="Gopay" required>
+                                <label for="paymentGopay" class="payment-label">
+                                    <div class="payment-icon gopay">
+                                        <i class="fas fa-qrcode"></i>
+                                    </div>
+                                    <div class="payment-details">
+                                        <span class="payment-name">GoPay</span>
+                                        <span class="payment-account">a.n. Enka Azwar</span>
+                                        <span class="payment-number">088295039238</span>
+                                    </div>
+                                </label>
+                            </div>
+                            
+                            <div class="payment-option">
+                                <input type="radio" id="paymentQris" name="payment" value="Qris" required>
+                                <label for="paymentQris" class="payment-label">
+                                    <div class="payment-icon qris">
+                                        <i class="fas fa-qrcode"></i>
+                                    </div>
+                                    <div class="payment-details">
+                                        <span class="payment-name">QRIS</span>
+                                        <span class="payment-account">Chat Owner Langsung</span>
+                                        <span class="payment-number">Klik pesan untuk detail</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="order-summary" id="orderSummary">
+                        <h4>Ringkasan Pesanan</h4>
+                        <div class="summary-content">
+                            <div class="summary-row">
+                                <span>Produk:</span>
+                                <span id="summaryProductName" class="summary-value">-</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Harga:</span>
+                                <span id="summaryProductPrice" class="summary-value">Rp 0</span>
+                            </div>
+                            <div class="summary-row total">
+                                <span>Total:</span>
+                                <span id="summaryTotalPrice" class="summary-value">Rp 0</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn" id="submitOrderBtn">
+                        <i class="fab fa-whatsapp"></i>
+                        Pesan via WhatsApp
+                    </button>
+                    
+                    <p class="form-notice">
+                        <i class="fas fa-info-circle"></i>
+                        Dengan mengirim pesanan, Anda akan diarahkan ke WhatsApp untuk konfirmasi
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
